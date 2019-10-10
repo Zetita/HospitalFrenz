@@ -108,7 +108,9 @@
 	</select>
 	
 	<br>
-
+	<br>
+	
+	<input class=bonito type="Button" name="btnAceptar" value="Agregar Sede" >
 	
 </div>
 </html>

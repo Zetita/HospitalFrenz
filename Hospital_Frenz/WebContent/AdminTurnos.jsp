@@ -129,7 +129,9 @@
 	<input class=bonito type="time" name="txtHora">
 	
 	<br>
+	<br>
 	
+	<input class=bonito type="Button" name="btnAceptar" value="Agregar Turno" >
 </div>
 
 </body>
