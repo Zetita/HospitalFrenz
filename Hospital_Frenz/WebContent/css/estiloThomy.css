@@ -1,0 +1,27 @@
+@charset "ISO-8859-1";
+
+label{
+	color: #FFFF;
+	font-size: 15px;
+	margin-left:10%;
+}
+
+h5{
+	color:#FFFF;
+	margin-left:10%;
+	}
+	
+
+
+div.boton{
+	margin-left:70%;
+}
+
+input{
+	
+}
+
+label.lbl2{
+	color: #FFFF;
+	margin-left:0%;
+}
