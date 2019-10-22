@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/estiloThomy.css">
 <jsp:include page="Master_User.html" />
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Turnos</title>
 </head>
 <body>
 <div class=container>
