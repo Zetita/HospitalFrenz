@@ -1,0 +1,36 @@
+@charset "ISO-8859-1";
+
+.bonito{
+	border-radius:50px;
+	margin-left:10px;
+}
+
+.mitad1{
+	position:fixed;
+	top:20%;
+	margin-right:49%;
+}
+
+.mitad2{
+	position:fixed;
+	top:20%;
+	margin-left:51%;
+}
+
+.divisor{
+	width:1px;
+	height:490px;
+	position:fixed;
+	left:50%;
+	top:10%
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+  text-align: left;    
+}
