@@ -3,54 +3,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/estiloThomy.css">
-<link rel="stylesheet" href="css/DataGrid.css">
+<link rel="stylesheet" href="css/EstiloAdmin.css">
 <jsp:include page="Master_Admin.html" />
+
 <title>Administrar Usuarios</title>
+
 </head>
+
 <body>
 
+<script src="javascript/FiltroDinamico.js"></script>
 
-<br>
-<br>
-<br>
-<br>
-<br>
+<hr class="divisor">
 
-<hr style="width:1px;height:490px;position:absolute;left:725px">
-
-<div>
+<div class="mitad1" >
 
 	<b><label class=lbl2>LISTAR USUARIOS</label><br></b>
 	<br>
 	
-	<input class=bonito type="Button" name="btnAgregar" value="+" >
-	
-	<select class=bonito name="ddlFiltro1">
-		<option value="Y">Y<option>
-	</select>
-	
-	<select class=bonito name="ddlTipoFiltro">
-		<option value="TIPO DE USUARIO">Tipo de Usuario<option>
-	</select>
-	
-	<select class=bonito name="ddlFiltro2">
-		<option value="ES">Es<option>
-	</select>
-	
-	<select class=bonito name="ddlFiltro">
-		<option value="PACIENTE">Paciente<option>
-	</select>
-
+	<table id="tbFiltro">
+			<tr>
+				<td>
+					<input class=bonito type="submit" id="btnAgregar" value="+" onclick="addRow('tbFiltro')" >
+				</td>
+				<td>
+					<select class=bonito id="ddlFiltro1">
+						<option value="-">-<option>
+					</select>
+				</td>
+				<td>
+					<select class=bonito id="ddlTipo" onchange="diferenciar()">
+						<option value="-">-</option>
+						<option value="1">Nombre de Usuario</option>
+						<option value="2">Email</option>
+						<option value="3">DNI</option>
+						<option value="4">Tipo de Usuario</option>
+					</select>
+				</td>
+				<td>
+					<select class=bonito id="ddlFiltro2" onchange="columna4()">
+					</select>
+				</td>
+				<td>
+				</td>
+			</tr>
+		</table>
 		
-</div>
-
+<br>
 <br>
 
-<div>
-		
-		<table>
+		<table id="tabla">
 			<tr>
 				<th colspan="2"></th>
 				<th>Nombre de Usuario</th>
@@ -60,21 +65,11 @@
 				<th>Administrador</th>
 				<th>Tipo de Usuario</th>
 			</tr>
-			<tr>
-				<td><a href="#" name="llbModificar">Modificar</a></td>
-				<td><a href="#" name="llbEliminar">Eliminar</a></td>
-				<td>_jlopez_</td>
-				<td>1234abcd</td>
-				<td>jose.lopez@gmail.com</td>
-				<td>39432465</td>
-				<td>No</td>
-				<td>Paciente</td>
-			</tr>
 		</table>
 	
 </div>
 
-<div style="position:relative;left:740px;bottom:110px">
+<div class="mitad2">
 	<b><label class=lbl2>AGREGAR USUARIO</label></b><br>
 	<br>
 	
