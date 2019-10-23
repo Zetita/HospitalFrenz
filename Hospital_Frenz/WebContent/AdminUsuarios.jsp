@@ -26,16 +26,16 @@
 	
 	<table id="tbFiltro">
 			<tr>
-				<td>
-					<input class=bonito type="submit" id="btnAgregar" value="+" onclick="addRow('tbFiltro')" >
+				<td style="border:none">
+					<input class=bonito type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltro')" >
 				</td>
-				<td>
-					<select class=bonito id="ddlFiltro1">
+				<td style="border:none">
+					<select class=bonito id="ddlFiltro1[0]">
 						<option value="-">-<option>
 					</select>
-				</td>
-				<td>
-					<select class=bonito id="ddlTipo" onchange="diferenciar()">
+				</td >
+				<td style="border:none">
+					<select class=bonito id="ddlTipo[0]" onchange="diferenciar()">
 						<option value="-">-</option>
 						<option value="1">Nombre de Usuario</option>
 						<option value="2">Email</option>
@@ -43,11 +43,11 @@
 						<option value="4">Tipo de Usuario</option>
 					</select>
 				</td>
-				<td>
-					<select class=bonito id="ddlFiltro2" onchange="columna4()">
+				<td style="border:none">
+					<select class=bonito id="ddlFiltro2[0]" onchange="columna()">
 					</select>
 				</td>
-				<td>
+				<td style="text-align:center;border:none"> <label id="dinamico[0]">Completar datos</label>
 				</td>
 			</tr>
 		</table>
