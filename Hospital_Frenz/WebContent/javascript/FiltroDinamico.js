@@ -1,26 +1,109 @@
- 	function addRow(tableID) {
+ 	function agregarFila(tablaID) {
 
-        var table = document.getElementById(tableID);
+        var tabla = document.getElementById(tablaID);
 
-        var rowCount = table.rows.length;
-        var row = table.insertRow(rowCount);
-
-        var cell1 = row.insertCell(0);
-        var element1 = document.createElement("input");
-        element1.type = "checkbox";
-        element1.name="chkbox[]";
-        cell1.appendChild(element1);
-
-        var cell2 = row.insertCell(1);
-        cell2.innerHTML = rowCount + 1;
-
-        var cell3 = row.insertCell(2);
-        var element2 = document.createElement("input");
-        element2.type = "text";
-        element2.name = "txtbox[]";
-        cell3.appendChild(element2);
-
-
+        var cant = tabla.rows.length;
+        
+        if(cant <= 4){
+        
+	        var fila = tabla.insertRow(cant);
+	        
+	        ///CELDA 1
+	        
+	        var celda1 = fila.insertCell(0);
+	        celda1.setAttribute("style","border:none");
+	        
+	        var elemento1 = document.createElement("input");
+	        elemento1.type = "button";
+	        elemento1.value="+"
+	        elemento1.setAttribute("id","btn["+cant+"]");
+	        elemento1.setAttribute("onclick","agregarFila('tbFiltro')");
+	        elemento1.classList.add("bonito");
+	        
+	        celda1.appendChild(elemento1);
+	
+	        ///CELDA 2
+	        
+	        var celda2 = fila.insertCell(1);
+	        celda2.setAttribute("style","border:none");
+	        
+	        var elemento2 = document.createElement("SELECT");
+			elemento2.setAttribute("id","ddlFiltro1["+cant+"]");
+	
+			var opcion1=document.createElement("option");
+	   		var opcion2=document.createElement("option");
+	   		opcion1.text="Y";
+	   		opcion2.text="Y NO";
+	   		opcion1.value="Y";
+	   		opcion2.value="Y NO";
+	   		
+	   		elemento2.add(opcion1);
+	   		elemento2.add(opcion2);
+	        elemento2.classList.add("bonito");
+	
+	        celda2.appendChild(elemento2);
+	        
+	        ///CELDA 3
+	        
+	        var celda3 = fila.insertCell(2);
+	        celda3.setAttribute("style","border:none");
+	        
+	        var elemento3 = document.createElement("SELECT");
+	        elemento3.setAttribute("id","ddlTipo["+cant+"]");
+	        elemento3.setAttribute("onchange","diferenciar()");
+	        
+	        var opcion3=document.createElement("option");
+	   		var opcion4=document.createElement("option");
+	        var opcion5=document.createElement("option");
+	   		var opcion6=document.createElement("option");
+	   		var opcion7=document.createElement("option");
+	        
+	        opcion3.text="-";
+	   		opcion4.text="Nombre de Usuario";
+	   		opcion5.text="Email";
+	   		opcion6.text="DNI";
+	   		opcion7.text="Tipo de Usuario";
+	   		opcion3.value="-";
+	   		opcion4.value="1";
+	   		opcion5.value="2";
+	   		opcion6.value="3";
+	   		opcion7.value="4";
+	   		
+	   		elemento3.add(opcion3);
+	   		elemento3.add(opcion4);
+	   		elemento3.add(opcion5);
+	   		elemento3.add(opcion6);
+	   		elemento3.add(opcion7);
+	        elemento3.classList.add("bonito");
+	   		
+	        celda3.appendChild(elemento3);
+	
+	        ///CELDA 4
+	        
+	        var celda4 = fila.insertCell(3);
+	        celda4.setAttribute("style","border:none");
+	        
+	        var elemento4 = document.createElement("SELECT");
+	        
+	        elemento4.setAttribute("id","ddlFiltro2["+cant+"]");
+	        elemento4.setAttribute("onchange","columna()");
+	        
+	        elemento4.classList.add("bonito");
+	        
+	        celda4.appendChild(elemento4);
+	        
+	        ///CELDA 5
+	        
+	        var celda5 = fila.insertCell(4);
+	        celda5.setAttribute("style","text-align:center;border:none");
+	        var text=document.createTextNode("Completar datos");
+	        var elemento5 = document.createElement("label");
+	        
+	        elemento5.setAttribute("id","dinamico["+cant+"]");
+			elemento5.appendChild(text);
+			
+			celda5.appendChild(elemento5);
+        }
     }
 
     function deleteRow(tableID) {
@@ -46,9 +129,9 @@
     
     function diferenciar()
     {
-    	 var filtro2= document.getElementById("ddlFiltro2");
+    	 var filtro2= document.getElementById("ddlFiltro2[0]");
     	 filtro2.length=0;
-    	 var tipo= document.getElementById("ddlTipo");
+    	 var tipo= document.getElementById("ddlTipo[0]");
     	 var opcion1=document.createElement("option");
     	 var opcion2=document.createElement("option");
     	 var opcion3=document.createElement("option");
@@ -78,25 +161,75 @@
     		 filtro2.add(opcion1);
     		 filtro2.add(opcion2);
     	 }
+    	 
+
+    	 //Reinicio ultimo ddl
+    	 
+    	 var x=document.getElementById('tbFiltro').rows
+		 var y=x[0].cells
+		 
+		 var text=document.createTextNode("Completar datos");
+		 var elemento = document.getElementById("dinamico[0]");
+		 y[4].removeChild(elemento);
+			
+		 elemento = document.createElement("label");
+		 elemento.setAttribute("id","dinamico[0]");
+		 elemento.appendChild(text);
+			
+		 y[4].appendChild(elemento);
     }
     
-    function columna4()
+    function columna()
     {
-    	var filtro2= document.getElementById("ddlFiltro2");
-    	var texto=filtro2.options[filtro2.selectedIndex].text;
-    	var table = document.getElementById("tbFiltro");
-    	 var rowCount = table.rows.length;
-         var row = table.insertRow(rowCount);
-    	var cell5 = row.insertCell(4);
     	
-    	if(texto.equals("Contiene")||texto.equals("No contiene"))
+    	var filtro2= document.getElementById("ddlFiltro2[0]");
+    	var texto=filtro2.options[filtro2.selectedIndex].innerHTML;
+    	var x=document.getElementById('tbFiltro').rows
+        var y=x[0].cells
+       
+        
+        if(texto=="Contiene"||texto=="No contiene")
     	{
-    		var element2 = document.createElement("input");
-            element2.type = "text";
-            element2.name = "txtbox[]";
-            cell5.appendChild(element2);
-    	}
-    	else if(texto.equals("Es")||texto.equals("No es")){
+    		var elemento = document.getElementById("dinamico[0]");
+    		y[4].removeChild(elemento);
     		
+    		elemento = document.createElement("input");
+            elemento.type = "text";
+            elemento.setAttribute("id","dinamico[0]");
+            elemento.classList.add("bonito");
+            y[4].appendChild(elemento);
     	}
+    	else if(texto=="Es"||texto=="No es"){
+    		var elemento = document.getElementById("dinamico[0]");
+    		y[4].removeChild(elemento);
+    		
+    		elemento = document.createElement("SELECT");
+    		elemento.setAttribute("id","dinamico[0]");
+    		
+    		var opcion1=document.createElement("option");
+       		var opcion2=document.createElement("option");
+       		opcion1.text="Medico";
+       		opcion2.text="Paciente";
+       		opcion1.value="Med";
+       		opcion2.value="Pac";
+       		
+       		elemento.add(opcion1);
+       		elemento.add(opcion2);
+            elemento.classList.add("bonito");
+            y[4].appendChild(elemento);
+    	}
+    	else{
+    		var text=document.createTextNode("Completar datos");
+    		var elemento = document.getElementById("dinamico[0]");
+    		y[4].removeChild(elemento);
+    		
+    		elemento = document.createElement("label");
+    		elemento.setAttribute("id","dinamico[0]");
+    		elemento.appendChild(text);
+    		
+    		y[4].appendChild(elemento);
+    	}
+    	
     }
+    
+    
