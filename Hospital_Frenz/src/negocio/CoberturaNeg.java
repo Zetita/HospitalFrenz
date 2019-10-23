@@ -1,12 +1,12 @@
-package datos;
+package negocio;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import entidad.Cobertura;
 
-public interface CoberturaDao {
-
-	public List<Cobertura> obtenerTodas();
+public interface CoberturaNeg {
+	
+	public ArrayList<Cobertura> listarCoberturas();
 	public Cobertura obtenerUna(int id);
 	public boolean insertar(Cobertura cob);
 	public boolean editar(Cobertura cob);

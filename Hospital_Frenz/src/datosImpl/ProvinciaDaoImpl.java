@@ -11,19 +11,20 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
 
 private Conexion cn;
 	
+	@Override
 	public List<Provincia> obtenerTodos() {
 		cn = new Conexion();
 		cn.Open();
 		 List<Provincia> list = new ArrayList<Provincia>();
 		 try
 		 {
-			 ResultSet rs= cn.query("Select * from Provincias");
+			 ResultSet rs= cn.query("Select * from provincias");
 			 while(rs.next())
 			 {
 				 Provincia prov = new Provincia();
-				 prov.setId(rs.getInt("Provincias.id"));
-				 prov.setNombre(rs.getString("Provincias.nombre"));
-				 prov.setCodigo31662(rs.getString("Provincias.codigo31662"));
+				 prov.setId(rs.getInt("provincias.id"));
+				 prov.setNombre(rs.getString("provincias.nombre"));
+				 prov.setCodigo31662(rs.getString("provincias.codigo31662"));
 				 
 				 list.add(prov);
 			 }
@@ -39,16 +40,17 @@ private Conexion cn;
 		 }
 		 return list;
 	}
-	public Provincia obtenerUno(int id) {
+	@Override
+	public Provincia obtenerUna(int id) {
 		cn = new Conexion();
 		cn.Open();
 		Provincia prov = new Provincia();
 		 try
 		 {
-			 ResultSet rs= cn.query("Select * from Provincias where id="+id);
-			 prov.setId(rs.getInt("Provincias.id"));
-			 prov.setNombre(rs.getString("Provincias.nombre"));
-			 prov.setCodigo31662(rs.getString("Provincias.codigo31662"));
+			 ResultSet rs= cn.query("Select * from provincias where id="+id);
+			 prov.setId(rs.getInt("provincias.id"));
+			 prov.setNombre(rs.getString("provincias.nombre"));
+			 prov.setCodigo31662(rs.getString("provincias.codigo31662"));
 		 }
 		 catch(Exception e)
 		 {
@@ -60,6 +62,7 @@ private Conexion cn;
 		 }
 		 return prov;
 	}
+	@Override
 	public boolean insertar(Provincia prov) {
 
 		boolean estado=true;
@@ -67,7 +70,7 @@ private Conexion cn;
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "INSERT INTO Provincias (id, nombre, codigo31662) VALUES ('"
+		String query = "INSERT INTO provincias (id, nombre, codigo31662) VALUES ('"
 				+prov.getId()+"', '"+prov.getNombre()+"', '"+prov.getCodigo31662()+"')";
 		try
 		 {

@@ -4,25 +4,27 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import datos.CoberturaDao;
 import entidad.Cobertura;
 
-public class CoberturaDaoImpl {
+public class CoberturaDaoImpl implements CoberturaDao {
 	
 	private Conexion cn;
 	
+	@Override
 	public List<Cobertura> obtenerTodas() {
 		cn = new Conexion();
 		cn.Open();
 		 List<Cobertura> list = new ArrayList<Cobertura>();
 		 try
 		 {
-			 ResultSet rs= cn.query("Select * from Coberturas");
+			 ResultSet rs= cn.query("Select * from coberturas");
 			 while(rs.next())
 			 {
 				 Cobertura cob = new Cobertura();
-				 cob.setIdCobertura(rs.getInt("Coberturas.IDCobertura"));
-				 cob.setNombre(rs.getString("Coberturas.NombreCobertura"));
-				 cob.setTipo(rs.getString("Coberturas.TipoCobertura"));
+				 cob.setIdCobertura(rs.getInt("coberturas.IDCobertura"));
+				 cob.setNombre(rs.getString("coberturas.NombreCobertura"));
+				 cob.setTipo(rs.getString("coberturas.TipoCobertura"));
 				 list.add(cob);
 			 }
 			 
@@ -37,16 +39,17 @@ public class CoberturaDaoImpl {
 		 }
 		 return list;
 	}
+	@Override
 	public Cobertura obtenerUna(int id) {
 		cn = new Conexion();
 		cn.Open();
 		Cobertura cob = new Cobertura();
 		 try
 		 {
-			 ResultSet rs= cn.query("Select * from Coberturas where IDCobertura="+id);
-			 cob.setIdCobertura(rs.getInt("Coberturas.IDCobertura"));
-			 cob.setNombre(rs.getString("Coberturas.NombreCobertura"));
-			 cob.setTipo(rs.getString("Coberturas.TipoCobertura"));
+			 ResultSet rs= cn.query("Select * from coberturas where IDCobertura="+id);
+			 cob.setIdCobertura(rs.getInt("coberturas.IDCobertura"));
+			 cob.setNombre(rs.getString("coberturas.NombreCobertura"));
+			 cob.setTipo(rs.getString("coberturas.TipoCobertura"));
 		 }
 		 catch(Exception e)
 		 {
@@ -58,6 +61,7 @@ public class CoberturaDaoImpl {
 		 }
 		 return cob;
 	}
+	@Override
 	public boolean insertar(Cobertura cob) {
 
 		boolean estado=true;
@@ -65,8 +69,8 @@ public class CoberturaDaoImpl {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "INSERT INTO Coberturas (IDCobertura, NombreCobertura, TipoCobertura) VALUES ('"
-				+cob.getIdCobertura()+"', '"+cob.getNombre()+"', '"+cob.getTipo()+"')";
+		String query = "INSERT INTO coberturas (IDCobertura, NombreCobertura, TipoCobertura) VALUES ("
+				+cob.getIdCobertura()+", '"+cob.getNombre()+"', '"+cob.getTipo()+"')";
 		try
 		 {
 			estado=cn.execute(query);
@@ -81,4 +85,28 @@ public class CoberturaDaoImpl {
 		}
 		return estado;
 	}
+	@Override
+	public boolean editar(Cobertura cob) {
+		
+		boolean estado=true;
+
+		cn = new Conexion();
+		cn.Open();	
+
+		String query = "UPDATE coberturas SET NombreCobertura='"+cob.getNombre()+"', TipoCobertura='"+cob.getTipo()+"' WHERE IDCobertura="+cob.getIdCobertura();
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+	}
+	
 }

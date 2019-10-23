@@ -7,6 +7,6 @@ import entidad.Provincia;
 public interface ProvinciaDao {
 
 	public List<Provincia> obtenerTodos();
-	public Provincia obtenerUno(int id);
+	public Provincia obtenerUna(int id);
 	public boolean insertar(Provincia prov);
 }

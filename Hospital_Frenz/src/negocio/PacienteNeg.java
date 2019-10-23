@@ -1,12 +1,11 @@
-package datos;
+package negocio;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import entidad.Paciente;
 
-public interface PacienteDao {
-	
-	public List<Paciente> obtenerTodos();
+public interface PacienteNeg {
+	public ArrayList<Paciente> listarPacientes();
 	public Paciente obtenerUno(int dni);
 	public boolean insertar(Paciente pac);
 	public boolean editar(Paciente pac);
