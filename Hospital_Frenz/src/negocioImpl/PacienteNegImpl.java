@@ -14,7 +14,10 @@ public class PacienteNegImpl implements PacienteNeg {
 	public PacienteNegImpl(PacienteDao pacDao) {
 		this.pacDao = pacDao;
 	}
-	
+	public PacienteNegImpl()
+	{
+		
+	}
 	@Override
 	public ArrayList<Paciente> listarPacientes() {
 		return (ArrayList<Paciente>) pacDao.obtenerTodos();
