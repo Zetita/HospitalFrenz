@@ -1,8 +1,21 @@
 @charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Lato:300,400,700');
 
 .bonito{
 	border-radius:50px;
 	margin-left:10px;
+	border: 1px solid white;
+	font-color:white;
+}
+
+.boton{
+	border-radius:50px;
+	margin-left:10px;
+	border: 1px solid white;
+	background-color:#345;
+	font-family: 'Lato', sans-serif;
+	color:white;
+	font-weight: bold;
 }
 
 .mitad1{
