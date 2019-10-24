@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
 <script src="javascript/FiltroDinamico.js"></script>
 
 <hr class="divisor">
@@ -24,7 +23,7 @@
 	<b><label class=lbl2>LISTAR USUARIOS</label><br></b>
 	<br>
 	
-	<table id="tbFiltro">
+	<table id="tbFiltro" style="width:114%">
 			<tr>
 				<td style="border:none">
 					<input class=boton type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltro')" >
@@ -54,11 +53,12 @@
 		
 		<br>
 		<br>
-		
-		<input type="button" id="btnFiltrar" class="boton" value="Filtrar" style="width:107%">
-		
-<br>
-<br>
+
+		<input type="button" id="btnFiltrar" class="boton" value="Filtrar" style="width:110%">
+	
+	<br>	
+	<br>
+	<br>
 
 		<table id="tabla">
 			<tr>
@@ -75,6 +75,8 @@
 </div>
 
 <div class="mitad2">
+
+	<form method="post" action="ServletUsuarios" >
 	<b><label class=lbl2>AGREGAR USUARIO</label></b><br>
 	<br>
 	
@@ -87,7 +89,7 @@
 	
 	<label class=lbl2>CONTRASEÑA DEL USUARIOS:</label>
 	&nbsp;
-	<input type="password" class=bonito name="txtContraseña">
+	<input type="password" class=bonito name="txtContrasenia">
 	
 	<br>
 	<br>
@@ -123,7 +125,7 @@
 	<br>
 	<br>
 	
-	<input class=boton type="Button" name="btnAceptar" value="Agregar Usuario" >
-	
+	<input class=boton type="Button" name="btnAceptar" value="Agregar Usuario">
+	</form>
 </div>
 </html>
