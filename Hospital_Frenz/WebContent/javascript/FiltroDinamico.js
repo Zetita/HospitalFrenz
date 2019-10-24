@@ -15,9 +15,9 @@
 	        
 	        var elemento1 = document.createElement("input");
 	        elemento1.type = "button";
-	        elemento1.value="+"
+	        elemento1.value="-"
 	        elemento1.setAttribute("id","btn["+cant+"]");
-	        elemento1.setAttribute("onclick","agregarFila('tbFiltro')");
+	        elemento1.setAttribute("onclick","quitarFila('tbFiltro',this)");
 	        elemento1.classList.add("bonito");
 	        
 	        celda1.appendChild(elemento1);
@@ -32,13 +32,21 @@
 	
 			var opcion1=document.createElement("option");
 	   		var opcion2=document.createElement("option");
+	   		var opcion3=document.createElement("option");
+	   		var opcion4=document.createElement("option");
 	   		opcion1.text="Y";
 	   		opcion2.text="Y NO";
+	   		opcion3.text="O";
+	   		opcion4.text="O NO";
 	   		opcion1.value="Y";
 	   		opcion2.value="Y NO";
+	   		opcion3.value="O";
+	   		opcion4.value="O NO";
 	   		
 	   		elemento2.add(opcion1);
 	   		elemento2.add(opcion2);
+	   		elemento2.add(opcion3);
+	   		elemento2.add(opcion4);
 	        elemento2.classList.add("bonito");
 	
 	        celda2.appendChild(elemento2);
@@ -50,7 +58,7 @@
 	        
 	        var elemento3 = document.createElement("SELECT");
 	        elemento3.setAttribute("id","ddlTipo["+cant+"]");
-	        elemento3.setAttribute("onchange","diferenciar()");
+	        elemento3.setAttribute("onchange","diferenciar(this)");
 	        
 	        var opcion3=document.createElement("option");
 	   		var opcion4=document.createElement("option");
@@ -86,7 +94,7 @@
 	        var elemento4 = document.createElement("SELECT");
 	        
 	        elemento4.setAttribute("id","ddlFiltro2["+cant+"]");
-	        elemento4.setAttribute("onchange","columna()");
+	        elemento4.setAttribute("onchange","columna(this)");
 	        
 	        elemento4.classList.add("bonito");
 	        
@@ -106,32 +114,19 @@
         }
     }
 
-    function deleteRow(tableID) {
-        try {
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-
-        for(var i=0; i<rowCount; i++) {
-            var row = table.rows[i];
-            var chkbox = row.cells[0].childNodes[0];
-            if(null != chkbox && true == chkbox.checked) {
-                table.deleteRow(i);
-                rowCount--;
-                i--;
-            }
-
-
-        }
-        }catch(e) {
-            alert(e);
-        }
+    function quitarFila(tablaID, boton) {
+    	var indice=boton.parentNode.parentNode.rowIndex;
+        var tabla = document.getElementById(tablaID);
+        tabla.deleteRow(indice);
+       
     }
     
-    function diferenciar()
+    function diferenciar(ddl)
     {
-    	 var filtro2= document.getElementById("ddlFiltro2[0]");
+    	 var indice = ddl.parentNode.parentNode.rowIndex;  	 
+    	 var filtro2= document.getElementById("ddlFiltro2["+indice+"]");
     	 filtro2.length=0;
-    	 var tipo= document.getElementById("ddlTipo[0]");
+    	 var tipo= document.getElementById("ddlTipo["+indice+"]");
     	 var opcion1=document.createElement("option");
     	 var opcion2=document.createElement("option");
     	 var opcion3=document.createElement("option");
@@ -169,42 +164,43 @@
 		 var y=x[0].cells
 		 
 		 var text=document.createTextNode("Completar datos");
-		 var elemento = document.getElementById("dinamico[0]");
+		 var elemento = document.getElementById("dinamico["+indice+"]");
 		 y[4].removeChild(elemento);
 			
 		 elemento = document.createElement("label");
-		 elemento.setAttribute("id","dinamico[0]");
+		 elemento.setAttribute("id","dinamico["+indice+"]");
 		 elemento.appendChild(text);
 			
 		 y[4].appendChild(elemento);
     }
     
-    function columna()
+    function columna(ddl)
     {
-    	
-    	var filtro2= document.getElementById("ddlFiltro2[0]");
+    	var indice = ddl.parentNode.parentNode.rowIndex;
+    	var filtro2= document.getElementById("ddlFiltro2["+indice+"]");
     	var texto=filtro2.options[filtro2.selectedIndex].innerHTML;
     	var x=document.getElementById('tbFiltro').rows
-        var y=x[0].cells
+        var y=x[indice].cells
        
         
         if(texto=="Contiene"||texto=="No contiene")
     	{
-    		var elemento = document.getElementById("dinamico[0]");
+
+    		var elemento = document.getElementById("dinamico["+indice+"]");
     		y[4].removeChild(elemento);
     		
     		elemento = document.createElement("input");
             elemento.type = "text";
-            elemento.setAttribute("id","dinamico[0]");
+            elemento.setAttribute("id","dinamico["+indice+"]");
             elemento.classList.add("bonito");
             y[4].appendChild(elemento);
     	}
     	else if(texto=="Es"||texto=="No es"){
-    		var elemento = document.getElementById("dinamico[0]");
+    		var elemento = document.getElementById("dinamico["+indice+"]");
     		y[4].removeChild(elemento);
     		
     		elemento = document.createElement("SELECT");
-    		elemento.setAttribute("id","dinamico[0]");
+    		elemento.setAttribute("id","dinamico["+indice+"]");
     		
     		var opcion1=document.createElement("option");
        		var opcion2=document.createElement("option");
@@ -220,16 +216,17 @@
     	}
     	else{
     		var text=document.createTextNode("Completar datos");
-    		var elemento = document.getElementById("dinamico[0]");
+    		var elemento = document.getElementById("dinamico["+indice+"]");
     		y[4].removeChild(elemento);
     		
     		elemento = document.createElement("label");
-    		elemento.setAttribute("id","dinamico[0]");
+    		elemento.setAttribute("id","dinamico["+indice+"]");
     		elemento.appendChild(text);
     		
     		y[4].appendChild(elemento);
     	}
     	
     }
+    
     
     
