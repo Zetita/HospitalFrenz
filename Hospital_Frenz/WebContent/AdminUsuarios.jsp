@@ -27,7 +27,7 @@
 	<table id="tbFiltro">
 			<tr>
 				<td style="border:none">
-					<input class=bonito type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltro')" >
+					<input class=boton type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltro')" >
 				</td>
 				<td style="border:none">
 					<select class=bonito id="ddlFiltro1[0]">
@@ -51,6 +51,11 @@
 				</td>
 			</tr>
 		</table>
+		
+		<br>
+		<br>
+		
+		<input type="button" id="btnFiltrar" class="boton" value="Filtrar" style="width:107%">
 		
 <br>
 <br>
@@ -118,7 +123,7 @@
 	<br>
 	<br>
 	
-	<input class=bonito type="Button" name="btnAceptar" value="Agregar Usuario" >
+	<input class=boton type="Button" name="btnAceptar" value="Agregar Usuario" >
 	
 </div>
 </html>
