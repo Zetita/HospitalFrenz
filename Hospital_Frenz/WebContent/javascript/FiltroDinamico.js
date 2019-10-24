@@ -18,7 +18,7 @@
 	        elemento1.value="-"
 	        elemento1.setAttribute("id","btn["+cant+"]");
 	        elemento1.setAttribute("onclick","quitarFila('tbFiltro',this)");
-	        elemento1.classList.add("bonito");
+	        elemento1.classList.add("boton");
 	        
 	        celda1.appendChild(elemento1);
 	
