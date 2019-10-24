@@ -35,7 +35,7 @@
 					</select>
 				</td >
 				<td style="border:none">
-					<select class=bonito id="ddlTipo[0]" onchange="diferenciar()">
+					<select class=bonito id="ddlTipo[0]" onchange="diferenciar(this)">
 						<option value="-">-</option>
 						<option value="1">Nombre de Usuario</option>
 						<option value="2">Email</option>
@@ -44,7 +44,7 @@
 					</select>
 				</td>
 				<td style="border:none">
-					<select class=bonito id="ddlFiltro2[0]" onchange="columna()">
+					<select class=bonito id="ddlFiltro2[0]" onchange="columna(this)">
 					</select>
 				</td>
 				<td style="text-align:center;border:none"> <label id="dinamico[0]">Completar datos</label>
