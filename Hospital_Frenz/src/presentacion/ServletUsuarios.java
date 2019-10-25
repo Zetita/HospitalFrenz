@@ -58,28 +58,28 @@ public class ServletUsuarios extends HttpServlet {
 		}
 		
 		//login
-		if(request.getParameter("btnAceptarLI")!=null)
-	    {
-			UsuarioNeg negUser = new UsuarioNegImpl();
-			String user = request.getParameter("txtUserLI");
-			String pass = request.getParameter("txtPassLI");
-			Usuario u = negUser.ingresar(user, pass);
-			if(u!=null)
-			{
-				System.out.println("pruebita");
-				System.out.println(u.getEmail());
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");
-				dispatcher.forward(request, response);
-				
-			}
-			else
-			{
-				System.out.println("nopruebita");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
-				dispatcher.forward(request, response);
-			}
-			
-	    }
+//		if(request.getParameter("btnAceptarLI")!=null)
+//	    {
+//			UsuarioNeg negUser = new UsuarioNegImpl();
+//			String user = request.getParameter("txtUserLI");
+//			String pass = request.getParameter("txtPassLI");
+//			Usuario u = negUser.ingresar(user, pass);
+//			if(u!=null)
+//			{
+//				System.out.println("pruebita");
+//				System.out.println(u.getEmail());
+//				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");
+//				dispatcher.forward(request, response);
+//				
+//			}
+//			else
+//			{
+//				System.out.println("nopruebita");
+//				RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+//				dispatcher.forward(request, response);
+//			}
+//			
+//	    }
 	}
 	
 	public Usuario LlenarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
