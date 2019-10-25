@@ -125,7 +125,7 @@
 	<br>
 	<br>
 	
-	<input class=boton type="Button" name="btnAceptar" value="Agregar Usuario">
+	<input class=boton type="submit" name="btnAceptar" value="Agregar Usuario">
 	</form>
 </div>
 </html>

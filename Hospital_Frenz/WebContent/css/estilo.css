@@ -1,11 +1,37 @@
 @charset "ISO-8859-1";
-body{
-	background-color:#464866;
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+   background-color: #464866;
+}
+header {
+  padding: 40px 0;
+   background-color: #25274D;
+  box-shadow: 0 4px 6px rgba(0,0,0,.2);  
+}
+.container {
+  padding: 30px 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.logo-box {
+  float: left;
+  margin-right: 20px;
+}
+.logo-box a {
+  outline: none;
+  display: block;
+}
+.logo-box img {display: block; width:150px;}
+a{
+	color:#29648A;
 }
 .login-box {
     width: 280px;
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;

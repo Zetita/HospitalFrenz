@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datos.PacienteDao;
-import datos.ProvinciaDao;
 import entidad.Cobertura;
-import entidad.Especialidad;
 import entidad.Localidad;
 import entidad.Paciente;
 import entidad.Provincia;

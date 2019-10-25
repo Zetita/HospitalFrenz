@@ -99,7 +99,7 @@ public class HorariosDaoImpl {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "UPDATE horarios SET IDMatriculaMed = " + hor.getIDMatriculaMed() + " AND IDSede = " + hor.getIDSede() + " AND IDEspecialidad = " + hor.getIDEspecialidad() + " AND Dia = " + hor.getDia() + " AND  Hora = " + hor.getHora();
+		String query = "UPDATE horarios SET IDMatriculaMed=" + hor.getIDMatriculaMed() + " AND IDSede = " + hor.getIDSede() + " AND IDEspecialidad = " + hor.getIDEspecialidad() + " AND Dia = " + hor.getDia() + " AND  Hora = " + hor.getHora();
 		try
 		 {
 			estado=cn.execute(query);

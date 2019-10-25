@@ -50,4 +50,9 @@ public class UsuarioNegImpl implements UsuarioNeg{
 		return userDao.editar(user);
 	}
 
+	@Override
+	public Usuario ingresar(String usuario, String pass) {
+		return userDao.ingresar(usuario,pass);
+	}
+
 }

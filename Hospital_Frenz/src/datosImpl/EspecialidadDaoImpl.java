@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datos.EspecialidadDao;
-import entidad.Cobertura;
 import entidad.Especialidad;
 
 public class EspecialidadDaoImpl implements EspecialidadDao {

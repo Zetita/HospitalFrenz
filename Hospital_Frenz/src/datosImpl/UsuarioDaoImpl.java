@@ -1,15 +1,13 @@
 package datosImpl;
 
 import datos.UsuarioDao;
-import entidad.Especialidad;
 import entidad.Usuario;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.utn.frgp.bd.SQLException;
-
+import java.sql.SQLException;
 public class UsuarioDaoImpl implements UsuarioDao{
 
 	private Conexion cn;
@@ -83,7 +81,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	@Override
 	public boolean eliminar(int dni) {
 		try {
-			class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 		}
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();
@@ -97,7 +95,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		try {
 			estado= cn.execute("DELETE from usuarios WHERE DNIUser="+dni);
 		}
-		catch(SQLException e){
+		catch(Exception e){
 			e.printStackTrace();
 			
 		}finally{
@@ -155,6 +153,35 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			cn.close();
 		}
 		return estado;
+	}
+
+	@Override
+	public Usuario ingresar(String usuario, String pass) {
+		Usuario u = new Usuario();
+		cn = new Conexion();
+		cn.Open();
+
+		try 
+		{
+			ResultSet rs= cn.query("Select * from usuarios WHERE NombreUser='"+usuario+"' AND ContraseniaUser='"+pass+"'");
+			
+			u.setUsuario(rs.getString("usuarios.NombreUser"));
+			u.setEmail(rs.getString("usuarios.EmailUser"));
+			u.setDNI(rs.getInt("usuarios.DNIUser"));
+			u.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
+			u.setAdmin(rs.getBoolean("usuarios.AdminUser"));
+			u.setTipo(rs.getBoolean("usuarios.TipoUser"));
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return u;
 	}
 
 	

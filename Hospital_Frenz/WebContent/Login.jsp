@@ -5,22 +5,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/estilo.css" type="text/css"><link>
-<jsp:include page="Master_User.html" />
 </head>
+<header>
+<div class="container">
+    <div class="logo-box">
+      <a href="/">
+        <img src="Recursos/logo8.png">
+      </a>
+    </div>
+   </div>
+</header>
 <body>
 	<div class="login-box">
-            <h1>Login</h1>
+            <h1>Ingresa</h1>
+            <form method="post" action="ServletUsuarios">
             <div class="textbox">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <input type="text" placeholder="Usuario" name="" value="">
+                <input type="text" placeholder="Usuario" name="txtUserLI" value="">
             </div>
 
             <div class="textbox">
                 <i class="fa fa-lock" aria-hidden="true"></i>
-                <input type="password" placeholder="Contraseña" name="" value="">
+                <input type="password" placeholder="Contraseña" name="txtPassLI" value="">
             </div>
 
-            <input type="submit" class="btn" name="" value="Entrar">
+            <input type="submit" class="btn" name="btnAceptarLI" value="Entrar">
+            </form>
+            ¿Aún no tenés usuario? <a href="ServletUsuarios?Param=signup">Hacé click acá para Registrarte</a>
       </div>
 </body>
 </html>

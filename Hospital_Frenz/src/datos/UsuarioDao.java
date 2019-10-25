@@ -11,4 +11,5 @@ public interface UsuarioDao {
 	public boolean eliminar(int dni);
 	public boolean insertar(Usuario user);
 	public boolean editar(Usuario user);
+	public Usuario ingresar(String usuario, String pass);
 }
