@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.sql.SQLException;
 public class UsuarioDaoImpl implements UsuarioDao{
 
 	private Conexion cn;
@@ -26,9 +25,8 @@ public class UsuarioDaoImpl implements UsuarioDao{
 				user.setEmail(rs.getString("usuarios.EmailUser"));
 				user.setDNI(rs.getInt("usuarios.DNIUser"));
 				user.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
-				user.setAdmin(rs.getBoolean("usuarios.AdminUser"));
-				user.setTipo(rs.getBoolean("usuarios.TipoUser"));
-				
+				user.setTipo(rs.getString("usuarios.TipoUser"));
+				user.setEstado(rs.getBoolean("usuarios.EstadoUser"));
 				list.add(user);
 			}
 		}
@@ -63,9 +61,8 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			user.setEmail(rs.getString("usuarios.EmailUser"));
 			user.setDNI(rs.getInt("usuarios.DNIUser"));
 			user.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
-			user.setAdmin(rs.getBoolean("usuarios.AdminUser"));
-			user.setTipo(rs.getBoolean("usuarios.TipoUser"));
-			
+			user.setTipo(rs.getString("usuarios.TipoUser"));
+			user.setEstado(rs.getBoolean("usuarios.EstadoUser"));
 		}
 		catch(Exception e)
 		{
@@ -88,7 +85,6 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		}
 		
 		boolean estado=true;
-		int cantFilas = 0;
 		cn = new Conexion();
 		cn.Open();
 		
@@ -112,9 +108,9 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		cn.Open();
 		
 		String query="INSERT INTO usuarios(NombreUser, EmailUser, DNIUser, "
-				+ "ContraseniaUser, AdminUser, TipoUser) VALUES ('"
+				+ "ContraseniaUser, TipoUser, EstadoUser) VALUES ('"
 				+ user.getUsuario()+"', '"+user.getEmail()+"', "+user.getDNI()+", '"
-				+ user.getContrasenia()+	"', "+user.isAdmin()+", "+user.isTipo()+")";	
+				+ user.getContrasenia()+"', '"+user.getTipo()+"', true)";	
 		try
 		{
 			estado= cn.execute(query);
@@ -138,8 +134,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		cn.Open();	
 
 		String query = "UPDATE usuarios SET NombreUser='"+user.getUsuario()+"', EmailUser='"+user.getEmail()
-		+"',ContraseniaUser='"+user.getContrasenia()+"', AdminUser="+user.isAdmin()+
-		", TipoUser="+user.isTipo()+" WHERE IDCobertura="+user.getDNI();
+		+"',ContraseniaUser='"+user.getContrasenia()+"', TipoUser='"+user.getTipo()+"', EstadoUser="+user.isEstado()+" WHERE IDCobertura="+user.getDNI();
 		try
 		 {
 			estado=cn.execute(query);
@@ -169,9 +164,8 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			u.setEmail(rs.getString("usuarios.EmailUser"));
 			u.setDNI(rs.getInt("usuarios.DNIUser"));
 			u.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
-			u.setAdmin(rs.getBoolean("usuarios.AdminUser"));
-			u.setTipo(rs.getBoolean("usuarios.TipoUser"));
-			
+			u.setTipo(rs.getString("usuarios.TipoUser"));
+			u.setEstado(rs.getBoolean("usuarios.EstadoUser"));
 		}
 		catch(Exception e)
 		{
