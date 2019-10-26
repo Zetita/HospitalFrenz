@@ -26,7 +26,7 @@ public class ServletUsuarios extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Llega");
+
 		if(request.getParameter("Param")!=null)
 		{
 			String opcion = request.getParameter("Param").toString();
@@ -42,11 +42,13 @@ public class ServletUsuarios extends HttpServlet {
 				break;
 			}
 		}
+		request.setAttribute("mensaje","asd");
+		RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
+		rd.forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Llega");
 		
 		//admin
 		if(request.getParameter("btnAceptar")!=null) {
@@ -89,12 +91,10 @@ public class ServletUsuarios extends HttpServlet {
 		user.setEmail(request.getParameter("txtEmail"));
 		user.setContrasenia(request.getParameter("txtContrasenia"));
 		user.setDNI(Integer.parseInt(request.getParameter("txtDNI")));
-		if(request.getParameter("chckAdministrador")=="true") user.setAdmin(true);
-		else user.setAdmin(false);
-		
-		String[] radio= request.getParameterValues("Tipo");
-		if(radio[0]=="true") user.setTipo(true);
-		else if (radio[1]=="false") user.setTipo(false);
+		user.setEstado(true);
+		if(request.getParameter("Tipo").equals("med")) user.setTipo("Medico");
+		else if (request.getParameter("Tipo").equals("pac")) user.setTipo("Paciente");
+		else if (request.getParameter("Tipo").equals("adm")) user.setTipo("Administrador");
 		
 		return user;
 	}
