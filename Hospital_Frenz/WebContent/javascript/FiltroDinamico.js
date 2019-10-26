@@ -65,23 +65,27 @@
 	        var opcion5=document.createElement("option");
 	   		var opcion6=document.createElement("option");
 	   		var opcion7=document.createElement("option");
+	   		var opcion8=document.createElement("option");
 	        
 	        opcion3.text="-";
 	   		opcion4.text="Nombre de Usuario";
 	   		opcion5.text="Email";
 	   		opcion6.text="DNI";
 	   		opcion7.text="Tipo de Usuario";
+	   		opcion8.text="Estado";
 	   		opcion3.value="-";
 	   		opcion4.value="1";
 	   		opcion5.value="2";
 	   		opcion6.value="3";
 	   		opcion7.value="4";
+	   		opcion8.value="5";
 	   		
 	   		elemento3.add(opcion3);
 	   		elemento3.add(opcion4);
 	   		elemento3.add(opcion5);
 	   		elemento3.add(opcion6);
 	   		elemento3.add(opcion7);
+	   		elemento3.add(opcion8);
 	        elemento3.classList.add("bonito");
 	   		
 	        celda3.appendChild(elemento3);
@@ -132,8 +136,8 @@
     	 var opcion3=document.createElement("option");
     	 
     	 if(tipo.value!="-"){
-    	 switch(tipo.value)
-    	 {
+	    	 switch(tipo.value)
+	    	 {
     		 case "1":
     		 case "2":
     		 case "3":
@@ -143,6 +147,7 @@
     			 opcion2.text="No contiene";
     			 break;
     		 case "4":
+    		 case "5":
     			 opcion1.value="1";
     			 opcion1.text="Es";
     			 opcion2.value="2";
@@ -177,44 +182,60 @@
     function columna(ddl)
     {
     	var indice = ddl.parentNode.parentNode.rowIndex;
+    	var tipo= document.getElementById("ddlTipo["+indice+"]");
     	var filtro2= document.getElementById("ddlFiltro2["+indice+"]");
-    	var texto=filtro2.options[filtro2.selectedIndex].innerHTML;
     	var x=document.getElementById('tbFiltro').rows
         var y=x[indice].cells
-       
         
-        if(texto=="Contiene"||texto=="No contiene")
-    	{
-
-    		var elemento = document.getElementById("dinamico["+indice+"]");
-    		y[4].removeChild(elemento);
-    		
-    		elemento = document.createElement("input");
-            elemento.type = "text";
-            elemento.setAttribute("id","dinamico["+indice+"]");
-            elemento.classList.add("bonito");
-            y[4].appendChild(elemento);
-    	}
-    	else if(texto=="Es"||texto=="No es"){
-    		var elemento = document.getElementById("dinamico["+indice+"]");
-    		y[4].removeChild(elemento);
-    		
-    		elemento = document.createElement("SELECT");
-    		elemento.setAttribute("id","dinamico["+indice+"]");
-    		
-    		var opcion1=document.createElement("option");
-       		var opcion2=document.createElement("option");
-       		opcion1.text="Medico";
-       		opcion2.text="Paciente";
-       		opcion1.value="Med";
-       		opcion2.value="Pac";
-       		
-       		elemento.add(opcion1);
-       		elemento.add(opcion2);
-            elemento.classList.add("bonito");
-            y[4].appendChild(elemento);
-    	}
-    	else{
+        if(tipo.value!="-"&&filtro2.value!="-"){
+	        if(tipo.value=="1"||tipo.value=="2"||tipo.value=="3")
+	    	{
+	
+	    		var elemento = document.getElementById("dinamico["+indice+"]");
+	    		y[4].removeChild(elemento);
+	    		
+	    		elemento = document.createElement("input");
+	            elemento.type = "text";
+	            elemento.setAttribute("id","dinamico["+indice+"]");
+	            elemento.classList.add("bonito");
+	            y[4].appendChild(elemento);
+	    	}
+	    	else if(tipo.value=="4"||tipo.value=="5"){
+	    		var elemento = document.getElementById("dinamico["+indice+"]");
+	    		y[4].removeChild(elemento);
+	    		
+	    		elemento = document.createElement("SELECT");
+	    		elemento.setAttribute("id","dinamico["+indice+"]");
+	    		
+	    		var opcion1=document.createElement("option");
+	       		var opcion2=document.createElement("option");
+	       		
+	       		if(tipo.value=="4"){
+	       		
+	       		var opcion3=document.createElement("option");
+	       		opcion1.text="Medico";
+	       		opcion2.text="Paciente";
+	       		opcion3.text="Administrador";
+	       		opcion1.value="med";
+	       		opcion2.value="pac";
+	       		opcion3.value="adm";
+	       		
+	       		}
+	       		else{
+	       			opcion1.text="Habilitado";
+		       		opcion2.text="Inhabilitado";
+		       		opcion1.value="true";
+		       		opcion2.value="false";
+	       		}
+	       		elemento.add(opcion1);
+	       		elemento.add(opcion2);
+	       		
+	       		if(tipo.value=="4") elemento.add(opcion3);
+	            elemento.classList.add("bonito");
+	            y[4].appendChild(elemento);
+	    	}
+        }
+        else{
     		var text=document.createTextNode("Completar datos");
     		var elemento = document.getElementById("dinamico["+indice+"]");
     		y[4].removeChild(elemento);
@@ -225,7 +246,6 @@
     		
     		y[4].appendChild(elemento);
     	}
-    	
     }
     
     
