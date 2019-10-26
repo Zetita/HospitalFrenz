@@ -5,21 +5,21 @@ public class Usuario {
 	private String Email;
 	private int DNI;
 	private String Contrasenia;
-	private boolean Admin;
-	private boolean Tipo;
+	private String Tipo;
+	private boolean Estado;
 	
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(String usuario, String email, int dNI, String contrasenia, boolean admin, boolean tipo) {
+	public Usuario(String usuario, String email, int dNI, String contrasenia, String tipo, boolean estado) {
 		super();
 		Usuario = usuario;
 		Email = email;
 		DNI = dNI;
 		Contrasenia = contrasenia;
-		Admin = admin;
 		Tipo = tipo;
+		Estado = estado;
 	}
 
 	public String getUsuario() {
@@ -54,26 +54,26 @@ public class Usuario {
 		Contrasenia = contrasenia;
 	}
 
-	public boolean isAdmin() {
-		return Admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		Admin = admin;
-	}
-
-	public boolean isTipo() {
+	public String getTipo() {
 		return Tipo;
 	}
 
-	public void setTipo(boolean tipo) {
+	public void setTipo(String tipo) {
 		Tipo = tipo;
+	}
+
+	public boolean isEstado() {
+		return Estado;
+	}
+
+	public void setEstado(boolean estado) {
+		Estado = estado;
 	}
 
 	@Override
 	public String toString() {
 		return "Usuarios [Usuario=" + Usuario + ", Email=" + Email + ", DNI=" + DNI + ", Contrasenia=" + Contrasenia
-				+ ", Admin=" + Admin + ", Tipo=" + Tipo + "]";
+				+ ", Tipo=" + Tipo + ", Estado= " + Estado+"]";
 	}
 	
 	
