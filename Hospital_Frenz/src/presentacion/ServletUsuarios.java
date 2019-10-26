@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +32,8 @@ public class ServletUsuarios extends HttpServlet {
 		if(request.getParameter("Param")!=null)
 		{
 			String opcion = request.getParameter("Param").toString();
-			
+			UsuarioNeg user=new UsuarioNegImpl();
+			List<Usuario> lst=new ArrayList<Usuario>();
 			switch (opcion) {
 			case "signup":
 			{
@@ -38,11 +41,18 @@ public class ServletUsuarios extends HttpServlet {
 				dispatcher.forward(request, response);
 				break;
 			}
+			case "admin":
+				try {
+				lst=user.listarUsuarios();
+				request.setAttribute("ListaUsers", lst);
+				}
+				catch(Exception e){
+					
+				}
 			default:
 				break;
 			}
 		}
-		request.setAttribute("mensaje","asd");
 		RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
 		rd.forward(request, response);
 	}
