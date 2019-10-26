@@ -16,6 +16,8 @@
 <body>
 <script src="javascript/FiltroDinamico.js"></script>
 
+<%System.out.println((String)request.getAttribute("mensaje")); %>
+
 <hr class="divisor">
 
 <div class="mitad1" >
@@ -60,15 +62,15 @@
 	<br>
 	<br>
 
-		<table id="tabla">
+		<table id="tabla" style="width:114%">
 			<tr>
 				<th colspan="2"></th>
 				<th>Nombre de Usuario</th>
 				<th>Contraseña</th>
 				<th>Email</th>
 				<th>DNI Asociado</th>
-				<th>Administrador</th>
 				<th>Tipo de Usuario</th>
+				<th>Estado</th>
 			</tr>
 		</table>
 	
@@ -82,7 +84,7 @@
 	
 	<label class=lbl2>NOMBRE DEL USUARIO:</label>
 	&nbsp;
-	<input type="text" class=bonito name="txtNombre">
+	<input type="text" class=bonito style="position:relative;left:11%" name="txtNombre">
 	
 	<br>
 	<br>
@@ -96,36 +98,47 @@
 	
 	<label class=lbl2>DNI DEL USUARIO:</label>
 	&nbsp;
-	<input type="number" class=bonito name="txtDNI">
+	<input type="number" class=bonito style="position:relative;left:22%" name="txtDNI">
 	
 	<br>
 	<br>
 	
 	<label class=lbl2>EMAIL DEL USUARIO:</label>
 	&nbsp;
-	<input type="text" class=bonito name="txtEmail">
+	<input type="text" class=bonito style="position:relative;left:17%" name="txtEmail">
 	
 	<br>
 	<br>
-	
-	<label class=lbl2>ADMINISTRADOR:</label>
-	&nbsp;
-	<input type="checkbox" class=bonito name="chckAdministrador">
-	
+	<table style="border:none;width:112%">
+		<tr>
+			<td style="border:none;text-align:left">
+			</td>
+			<td style="border:none;text-align:left">
+				<input name="Tipo" type="radio" class=bonito value="med" >
+				<label class=lbl2>Medico</label>
+			</td>
+		</tr>
+		<tr>
+			<td style="border:none;text-align:left">
+				<label class=lbl2>TIPO DE USUARIO:</label>
+
+			</td>
+			<td style="border:none;text-align:left">
+				<input name="Tipo" type="radio" class=bonito value="pac">
+				<label class=lbl2>Paciente</label>
+			</td>
+		</tr>
+		<tr>
+			<td style="border:none;text-align:left">
+			</td>
+			<td style="border:none;text-align:left">
+				<input name="Tipo" type="radio" class=bonito value="adm" >
+				<label class=lbl2>Administrador</label>
+			</td>
+		</tr>
+	</table>
 	<br>
-	<br>
-	
-	<label class=lbl2>TIPO DE USUARIO:</label>
-	&nbsp;
-	<input name="Tipo" type="radio" class=bonito value="Medico" name="chckMedico">
-	<label class=lbl2>Medico</label>
-	&nbsp;
-	<input name="Tipo" type="radio" class=bonito value="Paciente" name="chckPaciente">
-	<label class=lbl2>Paciente</label>
-	<br>
-	<br>
-	
-	<input class=boton type="submit" name="btnAceptar" value="Agregar Usuario">
+	<input class=boton type="submit" name="btnAceptar" style="width:95%" value="Agregar Usuario">
 	</form>
 </div>
 </html>
