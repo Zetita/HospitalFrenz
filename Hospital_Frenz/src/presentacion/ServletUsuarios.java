@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidad.Usuario;
 import negocio.UsuarioNeg;
@@ -42,12 +43,26 @@ public class ServletUsuarios extends HttpServlet {
 				break;
 			}
 			case "admin":
-				try {
-				lst=user.listarUsuarios();
-				request.setAttribute("ListaUsers", lst);
+				if(request.getParameter("Origen")!=null) {
+					if(request.getParameter("Origen").equals("1")) 
+					{
+						if(request.getParameter("Num")!=null) 
+						{
+							HttpSession sesion=request.getSession();
+							sesion.setAttribute("NumPag",request.getParameter("Num"));
+							lst=user.listarUsuarios();
+							request.setAttribute("ListaUsers", lst);
+						}
+					}
 				}
-				catch(Exception e){
-					
+				else {
+					try {
+					lst=user.listarUsuarios();
+					request.setAttribute("ListaUsers", lst);
+					}
+					catch(Exception e){
+						
+					}
 				}
 			default:
 				break;
@@ -64,6 +79,14 @@ public class ServletUsuarios extends HttpServlet {
 		if(request.getParameter("btnAceptar")!=null) {
 			UsuarioNeg userNeg = new UsuarioNegImpl();
 			Usuario user=LlenarUsuario(request,response);
+			List<Usuario> lst=new ArrayList<Usuario>();
+			try {
+				lst=userNeg.listarUsuarios();
+				request.setAttribute("ListaUsers", lst);
+			}
+			catch(Exception e){
+					
+			}
 			userNeg.insertar(user);
 			RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
 			rd.forward(request,response);
