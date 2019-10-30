@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.*, entidad.*"  %>
+    <%@ page import="java.util.*, entidad.*"  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,8 +17,9 @@
 
 <body>
 <script src="javascript/FiltroDinamico.js"></script>
+<script src="javascript/Modificar.js"></script>
 
-<div class="mitad1" >
+<div class="mitad1" style="width:56%">
 
 	<br>	
 	<br>
@@ -26,7 +28,7 @@
 	<b><label class=lbl2>LISTAR USUARIOS</label><br></b>
 	<br>
 	
-	<table id="tbFiltro" style="width:114%">
+	<table id="tbFiltro" style="width:100%">
 			<tr>
 				<td style="border:none">
 					<input class=boton type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltro')" >
@@ -58,13 +60,13 @@
 		<br>
 		<br>
 
-		<input type="button" id="btnFiltrar" class="boton" value="Filtrar" style="width:110%">
+		<input type="button" id="btnFiltrar" class="boton" style="width:94%" value="Filtrar">
 	
 	<br>	
 	<br>
 	<br>
 
-		<table id="tabla" style="width:114%">
+		<table id="tbUsers" style="width:100%">
 			<tr>
 				<th colspan="2"></th>
 				<th>Nombre de Usuario</th>
@@ -75,30 +77,70 @@
 				<th>Estado</th>
 			</tr>
 			<%List<Usuario> lst=null;
+			int Comienzo=0;
+			int Final=5;
 			  if(request.getAttribute("ListaUsers")!=null)
 			  {
 				  lst=(ArrayList<Usuario>)request.getAttribute("ListaUsers");
 			  }
-			  for(Usuario user: lst){
+			  if(session.getAttribute("NumPag")!=null)
+			  {
+				  
+			 	  Final=5*Integer.parseInt(session.getAttribute("NumPag").toString());
+			 	Comienzo=Final-5;
+			  }
+			  int indice=1;
+			  for(int i=Comienzo;i<Final;i++){
+				  try{
 				  %>
-				  <form method=post action="ServletUsuarios?Param=<%=user.getDNI()%>">
+				  <form method=post action="ServletUsuarios?Param=<%=lst.get(i).getDNI()%>">
 				  	<tr>
-				  		<td><input type="submit" class="boton" id="btnModificar" value="Modificar"></td>
-				  		<td><input type="submit" class="boton" id="btnEliminar" value="Eliminar"></td>
-				  		<td><%=user.getUsuario() %></td>
-				  		<td><%=user.getContrasenia() %></td>
-				  		<td><%=user.getEmail() %></td>
-				  		<td><%=user.getDNI() %></td>
-				  		<td><%=user.getTipo() %></td>
-				  		<td><% if(user.isEstado()==true){%>Habilitado
-				  		<%} else { %>Inhabilitado<%} %> </td>
+				  		<td><input type="button" class="boton" id="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbUsers')" value="Modificar"></td>
+				  		<td><input type="submit" class="boton" id="btnEliminar[<%=indice %>]" style="font-size:10px" value="Eliminar"></td>
+				  		<td><label id="lblUsuario[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getUsuario()%></label></td>
+				  		<td><label id="lblContrasenia[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getContrasenia() %></label></td>
+				  		<td><label id="lblEmail[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getEmail()%></label></td>
+				  		<td><label id="lblDNI[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getDNI()%></label></td>
+				  		<td><label id="lblTipo[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getTipo()%></label></td>
+				  		<td><% if(lst.get(i).isEstado()==true){%><label id="lblEstado[<%=indice%>]" style="font-size:10px">Habilitado</label>
+				  		<%} else { %><label id="lblEstado[<%=indice%>]" style="font-size:10px">Inhabilitado</label><%} %> </td>
 				  	</tr>
 				  </form>
 				  <%
+				  indice++;
+				  }
+				  catch(Exception e){
+					  
+				  }
+				  
+			  }
+			  
+			  int cant=lst.size()/5;
+			  if(lst.size()%5!=0)
+			  {
+				  session.setAttribute("Resto",lst.size()%5);
+			  }
+			  else{
+				  session.setAttribute("Resto",null);
+			  }
+			  %>
+			  
+			  <tr>
+			  <td colspan="8">
+			  
+			  <% 
+			   System.out.println(session.getAttribute("NumPag"));
+			  for(int i=0;i<=cant;i++){
+				   %>
+				   <a href="ServletUsuarios?Param=admin&Origen=1&Num=<%=i+1%>" id="btnPag<%=i+1 %>" class="boton"><%=i+1 %></a>
+				   <%
 			  }
 			%>
+			
+			</td>
+			</tr>
 		</table>
-	
+
 </div>
 
 <div class="mitad2">
