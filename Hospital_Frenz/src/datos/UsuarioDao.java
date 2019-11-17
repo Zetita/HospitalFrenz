@@ -2,6 +2,8 @@ package datos;
 
 import java.util.List;
 
+import entidad.Medico;
+import entidad.Paciente;
 import entidad.Usuario;
 
 public interface UsuarioDao {
@@ -12,4 +14,6 @@ public interface UsuarioDao {
 	public boolean insertar(Usuario user);
 	public boolean editar(Usuario user);
 	public Usuario ingresar(String usuario, String pass);
+	public Paciente buscarPaciente(String usuario);
+	public Medico buscarMedico(String usuario);
 }

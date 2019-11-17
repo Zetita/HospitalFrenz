@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import datos.UsuarioDao;
 import datosImpl.UsuarioDaoImpl;
+import entidad.Medico;
+import entidad.Paciente;
 import entidad.Usuario;
 import negocio.UsuarioNeg;
 
@@ -55,4 +57,14 @@ public class UsuarioNegImpl implements UsuarioNeg{
 		return userDao.ingresar(usuario,pass);
 	}
 
+	@Override
+	public Paciente buscarPaciente(String usuario) {
+		return userDao.buscarPaciente(usuario);
+	}
+
+	@Override
+	public Medico buscarMedico(String usuario) {
+		return userDao.buscarMedico(usuario);
+	}
+	
 }

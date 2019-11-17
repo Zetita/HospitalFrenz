@@ -23,7 +23,7 @@
 <div class="container" >
 <h5>Datos de contacto</h5><br>
 <label>Celular:</label> <input type=tel name=txtCel placeholder="11-1111-1111"><br>
-<label>Correo-Electronico:</label>><input type=email name=txtEmail placeholder="Grupo6@gmail.com"><br>
+<label>Correo-Electronico:</label><input type=email name=txtEmail placeholder="Grupo6@gmail.com"><br>
 
 
 <br><br>
@@ -39,7 +39,6 @@
 
 <div  class="container">
 <h5>Tipo de cobertura</h5><br>
-<label>Id Cobertura:</label><br>
 <label>Nombre de cobertura:</label><br>
 <label>Tipo de cobertura:</label><br>
 <div  class=boton><input type=button name=BtnActualizar class="btn btn-primary" value="Actualizar"></div>

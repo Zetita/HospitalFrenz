@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-   background-color: #464866;
+   background-color: lavender;
 }
 header {
   padding: 40px 0;
@@ -11,13 +11,12 @@ header {
   box-shadow: 0 4px 6px rgba(0,0,0,.2);  
 }
 .container {
-  padding: 30px 0;
-  max-width: 960px;
-  margin: 0 auto;
+  margin-left:40px;
 }
 .logo-box {
   float: left;
   margin-right: 20px;
+  display:contents;
 }
 .logo-box a {
   outline: none;
@@ -29,7 +28,6 @@ nav {
 }
 ul {
   list-style: none;
-  margin-left: 300px;
   padding: 0;
   float: left;
 }
@@ -42,6 +40,7 @@ nav li {
 }
 nav a {
   text-decoration: none;
+  top:30px;
   display: block;
   position: relative;
   color: #fff;
@@ -53,7 +52,7 @@ nav a:after {
   height: 2px;
   position: absolute;
   left: 0;
-  bottom: 15px;
+  bottom: 0px;
   background: #868686;
   transition: width .5s linear;  
 }
@@ -81,6 +80,55 @@ nav li:hover {background: rgba(0,0,0,.1);}
 nav a:after {content: none;}
 }
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,800);
+
+*, *:before, *:after{
+  box-sizing: border-box;
+  padding: 0; margin: 0;
+  font: 300 1em/1.5 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  text-decoration: none;
+  color: lightslategray;
+}
+
+
+button:hover{cursor: pointer}
+button {
+	background: #29648a;
+    position: relative;
+    border: 2px solid #29648a;
+    padding: 15px 50px;
+    overflow: hidden;
+    display:block; 
+    position:absolute; 
+    top:10%; 
+    left:70%;
+}
+
+/*button:before (attr data-hover)*/
+button:hover:before{opacity: 1; transform: translate(0,0);}
+button:before{
+    content: attr(data-hover);
+    position: absolute;
+    top: 1.1em; left: 0;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 800;
+    font-size: .8em;
+    opacity: 0;
+    transform: translate(-100%,0);
+    transition: all .3s ease-in-out;
+}
+/*button div (button text before hover)*/
+button:hover div{opacity: 0; transform: translate(100%,0)}
+button div{
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 800;
+    font-size: .8em;
+    transition: all .3s ease-in-out;
+    
+}
 
 .footer #button{
 	width:35px;

@@ -33,9 +33,15 @@ public class ServletCoberturas extends HttpServlet {
 			switch (opcion) {
 			case "admin":
 			{
-				//Se quiere insertar entonces cargo la lista de categorias
 				request.setAttribute("listaCoberturas", negCob.listarCoberturas());
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminCoberturas.jsp");
+				dispatcher.forward(request, response);
+				break;
+			}
+			case "user":
+			{
+				request.setAttribute("listaCoberturas", negCob.listarCoberturas());
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCoberturas.jsp");
 				dispatcher.forward(request, response);
 				break;
 			}

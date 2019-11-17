@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidad.Medico;
+import entidad.Paciente;
 import entidad.Usuario;
 import negocio.UsuarioNeg;
 import negocioImpl.UsuarioNegImpl;
@@ -64,6 +66,24 @@ public class ServletUsuarios extends HttpServlet {
 						
 					}
 				}
+			case "userPac":
+			{
+				Paciente pac= new Paciente();
+				UsuarioNeg userNeg = new UsuarioNegImpl();
+				request.setAttribute("paciente", userNeg.buscarPaciente(request.getParameter("usuario")));
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
+				dispatcher.forward(request, response);
+				break;
+			}
+			case "userMed":
+			{
+				Medico med = new Medico();
+				UsuarioNeg userNeg = new UsuarioNegImpl();
+				request.setAttribute("medico", userNeg.buscarMedico(request.getParameter("usuario")));
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
+				dispatcher.forward(request, response);
+				break;
+			}
 			default:
 				break;
 			}

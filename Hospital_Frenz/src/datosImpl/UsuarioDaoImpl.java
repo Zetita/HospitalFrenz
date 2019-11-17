@@ -1,6 +1,11 @@
 package datosImpl;
 
 import datos.UsuarioDao;
+import entidad.Cobertura;
+import entidad.Localidad;
+import entidad.Medico;
+import entidad.Paciente;
+import entidad.Provincia;
 import entidad.Usuario;
 
 import java.sql.ResultSet;
@@ -176,6 +181,99 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			cn.close();
 		}
 		return u;
+	}
+
+	@Override
+	public Paciente buscarPaciente(String usuario) {
+		cn = new Conexion();
+		cn.Open();
+		Paciente pac = new Paciente();
+		Provincia prov = new Provincia();
+		Localidad loc = new Localidad();
+		Cobertura cob= new Cobertura();
+		try 
+		{
+			ResultSet rs= cn.query("Select * from pacientes INNER JOIN usuarios ON pacientes.DNIPaciente=usuarios.DNIUser "
+					+ "WHERE usuarios.NombreUser=" + usuario);
+			 
+			pac.setDni(rs.getInt("pacientes.DNIPaciente"));
+			pac.setNombre(rs.getString("pacientes.NombrePaciente"));
+			pac.setApellido(rs.getString("pacientes.ApellidoPaciente"));
+			pac.setFecha(rs.getString("pacientes.FechaNacPaciente"));
+			pac.setTelefono(rs.getInt("pacientes.Telefono"));
+			pac.setDireccion(rs.getString("pacientes.DireccionPaciente"));
+			 
+			prov.setId(rs.getInt("provincias.id"));
+			prov.setNombre(rs.getString("provincias.nombre"));
+			prov.setCodigo31662(rs.getString("provincias.codigo31662"));
+			 
+			loc.setId(rs.getInt("localidades.id"));
+			loc.setNombre(rs.getString("localidades.nombre"));
+			loc.setCp(rs.getInt("localidades.codigopostal"));
+			loc.setProvincia(prov);
+			
+			cob.setIdCobertura(rs.getInt("coberturas.IDCobertura"));
+			cob.setNombre(rs.getString("coberturas.NombreCobertura"));
+			cob.setTipo(rs.getString("coberturas.TipoCobertura"));
+			
+			pac.setIdProvincia(prov);
+			pac.setLocalidad(loc);
+			pac.setCobertura(cob);
+			pac.setEstado(rs.getBoolean("pacientes.EstadoPaciente"));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return pac;
+	}
+
+	@Override
+	public Medico buscarMedico(String usuario) {
+		cn = new Conexion();
+		cn.Open();
+		Medico med = new Medico();
+		Provincia prov = new Provincia();
+		Localidad loc = new Localidad();
+		try 
+		{
+			ResultSet rs= cn.query("Select * from medicos INNER JOIN usuarios ON medicos.DNIPaciente=usuarios.DNIUser "
+					+ "WHERE usuarios.NombreUser=" + usuario);
+			 		
+			 
+			med.setDni(rs.getInt("medicos.DNIMed"));
+			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
+			med.setNombre(rs.getString("medicos.NombreMedico"));
+			med.setApellido(rs.getString("medicos.ApellidosMedico"));
+			med.setTelefono(rs.getInt("medicos.Telefono"));
+			med.setDireccion(rs.getString("medicos.DireccionMedico"));
+			 
+			prov.setId(rs.getInt("provincias.id"));
+			prov.setNombre(rs.getString("provincias.nombre"));
+			prov.setCodigo31662(rs.getString("provincias.codigo31662"));
+			 
+			loc.setId(rs.getInt("localidades.id"));
+			loc.setNombre(rs.getString("localidades.nombre"));
+			loc.setCp(rs.getInt("localidades.codigopostal"));
+			loc.setProvincia(prov);
+		
+			med.setIdProvincia(prov);
+			med.setLocalidad(loc);
+			med.setEstado(rs.getInt("medicos.EstadoMed"));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return med;
 	}
 
 	
