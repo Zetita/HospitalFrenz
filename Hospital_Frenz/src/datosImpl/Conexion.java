@@ -11,15 +11,21 @@ public class Conexion {
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
 	private String pass = "ROOT";
-	private String dbName = "hospitalfrenz??profileSQL=true&useSSL=false";
+	private String dbName = "hospitalfrenz";
 
 	protected Connection connection;
 	
+	public static void main(String[] args){
+		Conexion conexioncita= new Conexion();
+
+		System.out.println(conexioncita.Open());
+
+	}
 	public Connection Open()
 	{
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.MySQL.jdbc.Driver").newInstance();
 			this.connection = DriverManager.getConnection(host+dbName, user, pass);
 		}
 		catch(Exception e)

@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entidad.Medico;
-import entidad.Paciente;
 import entidad.Usuario;
 import negocio.UsuarioNeg;
 import negocioImpl.UsuarioNegImpl;
@@ -24,7 +22,9 @@ import negocioImpl.UsuarioNegImpl;
 @WebServlet("/ServletUsuarios")
 public class ServletUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	UsuarioNeg user=new UsuarioNegImpl();
+	
     public ServletUsuarios() {
     	super();
     }
@@ -35,7 +35,7 @@ public class ServletUsuarios extends HttpServlet {
 		if(request.getParameter("Param")!=null)
 		{
 			String opcion = request.getParameter("Param").toString();
-			UsuarioNeg user=new UsuarioNegImpl();
+			
 			List<Usuario> lst=new ArrayList<Usuario>();
 			switch (opcion) {
 			case "signup":
@@ -68,7 +68,7 @@ public class ServletUsuarios extends HttpServlet {
 				}
 			case "userPac":
 			{
-				Paciente pac= new Paciente();
+				
 				UsuarioNeg userNeg = new UsuarioNegImpl();
 				request.setAttribute("paciente", userNeg.buscarPaciente(request.getParameter("usuario")));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
@@ -77,7 +77,7 @@ public class ServletUsuarios extends HttpServlet {
 			}
 			case "userMed":
 			{
-				Medico med = new Medico();
+				
 				UsuarioNeg userNeg = new UsuarioNegImpl();
 				request.setAttribute("medico", userNeg.buscarMedico(request.getParameter("usuario")));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
@@ -113,28 +113,29 @@ public class ServletUsuarios extends HttpServlet {
 		}
 		
 		//login
-//		if(request.getParameter("btnAceptarLI")!=null)
-//	    {
-//			UsuarioNeg negUser = new UsuarioNegImpl();
-//			String user = request.getParameter("txtUserLI");
-//			String pass = request.getParameter("txtPassLI");
-//			Usuario u = negUser.ingresar(user, pass);
-//			if(u!=null)
-//			{
-//				System.out.println("pruebita");
-//				System.out.println(u.getEmail());
-//				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");
-//				dispatcher.forward(request, response);
-//				
-//			}
-//			else
-//			{
-//				System.out.println("nopruebita");
-//				RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
-//				dispatcher.forward(request, response);
-//			}
-//			
-//	    }
+		if(request.getParameter("btnAceptarLI")!=null)
+	    {
+			UsuarioNeg negUser = new UsuarioNegImpl();
+			String user = request.getParameter("txtUserLI").toString();
+			String pass = request.getParameter("txtPassLI").toString();
+			
+			Usuario u = (Usuario)negUser.ingresar(user, pass);
+			System.out.println(u);
+			if(u.getUsuario()!=null)
+			{
+				System.out.println("pruebita "+ user+"+"+pass);
+				
+				response.sendRedirect("UserDatos.jsp");
+			}
+			else
+			{
+				System.out.println("nopruebita");
+                request.setAttribute("errorMessage", "Invalid user or password");
+                RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
+                rd.forward(request, response); 
+			}
+			
+	    }
 	}
 	
 	public Usuario LlenarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

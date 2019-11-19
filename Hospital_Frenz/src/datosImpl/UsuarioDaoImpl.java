@@ -61,7 +61,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		try 
 		{
 			ResultSet rs= cn.query("Select * from usuarios WHERE DNIUser="+dni);
-			
+			rs.next();
 			user.setUsuario(rs.getString("usuarios.NombreUser"));
 			user.setEmail(rs.getString("usuarios.EmailUser"));
 			user.setDNI(rs.getInt("usuarios.DNIUser"));
@@ -160,10 +160,13 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		Usuario u = new Usuario();
 		cn = new Conexion();
 		cn.Open();
-
+		String sql= "Select * from usuarios WHERE NombreUser='"+usuario+"' AND ContraseniaUser='"+pass+"'";
+		System.out.println(sql);
 		try 
 		{
-			ResultSet rs= cn.query("Select * from usuarios WHERE NombreUser='"+usuario+"' AND ContraseniaUser='"+pass+"'");
+			
+			ResultSet rs= cn.query(sql);
+			rs.next();
 			
 			u.setUsuario(rs.getString("usuarios.NombreUser"));
 			u.setEmail(rs.getString("usuarios.EmailUser"));
@@ -171,6 +174,8 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			u.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
 			u.setTipo(rs.getString("usuarios.TipoUser"));
 			u.setEstado(rs.getBoolean("usuarios.EstadoUser"));
+			
+			
 		}
 		catch(Exception e)
 		{
@@ -180,6 +185,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		{
 			cn.close();
 		}
+		System.out.println(u);
 		return u;
 	}
 

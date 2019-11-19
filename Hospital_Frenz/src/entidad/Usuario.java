@@ -11,7 +11,9 @@ public class Usuario {
 	public Usuario() {
 		super();
 	}
-
+	public boolean isValid() {
+	    return Usuario!=null && Email!=null && Contrasenia!=null && Tipo!=null;
+	  }
 	public Usuario(String usuario, String email, int dNI, String contrasenia, String tipo, boolean estado) {
 		super();
 		Usuario = usuario;
