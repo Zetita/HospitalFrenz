@@ -10,6 +10,11 @@
 <title>Solicitar Turno</title>
 </head>
 <body>
+<form method="post" action="ServletUsuarios">
+<button type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
+ : request.getAttribute("usuario")%></div></button>
+</form>
+
 <div style="text-aling:center; margin-left:40%; margin-right:30%;">
 
 <label class=lbl2>Especialidad</label><br><br><select><option value=0>Seleccione Especialidad</option>

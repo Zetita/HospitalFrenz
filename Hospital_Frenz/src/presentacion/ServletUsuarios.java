@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ServletUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	UsuarioNeg user=new UsuarioNegImpl();
-	
+	public static HttpSession sesionIniciada;
     public ServletUsuarios() {
     	super();
     }
@@ -115,27 +116,35 @@ public class ServletUsuarios extends HttpServlet {
 		//login
 		if(request.getParameter("btnAceptarLI")!=null)
 	    {
+			sesionIniciada=request.getSession();
 			UsuarioNeg negUser = new UsuarioNegImpl();
 			String user = request.getParameter("txtUserLI").toString();
 			String pass = request.getParameter("txtPassLI").toString();
 			
-			Usuario u = (Usuario)negUser.ingresar(user, pass);
+			Usuario u = negUser.ingresar(user, pass);
 			System.out.println(u);
 			if(u.getUsuario()!=null)
 			{
-				System.out.println("pruebita "+ user+"+"+pass);
+				request.setAttribute("usuario", u.getUsuario());
+				sesionIniciada.setAttribute("usuario",u.getUsuario());
+				RequestDispatcher rd=request.getRequestDispatcher("UserDatos.jsp");
+				rd.forward(request,response);
 				
-				response.sendRedirect("UserDatos.jsp");
 			}
 			else
 			{
-				System.out.println("nopruebita");
-                request.setAttribute("errorMessage", "Invalid user or password");
+                request.setAttribute("errorMessage", "Usuario y/o contraseña invalido.");
                 RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
                 rd.forward(request, response); 
 			}
 			
 	    }
+		if(request.getParameter("btnLogOff")!=null)
+		{
+			sesionIniciada.invalidate();
+			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
+            rd.forward(request, response);
+		}
 	}
 	
 	public Usuario LlenarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

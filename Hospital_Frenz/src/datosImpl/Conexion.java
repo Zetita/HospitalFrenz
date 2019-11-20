@@ -11,7 +11,7 @@ public class Conexion {
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
 	private String pass = "ROOT";
-	private String dbName = "hospitalfrenz";
+	private String dbName = "hospitalfrenz?useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 	protected Connection connection;
 	
@@ -25,7 +25,7 @@ public class Conexion {
 	{
 		try
 		{
-			Class.forName("com.MySQL.jdbc.Driver").newInstance();
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			this.connection = DriverManager.getConnection(host+dbName, user, pass);
 		}
 		catch(Exception e)

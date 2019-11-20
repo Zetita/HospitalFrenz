@@ -29,7 +29,7 @@
                 <input type="password" placeholder="Contraseña" name="txtPassLI" value="">
             </div>
 			<span style="color:red"><%=(request.getAttribute("errorMessage") == null) ? ""
- : request.getAttribute("errMessage")%></span>
+ : request.getAttribute("errorMessage")%></span>
             <input type="submit" class="btn" name="btnAceptarLI" value="Entrar">
             </form>
             ¿Aún no tenés usuario? <a href="ServletUsuarios?Param=signup">Hacé click acá para Registrarte</a>

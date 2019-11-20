@@ -11,6 +11,12 @@
 <title>Turnos</title>
 </head>
 <body>
+
+<form method="post" action="ServletUsuarios">
+<button type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
+ : request.getAttribute("usuario")%></div></button>
+</form>
+
 <div class=container>
 <h5 >Turnos</h5><br>
 <label>SIN INFORMACION PARA MOSTRAR </label>

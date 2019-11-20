@@ -11,6 +11,11 @@
 </head>
 <body>
 
+<form method="post" action="ServletUsuarios">
+<button type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
+ : request.getAttribute("usuario")%></div></button>
+</form>
+
 <div class="container">
 <h5>Datos Personales</h5><br>
 <label>Numero de Documento:</label><br>
