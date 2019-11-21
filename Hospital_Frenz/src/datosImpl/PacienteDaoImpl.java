@@ -21,8 +21,8 @@ public class PacienteDaoImpl implements PacienteDao {
 		 List<Paciente> list = new ArrayList<Paciente>();
 		 try
 		 {
-			 ResultSet rs= cn.query("Select * from pacientes INNER JOIN provincias ON pacientes.IDProvinciaPaciente=provincias.id "
-			 		+ "INNER JOIN localidades ON pacientes.IDLocalidadPaciente=localidades.id INNER JOIN coberturas ON "
+			 ResultSet rs= cn.query("Select * from pacientes INNER JOIN localidades ON pacientes.IDLocalidad=localidades.id "
+			 		+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id INNER JOIN coberturas ON "
 			 		+ "pacientes.IDCobertura=coberturas.IDCobertura");
 			 while(rs.next())
 			 {
@@ -82,8 +82,8 @@ public class PacienteDaoImpl implements PacienteDao {
 		 
 		 try
 		 {
-			 ResultSet rs= cn.query("Select * from pacientes INNER JOIN provincias ON pacientes.IDProvinciaPaciente=provincias.id "
-				 		+ "INNER JOIN localidades ON pacientes.IDLocalidadPaciente=localidades.id INNER JOIN coberturas ON "
+			 ResultSet rs= cn.query("Select * from pacientes INNER JOIN localidades ON pacientes.IDLocalidad=localidades.id "
+				 		+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id INNER JOIN coberturas ON "
 				 		+ "pacientes.IDCobertura=coberturas.IDCobertura WHERE pacientes.DNIPaciente="+dni);
 			 
 			pac.setDni(rs.getInt("pacientes.DNIPaciente"));
@@ -131,10 +131,10 @@ public class PacienteDaoImpl implements PacienteDao {
 		cn.Open();	
 
 		String query = "INSERT INTO pacientes (DNIPaciente, NombrePaciente, ApellidoPaciente, FechaNacPaciente, Telefono,"
-				+ " DireccionPaciente, IDLocalidadPaciente, IDProvinciaPaciente, IDCobertura, EstadoPaciente) VALUES ("
-				+pac.getDni()+", '"+pac.getNombre()+"', '"+pac.getApellido()+"', "+pac.getFecha()+", "+pac.getTelefono()+", '"+
-				pac.getDireccion()+"', "+pac.getLocalidad().getId()+", "+pac.getProvincia().getId()+", "+ pac.getCobertura().getIdCobertura()
-				+", "+ pac.getEstado()+")";
+				+ " DireccionPaciente, IDLocalidad, IDCobertura, EstadoPaciente) VALUES ("+pac.getDni()+", '"
+				+pac.getNombre()+"', '"+pac.getApellido()+"', "+pac.getFecha()+", "+pac.getTelefono()+", '"+
+				pac.getDireccion()+"', "+pac.getLocalidad().getId()+", "+ pac.getCobertura().getIdCobertura()+", "
+				+ pac.getEstado()+")";
 		try
 		 {
 			estado=cn.execute(query);
@@ -158,8 +158,8 @@ public class PacienteDaoImpl implements PacienteDao {
 		cn.Open();	
 
 		String query = "UPDATE pacientes SET NombrePaciente='"+pac.getNombre()+"', ApellidoPaciente='"+pac.getApellido()+"', FechaNacPaciente="
-				+pac.getFecha()+", Telefono="+pac.getTelefono()+", DireccionPaciente='"+pac.getDireccion()+"', IDLocalidadPaciente="+
-				pac.getLocalidad().getId()+", IDProvinciaPaciente="+pac.getProvincia().getId()+", IDCobertura="+pac.getCobertura().getIdCobertura()
+				+pac.getFecha()+", Telefono="+pac.getTelefono()+", DireccionPaciente='"+pac.getDireccion()+"', IDLocalidad="+
+				pac.getLocalidad().getId()+", IDCobertura="+pac.getCobertura().getIdCobertura()
 				+", EstadoPaciente="+ pac.getEstado()+" WHERE DNIPaciente="+pac.getDni();
 		try
 		 {

@@ -116,25 +116,39 @@ public class ServletUsuarios extends HttpServlet {
 		//login
 		if(request.getParameter("btnAceptarLI")!=null)
 	    {
+			RequestDispatcher rd;
 			sesionIniciada=request.getSession();
 			UsuarioNeg negUser = new UsuarioNegImpl();
 			String user = request.getParameter("txtUserLI").toString();
 			String pass = request.getParameter("txtPassLI").toString();
 			
 			Usuario u = negUser.ingresar(user, pass);
-			System.out.println(u);
 			if(u.getUsuario()!=null)
 			{
 				request.setAttribute("usuario", u.getUsuario());
+				System.out.println(u.getTipo());
 				sesionIniciada.setAttribute("usuario",u.getUsuario());
-				RequestDispatcher rd=request.getRequestDispatcher("UserDatos.jsp");
+				if(u.getTipo().equals("0"))
+				{
+					rd=request.getRequestDispatcher("AdminTurnos.jsp");
+						
+				}
+				else if(u.getTipo().equals("1"))
+				{
+					rd=request.getRequestDispatcher("MedDatos.jsp");
+					
+				}
+				else
+				{
+					rd=request.getRequestDispatcher("UserDatos.jsp");
+				}
 				rd.forward(request,response);
 				
 			}
 			else
 			{
                 request.setAttribute("errorMessage", "Usuario y/o contraseña invalido.");
-                RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
+                rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response); 
 			}
 			

@@ -20,8 +20,8 @@ public class SedeDaoImpl implements SedeDao {
 		List<Sede> list = new ArrayList<Sede>();
 		try
 		{
-			ResultSet rs= cn.query("Select * from sedes INNER JOIN provincias ON sedes.IDProvinciaSede=provincias.id"
-			 		+ " INNER JOIN localidades ON sedes.IDLocalidadSede=localidades.id");
+			ResultSet rs= cn.query("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id"
+					+ "INNER JOIN provincias ON localidad.provincia_id=provincias.id");
 			while(rs.next())
 			{
 				Sede sede = new Sede();
@@ -69,8 +69,8 @@ public class SedeDaoImpl implements SedeDao {
 		Localidad loc = new Localidad();
 		try
 		{
-			ResultSet rs= cn.query("Select * from sedes INNER JOIN provincias ON sedes.IDProvinciaSede=provincias.id"
-				 		+ " INNER JOIN localidades ON sedes.IDLocalidadSede=localidades.id where IDSede="+id);
+			ResultSet rs= cn.query("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id"
+					+ "INNER JOIN provincias ON localidad.provincia_id=provincias.id WHERE IDSede="+id);
 			 
 			sede.setId(rs.getInt("sedes.IDSede"));
 			sede.setNombre(rs.getString("sedes.NombreSede"));
@@ -107,9 +107,8 @@ public class SedeDaoImpl implements SedeDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "INSERT INTO sedes (IDSede, NombreSede, DireccionSede, IDProvinciaSede, IDLocalidadSede, Estado)"
-				+ " VALUES ("+sede.getId()+", '"+sede.getNombre()+"', '"+sede.getDireccion()+"', "+ sede.getProvincia().getId()
-				+", "+sede.getLocalidad().getId()+", "+sede.getEstado()+")";
+		String query = "INSERT INTO sedes (IDSede, NombreSede, DireccionSede, IDLocalidad, Estado)" + " VALUES ("
+		+sede.getId()+", '"+sede.getNombre()+"', '"+sede.getDireccion()+"', "+sede.getLocalidad().getId()+", "+sede.getEstado()+")";
 		try
 		 {
 			estado=cn.execute(query);
@@ -133,8 +132,7 @@ public class SedeDaoImpl implements SedeDao {
 		cn.Open();	
 
 		String query = "UPDATE sedes SET NombreSede='"+sede.getNombre()+"', DireccionSede='"+sede.getDireccion()
-				+ "', IDProvinciaSede="+sede.getProvincia().getId()+", IDLocalidadSede="+sede.getLocalidad().getId()
-				+" WHERE IDSede="+sede.getId();
+				+ "', IDLocalidad="+sede.getLocalidad().getId() + " WHERE IDSede="+sede.getId();
 		try
 		 {
 			estado=cn.execute(query);

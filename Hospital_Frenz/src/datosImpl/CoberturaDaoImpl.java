@@ -25,6 +25,7 @@ public class CoberturaDaoImpl implements CoberturaDao {
 				 cob.setIdCobertura(rs.getInt("coberturas.IDCobertura"));
 				 cob.setNombre(rs.getString("coberturas.NombreCobertura"));
 				 cob.setTipo(rs.getString("coberturas.TipoCobertura"));
+				 cob.setCosto(rs.getDouble("coberturas.CostoCobertura"));
 				 list.add(cob);
 			 }
 			 
@@ -50,6 +51,7 @@ public class CoberturaDaoImpl implements CoberturaDao {
 			 cob.setIdCobertura(rs.getInt("coberturas.IDCobertura"));
 			 cob.setNombre(rs.getString("coberturas.NombreCobertura"));
 			 cob.setTipo(rs.getString("coberturas.TipoCobertura"));
+			 cob.setCosto(rs.getDouble("coberturas.CostoCobertura"));
 		 }
 		 catch(Exception e)
 		 {
@@ -69,8 +71,8 @@ public class CoberturaDaoImpl implements CoberturaDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "INSERT INTO coberturas (IDCobertura, NombreCobertura, TipoCobertura) VALUES ("
-				+cob.getIdCobertura()+", '"+cob.getNombre()+"', '"+cob.getTipo()+"')";
+		String query = "INSERT INTO coberturas (IDCobertura, NombreCobertura, TipoCobertura, CostoCobertura) VALUES ("
+				+cob.getIdCobertura()+", '"+cob.getNombre()+"', '"+cob.getTipo()+"', "+ cob.getCosto()+")";
 		try
 		 {
 			estado=cn.execute(query);
@@ -93,7 +95,8 @@ public class CoberturaDaoImpl implements CoberturaDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "UPDATE coberturas SET NombreCobertura='"+cob.getNombre()+"', TipoCobertura='"+cob.getTipo()+"' WHERE IDCobertura="+cob.getIdCobertura();
+		String query = "UPDATE coberturas SET NombreCobertura='"+cob.getNombre()+"', TipoCobertura='"+cob.getTipo()+
+				"', CostoCobertura="+cob.getCosto()+" WHERE IDCobertura="+cob.getIdCobertura();
 		try
 		 {
 			estado=cn.execute(query);

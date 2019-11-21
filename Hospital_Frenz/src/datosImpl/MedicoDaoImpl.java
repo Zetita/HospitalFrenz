@@ -20,8 +20,8 @@ public class MedicoDaoImpl implements MedicoDao {
 		List<Medico> list = new ArrayList<Medico>();
 		try
 		{
-			ResultSet rs= cn.query("Select * from medicos INNER JOIN provincias ON medicos.IDProvinciaMed=provincias.id "
-				 		+ "INNER JOIN localidades ON medicos.IDLocalidadMed=localidades.id");
+			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades ON medicos.IDLocalidad=localidades.id"
+					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id");
 			while(rs.next())
 			 {
 				Medico med = new Medico();
@@ -71,8 +71,8 @@ public class MedicoDaoImpl implements MedicoDao {
 		
 		try
 		{
-			ResultSet rs= cn.query("Select * from medicos INNER JOIN provincias ON medicos.IDProvinciaMed=provincias.id "
-				 		+ "INNER JOIN localidades ON medicos.IDLocalidadMed=localidades.id WHERE medicos.DNIMed="+dni);
+			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades ON medicos.IDLocalidad=localidades.id"
+					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE medicos.DNIMed="+dni);
 		
 			med.setDni(rs.getInt("medicos.DNIMed"));
 			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
@@ -115,8 +115,8 @@ public class MedicoDaoImpl implements MedicoDao {
 		
 		try
 		{
-			ResultSet rs= cn.query("Select * from medicos INNER JOIN provincias ON medicos.IDProvinciaMed=provincias.id "
-				 		+ "INNER JOIN localidades ON medicos.IDLocalidadMed=localidades.id WHERE medicos.MatriculaMed="+mat);
+			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades ON medicos.IDLocalidad=localidades.id"
+					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE medicos.MatriculaMed="+mat);
 		
 			med.setDni(rs.getInt("medicos.DNIMed"));
 			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
@@ -158,10 +158,10 @@ public class MedicoDaoImpl implements MedicoDao {
 		cn = new Conexion();
 		cn.Open();
 		
-		String query = "INSERT INTO medicos (DNIMed, MatriculaMed, NombreMed, ApellidosMed, DireccionMed, IDLocalidadMed," + 
-				" IDProvinciaMed, TelefonoMed, EstadoMed) VALUES ("+med.getDni()+", "+med.getMatricula()+", '"+med.getNombre()+"', '"+
-				med.getApellido()+"', '"+med.getDireccion()+"', "+med.getLocalidad().getId()+", "+med.getProvincia().getId()+", "+
-				med.getTelefono()+", "+med.getEstado()+")";
+		String query = "INSERT INTO medicos (DNIMed, MatriculaMed, NombreMed, ApellidosMed, DireccionMed, IDLocalidad," + 
+				" TelefonoMed, EstadoMed) VALUES ("+med.getDni()+", "+med.getMatricula()+", '"+med.getNombre()+"', '"+
+				med.getApellido()+"', '"+med.getDireccion()+"', "+med.getLocalidad().getId()+", "+med.getTelefono()
+				+", "+med.getEstado()+")";
 		try
 		{
 			estado=cn.execute(query);
@@ -185,8 +185,8 @@ public class MedicoDaoImpl implements MedicoDao {
 		cn.Open();	
 
 		String query = "UPDATE medicos SET NombreMed='"+med.getNombre()+"', ApellidosMed='"+med.getApellido()+"', DireccionMed='"+
-				med.getDireccion()+"', IDLocalidad="+ med.getLocalidad().getId()+", IDProvincia="+ med.getProvincia().getId()+
-				", TelefonoMed="+med.getTelefono()+", EstadoMed="+med.getEstado()+" WHERE DNIMed="+med.getDni();
+				med.getDireccion()+"', IDLocalidad="+ med.getLocalidad().getId()+", TelefonoMed="+med.getTelefono()
+				+", EstadoMed="+med.getEstado()+" WHERE DNIMed="+med.getDni();
 		try
 		 {
 			estado=cn.execute(query);
