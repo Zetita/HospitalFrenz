@@ -124,6 +124,7 @@ public class ServletUsuarios extends HttpServlet {
 			
 			Usuario u = negUser.ingresar(user, pass);
 			if(u.getUsuario()!=null)
+				
 			{
 				request.setAttribute("usuario", u.getUsuario());
 				System.out.println(u.getTipo());
