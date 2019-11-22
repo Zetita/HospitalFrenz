@@ -8,17 +8,16 @@ public class Paciente {
 	private String fecha;
 	private int telefono;
 	private String  direccion;
-	private Provincia provincia;
 	private Localidad localidad;
 	private Cobertura cobertura;
-	private boolean estado;
+	private int estado;
 	
 	public Paciente()
 	{
 		
 	}
 	public Paciente(int dni, String nombre, String apellido, String fecha, int telefono, String direccion,
-			Provincia provincia, Localidad localidad, Cobertura cobertura, boolean estado) {
+			Localidad localidad, Cobertura cobertura, int estado) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -26,7 +25,6 @@ public class Paciente {
 		this.fecha = fecha;
 		this.telefono = telefono;
 		this.direccion = direccion;
-		this.provincia = provincia;
 		this.localidad = localidad;
 		this.cobertura = cobertura;
 		this.estado = estado;
@@ -67,12 +65,7 @@ public class Paciente {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public Provincia getProvincia() {
-		return provincia;
-	}
-	public void setIdProvincia(Provincia provincia) {
-		this.provincia = provincia;
-	}
+	
 	public Localidad getLocalidad() {
 		return localidad;
 	}
@@ -85,16 +78,16 @@ public class Paciente {
 	public void setCobertura(Cobertura cobertura) {
 		this.cobertura = cobertura;
 	}
-	public boolean getEstado() {
+	public int getEstado() {
 		return estado;
 	}
-	public void setEstado(boolean estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 	@Override
 	public String toString() {
 		return "Paciente [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", fecha=" + fecha
-				+ ", telefono=" + telefono + ", direccion=" + direccion + ", Provincia=" + provincia.getNombre()
+				+ ", telefono=" + telefono + ", direccion=" + direccion + ", Provincia=" + localidad.getProvincia().getNombre()
 				+ ", Localidad=" + localidad.getNombre() + ", Cobertura=" + cobertura.getNombre() + ", estado=" + estado + "]";
 	}
 

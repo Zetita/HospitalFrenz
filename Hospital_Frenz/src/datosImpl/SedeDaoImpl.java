@@ -41,7 +41,6 @@ public class SedeDaoImpl implements SedeDao {
 				loc.setCp(rs.getInt("localidades.codigopostal"));
 				loc.setProvincia(prov);
 				
-				sede.setProvincia(prov);
 				sede.setLocalidad(loc);
 				sede.setEstado(rs.getInt("sedes.Estado"));
 				 
@@ -71,7 +70,8 @@ public class SedeDaoImpl implements SedeDao {
 		{
 			ResultSet rs= cn.query("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id"
 					+ "INNER JOIN provincias ON localidad.provincia_id=provincias.id WHERE IDSede="+id);
-			 
+			rs.next();
+			
 			sede.setId(rs.getInt("sedes.IDSede"));
 			sede.setNombre(rs.getString("sedes.NombreSede"));
 			sede.setDireccion(rs.getString("sedes.DireccionSede"));
@@ -85,7 +85,6 @@ public class SedeDaoImpl implements SedeDao {
 			loc.setCp(rs.getInt("localidades.codigopostal"));
 			loc.setProvincia(prov);
 			
-			sede.setProvincia(prov);
 			sede.setLocalidad(loc);
 			sede.setEstado(rs.getInt("sedes.Estado"));
 		 }

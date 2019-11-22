@@ -4,7 +4,6 @@ public class Sede {
 	private int id;
 	private String nombre;
 	private String direccion;
-	private Provincia provincia;
 	private Localidad localidad;
 	private int estado;
 	
@@ -12,12 +11,11 @@ public class Sede {
 		
 	}
 
-	public Sede(int id, String nombre, String direccion, Provincia provincia, Localidad localidad, int estado) {
+	public Sede(int id, String nombre, String direccion, Localidad localidad, int estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.direccion = direccion;
-		this.provincia = provincia;
 		this.localidad = localidad;
 		this.estado = estado;
 	}
@@ -46,13 +44,6 @@ public class Sede {
 		this.direccion = direccion;
 	}
 
-	public Provincia getProvincia() {
-		return provincia;
-	}
-
-	public void setProvincia(Provincia provincia) {
-		this.provincia = provincia;
-	}
 
 	public Localidad getLocalidad() {
 		return localidad;
@@ -72,7 +63,7 @@ public class Sede {
 
 	@Override
 	public String toString() {
-		return "Sede [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", provincia=" + provincia.getNombre()
+		return "Sede [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", provincia=" + localidad.getProvincia().getNombre()
 				+ ", localidad=" + localidad.getNombre() + ", estado=" + estado + "]";
 	}
 	

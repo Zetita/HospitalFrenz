@@ -1,3 +1,5 @@
+<%@page import="entidad.Medico"%>
+<%@page import="entidad.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -6,8 +8,8 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/estiloThomy.css">
-<jsp:include page="Master_User.html" />
-<title>Insert title here</title>
+<jsp:include page="Master_Medico.html" />
+<title>Mis datos | Hospital Frenz</title>
 </head>
 <body>
 
@@ -15,39 +17,52 @@
 <button type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
  : request.getAttribute("usuario")%></div></button>
 </form>
+<br>
+
+
+<form method="post" action="ServletUsuarios">
+	<%
+		Medico med= new Medico();
+		if(request.getAttribute("medico")!=null)
+		{
+			med= (Medico) request.getAttribute("medico");
+		}
+		Usuario u= new Usuario();
+		u= (Usuario)request.getAttribute("usuarioiniciado");
+	%>
+</form>
 
 <div class="container">
 <h5>Datos Personales</h5><br>
-<label>Numero de Documento:</label><br>
-<label>Nombre:</label><br>
-<label>Apellido:</label><br>
-<label>Fecha De Nacimiento:</label><br>
+ 
+<label>Numero de Documento:</label><%= med.getDni() %><br>
+
+<label>Matricula:</label><%= med.getMatricula() %><br>
+
+<label>Nombre:</label><%= med.getNombre() %><br>
+
+<label>Apellido:</label><%= med.getApellido() %><br>
 </div>
 <br><br>
 
+
 <div class="container" >
 <h5>Datos de contacto</h5><br>
-<label>Celular:</label> <input type=tel name=txtCel placeholder="11-1111-1111"><br>
-<label>Correo-Electronico:</label><input type=email name=txtEmail placeholder="Grupo6@gmail.com"><br>
-
+<label>Telefono:</label> <input type=tel name=txtTelefono value=<%= med.getTelefono() %>><br>
+<label>Correo-Electronico:</label><input type=email name=txtEmail value=<%= u.getEmail() %>><br>
 
 <br><br>
 </div>
 
 <div class="container" >
 <h5>Datos de residencia</h5><br>
-<label>Provincia:</label><input name=txtProvincia placeholder="Buenos Aires" type="text"><br>
-<label>Localidad:</label><input	name=txtLocalidad placeholder="Escobar" type="text"	><br>
-<label>Direccion:</label><input name=txtDireccion placeholder="F.Diaz 3500" type="text"><br>
+<label>Provincia:</label><input name=txtProvincia value=<%= med.getLocalidad().getProvincia().getNombre() %> type="text"><br>
+<label>Localidad:</label><input	name=txtLocalidad value=<%= med.getLocalidad().getNombre() %> type="text"	><br>
+<label>Direccion:</label><input name=txtDireccion value=<%= med.getDireccion() %> type="text"><br>
 <br><br>
 </div>
 
-<div  class="container">
-<h5>Tipo de cobertura</h5><br>
-<label>Nombre de cobertura:</label><br>
-<label>Tipo de cobertura:</label><br>
-<div  class=boton><input type=button name=BtnActualizar class="btn btn-primary" value="Actualizar"></div>
-</div>
+<div  class=boton><input type=button name=BtnActualizarMed class="btn btn-primary" value="Actualizar"></div>
 
 </body>
 </html>

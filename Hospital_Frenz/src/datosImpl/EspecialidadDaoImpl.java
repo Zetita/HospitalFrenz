@@ -47,6 +47,7 @@ private Conexion cn;
 		try 
 		{
 			ResultSet rs= cn.query("Select * from especialidades WHERE IDEspecialidad="+id);
+			rs.next();
 			
 			esp.setId(rs.getInt("especialidades.IDEspecialidad"));
 			esp.setDescripcion(rs.getString("especialidades.DescripcionEspecialidad"));

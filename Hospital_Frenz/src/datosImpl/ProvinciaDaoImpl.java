@@ -48,6 +48,8 @@ private Conexion cn;
 		 try
 		 {
 			 ResultSet rs= cn.query("Select * from provincias where id="+id);
+			 rs.next();
+			 
 			 prov.setId(rs.getInt("provincias.id"));
 			 prov.setNombre(rs.getString("provincias.nombre"));
 			 prov.setCodigo31662(rs.getString("provincias.codigo31662"));

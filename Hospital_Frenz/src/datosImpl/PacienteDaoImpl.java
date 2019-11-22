@@ -52,10 +52,9 @@ public class PacienteDaoImpl implements PacienteDao {
 				cob.setNombre(rs.getString("coberturas.NombreCobertura"));
 				cob.setTipo(rs.getString("coberturas.TipoCobertura"));
 				
-				pac.setIdProvincia(prov);
 				pac.setLocalidad(loc);
 				pac.setCobertura(cob);
-				pac.setEstado(rs.getBoolean("pacientes.EstadoPaciente"));
+				pac.setEstado(rs.getInt("pacientes.EstadoPaciente"));
 				list.add(pac); 		 
 			 }
 			 
@@ -85,6 +84,7 @@ public class PacienteDaoImpl implements PacienteDao {
 			 ResultSet rs= cn.query("Select * from pacientes INNER JOIN localidades ON pacientes.IDLocalidad=localidades.id "
 				 		+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id INNER JOIN coberturas ON "
 				 		+ "pacientes.IDCobertura=coberturas.IDCobertura WHERE pacientes.DNIPaciente="+dni);
+			 rs.next();
 			 
 			pac.setDni(rs.getInt("pacientes.DNIPaciente"));
 			pac.setNombre(rs.getString("pacientes.NombrePaciente"));
@@ -106,11 +106,10 @@ public class PacienteDaoImpl implements PacienteDao {
 			cob.setNombre(rs.getString("coberturas.NombreCobertura"));
 			cob.setTipo(rs.getString("coberturas.TipoCobertura"));
 			
-			pac.setIdProvincia(prov);
 			pac.setLocalidad(loc);
 			pac.setCobertura(cob);
 			 
-			pac.setEstado(rs.getBoolean("pacientes.EstadoPaciente"));
+			pac.setEstado(rs.getInt("pacientes.EstadoPaciente"));
 		 }
 		 catch(Exception e)
 		 {

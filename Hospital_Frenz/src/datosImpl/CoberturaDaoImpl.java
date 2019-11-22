@@ -48,6 +48,8 @@ public class CoberturaDaoImpl implements CoberturaDao {
 		 try
 		 {
 			 ResultSet rs= cn.query("Select * from coberturas where IDCobertura="+id);
+			 rs.next();
+			 
 			 cob.setIdCobertura(rs.getInt("coberturas.IDCobertura"));
 			 cob.setNombre(rs.getString("coberturas.NombreCobertura"));
 			 cob.setTipo(rs.getString("coberturas.TipoCobertura"));

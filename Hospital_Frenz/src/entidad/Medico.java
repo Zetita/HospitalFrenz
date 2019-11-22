@@ -7,7 +7,6 @@ public class Medico {
 	private String nombre;
 	private String apellido;
 	private String direccion;
-	private Provincia provincia;
 	private Localidad localidad;
 	private int telefono;
 	private int estado;
@@ -16,8 +15,8 @@ public class Medico {
 		
 	}
 
-	public Medico(int dni, int matricula, String nombre, String apellido, String direccion, Localidad localidad,
-			Provincia provincia, int telefono, int estado) {
+	public Medico(int dni, int matricula, String nombre, String apellido, String direccion, Localidad localidad, 
+			int telefono, int estado) {
 		super();
 		this.dni = dni;
 		this.matricula = matricula;
@@ -25,7 +24,6 @@ public class Medico {
 		this.apellido = apellido;
 		this.direccion = direccion;
 		this.localidad = localidad;
-		this.provincia = provincia;
 		this.telefono = telefono;
 		this.estado = estado;
 	}
@@ -70,12 +68,6 @@ public class Medico {
 		this.direccion = direccion;
 	}
 
-	public Provincia getProvincia() {
-		return provincia;
-	}
-	public void setIdProvincia(Provincia provincia) {
-		this.provincia = provincia;
-	}
 	public Localidad getLocalidad() {
 		return localidad;
 	}
@@ -102,8 +94,8 @@ public class Medico {
 	@Override
 	public String toString() {
 		return "Medico [dni=" + dni + ", matricula=" + matricula + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", direccion=" + direccion + ", idLocalidad=" + localidad.getId() + ", idProvincia=" + provincia.getId()
-				+ ", telefono=" + telefono + ", estado=" + estado + "]";
+				+ ", direccion=" + direccion + ", Localidad=" + localidad.getNombre() + ", Provincia=" + 
+				localidad.getProvincia().getNombre()+ ", telefono=" + telefono + ", estado=" + estado + "]";
 	}
 	
 }

@@ -1,7 +1,7 @@
 package entidad;
 
 public class Usuario {
-	private String Usuario;
+	private String usuario_;
 	private String Email;
 	private int DNI;
 	private String Contrasenia;
@@ -12,11 +12,11 @@ public class Usuario {
 		super();
 	}
 	public boolean isValid() {
-	    return Usuario!=null && Email!=null && Contrasenia!=null && Tipo!=null;
+	    return usuario_!=null && Email!=null && Contrasenia!=null && Tipo!=null;
 	  }
 	public Usuario(String usuario, String email, int dNI, String contrasenia, String tipo, boolean estado) {
 		super();
-		Usuario = usuario;
+		usuario_ = usuario;
 		Email = email;
 		DNI = dNI;
 		Contrasenia = contrasenia;
@@ -25,11 +25,11 @@ public class Usuario {
 	}
 
 	public String getUsuario() {
-		return Usuario;
+		return usuario_;
 	}
 
 	public void setUsuario(String usuario) {
-		Usuario = usuario;
+		usuario_ = usuario;
 	}
 
 	public String getEmail() {
@@ -74,7 +74,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuarios [Usuario=" + Usuario + ", Email=" + Email + ", DNI=" + DNI + ", Contrasenia=" + Contrasenia
+		return "Usuarios [Usuario=" + usuario_ + ", Email=" + Email + ", DNI=" + DNI + ", Contrasenia=" + Contrasenia
 				+ ", Tipo=" + Tipo + ", Estado= " + Estado+"]";
 	}
 	

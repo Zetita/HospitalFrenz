@@ -112,8 +112,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		cn = new Conexion();
 		cn.Open();
 		
-		String query="INSERT INTO usuarios(NombreUser, EmailUser, DNIUser, "
-				+ "ContraseniaUser, TipoUser, EstadoUser) VALUES ('"
+		String query="INSERT INTO usuarios(NombreUser, EmailUser, DNIUser, ContraseniaUser, TipoUser, EstadoUser) VALUES ('"
 				+ user.getUsuario()+"', '"+user.getEmail()+"', "+user.getDNI()+", '"
 				+ user.getContrasenia()+"', '"+user.getTipo()+"', true)";	
 		try
@@ -161,7 +160,6 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		cn = new Conexion();
 		cn.Open();
 		String sql= "Select * from usuarios WHERE NombreUser='"+usuario+"' AND ContraseniaUser='"+pass+"'";
-		System.out.println(sql);
 		try 
 		{
 			
@@ -185,7 +183,6 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		{
 			cn.close();
 		}
-		System.out.println(u);
 		return u;
 	}
 
@@ -200,14 +197,16 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		try 
 		{
 			ResultSet rs= cn.query("Select * from pacientes INNER JOIN usuarios ON pacientes.DNIPaciente=usuarios.DNIUser "
-					+ "WHERE usuarios.NombreUser=" + usuario);
-			 
+					+ "WHERE usuarios.NombreUser='" + usuario +"'");
+			rs.next();
+			
 			pac.setDni(rs.getInt("pacientes.DNIPaciente"));
 			pac.setNombre(rs.getString("pacientes.NombrePaciente"));
 			pac.setApellido(rs.getString("pacientes.ApellidoPaciente"));
 			pac.setFecha(rs.getString("pacientes.FechaNacPaciente"));
 			pac.setTelefono(rs.getInt("pacientes.Telefono"));
 			pac.setDireccion(rs.getString("pacientes.DireccionPaciente"));
+			pac.setEstado(rs.getInt("pacientes.EstadoPaciente"));
 			 
 			prov.setId(rs.getInt("provincias.id"));
 			prov.setNombre(rs.getString("provincias.nombre"));
@@ -222,10 +221,8 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			cob.setNombre(rs.getString("coberturas.NombreCobertura"));
 			cob.setTipo(rs.getString("coberturas.TipoCobertura"));
 			
-			pac.setIdProvincia(prov);
 			pac.setLocalidad(loc);
 			pac.setCobertura(cob);
-			pac.setEstado(rs.getBoolean("pacientes.EstadoPaciente"));
 		}
 		catch(Exception e)
 		{
@@ -247,16 +244,18 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		Localidad loc = new Localidad();
 		try 
 		{
-			ResultSet rs= cn.query("Select * from medicos INNER JOIN usuarios ON medicos.DNIPaciente=usuarios.DNIUser "
-					+ "WHERE usuarios.NombreUser=" + usuario);
+			ResultSet rs= cn.query("Select * from medicos INNER JOIN usuarios ON medicos.DNIMed=usuarios.DNIUser "
+					+ "INNER JOIN localidades ON medicos.IDLocalidad=localidades.id INNER JOIN provincias "
+					+ "ON localidades.provincia_id=provincias.id WHERE usuarios.NombreUser='" + usuario+"'");
 			 		
+			rs.next();
 			 
 			med.setDni(rs.getInt("medicos.DNIMed"));
 			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
-			med.setNombre(rs.getString("medicos.NombreMedico"));
-			med.setApellido(rs.getString("medicos.ApellidosMedico"));
-			med.setTelefono(rs.getInt("medicos.Telefono"));
-			med.setDireccion(rs.getString("medicos.DireccionMedico"));
+			med.setNombre(rs.getString("medicos.NombreMed"));
+			med.setApellido(rs.getString("medicos.ApellidosMed"));
+			med.setTelefono(rs.getInt("medicos.TelefonoMed"));
+			med.setDireccion(rs.getString("medicos.DireccionMed"));
 			 
 			prov.setId(rs.getInt("provincias.id"));
 			prov.setNombre(rs.getString("provincias.nombre"));
@@ -267,7 +266,6 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			loc.setCp(rs.getInt("localidades.codigopostal"));
 			loc.setProvincia(prov);
 		
-			med.setIdProvincia(prov);
 			med.setLocalidad(loc);
 			med.setEstado(rs.getInt("medicos.EstadoMed"));
 		}

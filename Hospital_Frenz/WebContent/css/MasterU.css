@@ -6,7 +6,7 @@ body {
    background-color: lavender;
 }
 header {
-  padding: 40px 0;
+  padding-top: 30px;
    background-color: #25274D;
   box-shadow: 0 4px 6px rgba(0,0,0,.2);  
 }

@@ -30,10 +30,11 @@ public class MedicoDaoImpl implements MedicoDao {
 				 
 				med.setDni(rs.getInt("medicos.DNIMed"));
 				med.setMatricula(rs.getInt("medicos.MatriculaMed"));
-				med.setNombre(rs.getString("medicos.NombreMedico"));
-				med.setApellido(rs.getString("medicos.ApellidosMedico"));
-				med.setTelefono(rs.getInt("medicos.Telefono"));
-				med.setDireccion(rs.getString("medicos.DireccionMedico"));
+				med.setNombre(rs.getString("medicos.NombreMed"));
+				med.setApellido(rs.getString("medicos.ApellidosMed"));
+				med.setTelefono(rs.getInt("medicos.TelefonoMed"));
+				med.setDireccion(rs.getString("medicos.DireccionMed"));
+				med.setEstado(rs.getInt("medicos.EstadoMed"));
 				 
 				prov.setId(rs.getInt("provincias.id"));
 				prov.setNombre(rs.getString("provincias.nombre"));
@@ -44,7 +45,6 @@ public class MedicoDaoImpl implements MedicoDao {
 				loc.setCp(rs.getInt("localidades.codigopostal"));
 				loc.setProvincia(prov);
 			
-				med.setIdProvincia(prov);
 				med.setLocalidad(loc);
 				med.setEstado(rs.getInt("medicos.EstadoMed"));
 				list.add(med); 	
@@ -73,13 +73,15 @@ public class MedicoDaoImpl implements MedicoDao {
 		{
 			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades ON medicos.IDLocalidad=localidades.id"
 					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE medicos.DNIMed="+dni);
-		
+			rs.next();
+			
 			med.setDni(rs.getInt("medicos.DNIMed"));
 			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
 			med.setNombre(rs.getString("medicos.NombreMed"));
 			med.setApellido(rs.getString("medicos.ApellidosMed"));
 			med.setTelefono(rs.getInt("medicos.TelefonoMed"));
 			med.setDireccion(rs.getString("medicos.DireccionMed"));
+			med.setEstado(rs.getInt("medicos.EstadoMed"));
 			 
 			prov.setId(rs.getInt("provincias.id"));
 			prov.setNombre(rs.getString("provincias.nombre"));
@@ -90,7 +92,6 @@ public class MedicoDaoImpl implements MedicoDao {
 			loc.setCp(rs.getInt("localidades.codigopostal"));
 			loc.setProvincia(prov);
 		
-			med.setIdProvincia(prov);
 			med.setLocalidad(loc);
 			med.setEstado(rs.getInt("medicos.EstadoMed"));
 		}
@@ -117,13 +118,15 @@ public class MedicoDaoImpl implements MedicoDao {
 		{
 			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades ON medicos.IDLocalidad=localidades.id"
 					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE medicos.MatriculaMed="+mat);
-		
+			rs.next(); 
+			
 			med.setDni(rs.getInt("medicos.DNIMed"));
 			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
 			med.setNombre(rs.getString("medicos.NombreMed"));
 			med.setApellido(rs.getString("medicos.ApellidosMed"));
 			med.setTelefono(rs.getInt("medicos.TelefonoMed"));
 			med.setDireccion(rs.getString("medicos.DireccionMed"));
+			med.setEstado(rs.getInt("medicos.EstadoMed"));
 			 
 			prov.setId(rs.getInt("provincias.id"));
 			prov.setNombre(rs.getString("provincias.nombre"));
@@ -134,7 +137,6 @@ public class MedicoDaoImpl implements MedicoDao {
 			loc.setCp(rs.getInt("localidades.codigopostal"));
 			loc.setProvincia(prov);
 		
-			med.setIdProvincia(prov);
 			med.setLocalidad(loc);
 			med.setEstado(rs.getInt("medicos.EstadoMed"));
 		

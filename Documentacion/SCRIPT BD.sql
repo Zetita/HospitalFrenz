@@ -36,6 +36,7 @@ CREATE TABLE `hospitalfrenz`.`usuarios` (
   `DNIUser` INT NOT NULL,
   `ContraseniaUser` VARCHAR(20) NOT NULL,
   `TipoUser` TINYINT NOT NULL,
+  `EstadoUser` TINYINT NOT NULL,
 CONSTRAINT  `U_Usuarios_DNI` UNIQUE (DNIUser),
   CONSTRAINT `PK_Usuarios ` PRIMARY KEY (`NombreUser`));
 

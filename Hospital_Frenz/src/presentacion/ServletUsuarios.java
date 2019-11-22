@@ -1,7 +1,6 @@
 package presentacion;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,8 @@ import negocioImpl.UsuarioNegImpl;
 public class ServletUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	UsuarioNeg user=new UsuarioNegImpl();
+	UsuarioNeg userNeg=new UsuarioNegImpl();
+	
 	public static HttpSession sesionIniciada;
     public ServletUsuarios() {
     	super();
@@ -53,38 +53,21 @@ public class ServletUsuarios extends HttpServlet {
 						{
 							HttpSession sesion=request.getSession();
 							sesion.setAttribute("NumPag",request.getParameter("Num"));
-							lst=user.listarUsuarios();
+							lst=userNeg.listarUsuarios();
 							request.setAttribute("ListaUsers", lst);
 						}
 					}
 				}
 				else {
 					try {
-					lst=user.listarUsuarios();
+					lst=userNeg.listarUsuarios();
 					request.setAttribute("ListaUsers", lst);
 					}
 					catch(Exception e){
 						
 					}
 				}
-			case "userPac":
-			{
-				
-				UsuarioNeg userNeg = new UsuarioNegImpl();
-				request.setAttribute("paciente", userNeg.buscarPaciente(request.getParameter("usuario")));
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
-				dispatcher.forward(request, response);
-				break;
-			}
-			case "userMed":
-			{
-				
-				UsuarioNeg userNeg = new UsuarioNegImpl();
-				request.setAttribute("medico", userNeg.buscarMedico(request.getParameter("usuario")));
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
-				dispatcher.forward(request, response);
-				break;
-			}
+			
 			default:
 				break;
 			}
@@ -98,7 +81,6 @@ public class ServletUsuarios extends HttpServlet {
 		
 		//admin
 		if(request.getParameter("btnAceptar")!=null) {
-			UsuarioNeg userNeg = new UsuarioNegImpl();
 			Usuario user=LlenarUsuario(request,response);
 			List<Usuario> lst=new ArrayList<Usuario>();
 			try {
@@ -127,7 +109,8 @@ public class ServletUsuarios extends HttpServlet {
 				
 			{
 				request.setAttribute("usuario", u.getUsuario());
-				System.out.println(u.getTipo());
+				request.setAttribute("usuarioiniciado", u);
+				
 				sesionIniciada.setAttribute("usuario",u.getUsuario());
 				if(u.getTipo().equals("0"))
 				{
@@ -136,11 +119,15 @@ public class ServletUsuarios extends HttpServlet {
 				}
 				else if(u.getTipo().equals("1"))
 				{
+					
+					request.setAttribute("medico", userNeg.buscarMedico(u.getUsuario()));
+					System.out.println(userNeg.buscarMedico(u.getUsuario()));
 					rd=request.getRequestDispatcher("MedDatos.jsp");
 					
 				}
 				else
 				{
+					request.setAttribute("paciente", userNeg.buscarPaciente(u.getUsuario()));
 					rd=request.getRequestDispatcher("UserDatos.jsp");
 				}
 				rd.forward(request,response);
@@ -160,6 +147,7 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
             rd.forward(request, response);
 		}
+		
 	}
 	
 	public Usuario LlenarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
