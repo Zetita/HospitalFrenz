@@ -3,7 +3,7 @@ package entidad;
 public class Usuario {
 	private String usuario_;
 	private String Email;
-	private int DNI;
+	private String DNI;
 	private String Contrasenia;
 	private String Tipo;
 	private boolean Estado;
@@ -14,7 +14,7 @@ public class Usuario {
 	public boolean isValid() {
 	    return usuario_!=null && Email!=null && Contrasenia!=null && Tipo!=null;
 	  }
-	public Usuario(String usuario, String email, int dNI, String contrasenia, String tipo, boolean estado) {
+	public Usuario(String usuario, String email, String dNI, String contrasenia, String tipo, boolean estado) {
 		super();
 		usuario_ = usuario;
 		Email = email;
@@ -40,11 +40,11 @@ public class Usuario {
 		Email = email;
 	}
 
-	public int getDNI() {
+	public String getDNI() {
 		return DNI;
 	}
 
-	public void setDNI(int dNI) {
+	public void setDNI(String dNI) {
 		DNI = dNI;
 	}
 

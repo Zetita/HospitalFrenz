@@ -2,21 +2,21 @@ package entidad;
 
 public class Medico {
 
-	private int dni;
-	private int matricula;
+	private String dni;
+	private String matricula;
 	private String nombre;
 	private String apellido;
 	private String direccion;
 	private Localidad localidad;
-	private int telefono;
+	private String telefono;
 	private int estado;
 	
 	public Medico() {
 		
 	}
 
-	public Medico(int dni, int matricula, String nombre, String apellido, String direccion, Localidad localidad, 
-			int telefono, int estado) {
+	public Medico(String dni, String matricula, String nombre, String apellido, String direccion, Localidad localidad, 
+			String telefono, int estado) {
 		super();
 		this.dni = dni;
 		this.matricula = matricula;
@@ -28,19 +28,19 @@ public class Medico {
 		this.estado = estado;
 	}
 
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
-	public int getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(int matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 
@@ -75,11 +75,11 @@ public class Medico {
 		this.localidad = localidad;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

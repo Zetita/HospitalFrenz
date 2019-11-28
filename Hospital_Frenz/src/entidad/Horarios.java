@@ -3,7 +3,7 @@ package entidad;
 import java.sql.Date;
 
 public class Horarios {
-	private int IDMatriculaMed;
+	private String IDMatriculaMed;
 	private int IDSede;
 	private int IDEspecialidad;
 	private String Dia;
@@ -13,7 +13,7 @@ public class Horarios {
 		
 	}
 	
-	public Horarios (int IDMatriculaMed, int IDSede, int IDEspecialidad,String Dia, Date Hora) {
+	public Horarios (String IDMatriculaMed, int IDSede, int IDEspecialidad,String Dia, Date Hora) {
 		super();
 		this.IDMatriculaMed=IDMatriculaMed;
 		this.IDSede=IDSede;
@@ -22,85 +22,45 @@ public class Horarios {
 		this.Hora=Hora;
 	}
 	
-	public int getIDMatriculaMed() {
+	public String getIDMatriculaMed() {
 		return IDMatriculaMed;
 	}
 
-
-
-	public void setIDMatriculaMed(int iDMatriculaMed) {
+	public void setIDMatriculaMed(String iDMatriculaMed) {
 		IDMatriculaMed = iDMatriculaMed;
 	}
-
-
 
 	public int getIDSede() {
 		return IDSede;
 	}
 
-
 	public void setIDSede(int iDSede) {
 		IDSede = iDSede;
 	}
-
-
-
-
-
 
 	public int getIDEspecialidad() {
 		return IDEspecialidad;
 	}
 
-
-
-
-
-
 	public void setIDEspecialidad(int numEspecialidad) {
 		IDEspecialidad = numEspecialidad;
 	}
-
-
-
-
-
 
 	public String getDia() {
 		return Dia;
 	}
 
-
-
-
-
-
 	public void setDia(String dia) {
 		Dia = dia;
 	}
-
-
-
-
-
 
 	public Date getHora() {
 		return Hora;
 	}
 
-
-
-
-
-
 	public void setHora(Date hora) {
 		Hora = hora;
 	}
-
-
-
-
-
 
 	public String toString() {
 		return "Horarios IDMatriculaMed=" + IDMatriculaMed + ", IDSede=" + IDSede + ", IDEspecialidad="

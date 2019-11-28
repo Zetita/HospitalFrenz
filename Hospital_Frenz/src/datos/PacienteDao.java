@@ -7,8 +7,8 @@ import entidad.Paciente;
 public interface PacienteDao {
 	
 	public List<Paciente> obtenerTodos();
-	public Paciente obtenerUno(int dni);
+	public Paciente obtenerUno(String dni);
 	public boolean insertar(Paciente pac);
 	public boolean editar(Paciente pac);
-	public boolean borrar(int dni);
+	public boolean borrar(String dni);
 }

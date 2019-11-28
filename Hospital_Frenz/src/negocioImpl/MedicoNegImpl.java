@@ -25,12 +25,12 @@ public class MedicoNegImpl implements MedicoNeg {
 	}
 
 	@Override
-	public Medico obtenerUnoDni(int dni) {
+	public Medico obtenerUnoDni(String dni) {
 		return medDao.obtenerUnoDni(dni);
 	}
 
 	@Override
-	public Medico obtenerUnoMat(int mat) {
+	public Medico obtenerUnoMat(String mat) {
 		return medDao.obtenerUnoMat(mat);
 	}
 
@@ -45,7 +45,7 @@ public class MedicoNegImpl implements MedicoNeg {
 	}
 
 	@Override
-	public boolean borrar(int dni) {
+	public boolean borrar(String dni) {
 		return medDao.borrar(dni);
 	}
 

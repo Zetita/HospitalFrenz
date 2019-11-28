@@ -28,7 +28,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 				Usuario user = new Usuario();
 				user.setUsuario(rs.getString("usuarios.NombreUser"));
 				user.setEmail(rs.getString("usuarios.EmailUser"));
-				user.setDNI(rs.getInt("usuarios.DNIUser"));
+				user.setDNI(rs.getString("usuarios.DNIUser"));
 				user.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
 				user.setTipo(rs.getString("usuarios.TipoUser"));
 				user.setEstado(rs.getBoolean("usuarios.EstadoUser"));
@@ -54,17 +54,17 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	}
 	
 	@Override
-	public Usuario obtenerUna(int dni) {
+	public Usuario obtenerUna(String dni) {
 		cn = new Conexion();
 		cn.Open();
 		Usuario user = new Usuario();
 		try 
 		{
-			ResultSet rs= cn.query("Select * from usuarios WHERE DNIUser="+dni);
+			ResultSet rs= cn.query("Select * from usuarios WHERE DNIUser='"+dni+"'");
 			rs.next();
 			user.setUsuario(rs.getString("usuarios.NombreUser"));
 			user.setEmail(rs.getString("usuarios.EmailUser"));
-			user.setDNI(rs.getInt("usuarios.DNIUser"));
+			user.setDNI(rs.getString("usuarios.DNIUser"));
 			user.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
 			user.setTipo(rs.getString("usuarios.TipoUser"));
 			user.setEstado(rs.getBoolean("usuarios.EstadoUser"));
@@ -81,7 +81,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	}
 
 	@Override
-	public boolean eliminar(int dni) {
+	public boolean eliminar(String dni) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		}
@@ -94,7 +94,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		cn.Open();
 		
 		try {
-			estado= cn.execute("DELETE from usuarios WHERE DNIUser="+dni);
+			estado= cn.execute("DELETE from usuarios WHERE DNIUser='"+dni+"'");
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		cn.Open();
 		
 		String query="INSERT INTO usuarios(NombreUser, EmailUser, DNIUser, ContraseniaUser, TipoUser, EstadoUser) VALUES ('"
-				+ user.getUsuario()+"', '"+user.getEmail()+"', "+user.getDNI()+", '"
+				+ user.getUsuario()+"', '"+user.getEmail()+"', '"+user.getDNI()+"', '"
 				+ user.getContrasenia()+"', '"+user.getTipo()+"', true)";	
 		try
 		{
@@ -168,7 +168,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			
 			u.setUsuario(rs.getString("usuarios.NombreUser"));
 			u.setEmail(rs.getString("usuarios.EmailUser"));
-			u.setDNI(rs.getInt("usuarios.DNIUser"));
+			u.setDNI(rs.getString("usuarios.DNIUser"));
 			u.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
 			u.setTipo(rs.getString("usuarios.TipoUser"));
 			u.setEstado(rs.getBoolean("usuarios.EstadoUser"));
@@ -200,11 +200,11 @@ public class UsuarioDaoImpl implements UsuarioDao{
 					+ "WHERE usuarios.NombreUser='" + usuario +"'");
 			rs.next();
 			
-			pac.setDni(rs.getInt("pacientes.DNIPaciente"));
+			pac.setDni(rs.getString("pacientes.DNIPaciente"));
 			pac.setNombre(rs.getString("pacientes.NombrePaciente"));
 			pac.setApellido(rs.getString("pacientes.ApellidoPaciente"));
 			pac.setFecha(rs.getString("pacientes.FechaNacPaciente"));
-			pac.setTelefono(rs.getInt("pacientes.Telefono"));
+			pac.setTelefono(rs.getString("pacientes.Telefono"));
 			pac.setDireccion(rs.getString("pacientes.DireccionPaciente"));
 			pac.setEstado(rs.getInt("pacientes.EstadoPaciente"));
 			 
@@ -250,11 +250,11 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			 		
 			rs.next();
 			 
-			med.setDni(rs.getInt("medicos.DNIMed"));
-			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
+			med.setDni(rs.getString("medicos.DNIMed"));
+			med.setMatricula(rs.getString("medicos.MatriculaMed"));
 			med.setNombre(rs.getString("medicos.NombreMed"));
 			med.setApellido(rs.getString("medicos.ApellidosMed"));
-			med.setTelefono(rs.getInt("medicos.TelefonoMed"));
+			med.setTelefono(rs.getString("medicos.TelefonoMed"));
 			med.setDireccion(rs.getString("medicos.DireccionMed"));
 			 
 			prov.setId(rs.getInt("provincias.id"));

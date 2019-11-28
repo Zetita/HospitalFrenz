@@ -32,11 +32,11 @@ public class PacienteDaoImpl implements PacienteDao {
 				Localidad loc = new Localidad();
 				Cobertura cob= new Cobertura();
 				 
-				pac.setDni(rs.getInt("pacientes.DNIPaciente"));
+				pac.setDni(rs.getString("pacientes.DNIPaciente"));
 				pac.setNombre(rs.getString("pacientes.NombrePaciente"));
 				pac.setApellido(rs.getString("pacientes.ApellidoPaciente"));
 				pac.setFecha(rs.getString("pacientes.FechaNacPaciente"));
-				pac.setTelefono(rs.getInt("pacientes.Telefono"));
+				pac.setTelefono(rs.getString("pacientes.Telefono"));
 				pac.setDireccion(rs.getString("pacientes.DireccionPaciente"));
 				 
 				prov.setId(rs.getInt("provincias.id"));
@@ -70,7 +70,7 @@ public class PacienteDaoImpl implements PacienteDao {
 		 return list;
 	}
 	@Override
-	public Paciente obtenerUno(int dni) {
+	public Paciente obtenerUno(String dni) {
 		
 		 cn = new Conexion();
 		 cn.Open();
@@ -83,14 +83,14 @@ public class PacienteDaoImpl implements PacienteDao {
 		 {
 			 ResultSet rs= cn.query("Select * from pacientes INNER JOIN localidades ON pacientes.IDLocalidad=localidades.id "
 				 		+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id INNER JOIN coberturas ON "
-				 		+ "pacientes.IDCobertura=coberturas.IDCobertura WHERE pacientes.DNIPaciente="+dni);
+				 		+ "pacientes.IDCobertura=coberturas.IDCobertura WHERE pacientes.DNIPaciente='"+dni+"'");
 			 rs.next();
 			 
-			pac.setDni(rs.getInt("pacientes.DNIPaciente"));
+			pac.setDni(rs.getString("pacientes.DNIPaciente"));
 			pac.setNombre(rs.getString("pacientes.NombrePaciente"));
 			pac.setApellido(rs.getString("pacientes.ApellidoPaciente"));
 			pac.setFecha(rs.getString("pacientes.FechaNacPaciente"));
-			pac.setTelefono(rs.getInt("pacientes.Telefono"));
+			pac.setTelefono(rs.getString("pacientes.Telefono"));
 			pac.setDireccion(rs.getString("pacientes.DireccionPaciente"));
 		
 			prov.setId(rs.getInt("provincias.id"));
@@ -130,8 +130,8 @@ public class PacienteDaoImpl implements PacienteDao {
 		cn.Open();	
 
 		String query = "INSERT INTO pacientes (DNIPaciente, NombrePaciente, ApellidoPaciente, FechaNacPaciente, Telefono,"
-				+ " DireccionPaciente, IDLocalidad, IDCobertura, EstadoPaciente) VALUES ("+pac.getDni()+", '"
-				+pac.getNombre()+"', '"+pac.getApellido()+"', "+pac.getFecha()+", "+pac.getTelefono()+", '"+
+				+ " DireccionPaciente, IDLocalidad, IDCobertura, EstadoPaciente) VALUES ('"+pac.getDni()+"', '"
+				+pac.getNombre()+"', '"+pac.getApellido()+"', "+pac.getFecha()+", '"+pac.getTelefono()+"', '"+
 				pac.getDireccion()+"', "+pac.getLocalidad().getId()+", "+ pac.getCobertura().getIdCobertura()+", "
 				+ pac.getEstado()+")";
 		try
@@ -157,9 +157,9 @@ public class PacienteDaoImpl implements PacienteDao {
 		cn.Open();	
 
 		String query = "UPDATE pacientes SET NombrePaciente='"+pac.getNombre()+"', ApellidoPaciente='"+pac.getApellido()+"', FechaNacPaciente="
-				+pac.getFecha()+", Telefono="+pac.getTelefono()+", DireccionPaciente='"+pac.getDireccion()+"', IDLocalidad="+
+				+pac.getFecha()+", Telefono='"+pac.getTelefono()+"', DireccionPaciente='"+pac.getDireccion()+"', IDLocalidad="+
 				pac.getLocalidad().getId()+", IDCobertura="+pac.getCobertura().getIdCobertura()
-				+", EstadoPaciente="+ pac.getEstado()+" WHERE DNIPaciente="+pac.getDni();
+				+", EstadoPaciente="+ pac.getEstado()+" WHERE DNIPaciente='"+pac.getDni()+"'";
 		try
 		 {
 			estado=cn.execute(query);
@@ -175,12 +175,12 @@ public class PacienteDaoImpl implements PacienteDao {
 		return estado;
 	}
 	@Override
-	public boolean borrar(int dni) {
+	public boolean borrar(String dni) {
 		
 		boolean estado=true;
 		cn = new Conexion();
 		cn.Open();		 
-		String query = "UPDATE pacientes SET EstadoPaciente=0 WHERE DNIPaciente="+dni;
+		String query = "UPDATE pacientes SET EstadoPaciente=0 WHERE DNIPaciente='"+dni+"'";
 		try
 		 {
 			estado=cn.execute(query);

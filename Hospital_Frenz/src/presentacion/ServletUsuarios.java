@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidad.Paciente;
 import entidad.Usuario;
+import negocio.PacienteNeg;
 import negocio.UsuarioNeg;
+import negocioImpl.PacienteNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
 /**
@@ -100,11 +103,11 @@ public class ServletUsuarios extends HttpServlet {
 	    {
 			RequestDispatcher rd;
 			sesionIniciada=request.getSession();
-			UsuarioNeg negUser = new UsuarioNegImpl();
+			userNeg = new UsuarioNegImpl();
 			String user = request.getParameter("txtUserLI").toString();
 			String pass = request.getParameter("txtPassLI").toString();
 			
-			Usuario u = negUser.ingresar(user, pass);
+			Usuario u = userNeg.ingresar(user, pass);
 			if(u.getUsuario()!=null)
 				
 			{
@@ -112,16 +115,15 @@ public class ServletUsuarios extends HttpServlet {
 				request.setAttribute("usuarioiniciado", u);
 				
 				sesionIniciada.setAttribute("usuario",u.getUsuario());
-				if(u.getTipo().equals("0"))
+				if(u.getTipo().equals("adm"))
 				{
 					rd=request.getRequestDispatcher("AdminTurnos.jsp");
 						
 				}
-				else if(u.getTipo().equals("1"))
+				else if(u.getTipo().equals("med"))
 				{
 					
 					request.setAttribute("medico", userNeg.buscarMedico(u.getUsuario()));
-					System.out.println(userNeg.buscarMedico(u.getUsuario()));
 					rd=request.getRequestDispatcher("MedDatos.jsp");
 					
 				}
@@ -147,6 +149,54 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
             rd.forward(request, response);
 		}
+		if(request.getParameter("btnAceptarSU")!=null)
+		{
+			
+			
+			RequestDispatcher rd;
+			Paciente pac= new Paciente();
+			Usuario nUser= new Usuario();
+			
+			PacienteNeg pacNeg= new PacienteNegImpl();
+			pac= pacNeg.obtenerUno(request.getParameter("txtDNISU"));
+			nUser= userNeg.obtenerUsuario(request.getParameter("txtDNISU"));
+			
+			if(nUser.getUsuario()!=null) //si existe ya el usuario
+			{
+				request.setAttribute("errorMessage2", "Paciente ya registrado.");
+                rd = request.getRequestDispatcher("SignUp.jsp");
+                rd.forward(request, response); 
+			}
+			if(pac.getDni()!=null) //si el paciente esta en los reg
+			{
+				nUser.setDNI(request.getParameter("txtDNISU"));
+				nUser.setEmail(request.getParameter("txtEmailSU"));
+				nUser.setUsuario(request.getParameter("txtUserSU"));
+				nUser.setContrasenia(request.getParameter("txtPassSU"));
+				nUser.setTipo("pac");
+				nUser.setEstado(true);
+				
+				if(userNeg.insertar(nUser))
+				{
+					request.setAttribute("bienMessage", "Usuario registrado exitosamente.");
+	                rd = request.getRequestDispatcher("SignUp.jsp");
+	                rd.forward(request, response);
+				}
+				else
+				{
+					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo más tarde.");
+	                rd = request.getRequestDispatcher("SignUp.jsp");
+	                rd.forward(request, response);
+				}
+			}
+			else
+			{
+				request.setAttribute("errorMessage2", "DNI no pertenece a un paciente.");
+                rd = request.getRequestDispatcher("SignUp.jsp");
+                rd.forward(request, response); 
+			}
+			
+		}
 		
 	}
 	
@@ -156,7 +206,7 @@ public class ServletUsuarios extends HttpServlet {
 		user.setUsuario(request.getParameter("txtNombre"));
 		user.setEmail(request.getParameter("txtEmail"));
 		user.setContrasenia(request.getParameter("txtContrasenia"));
-		user.setDNI(Integer.parseInt(request.getParameter("txtDNI")));
+		user.setDNI(request.getParameter("txtDNI"));
 		user.setEstado(true);
 		if(request.getParameter("Tipo").equals("med")) user.setTipo("Medico");
 		else if (request.getParameter("Tipo").equals("pac")) user.setTipo("Paciente");

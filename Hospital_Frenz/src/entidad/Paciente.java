@@ -2,11 +2,11 @@ package entidad;
 
 public class Paciente {
 	
-	private int dni;
+	private String dni;
 	private String nombre;
 	private String apellido;
 	private String fecha;
-	private int telefono;
+	private String telefono;
 	private String  direccion;
 	private Localidad localidad;
 	private Cobertura cobertura;
@@ -16,7 +16,7 @@ public class Paciente {
 	{
 		
 	}
-	public Paciente(int dni, String nombre, String apellido, String fecha, int telefono, String direccion,
+	public Paciente(String dni, String nombre, String apellido, String fecha, String telefono, String direccion,
 			Localidad localidad, Cobertura cobertura, int estado) {
 		super();
 		this.dni = dni;
@@ -29,10 +29,10 @@ public class Paciente {
 		this.cobertura = cobertura;
 		this.estado = estado;
 	}
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 	public String getNombre() {
@@ -53,10 +53,10 @@ public class Paciente {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	public String getDireccion() {

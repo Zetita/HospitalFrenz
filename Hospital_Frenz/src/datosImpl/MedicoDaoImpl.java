@@ -28,11 +28,11 @@ public class MedicoDaoImpl implements MedicoDao {
 				Provincia prov = new Provincia();
 				Localidad loc = new Localidad();
 				 
-				med.setDni(rs.getInt("medicos.DNIMed"));
-				med.setMatricula(rs.getInt("medicos.MatriculaMed"));
+				med.setDni(rs.getString("medicos.DNIMed"));
+				med.setMatricula(rs.getString("medicos.MatriculaMed"));
 				med.setNombre(rs.getString("medicos.NombreMed"));
 				med.setApellido(rs.getString("medicos.ApellidosMed"));
-				med.setTelefono(rs.getInt("medicos.TelefonoMed"));
+				med.setTelefono(rs.getString("medicos.TelefonoMed"));
 				med.setDireccion(rs.getString("medicos.DireccionMed"));
 				med.setEstado(rs.getInt("medicos.EstadoMed"));
 				 
@@ -62,7 +62,7 @@ public class MedicoDaoImpl implements MedicoDao {
 	}
 
 	@Override
-	public Medico obtenerUnoDni(int dni) {
+	public Medico obtenerUnoDni(String dni) {
 		cn = new Conexion();
 		cn.Open();
 		Medico med = new Medico();
@@ -72,14 +72,14 @@ public class MedicoDaoImpl implements MedicoDao {
 		try
 		{
 			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades ON medicos.IDLocalidad=localidades.id"
-					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE medicos.DNIMed="+dni);
+					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE medicos.DNIMed='"+dni+"'");
 			rs.next();
 			
-			med.setDni(rs.getInt("medicos.DNIMed"));
-			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
+			med.setDni(rs.getString("medicos.DNIMed"));
+			med.setMatricula(rs.getString("medicos.MatriculaMed"));
 			med.setNombre(rs.getString("medicos.NombreMed"));
 			med.setApellido(rs.getString("medicos.ApellidosMed"));
-			med.setTelefono(rs.getInt("medicos.TelefonoMed"));
+			med.setTelefono(rs.getString("medicos.TelefonoMed"));
 			med.setDireccion(rs.getString("medicos.DireccionMed"));
 			med.setEstado(rs.getInt("medicos.EstadoMed"));
 			 
@@ -107,7 +107,7 @@ public class MedicoDaoImpl implements MedicoDao {
 	}
 
 	@Override
-	public Medico obtenerUnoMat(int mat) {
+	public Medico obtenerUnoMat(String mat) {
 		cn = new Conexion();
 		cn.Open();
 		Medico med = new Medico();
@@ -117,14 +117,14 @@ public class MedicoDaoImpl implements MedicoDao {
 		try
 		{
 			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades ON medicos.IDLocalidad=localidades.id"
-					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE medicos.MatriculaMed="+mat);
+					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE medicos.MatriculaMed='"+mat+"'");
 			rs.next(); 
 			
-			med.setDni(rs.getInt("medicos.DNIMed"));
-			med.setMatricula(rs.getInt("medicos.MatriculaMed"));
+			med.setDni(rs.getString("medicos.DNIMed"));
+			med.setMatricula(rs.getString("medicos.MatriculaMed"));
 			med.setNombre(rs.getString("medicos.NombreMed"));
 			med.setApellido(rs.getString("medicos.ApellidosMed"));
-			med.setTelefono(rs.getInt("medicos.TelefonoMed"));
+			med.setTelefono(rs.getString("medicos.TelefonoMed"));
 			med.setDireccion(rs.getString("medicos.DireccionMed"));
 			med.setEstado(rs.getInt("medicos.EstadoMed"));
 			 
@@ -161,9 +161,9 @@ public class MedicoDaoImpl implements MedicoDao {
 		cn.Open();
 		
 		String query = "INSERT INTO medicos (DNIMed, MatriculaMed, NombreMed, ApellidosMed, DireccionMed, IDLocalidad," + 
-				" TelefonoMed, EstadoMed) VALUES ("+med.getDni()+", "+med.getMatricula()+", '"+med.getNombre()+"', '"+
-				med.getApellido()+"', '"+med.getDireccion()+"', "+med.getLocalidad().getId()+", "+med.getTelefono()
-				+", "+med.getEstado()+")";
+				" TelefonoMed, EstadoMed) VALUES ('"+med.getDni()+"', '"+med.getMatricula()+"'s, '"+med.getNombre()+"', '"+
+				med.getApellido()+"', '"+med.getDireccion()+"', "+med.getLocalidad().getId()+", '"+med.getTelefono()
+				+"', "+med.getEstado()+")";
 		try
 		{
 			estado=cn.execute(query);
@@ -187,8 +187,8 @@ public class MedicoDaoImpl implements MedicoDao {
 		cn.Open();	
 
 		String query = "UPDATE medicos SET NombreMed='"+med.getNombre()+"', ApellidosMed='"+med.getApellido()+"', DireccionMed='"+
-				med.getDireccion()+"', IDLocalidad="+ med.getLocalidad().getId()+", TelefonoMed="+med.getTelefono()
-				+", EstadoMed="+med.getEstado()+" WHERE DNIMed="+med.getDni();
+				med.getDireccion()+"', IDLocalidad="+ med.getLocalidad().getId()+", TelefonoMed='"+med.getTelefono()
+				+"', EstadoMed="+med.getEstado()+" WHERE DNIMed='"+med.getDni()+"'";
 		try
 		 {
 			estado=cn.execute(query);
@@ -204,12 +204,12 @@ public class MedicoDaoImpl implements MedicoDao {
 		return estado;
 	}
 	@Override
-	public boolean borrar(int dni) {
+	public boolean borrar(String dni) {
 		
 		boolean estado=true;
 		cn = new Conexion();
 		cn.Open();		 
-		String query = "UPDATE medicos SET EstadoMed=0 WHERE DNIMed="+dni;
+		String query = "UPDATE medicos SET EstadoMed=0 WHERE DNIMed='"+dni+"'";
 		try
 		 {
 			estado=cn.execute(query);

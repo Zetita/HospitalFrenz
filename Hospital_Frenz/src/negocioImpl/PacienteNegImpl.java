@@ -24,7 +24,7 @@ public class PacienteNegImpl implements PacienteNeg {
 	}
 
 	@Override
-	public Paciente obtenerUno(int dni) {
+	public Paciente obtenerUno(String dni) {
 		return pacDao.obtenerUno(dni);
 	}
 
@@ -39,7 +39,7 @@ public class PacienteNegImpl implements PacienteNeg {
 	}
 
 	@Override
-	public boolean borrar(int dni) {
+	public boolean borrar(String dni) {
 		return pacDao.borrar(dni);
 	}
 

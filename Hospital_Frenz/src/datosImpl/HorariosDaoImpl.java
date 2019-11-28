@@ -21,7 +21,7 @@ public class HorariosDaoImpl {
 			while(rs.next())
 			{
 				Horarios horarios = new Horarios();
-				horarios.setIDMatriculaMed(rs.getInt("horarios.IDMatriculaMed"));
+				horarios.setIDMatriculaMed(rs.getString("horarios.IDMatriculaMed"));
 				horarios.setHora(rs.getDate("horarios.Hora"));
 				horarios.setDia(rs.getString("horarios.Dia"));
 				horarios.setIDSede(rs.getInt("horarios.IDSede"));
@@ -41,17 +41,17 @@ public class HorariosDaoImpl {
 		return list;
 	}
 	
-	public List<Horarios> obtenerHorariosPorMedico(int idMatricula) {
+	public List<Horarios> obtenerHorariosPorMedico(String idMatricula) {
 		cn = new Conexion();
 		cn.Open();
 		List<Horarios> list = new ArrayList<Horarios>();
 		try 
 		{
-			ResultSet rs= cn.query("Select * from horarios WHERE IDMatriculaMed=" + idMatricula);
+			ResultSet rs= cn.query("Select * from horarios WHERE IDMatriculaMed='" + idMatricula+"'");
 			while(rs.next())
 			{
 				Horarios horarios= new Horarios();
-				horarios.setIDMatriculaMed(rs.getInt("horarios.IDMatriculaMed"));
+				horarios.setIDMatriculaMed(rs.getString("horarios.IDMatriculaMed"));
 				horarios.setHora(rs.getDate("horarios.Hora"));
 				horarios.setDia(rs.getString("horarios.Dia"));
 				horarios.setIDSede(rs.getInt("horarios.IDSede"));
@@ -115,7 +115,7 @@ public class HorariosDaoImpl {
 		return estado;
 	}
 	
-	public boolean borrar(int IDMatriculaMed, int IDSede, int IDEspecialidad) {
+	public boolean borrar(String IDMatriculaMed, int IDSede, int IDEspecialidad) {
 		
 		boolean estado=true;
 		
@@ -123,7 +123,7 @@ public class HorariosDaoImpl {
 		cn.Open();
 		
 
-		String query="UPDATE horarios SET horariosEstado=0 WHERE IDMatriculaMed =" + IDMatriculaMed + " AND IDSede=" + IDSede + " AND IDEspecialidad = " + IDEspecialidad;
+		String query="UPDATE horarios SET Estado=0 WHERE IDMatriculaMed='" + IDMatriculaMed + "' AND IDSede=" + IDSede + " AND IDEspecialidad = " + IDEspecialidad;
 		try
 		{
 			estado= cn.execute(query);
