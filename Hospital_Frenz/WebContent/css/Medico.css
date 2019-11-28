@@ -1,11 +1,19 @@
 @charset "ISO-8859-1";
 .buttonT{
-	width:70px;
+	color: white;
+	background: darkred;
+    border: none;
+    padding: 1px 5px;
+    overflow: hidden;
+    display: block;
+    position: inherit;
+    width:100px;
 }
 * {
   box-sizing: border-radius;
   font-family: 'Rubik', sans-serif;
 }
+
 .container1 {
 
   position: absolute;

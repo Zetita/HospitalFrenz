@@ -4,15 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/estiloThomy.css">
 <jsp:include page="Master_User.html" />
-<title>Insert title here</title>
+<title>Mis datos | Hospital Frenz</title>
 </head>
 <body>
 
 <form method="post" action="ServletUsuarios">
-<button type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
  : request.getAttribute("usuario")%></div></button>
 </form>
 

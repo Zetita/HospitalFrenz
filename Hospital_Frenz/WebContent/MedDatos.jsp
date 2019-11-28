@@ -14,8 +14,10 @@
 <body>
 
 <form method="post" action="ServletUsuarios">
-<button type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
+
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
  : request.getAttribute("usuario")%></div></button>
+
 </form>
 <br>
 
