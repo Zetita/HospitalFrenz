@@ -3,15 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<jsp:include page="Master_User.html" />
-
-<link rel="stylesheet" href="css/Medico.css" type="text/css"><link>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <meta charset="ISO-8859-1">
+<jsp:include page="Master_User.html" />
 <title>Turnos | Hospital Frenz</title>
+<link rel="stylesheet" href="css/Medico.css" type="text/css"><link>
 </head>
 <body>
+
 <form method="post" action="ServletUsuarios">
 <button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
  : request.getAttribute("usuario")%></div></button>

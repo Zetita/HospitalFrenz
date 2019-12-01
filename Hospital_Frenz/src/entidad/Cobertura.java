@@ -6,6 +6,8 @@ public class Cobertura {
 	private String nombre;
 	private String tipo;
 	private Double costo;
+	private String descripcion;
+	
 	public Cobertura()
 	{
 		
@@ -49,10 +51,18 @@ public class Cobertura {
 	public void setCosto(Double costo) {
 		this.costo = costo;
 	}
+	public String getDescripcion() {
+		return descripcion;
+	}
 
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	@Override
 	public String toString() {
-		return "Cobertura [idCobertura=" + idCobertura + ", nombre=" + nombre + ", tipo=" + tipo + ", costo="+ costo + "]";
+		return "Cobertura [idCobertura=" + idCobertura + ", nombre=" + nombre + ", tipo=" + tipo + ", costo="+ costo + ", descripcion="+ descripcion + "]";
 	}
+
+	
 	
 }
