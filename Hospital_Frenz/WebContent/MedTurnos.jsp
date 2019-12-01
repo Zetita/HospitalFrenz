@@ -10,11 +10,7 @@
 <title>Turnos | Hospital Frenz</title>
 </head>
 <body>
-<form method="post" action="ServletUsuarios">
-<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
- : request.getAttribute("usuario")%></div></button>
-</form>
-
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
 
 <div class="container1">
   <div class="items">

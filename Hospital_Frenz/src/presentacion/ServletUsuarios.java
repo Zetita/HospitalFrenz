@@ -111,7 +111,7 @@ public class ServletUsuarios extends HttpServlet {
 			if(u.getUsuario()!=null)
 				
 			{
-				request.setAttribute("usuario", u.getUsuario());
+				
 				request.setAttribute("usuarioiniciado", u);
 				
 				sesionIniciada.setAttribute("usuario",u.getUsuario());

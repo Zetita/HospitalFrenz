@@ -9,13 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidad.Usuario;
+import negocio.EspecialidadNeg;
+import negocio.TurnoNeg;
+import negocioImpl.EspecialidadNegImpl;
+import negocioImpl.TurnoNegImpl;
+
 /**
  * Servlet implementation class ServletTurnos
  */
 @WebServlet("/ServletTurnos")
 public class ServletTurnos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private static Usuario user= new Usuario();
+	TurnoNeg turNeg= new TurnoNegImpl();
+	EspecialidadNeg espNeg= new EspecialidadNegImpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,8 +41,16 @@ public class ServletTurnos extends HttpServlet {
 		{
 			String opcion = request.getParameter("Param").toString();
 			switch (opcion) {
+			/*case "cargarTurno":
+			{
+				request.setAttribute("listaEsp", espNeg.listarEspecialidades());
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserSolicitud.jsp");
+				dispatcher.forward(request, response);
+				break;
+			}*/
 			case "medTurnos":
 			{
+				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedTurnos.jsp");
 				dispatcher.forward(request, response);
 				break;
@@ -53,8 +70,12 @@ public class ServletTurnos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		if(request.getParameter("BtnTurno")!=null)
+		{
+			request.setAttribute("listaEsp", espNeg.listarEspecialidades());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserSolicitud.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

@@ -10,17 +10,14 @@
 </head>
 <body>
 
-<form method="post" action="ServletUsuarios">
-<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
- : request.getAttribute("usuario")%></div></button>
-</form>
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
 
-
+ <form method="post" action="ServletTurnos">
 <div class="container1">
   <div class="items">
     <div class="items-head">
-      <p>Turnos recientes 
-      <input type="button" name="BtnTurno" value="Solicitar Turno" class="btn btn-primary" style="margin-left:20px;"> 
+    
+      <p>Turnos recientes <input type="submit" name="BtnTurno" value="Solicitar Turno" class="btn btn-primary" style="margin-left:20px;"> 
       </p>
       <hr>
     </div>
@@ -59,7 +56,8 @@
       </div>
     </div>
   </div>
-</div>
+
+</form>
 <br>
 <br>
 <div class="container2">

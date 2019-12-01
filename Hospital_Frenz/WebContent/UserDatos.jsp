@@ -9,10 +9,7 @@
 </head>
 <body>
 
-<form method="post" action="ServletUsuarios">
-<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div><%=(request.getAttribute("usuario") == null) ? ""
- : request.getAttribute("usuario")%></div></button>
-</form>
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
 
 <div class="container">
 <h5>Datos Personales</h5><br>
