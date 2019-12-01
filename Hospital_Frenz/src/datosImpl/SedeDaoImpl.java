@@ -21,7 +21,7 @@ public class SedeDaoImpl implements SedeDao {
 		try
 		{
 			ResultSet rs= cn.query("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id"
-					+ "INNER JOIN provincias ON localidad.provincia_id=provincias.id");
+					+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id");
 			while(rs.next())
 			{
 				Sede sede = new Sede();

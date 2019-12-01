@@ -8,6 +8,8 @@ import datos.MedicoDao;
 import entidad.Localidad;
 import entidad.Medico;
 import entidad.Provincia;
+import negocio.LocalidadNeg;
+import negocioImpl.LocalidadNegImpl;
 
 public class MedicoDaoImpl implements MedicoDao {
 
@@ -20,12 +22,12 @@ public class MedicoDaoImpl implements MedicoDao {
 		List<Medico> list = new ArrayList<Medico>();
 		try
 		{
-			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades ON medicos.IDLocalidad=localidades.id"
-					+"INNER JOIN provincias ON localidades.provincia_id=provincias.id");
+			ResultSet rs= cn.query("Select * from medicos INNER JOIN localidades");
 			while(rs.next())
 			 {
 				Medico med = new Medico();
 				Provincia prov = new Provincia();
+				LocalidadNeg locNeg= new LocalidadNegImpl();
 				Localidad loc = new Localidad();
 				 
 				med.setDni(rs.getString("medicos.DNIMed"));
@@ -35,16 +37,9 @@ public class MedicoDaoImpl implements MedicoDao {
 				med.setTelefono(rs.getString("medicos.TelefonoMed"));
 				med.setDireccion(rs.getString("medicos.DireccionMed"));
 				med.setEstado(rs.getInt("medicos.EstadoMed"));
-				 
-				prov.setId(rs.getInt("provincias.id"));
-				prov.setNombre(rs.getString("provincias.nombre"));
-				prov.setCodigo31662(rs.getString("provincias.codigo31662"));
-				 
-				loc.setId(rs.getInt("localidades.id"));
-				loc.setNombre(rs.getString("localidades.nombre"));
-				loc.setCp(rs.getInt("localidades.codigopostal"));
-				loc.setProvincia(prov);
-			
+				
+				loc=locNeg.obtenerUna(rs.getInt("localidades.id"));
+
 				med.setLocalidad(loc);
 				med.setEstado(rs.getInt("medicos.EstadoMed"));
 				list.add(med); 	
