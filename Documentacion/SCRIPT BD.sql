@@ -23,7 +23,7 @@ CREATE TABLE `hospitalfrenz`.`localidades` (
 
 CREATE TABLE `hospitalfrenz`.`sedes` (
   `IDSede` INT NOT NULL,
-  `NombreSede` VARCHAR(20) NOT NULL,
+  `NombreSede` VARCHAR(50) NOT NULL,
   `DireccionSede` VARCHAR(40) NOT NULL,
   `IDLocalidad` INT(10) UNSIGNED NOT NULL,
   `Estado` TINYINT NOT NULL,
