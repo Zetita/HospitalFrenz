@@ -17,6 +17,7 @@ INSERT INTO `hospitalfrenz`.`pacientes`
 VALUES('40.020.222','Carolina','Aguirre','1997-05-09','15-1114-2722', 'Chacabuco 111','12565','1','1');
 
 
+INSERT INTO `hospitalfrenz`.`turnos` (`IDTurno`, `IDSede`, `IDMatriculaMed`, `DNIPaciente`, `Fecha`, `Hora`, `IDEspecialidad`, `Estado`, `Asistencia`) VALUES ('1', '1', '11111112', '40.020.222', '2019-10-25', '10.00', '2', '0', '0');
 
 INSERT INTO `hospitalfrenz`.`usuarios` (`NombreUser`, `EmailUser`, `DNIUser`, `ContraseniaUser`, `TipoUser`, `EstadoUser`) 
 VALUES ('admin', 'admin@admin.com', '00.000.000', 'admin', 'adm', TRUE);
