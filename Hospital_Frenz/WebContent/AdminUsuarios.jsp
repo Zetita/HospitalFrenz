@@ -9,16 +9,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/estiloThomy.css">
 <link rel="stylesheet" href="css/EstiloAdmin.css">
+
 <jsp:include page="Master_Admin.html" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="javascript/FiltroDinamico.js"></script>
+<script src="javascript/Modificar.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
 
 <title>Administrar Usuarios</title>
 
 </head>
 
 <body>
-<script src="javascript/FiltroDinamico.js"></script>
-<script src="javascript/Modificar.js"></script>
-
+		
+		<script type="text/javascript">
+		$(document).ready( function () {
+		    $('#tbUsers').DataTable();
+		} );</script>
+		
 <div class="mitad1" style="width:56%">
 
 	<br>	
@@ -29,17 +41,18 @@
 	<br>
 	
 	<table id="tbFiltro" style="width:100%">
+
 			<tr>
 				<td style="border:none">
-					<input class=boton type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltro')" >
+					<input type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltro')" >
 				</td>
 				<td style="border:none">
-					<select class=bonito id="ddlFiltro1[0]">
+					<select id="ddlFiltro1[0]">
 						<option value="-">-<option>
 					</select>
 				</td >
 				<td style="border:none">
-					<select class=bonito id="ddlTipo[0]" onchange="diferenciar(this)">
+					<select id="ddlTipo[0]" onchange="diferenciar(this)">
 						<option value="-">-</option>
 						<option value="1">Nombre de Usuario</option>
 						<option value="2">Email</option>
@@ -49,7 +62,7 @@
 					</select>
 				</td>
 				<td style="border:none">
-					<select class=bonito id="ddlFiltro2[0]" onchange="columna(this)">
+					<select id="ddlFiltro2[0]" onchange="columna(this)">
 					</select>
 				</td>
 				<td style="text-align:center;border:none"> <label id="dinamico[0]">Completar datos</label>
@@ -60,13 +73,14 @@
 		<br>
 		<br>
 
-		<input type="button" id="btnFiltrar" class="boton" style="width:94%" value="Filtrar">
+		<input type="button" id="btnFiltrar" style="width:94%" value="Filtrar">
 	
 	<br>	
 	<br>
 	<br>
 
 		<table id="tbUsers" style="width:100%">
+			<thead>
 			<tr>
 				<th colspan="2"></th>
 				<th>Nombre de Usuario</th>
@@ -76,27 +90,25 @@
 				<th>Tipo de Usuario</th>
 				<th>Estado</th>
 			</tr>
-			<%List<Usuario> lst=null;
-			int Comienzo=0;
-			int Final=5;
+			</thead>
+			<tbody>
+			<% 
+			
+			List<Usuario> lst=new ArrayList<Usuario>();
+
 			  if(request.getAttribute("ListaUsers")!=null)
 			  {
 				  lst=(ArrayList<Usuario>)request.getAttribute("ListaUsers");
 			  }
-			  if(session.getAttribute("NumPag")!=null)
-			  {
-				  
-			 	  Final=5*Integer.parseInt(session.getAttribute("NumPag").toString());
-			 	Comienzo=Final-5;
-			  }
+			  
 			  int indice=1;
-			  for(int i=Comienzo;i<Final;i++){
+			  for(int i=0;i<lst.size();i++){
 				  try{
 				  %>
 				  <form method=post action="ServletUsuarios?Param=<%=lst.get(i).getDNI()%>">
 				  	<tr>
-				  		<td><input type="button" class="boton" id="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbUsers')" value="Modificar"></td>
-				  		<td><input type="submit" class="boton" id="btnEliminar[<%=indice %>]" style="font-size:10px" value="Eliminar"></td>
+				  		<td><input type="button" id="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbUsers')" value="Modificar"></td>
+				  		<td><input type="submit" id="btnEliminar[<%=indice %>]" style="font-size:10px" value="Eliminar"></td>
 				  		<td><label id="lblUsuario[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getUsuario()%></label></td>
 				  		<td><label id="lblContrasenia[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getContrasenia() %></label></td>
 				  		<td><label id="lblEmail[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getEmail()%></label></td>
@@ -115,31 +127,10 @@
 				  
 			  }
 			  
-			  int cant=lst.size()/5;
-			  if(lst.size()%5!=0)
-			  {
-				  session.setAttribute("Resto",lst.size()%5);
-			  }
-			  else{
-				  session.setAttribute("Resto",null);
-			  }
-			  %>
-			  
-			  <tr>
-			  <td colspan="8">
-			  
-			  <% 
-			   System.out.println(session.getAttribute("NumPag"));
-			  for(int i=0;i<=cant;i++){
-				   %>
-				   <a href="ServletUsuarios?Param=admin&Origen=1&Num=<%=i+1%>" id="btnPag<%=i+1 %>" class="boton"><%=i+1 %></a>
-				   <%
-			  }
-			%>
-			
-			</td>
-			</tr>
+				%>
+				</tbody>
 		</table>
+
 
 </div>
 
@@ -156,14 +147,14 @@
 	
 	<label class=lbl2>NOMBRE DEL USUARIO:</label>
 	&nbsp;
-	<input type="text" class=bonito style="position:relative;left:11%" name="txtNombre">
+	<input type="text"style="position:relative;left:11%" name="txtNombre">
 	
 	<br>
 	<br>
 	
 	<label class=lbl2>CONTRASEÑA DEL USUARIOS:</label>
 	&nbsp;
-	<input type="password" class=bonito name="txtContrasenia">
+	<input type="password" style="position:relative;left:1.5%" name="txtContrasenia">
 	
 	<br>
 	<br>
@@ -171,7 +162,7 @@
 
 	<label class=lbl2>DNI DEL USUARIO:</label>
 	&nbsp;
-	<input type="number" class=bonito style="position:relative;left:22%" name="txtDNI">
+	<input type="number" style="position:relative;left:19%" name="txtDNI">
 	
 	<br>
 	<br>
@@ -179,7 +170,7 @@
 
 	<label class=lbl2>EMAIL DEL USUARIO:</label>
 	&nbsp;
-	<input type="text" class=bonito style="position:relative;left:17%" name="txtEmail">
+	<input type="text" style="position:relative;left:15%" name="txtEmail">
 	
 	<br>
 	<br>
@@ -189,7 +180,7 @@
 			<td style="border:none;text-align:left">
 			</td>
 			<td style="border:none;text-align:left">
-				<input name="Tipo" type="radio" class=bonito value="med" >
+				<input name="Tipo" type="radio" value="med" >
 				<label class=lbl2>Medico</label>
 			</td>
 		</tr>
@@ -199,7 +190,7 @@
 
 			</td>
 			<td style="border:none;text-align:left">
-				<input name="Tipo" type="radio" class=bonito value="pac">
+				<input name="Tipo" type="radio" value="pac">
 				<label class=lbl2>Paciente</label>
 			</td>
 		</tr>
@@ -207,7 +198,7 @@
 			<td style="border:none;text-align:left">
 			</td>
 			<td style="border:none;text-align:left">
-				<input name="Tipo" type="radio" class=bonito value="adm" >
+				<input name="Tipo" type="radio" value="adm" >
 				<label class=lbl2>Administrador</label>
 			</td>
 		</tr>
