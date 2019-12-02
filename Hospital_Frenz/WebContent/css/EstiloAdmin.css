@@ -1,14 +1,22 @@
 @charset "ISO-8859-1";
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Lato:300,400,700');
 
-.bonito{
+select,input[type="text"],input[type="search"],
+input[type="password"],input[type="number"]{
+	border: 1px solid black;
 	border-radius:50px;
 	margin-left:10px;
 	border: 1px solid white;
 	font-color:white;
 }
 
-.boton{
+
+
+input[type="search"]{
+	margin-bottom:5px;
+}
+
+input[type="button"],input[type="submit"]{
 	border-radius:50px;
 	margin-left:10px;
 	border: 1px solid white;
@@ -34,9 +42,17 @@
 	height:76%
 }
 
+label{
+	color:white;
+	font-family: 'Lato', sans-serif;
+}
+
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+  
+  color:black;
+  background-color: #345;
 }
 
 th, td {
