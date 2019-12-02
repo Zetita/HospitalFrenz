@@ -17,7 +17,6 @@ function modificar(boton,tablaID)
 		btnModificar.setAttribute("onclick","location.href='ServletUsuarios?Param=admin'");
 		btnModificar.setAttribute("value","Aceptar");
 		btnModificar.setAttribute("style","font-size:10px");
-		btnModificar.classList.add("boton");
 		y[0].appendChild(btnModificar);
 		
 		var lblContrasenia=document.getElementById("lblContrasenia["+indice+"]");
@@ -27,7 +26,6 @@ function modificar(boton,tablaID)
 		lblContrasenia.setAttribute("id","txtContrasenia["+indice+"]");
 		lblContrasenia.setAttribute("type","text");
 		lblContrasenia.setAttribute("style","font-size:10px");
-		lblContrasenia.classList.add("bonito");
 		y[3].appendChild(lblContrasenia);
 		
 		var lblEmail=document.getElementById("lblEmail["+indice+"]");
@@ -37,7 +35,6 @@ function modificar(boton,tablaID)
 		lblEmail.setAttribute("id","txtEmail["+indice+"]");
 		lblEmail.setAttribute("type","email");
 		lblEmail.setAttribute("style","font-size:10px");
-		lblEmail.classList.add("bonito");
 		y[4].appendChild(lblEmail);
 		
 		var lblTipo=document.getElementById("lblTipo["+indice+"]");
@@ -46,7 +43,6 @@ function modificar(boton,tablaID)
 		lblTipo=document.createElement("select");
 		lblTipo.setAttribute("id","ddlTipo["+indice+"]");
 		lblTipo.setAttribute("style","font-size:10px");
-		lblTipo.classList.add("bonito");
 		
 		var opcion1=document.createElement("option");
    		var opcion2=document.createElement("option");

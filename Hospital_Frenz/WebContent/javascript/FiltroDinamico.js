@@ -18,7 +18,6 @@
 	        elemento1.value="-"
 	        elemento1.setAttribute("id","btn["+cant+"]");
 	        elemento1.setAttribute("onclick","quitarFila('tbFiltro',this)");
-	        elemento1.classList.add("boton");
 	        
 	        celda1.appendChild(elemento1);
 	
@@ -47,7 +46,6 @@
 	   		elemento2.add(opcion2);
 	   		elemento2.add(opcion3);
 	   		elemento2.add(opcion4);
-	        elemento2.classList.add("bonito");
 	
 	        celda2.appendChild(elemento2);
 	        
@@ -86,7 +84,6 @@
 	   		elemento3.add(opcion6);
 	   		elemento3.add(opcion7);
 	   		elemento3.add(opcion8);
-	        elemento3.classList.add("bonito");
 	   		
 	        celda3.appendChild(elemento3);
 	
@@ -100,7 +97,6 @@
 	        elemento4.setAttribute("id","ddlFiltro2["+cant+"]");
 	        elemento4.setAttribute("onchange","columna(this)");
 	        
-	        elemento4.classList.add("bonito");
 	        
 	        celda4.appendChild(elemento4);
 	        
