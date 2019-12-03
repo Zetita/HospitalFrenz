@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title></title>
+<link rel="stylesheet" href="css/General.css" type="text/css"><link>
+<jsp:include page="Master_User.html" />
+
+
+<title>Inicio | Hospital Frenz</title>
 </head>
+
 <body> 
+
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
 
 
 </body>
