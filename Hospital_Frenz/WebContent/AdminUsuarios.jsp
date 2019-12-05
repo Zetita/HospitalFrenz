@@ -12,13 +12,13 @@
 
 <jsp:include page="Master_Admin.html" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="javascript/jquery-3.4.1.js"></script>
 <script src="javascript/FiltroDinamico.js"></script>
 <script src="javascript/Modificar.js"></script>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
  
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
 
 <title>Administrar Usuarios</title>
 
@@ -84,7 +84,7 @@
 			<tr>
 				<th colspan="2"></th>
 				<th>Nombre de Usuario</th>
-				<th>Contraseña</th>
+				<th>ContraseÃ±a</th>
 				<th>Email</th>
 				<th>DNI Asociado</th>
 				<th>Tipo de Usuario</th>
@@ -152,7 +152,7 @@
 	<br>
 	<br>
 	
-	<label class=lbl2>CONTRASEÑA DEL USUARIOS:</label>
+	<label class=lbl2>CONTRASEÃ‘A DEL USUARIOS:</label>
 	&nbsp;
 	<input type="password" style="position:relative;left:1.5%" name="txtContrasenia">
 	
