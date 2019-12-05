@@ -7,18 +7,22 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	
+<jsp:include page="Master_Admin.html" />
+	
 <link rel="stylesheet" href="css/estiloThomy.css">
 <link rel="stylesheet" href="css/EstiloAdmin.css">
-
-<jsp:include page="Master_Admin.html" />
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 
 <script src="javascript/jquery-3.4.1.js"></script>
 <script src="javascript/FiltroDinamico.js"></script>
 <script src="javascript/Modificar.js"></script>
-
-<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
- 
+<script src="javascript/ObtenerFiltro.js"></script>
+<script src="javascript/ObtenerModificar.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
+ 
+
 
 <title>Administrar Usuarios</title>
 
@@ -40,7 +44,7 @@
 	<b><label class=lbl2>LISTAR USUARIOS</label><br></b>
 	<br>
 	
-	<table id="tbFiltro" style="width:100%">
+	<table id="tbFiltroUser" style="width:100%">
 
 			<tr>
 				<td style="border:none">
@@ -73,7 +77,7 @@
 		<br>
 		<br>
 
-		<input type="button" id="btnFiltrar" style="width:94%" value="Filtrar">
+		<input type="button" id="btnFiltrar" style="width:94%" value="Filtrar" onclick="ObtenerFiltro(tbFiltroUser)">
 	
 	<br>	
 	<br>
