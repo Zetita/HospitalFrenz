@@ -58,13 +58,13 @@ public class TurnoDaoImpl implements TurnoDao {
 				//guardo paciente
 				Paciente pac= new Paciente();
 				PacienteNeg pacNeg= new PacienteNegImpl();
-				pac= pacNeg.obtenerUno(rs.getString("tunos.DNIPaciente"));
+				pac= pacNeg.obtenerUno(rs.getString("turnos.DNIPaciente"));
 				tur.setPaciente(pac);
 				
 				//guardo especialidad
 				Especialidad esp= new Especialidad();
 				EspecialidadNeg espNeg= new EspecialidadNegImpl();
-				esp= espNeg.obtenerUna(rs.getInt("tunos.IDEspecialidad"));
+				esp= espNeg.obtenerUna(rs.getInt("turnos.IDEspecialidad"));
 				tur.setEspecialidad(esp);
 				
 				list.add(tur);
@@ -86,7 +86,7 @@ public class TurnoDaoImpl implements TurnoDao {
 		cn = new Conexion();
 		cn.Open();
 		List<Turno> list = new ArrayList<Turno>();
-		String sql="Select * from turnos where Estado=0 AND ";
+		String sql="Select * from turnos where Estado=1 AND ";
 		if(OP.equals("med"))
 		{
 			sql+="IDMatriculaMed='"+id+"'";
@@ -123,15 +123,14 @@ public class TurnoDaoImpl implements TurnoDao {
 				//guardo paciente
 				Paciente pac= new Paciente();
 				PacienteNeg pacNeg= new PacienteNegImpl();
-				pac= pacNeg.obtenerUno(rs.getString("tunos.DNIPaciente"));
+				pac= pacNeg.obtenerUno(rs.getString("turnos.DNIPaciente"));
 				tur.setPaciente(pac);
 				
 				//guardo especialidad
 				Especialidad esp= new Especialidad();
 				EspecialidadNeg espNeg= new EspecialidadNegImpl();
-				esp= espNeg.obtenerUna(rs.getInt("tunos.IDEspecialidad"));
+				esp= espNeg.obtenerUna(rs.getInt("turnos.IDEspecialidad"));
 				tur.setEspecialidad(esp);
-				
 				list.add(tur);
 			 }
 			 
@@ -152,7 +151,7 @@ public class TurnoDaoImpl implements TurnoDao {
 		cn.Open();
 		List<Turno> list = new ArrayList<Turno>();
 		
-		String sql="Select * from turnos where Estado=-1 AND ";
+		String sql="Select * from turnos where Estado<>1 AND ";
 		if(OP.equals("med"))
 		{
 			sql+="IDMatriculaMed='"+id+"'";
@@ -192,15 +191,15 @@ public class TurnoDaoImpl implements TurnoDao {
 				//guardo paciente
 				Paciente pac= new Paciente();
 				PacienteNeg pacNeg= new PacienteNegImpl();
-				pac= pacNeg.obtenerUno(rs.getString("tunos.DNIPaciente"));
+				pac= pacNeg.obtenerUno(rs.getString("turnos.DNIPaciente"));
 				tur.setPaciente(pac);
 				
 				//guardo especialidad
 				Especialidad esp= new Especialidad();
 				EspecialidadNeg espNeg= new EspecialidadNegImpl();
-				esp= espNeg.obtenerUna(rs.getInt("tunos.IDEspecialidad"));
+				esp= espNeg.obtenerUna(rs.getInt("turnos.IDEspecialidad"));
 				tur.setEspecialidad(esp);
-				
+
 				list.add(tur);
 			 }
 			 
@@ -246,13 +245,13 @@ public class TurnoDaoImpl implements TurnoDao {
 			//guardo paciente
 			Paciente pac= new Paciente();
 			PacienteNeg pacNeg= new PacienteNegImpl();
-			pac= pacNeg.obtenerUno(rs.getString("tunos.DNIPaciente"));
+			pac= pacNeg.obtenerUno(rs.getString("turnos.DNIPaciente"));
 			tur.setPaciente(pac);
 			
 			//guardo especialidad
 			Especialidad esp= new Especialidad();
 			EspecialidadNeg espNeg= new EspecialidadNegImpl();
-			esp= espNeg.obtenerUna(rs.getInt("tunos.IDEspecialidad"));
+			esp= espNeg.obtenerUna(rs.getInt("turnos.IDEspecialidad"));
 			tur.setEspecialidad(esp);
 			 
 		}

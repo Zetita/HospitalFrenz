@@ -28,7 +28,6 @@ public class ServletUsuarios extends HttpServlet {
 	
 	UsuarioNeg userNeg=new UsuarioNegImpl();
 	
-	public static HttpSession sesionIniciada;
     public ServletUsuarios() {
     	super();
     }
@@ -81,7 +80,8 @@ public class ServletUsuarios extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		HttpSession sesionIniciada=request.getSession();
 		//admin
 		if(request.getParameter("btnAceptar")!=null) {
 			Usuario user=LlenarUsuario(request,response);
@@ -102,7 +102,6 @@ public class ServletUsuarios extends HttpServlet {
 		if(request.getParameter("btnAceptarLI")!=null)
 	    {
 			RequestDispatcher rd;
-			sesionIniciada=request.getSession();
 			userNeg = new UsuarioNegImpl();
 			String user = request.getParameter("txtUserLI").toString();
 			String pass = request.getParameter("txtPassLI").toString();
@@ -115,6 +114,7 @@ public class ServletUsuarios extends HttpServlet {
 				request.setAttribute("usuarioiniciado", u);
 				
 				sesionIniciada.setAttribute("usuario",u.getUsuario());
+
 				if(u.getTipo().equals("adm"))
 				{
 					rd=request.getRequestDispatcher("AdminTurnos.jsp");
@@ -131,6 +131,7 @@ public class ServletUsuarios extends HttpServlet {
 				{
 					request.setAttribute("paciente", userNeg.buscarPaciente(u.getUsuario()));
 					rd=request.getRequestDispatcher("UserDatos.jsp");
+					
 				}
 				rd.forward(request,response);
 				

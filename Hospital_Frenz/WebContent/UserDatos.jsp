@@ -1,5 +1,4 @@
-<%@page import="entidad.Paciente"%>
-<%@page import="entidad.Usuario"%>
+<%@page import="entidad.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -11,7 +10,7 @@
 </head>
 <body>
 
-<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion" value=${usuario}><div>${usuario}</div></button>
 <br>
 <%
 		Paciente pac= new Paciente();
@@ -21,6 +20,7 @@
 		}
 		Usuario u= new Usuario();
 		u= (Usuario)request.getAttribute("usuarioiniciado");
+		request.setAttribute("usuario_", u.getUsuario());
 	%>
 <div class="container">
 <h5>Datos Personales</h5><br>

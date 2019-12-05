@@ -5,7 +5,6 @@
 <head>
 <link rel="stylesheet" href="css/slider.css">
 <jsp:include page="Master_Inicio.html" />
-<script type="text/javascript" src="css/slider.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title></title>
 </head>
