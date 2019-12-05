@@ -14,30 +14,36 @@ function modificar(boton,tablaID)
 		btnModificar=document.createElement("input");
 		btnModificar.setAttribute("id","btnModificar["+indice+"]");
 		btnModificar.setAttribute("type","submit");
-		btnModificar.setAttribute("onclick","location.href='ServletUsuarios?Param=admin'");
+		btnModificar.setAttribute("onclick","location.href='ServletUsuarios?Param=admin&Consulta='+ObtenerFiltro(this,'tbUsers')");
 		btnModificar.setAttribute("value","Aceptar");
 		btnModificar.setAttribute("style","font-size:10px");
 		y[0].appendChild(btnModificar);
 		
+		
 		var lblContrasenia=document.getElementById("lblContrasenia["+indice+"]");
+		var Contrasenia=lblContrasenia.value;
 		y[3].removeChild(lblContrasenia);
 		
 		lblContrasenia=document.createElement("input");
 		lblContrasenia.setAttribute("id","txtContrasenia["+indice+"]");
 		lblContrasenia.setAttribute("type","text");
 		lblContrasenia.setAttribute("style","font-size:10px");
+		lblContrasenia.value=Contrasenia;
 		y[3].appendChild(lblContrasenia);
 		
 		var lblEmail=document.getElementById("lblEmail["+indice+"]");
+		var Email=lblEmail.value;
 		y[4].removeChild(lblEmail);
 		
 		lblEmail=document.createElement("input");
 		lblEmail.setAttribute("id","txtEmail["+indice+"]");
 		lblEmail.setAttribute("type","email");
 		lblEmail.setAttribute("style","font-size:10px");
+		lblEmail.value=Email;
 		y[4].appendChild(lblEmail);
 		
 		var lblTipo=document.getElementById("lblTipo["+indice+"]");
+		var Tipo=lblTipo.value;
 		y[6].removeChild(lblTipo);
 		
 		lblTipo=document.createElement("select");
@@ -53,6 +59,18 @@ function modificar(boton,tablaID)
    		opcion1.value="med";
    		opcion2.value="pac";
    		opcion3.value="adm";
+		
+		switch(Tipo){
+			case "Medico":
+				opcion1.setAttribute("selected","selected");
+			break;
+			case "Paciente":
+				opcion2.setAttribute("selected","selected");
+			break;
+			case "Administrador":
+				opcion3.setAttribute("selected","selected");
+			break;
+		}
 		
    		lblTipo.add(opcion1);
    		lblTipo.add(opcion2);
