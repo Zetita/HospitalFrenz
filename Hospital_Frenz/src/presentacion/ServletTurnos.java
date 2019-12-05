@@ -22,7 +22,7 @@ import negocioImpl.TurnoNegImpl;
 public class ServletTurnos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	private static Usuario user= new Usuario();
+	private static Usuario user;
 	TurnoNeg turNeg= new TurnoNegImpl();
 	EspecialidadNeg espNeg= new EspecialidadNegImpl();
     /**
@@ -52,6 +52,8 @@ public class ServletTurnos extends HttpServlet {
 			{
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedTurnos.jsp");
+				Usuario u= (Usuario) request.getAttribute("usuarioiniciado");
+				
 				dispatcher.forward(request, response);
 				break;
 			}

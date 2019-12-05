@@ -81,7 +81,140 @@ public class TurnoDaoImpl implements TurnoDao {
 		 }
 		 return list;
 	}
-
+	@Override
+	public List<Turno> obtenerPendientes(String OP, String id) {
+		cn = new Conexion();
+		cn.Open();
+		List<Turno> list = new ArrayList<Turno>();
+		String sql="Select * from turnos where Estado=0 AND ";
+		if(OP.equals("med"))
+		{
+			sql+="IDMatriculaMed='"+id+"'";
+		}
+		else
+		{
+			sql+="DNIPaciente='"+id+"'";
+		}
+		try
+		{
+			ResultSet rs= cn.query(sql);
+			while(rs.next())
+			{
+				Turno tur = new Turno();
+		
+				tur.setId(rs.getInt("turnos.IDTurno"));
+				tur.setFecha(rs.getString("turnos.Fecha"));
+				tur.setHora(rs.getTime("turnos.Hora"));
+				tur.setEstado(rs.getInt("turnos.Estado"));
+				tur.setAsistencia(rs.getInt("turnos.Asistencia"));
+				
+				//guardo sede
+				Sede sede = new Sede();
+				SedeNeg sedeNeg= new SedeNegImpl();
+				sede= sedeNeg.obtenerUna(rs.getInt("turnos.IDSede"));
+				tur.setSede(sede);
+				
+				//guardo medico
+				Medico med= new Medico();
+				MedicoNeg medNeg= new MedicoNegImpl();
+				med= medNeg.obtenerUnoMat(rs.getString("turnos.IDMatriculaMed"));
+				tur.setMedico(med);
+				
+				//guardo paciente
+				Paciente pac= new Paciente();
+				PacienteNeg pacNeg= new PacienteNegImpl();
+				pac= pacNeg.obtenerUno(rs.getString("tunos.DNIPaciente"));
+				tur.setPaciente(pac);
+				
+				//guardo especialidad
+				Especialidad esp= new Especialidad();
+				EspecialidadNeg espNeg= new EspecialidadNegImpl();
+				esp= espNeg.obtenerUna(rs.getInt("tunos.IDEspecialidad"));
+				tur.setEspecialidad(esp);
+				
+				list.add(tur);
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return list;
+	}
+	@Override
+	public List<Turno> obtenerPasados(String OP, String id) {
+		cn = new Conexion();
+		cn.Open();
+		List<Turno> list = new ArrayList<Turno>();
+		
+		String sql="Select * from turnos where Estado=-1 AND ";
+		if(OP.equals("med"))
+		{
+			sql+="IDMatriculaMed='"+id+"'";
+		}
+		else
+		{
+			sql+="DNIPaciente='"+id+"'";
+		}
+			
+			//chequear esto
+			sql+=" ORDER BY IDTurno DESC";
+		try
+		{
+			ResultSet rs= cn.query(sql);
+			while(rs.next())
+			{
+				Turno tur = new Turno();
+		
+				tur.setId(rs.getInt("turnos.IDTurno"));
+				tur.setFecha(rs.getString("turnos.Fecha"));
+				tur.setHora(rs.getTime("turnos.Hora"));
+				tur.setEstado(rs.getInt("turnos.Estado"));
+				tur.setAsistencia(rs.getInt("turnos.Asistencia"));
+				
+				//guardo sede
+				Sede sede = new Sede();
+				SedeNeg sedeNeg= new SedeNegImpl();
+				sede= sedeNeg.obtenerUna(rs.getInt("turnos.IDSede"));
+				tur.setSede(sede);
+				
+				//guardo medico
+				Medico med= new Medico();
+				MedicoNeg medNeg= new MedicoNegImpl();
+				med= medNeg.obtenerUnoMat(rs.getString("turnos.IDMatriculaMed"));
+				tur.setMedico(med);
+				
+				//guardo paciente
+				Paciente pac= new Paciente();
+				PacienteNeg pacNeg= new PacienteNegImpl();
+				pac= pacNeg.obtenerUno(rs.getString("tunos.DNIPaciente"));
+				tur.setPaciente(pac);
+				
+				//guardo especialidad
+				Especialidad esp= new Especialidad();
+				EspecialidadNeg espNeg= new EspecialidadNegImpl();
+				esp= espNeg.obtenerUna(rs.getInt("tunos.IDEspecialidad"));
+				tur.setEspecialidad(esp);
+				
+				list.add(tur);
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return list;
+	}
 	@Override
 	public Turno obtenerUno(int idturno, int idsede) {
 		cn = new Conexion();
