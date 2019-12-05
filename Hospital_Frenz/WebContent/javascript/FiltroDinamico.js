@@ -42,6 +42,8 @@
 	   		opcion3.value="O";
 	   		opcion4.value="O NO";
 	   		
+			opcion1.setAttribute("selected","selected");
+		
 	   		elemento2.add(opcion1);
 	   		elemento2.add(opcion2);
 	   		elemento2.add(opcion3);
@@ -78,6 +80,8 @@
 	   		opcion7.value="4";
 	   		opcion8.value="5";
 	   		
+			opcion3.setAttribute("selected","selected");
+			
 	   		elemento3.add(opcion3);
 	   		elemento3.add(opcion4);
 	   		elemento3.add(opcion5);
@@ -153,6 +157,7 @@
 	    	 opcion3.value="-";
 			 opcion3.text="-";
 			 
+		 opcion3.setAttribute("selected","selected");
 			 filtro2.add(opcion3);
     		 filtro2.add(opcion1);
     		 filtro2.add(opcion2);
@@ -223,6 +228,9 @@
 		       		opcion1.value="true";
 		       		opcion2.value="false";
 	       		}
+			
+			opcion1.setAttribute("selected","selected");
+			
 	       		elemento.add(opcion1);
 	       		elemento.add(opcion2);
 	       		
