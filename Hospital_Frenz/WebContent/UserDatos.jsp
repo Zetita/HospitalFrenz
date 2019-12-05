@@ -5,12 +5,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <jsp:include page="Master_User.html" />
 <title>Mis datos | Hospital Frenz</title>
 </head>
 <body>
-
+<form method="post" action="ServletUsuarios">
 <button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion" value=${usuario}><div>${usuario}</div></button>
+</form>
 <br>
 <%
 		Paciente pac= new Paciente();

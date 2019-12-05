@@ -42,7 +42,6 @@ public class TurnoDaoImpl implements TurnoDao {
 				tur.setHora(rs.getTime("turnos.Hora"));
 				tur.setEstado(rs.getInt("turnos.Estado"));
 				tur.setAsistencia(rs.getInt("turnos.Asistencia"));
-				
 				//guardo sede
 				Sede sede = new Sede();
 				SedeNeg sedeNeg= new SedeNegImpl();
@@ -161,7 +160,6 @@ public class TurnoDaoImpl implements TurnoDao {
 			sql+="DNIPaciente='"+id+"'";
 		}
 			
-			//chequear esto
 			sql+=" ORDER BY IDTurno DESC";
 		try
 		{

@@ -120,6 +120,16 @@ p .btnTurno {
     position: inherit;
     width:100px;
 }
+.buttonT2{
+	color: white;
+	background: #2e9cca;
+    border: none;
+    padding: 1px 5px;
+    overflow: hidden;
+    display: block;
+    position: inherit;
+    width:100px;
+}
 /*button:before (attr data-hover)*/
 .btnUser:hover:before{opacity: 1; transform: translate(0,0);}
 .btnUser:before{

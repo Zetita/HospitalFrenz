@@ -7,14 +7,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <jsp:include page="Master_User.html" />
-<title>Turnos | Hospital Frenz</title>
 <link rel="stylesheet" href="css/Medico.css" type="text/css"><link>
+<title>Turnos | Hospital Frenz</title>
+
 </head>
 <body>
-
+<form method="post" action="ServletUsuarios">
 <button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
-
+</form>
 <%	
 		List<Turno> listaTurPen = new ArrayList<Turno>();
 		if (request.getAttribute("listaTurPendientes") != null) {
@@ -90,12 +92,14 @@
 	%>	<div class="items-body">
 	<% for (Turno t2 : listaTurPas) {
 	
-	String est;
+	String est,hora;
+	hora=t2.getHora().toString();
+	
 	if(t2.getEstado()==-2 || t2.getEstado()==-1)
 	{
 		est="CANCELADO";
 	}
-	else if(t2.getAsistencia()==0){
+	else if(t2.getAsistencia()==1){
 		est="ASISTIO";
 	}
 	else{
@@ -106,10 +110,7 @@
 	   
       <div class="items-body-content">
         <span style="font-weight:bold;">Dr/a.<%= t2.getMedico().getApellido()%>, <%= t2.getMedico().getNombre() %> - <%= t2.getFecha() %> 
-        <%=t2.getHora().toString().substring(0,5) %> - <%= est %>
-    
-        </span>
-        
+        <%=hora%> - <%= est %></span>
         <br>
         <span>Especilidad: <%= t2.getEspecialidad().getDescripcion() %></span>
         <br>
@@ -117,11 +118,9 @@
         <i class="fa fa-angle-right"></i>
       </div>
       
-
 	<% }%>
 	</div>
 
- 
 <% }%>
   </div>
 </div>

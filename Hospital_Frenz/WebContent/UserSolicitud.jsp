@@ -20,9 +20,9 @@
 			listaE = (List<Especialidad>) request.getAttribute("listaEsp");
 		}
 	%>
-
+<form method="post" action="ServletUsuarios">
 <button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
-
+</form>
 <form method="post" action="ServletTurnos">
 
 <div style="text-aling:center; margin-left:40%; margin-right:30%;">
