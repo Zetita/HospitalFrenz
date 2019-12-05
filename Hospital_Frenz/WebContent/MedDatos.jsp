@@ -17,8 +17,6 @@
 
 <br>
 
-
-<form method="post" action="ServletUsuarios">
 	<%
 		Medico med= new Medico();
 		if(request.getAttribute("medico")!=null)
@@ -28,7 +26,7 @@
 		Usuario u= new Usuario();
 		u= (Usuario)request.getAttribute("usuarioiniciado");
 	%>
-</form>
+
 
 <div class="container">
 <h5>Datos Personales</h5><br>
@@ -54,9 +52,9 @@
 
 <div class="container" >
 <h5>Datos de residencia</h5><br>
-<label>Provincia:</label><input name=txtProvincia value=<%= med.getLocalidad().getProvincia().getNombre() %> type="text"><br>
-<label>Localidad:</label><input	name=txtLocalidad value=<%= med.getLocalidad().getNombre() %> type="text"	><br>
-<label>Direccion:</label><input name=txtDireccion value=<%= med.getDireccion() %> type="text"><br>
+<label>Provincia:</label><input name=txtProvincia value="<%= med.getLocalidad().getProvincia().getNombre() %>" type="text"><br>
+<label>Localidad:</label><input	name=txtLocalidad value="<%= med.getLocalidad().getNombre() %>" type="text"	><br>
+<label>Direccion:</label><input name=txtDireccion value="<%= med.getDireccion() %>" type="text"><br>
 <br><br>
 </div>
 

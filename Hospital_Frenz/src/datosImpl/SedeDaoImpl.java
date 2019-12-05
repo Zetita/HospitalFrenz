@@ -8,6 +8,8 @@ import datos.SedeDao;
 import entidad.Localidad;
 import entidad.Provincia;
 import entidad.Sede;
+import negocio.LocalidadNeg;
+import negocioImpl.LocalidadNegImpl;
 
 public class SedeDaoImpl implements SedeDao {
 
@@ -25,24 +27,16 @@ public class SedeDaoImpl implements SedeDao {
 			while(rs.next())
 			{
 				Sede sede = new Sede();
-				Provincia prov = new Provincia();
 				Localidad loc = new Localidad();
+				LocalidadNeg locNeg= new LocalidadNegImpl();
 				 
 				sede.setId(rs.getInt("sedes.IDSede"));
 				sede.setNombre(rs.getString("sedes.NombreSede"));
 				sede.setDireccion(rs.getString("sedes.DireccionSede"));
-				
-				prov.setId(rs.getInt("provincias.id"));
-				prov.setNombre(rs.getString("provincias.nombre"));
-				prov.setCodigo31662(rs.getString("provincias.codigo31662"));
-				 
-				loc.setId(rs.getInt("localidades.id"));
-				loc.setNombre(rs.getString("localidades.nombre"));
-				loc.setCp(rs.getInt("localidades.codigopostal"));
-				loc.setProvincia(prov);
-				
-				sede.setLocalidad(loc);
 				sede.setEstado(rs.getInt("sedes.Estado"));
+				
+				loc= locNeg.obtenerUna(rs.getInt("sedes.IDLocalidad"));
+				sede.setLocalidad(loc);
 				 
 				list.add(sede);
 			 }
@@ -66,27 +60,19 @@ public class SedeDaoImpl implements SedeDao {
 		Sede sede = new Sede();
 		Provincia prov = new Provincia();
 		Localidad loc = new Localidad();
+		LocalidadNeg locNeg= new LocalidadNegImpl();
 		try
 		{
-			ResultSet rs= cn.query("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id"
-					+ "INNER JOIN provincias ON localidad.provincia_id=provincias.id WHERE IDSede="+id);
+			ResultSet rs= cn.query("Select * from sedes WHERE IDSede="+id);
 			rs.next();
 			
 			sede.setId(rs.getInt("sedes.IDSede"));
 			sede.setNombre(rs.getString("sedes.NombreSede"));
 			sede.setDireccion(rs.getString("sedes.DireccionSede"));
-			
-			prov.setId(rs.getInt("provincias.id"));
-			prov.setNombre(rs.getString("provincias.nombre"));
-			prov.setCodigo31662(rs.getString("provincias.codigo31662"));
-			 
-			loc.setId(rs.getInt("localidades.id"));
-			loc.setNombre(rs.getString("localidades.nombre"));
-			loc.setCp(rs.getInt("localidades.codigopostal"));
-			loc.setProvincia(prov);
-			
-			sede.setLocalidad(loc);
 			sede.setEstado(rs.getInt("sedes.Estado"));
+			
+			loc= locNeg.obtenerUna(rs.getInt("sedes.IDLocalidad"));
+			sede.setLocalidad(loc);
 		 }
 		 catch(Exception e)
 		 {
