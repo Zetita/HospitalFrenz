@@ -34,7 +34,7 @@ public class ServletUsuarios extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		if(request.getParameter("Param")!=null)
 		{
 			String opcion = request.getParameter("Param").toString();
@@ -69,13 +69,20 @@ public class ServletUsuarios extends HttpServlet {
 						
 					}
 				}
-			
+			case "userDatos":
+				RequestDispatcher rd=request.getRequestDispatcher("UserDatos.jsp");	
+				rd.forward(request, response);
+				break;
+			case "medDatos":
+				RequestDispatcher rd2=request.getRequestDispatcher("MedDatos.jsp");	
+				rd2.forward(request, response);
+				break;
 			default:
 				break;
 			}
 		}
-		RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
-		rd.forward(request, response);
+		//RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
+		//rd.forward(request, response);
 	}
 
 	
@@ -107,31 +114,25 @@ public class ServletUsuarios extends HttpServlet {
 			String pass = request.getParameter("txtPassLI").toString();
 			
 			Usuario u = userNeg.ingresar(user, pass);
-			if(u.getUsuario()!=null)
-				
+			if(u.getUsuario()!=null)	
 			{
 				
-				request.setAttribute("usuarioiniciado", u);
-				
+				request.setAttribute("usuarioiniciado", u);			
 				sesionIniciada.setAttribute("usuario",u.getUsuario());
 
 				if(u.getTipo().equals("adm"))
 				{
-					rd=request.getRequestDispatcher("AdminTurnos.jsp");
-						
+					rd=request.getRequestDispatcher("AdminTurnos.jsp");					
 				}
 				else if(u.getTipo().equals("med"))
-				{
-					
+				{			
 					request.setAttribute("medico", userNeg.buscarMedico(u.getUsuario()));
-					rd=request.getRequestDispatcher("MedDatos.jsp");
-					
+					rd=request.getRequestDispatcher("MedDatos.jsp");				
 				}
 				else
 				{
 					request.setAttribute("paciente", userNeg.buscarPaciente(u.getUsuario()));
-					rd=request.getRequestDispatcher("UserDatos.jsp");
-					
+					rd=request.getRequestDispatcher("UserDatos.jsp");			
 				}
 				rd.forward(request,response);
 				
