@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import entidad.Medico;
 import entidad.Paciente;
-import entidad.Usuario;
 import negocio.EspecialidadNeg;
 import negocio.TurnoNeg;
 import negocio.UsuarioNeg;

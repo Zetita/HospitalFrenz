@@ -38,16 +38,16 @@ public class ServletUsuarios extends HttpServlet {
 		if(request.getParameter("Param")!=null)
 		{
 			String opcion = request.getParameter("Param").toString();
-			
+			RequestDispatcher dispatcher = null;
 			List<Usuario> lst=new ArrayList<Usuario>();
 			switch (opcion) {
 			case "signup":
 			{
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/SignUp.jsp");
-				dispatcher.forward(request, response);
+				dispatcher = request.getRequestDispatcher("/SignUp.jsp");
 				break;
 			}
 			case "admin":
+			{
 				if(request.getParameter("Origen")!=null) {
 					if(request.getParameter("Origen").equals("1")) 
 					{
@@ -69,18 +69,26 @@ public class ServletUsuarios extends HttpServlet {
 						
 					}
 				}
+				break;
+			}
 			case "userDatos":
-				RequestDispatcher rd=request.getRequestDispatcher("UserDatos.jsp");	
-				rd.forward(request, response);
+			{
+				dispatcher = request.getRequestDispatcher("UserDatos.jsp");
+				
 				break;
+			}
 			case "medDatos":
-				RequestDispatcher rd2=request.getRequestDispatcher("MedDatos.jsp");	
-				rd2.forward(request, response);
+			{
+				dispatcher = request.getRequestDispatcher("/MedDatos.jsp");	
 				break;
+			}
 			default:
 				break;
 			}
+
+			dispatcher.forward(request, response);
 		}
+		
 		//RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
 		//rd.forward(request, response);
 	}

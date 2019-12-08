@@ -10,6 +10,7 @@ public interface UsuarioDao {
 	public List<Usuario> obtenerTodas();
 	public List<Usuario> obtenerTodas(String Consulta);
 	public Usuario obtenerUna(String dni);
+	public Usuario obtenerUnoUser(String usuario);
 	public boolean eliminar(String dni);
 	public boolean insertar(Usuario user);
 	public boolean editar(Usuario user);

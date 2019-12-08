@@ -36,7 +36,10 @@ public class UsuarioNegImpl implements UsuarioNeg{
 	public Usuario obtenerUsuario(String dni) {
 		return userDao.obtenerUna(dni);
 	}
-
+	@Override
+	public Usuario obtenerUsuarioUser(String usuario) {
+		return userDao.obtenerUnoUser(usuario);
+	}
 	@Override
 	public boolean borrar(String dni) {
 		return userDao.eliminar(dni);

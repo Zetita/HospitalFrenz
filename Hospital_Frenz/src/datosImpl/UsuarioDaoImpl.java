@@ -82,6 +82,32 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		}
 		return user;
 	}
+	@Override
+	public Usuario obtenerUnoUser(String usuario) {
+		cn = new Conexion();
+		cn.Open();
+		Usuario user = new Usuario();
+		try 
+		{
+			ResultSet rs= cn.query("Select * from usuarios WHERE NombreUser='"+usuario+"'");
+			rs.next();
+			user.setUsuario(rs.getString("usuarios.NombreUser"));
+			user.setEmail(rs.getString("usuarios.EmailUser"));
+			user.setDNI(rs.getString("usuarios.DNIUser"));
+			user.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
+			user.setTipo(rs.getString("usuarios.TipoUser"));
+			user.setEstado(rs.getBoolean("usuarios.EstadoUser"));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return user;
+	}
 
 	@Override
 	public boolean eliminar(String dni) {
