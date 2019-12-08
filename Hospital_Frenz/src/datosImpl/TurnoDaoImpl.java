@@ -27,12 +27,10 @@ public class TurnoDaoImpl implements TurnoDao {
 		cn = new Conexion();
 		cn.Open();
 		List<Turno> list = new ArrayList<Turno>();
-		 //chequear esto
-		String sql="Select * from turnos";
-		 
+	 
 		try
 		{
-			ResultSet rs= cn.query(sql);
+			ResultSet rs= cn.query("Select * from turnos");
 			while(rs.next())
 			{
 				Turno tur = new Turno();
@@ -219,7 +217,7 @@ public class TurnoDaoImpl implements TurnoDao {
 		Turno tur= new Turno();
 		try
 		{
-			ResultSet rs= cn.query("select * from turnos WHERE IDTurno"+idturno+" AND IDSede="+idsede);
+			ResultSet rs= cn.query("select * from turnos WHERE IDTurno="+idturno+" AND IDSede="+idsede);
 			rs.next();
 			
 			tur.setId(rs.getInt("turnos.IDTurno"));
@@ -318,11 +316,31 @@ public class TurnoDaoImpl implements TurnoDao {
 	}
 
 	@Override
-	public boolean borrar(int idturno, int idsede) {
+	public boolean baja(int idturno, int idsede,int est) {
 		boolean estado=true;
 		cn = new Conexion();
 		cn.Open();		 
-		String query = "UPDATE turnos SET Estado=0 WHERE IDTurno="+idturno+" AND IDSede="+idsede;
+		String query = "UPDATE turnos SET Estado="+est+ " WHERE IDTurno="+idturno+" AND IDSede="+idsede;
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+	}
+	@Override
+	public boolean cargarAsistencia(int idturno, int idsede, int est) {
+		boolean estado=true;
+		cn = new Conexion();
+		cn.Open();		 
+		String query = "UPDATE turnos SET Asistencia="+est+ ", Estado=0 WHERE IDTurno="+idturno+" AND IDSede="+idsede;
 		try
 		 {
 			estado=cn.execute(query);

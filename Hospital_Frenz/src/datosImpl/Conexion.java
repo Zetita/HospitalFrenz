@@ -11,7 +11,7 @@ public class Conexion {
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
 	private String pass = "ROOT";
-	private String dbName = "hospitalfrenz?useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private String dbName = "hospitalfrenz?useLegacyDatetimeCode=false&serverTimezone=GMT-3";
 
 	protected Connection connection;
 	

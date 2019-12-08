@@ -6,10 +6,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<meta charset="ISO-8859-1">
 <jsp:include page="Master_Medico.html" />
 <link rel="stylesheet" href="css/Medico.css" type="text/css"><link>
-<meta charset="ISO-8859-1">
 <title>Turnos | Hospital Frenz</title>
 </head>
 <body>
@@ -18,12 +17,12 @@
 </form>
 <%	
 		List<Turno> listaTurPen = new ArrayList<Turno>();
-		if (request.getAttribute("listaTurPendientes") != null) {
-			listaTurPen = (List<Turno>) request.getAttribute("listaTurPendientes");
+		if (request.getAttribute("listaTurPendientesM") != null) {
+			listaTurPen = (List<Turno>) request.getAttribute("listaTurPendientesM");
 		}
 		List<Turno> listaTurPas = new ArrayList<Turno>();
-		if (request.getAttribute("listaTurPasados") != null) {
-			listaTurPas = (List<Turno>) request.getAttribute("listaTurPasados");
+		if (request.getAttribute("listaTurPasadosM") != null) {
+			listaTurPas = (List<Turno>) request.getAttribute("listaTurPasadosM");
 		}
 
  %>
@@ -44,21 +43,22 @@
 	<% }  else{
 	
 %><div class="items-body">
-<% for (Turno t1 : listaTurPen) {
-		String id=String.valueOf(t1.getSede().getId())+'-'+ String.valueOf(t1.getId());
-%>
+<% for (Turno t1 : listaTurPen) {%>
 
       <div class="items-body-content">
            <span style="font-weight:bold;"><%= t1.getPaciente().getApellido()%>, <%= t1.getPaciente().getNombre() %> - 
         <%= t1.getFecha() %> <%=t1.getHora().toString().substring(0,5) %> - PENDIENTE</span> 
         <br>
-        <span>Especilidad: <%= t1.getEspecialidad().getDescripcion() %></span>
+        <span>Especialidad: <%= t1.getEspecialidad().getDescripcion() %></span>
         <br>
         <span>Sede: <%=t1.getSede().getNombre()%></span>
         <br>
-        <button name="btnCancelar"class="buttonT" value="<%=id%>">Cancelar</button><br>
-        <button name="btnAsistio" class="buttonT2" value="<%=id%>">Asistio</button> <br>
-        <button name="btnNoAsistio" class="buttonT2" value="<%=id%>">Ausente</button>
+        <input type="hidden" name="idTurCancelarM" value=<%=t1.getId()%>>
+        <input type="hidden" name="idSedeCancelarM" value=<%=t1.getSede().getId()%>>
+        <input type="submit" class="buttonT" name="BtnCancelarxMed" value="Cancelar"><br>
+       
+        <input type="submit" class="buttonT2" name="BtnAsistio" value="Asistio"><br>
+        <input type="submit" class="buttonT2" name="BtnAusente" value="Ausente">
         <i class="fa fa-angle-right"></i>
       </div>
 
@@ -91,8 +91,7 @@
     <div class="items-body">
     <% for (Turno t2 : listaTurPas) {
 	
-	String est,hora;
-	hora=t2.getHora().toString();
+	String est;
 	
 	if(t2.getEstado()==-2 || t2.getEstado()==-1)
 	{
@@ -108,9 +107,9 @@
 	%>
       <div class="items-body-content">
         <span style="font-weight:bold;"><%= t2.getPaciente().getApellido()%>, <%= t2.getPaciente().getNombre() %> - <%= t2.getFecha() %> 
-        <%=hora%> - <%= est %></span>
+        <%=t2.getHora().toString().substring(0,5)%> - <%= est %></span>
         <br>
-        <span>Especilidad: <%= t2.getEspecialidad().getDescripcion() %></span>
+        <span>Especialidad: <%= t2.getEspecialidad().getDescripcion() %></span>
         <br>
         <span>Sede: <%=t2.getSede().getNombre()%></span>
         <i class="fa fa-angle-right"></i>
@@ -121,5 +120,6 @@
 <% }%>
   </div>
 </div>
+<br>
 </body>
 </html>

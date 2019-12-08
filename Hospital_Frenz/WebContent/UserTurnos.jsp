@@ -34,7 +34,6 @@
 <div class="container1">
   <div class="items">
     <div class="items-head">
-    
       <p>Turnos recientes <input type="submit" name="BtnTurno" value="Solicitar Turno" class="btn btn-primary" style="margin-left:20px;"> 
       </p>
       <hr>
@@ -48,18 +47,19 @@
 	<% }  else{
 	
 %>	<div class="items-body">
-<% for (Turno t1 : listaTurPen) {
-	String id=String.valueOf(t1.getSede().getId())+'-'+ String.valueOf(t1.getId());%>
+<% for (Turno t1 : listaTurPen) {%>
 	
 	<div class="items-body-content">
         <span style="font-weight:bold;">Dr/a. <%= t1.getMedico().getApellido()%>, <%= t1.getMedico().getNombre() %> - 
         <%= t1.getFecha() %> <%=t1.getHora().toString().substring(0,5) %> - PENDIENTE</span> 
         <br>
-        <span>Especilidad: <%= t1.getEspecialidad().getDescripcion() %></span>
+        <span>Especialidad: <%= t1.getEspecialidad().getDescripcion() %></span>
         <br>
         <span>Sede: <%=t1.getSede().getNombre()%></span>
         <br>
-        <button class="buttonT" value="<%=id%>">Cancelar</button>
+        <input type="hidden" name="idTurCancelar" value="<%=t1.getId()%>">
+        <input type="hidden" name="idSedeCancelar" value="<%=t1.getSede().getId()%>">
+        <input type="submit" class="buttonT" name="BtnCancelarxUser" value="Cancelar">
         <i class="fa fa-angle-right"></i>
       </div>
 	
@@ -92,8 +92,7 @@
 	%>	<div class="items-body">
 	<% for (Turno t2 : listaTurPas) {
 	
-	String est,hora;
-	hora=t2.getHora().toString();
+	String est;
 	
 	if(t2.getEstado()==-2 || t2.getEstado()==-1)
 	{
@@ -110,9 +109,9 @@
 	   
       <div class="items-body-content">
         <span style="font-weight:bold;">Dr/a.<%= t2.getMedico().getApellido()%>, <%= t2.getMedico().getNombre() %> - <%= t2.getFecha() %> 
-        <%=hora%> - <%= est %></span>
+        <%=t2.getHora().toString().substring(0,5)%> - <%= est %></span>
         <br>
-        <span>Especilidad: <%= t2.getEspecialidad().getDescripcion() %></span>
+        <span>Especialidad: <%= t2.getEspecialidad().getDescripcion() %></span>
         <br>
         <span>Sede: <%=t2.getSede().getNombre()%></span>
         <i class="fa fa-angle-right"></i>

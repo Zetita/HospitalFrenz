@@ -12,7 +12,7 @@
 </head>
 <body>
 <form method="post" action="ServletUsuarios">
-<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion" value=${usuario}><div>${usuario}</div></button>
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion" ><div>${usuario}</div></button>
 </form>
 <br>
 <%

@@ -33,11 +33,14 @@ public class TurnoNegImpl implements TurnoNeg {
 	}
 
 	@Override
-	public boolean borrar(int idturno, int idsede) {
-		return turDao.borrar(idturno, idsede);
+	public boolean baja(int idturno, int idsede, int est) {
+		return turDao.baja(idturno, idsede, est);
 	}
 
-
+	@Override
+	public boolean cargarAsistencia(int idturno, int idsede, int est) {
+		return turDao.cargarAsistencia(idturno, idsede, est);
+	}
 	@Override
 	public ArrayList<Turno> obtenerPendientes(String OP, String id) {
 		return (ArrayList<Turno>) turDao.obtenerPendientes(OP, id);
@@ -48,5 +51,8 @@ public class TurnoNegImpl implements TurnoNeg {
 	public ArrayList<Turno> obtenerPasados(String OP, String id) {
 		return (ArrayList<Turno>) turDao.obtenerPasados(OP, id);
 	}
+
+
+	
 
 }

@@ -8,7 +8,6 @@ import datos.PacienteDao;
 import entidad.Cobertura;
 import entidad.Localidad;
 import entidad.Paciente;
-import entidad.Provincia;
 import negocio.CoberturaNeg;
 import negocio.LocalidadNeg;
 import negocioImpl.CoberturaNegImpl;

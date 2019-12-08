@@ -10,5 +10,6 @@ public interface TurnoNeg {
 	public Turno obtenerUno(int idturno, int idsede);
 	public boolean insertar(Turno tur);
 	public boolean editar(Turno tur);
-	public boolean borrar(int idturno, int idsede);
+	public boolean baja(int idturno, int idsede, int est);
+	public boolean cargarAsistencia(int idturno, int idsede, int est);
 }

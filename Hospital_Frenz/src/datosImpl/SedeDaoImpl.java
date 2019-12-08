@@ -6,7 +6,6 @@ import java.util.List;
 
 import datos.SedeDao;
 import entidad.Localidad;
-import entidad.Provincia;
 import entidad.Sede;
 import negocio.LocalidadNeg;
 import negocioImpl.LocalidadNegImpl;
@@ -58,7 +57,6 @@ public class SedeDaoImpl implements SedeDao {
 		cn = new Conexion();
 		cn.Open();
 		Sede sede = new Sede();
-		Provincia prov = new Provincia();
 		Localidad loc = new Localidad();
 		LocalidadNeg locNeg= new LocalidadNegImpl();
 		try
