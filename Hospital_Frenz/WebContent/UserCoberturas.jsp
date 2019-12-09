@@ -20,24 +20,45 @@
 
 <%
 		List<Cobertura> listaC = new ArrayList<Cobertura>();
+		Paciente pac;
 		if (request.getAttribute("listaCob") != null) {
 			listaC = (List<Cobertura>) request.getAttribute("listaCob");
 		}
+		pac= (Paciente) request.getAttribute("paciente");
+	
 %>
+
+<form method="post" action="ServletCoberturas">
+
+<%
+    if(listaC == null || listaC.size() == 0){ 
+     %>
+    <br>
+	<h2 style="text-align:center;">No hay informacion para mostrar. </h2>
+	<br>
+	<% }  else{
+		 for (Cobertura cob : listaC) {%>
+
 <div class="cardCob">
 
-	<img src="https://c.pxhere.com/images/3d/2a/f63e6744866c8fa2ea7e935514c3-1434047.jpg!d">
+	<img src="Recursos/Coberturas/<%=cob.getIdCobertura()%>.jpg">
 	<div class="cardCob-data">
-	<h5>Cobertura wawa</h5>
+	<h5><%= cob.getNombre() %></h5>	<h4>$<%=cob.getCosto() %></h4>
+	<h3>Tipo: <%=cob.getTipo() %></h3>
 	<h3>Beneficios:</h3>
-	<label>los b e n e f i c i o s .........................................................hfuhfhsfhf</label><br>
+	<label><%=cob.getDescripcion() %></label>
 	</div>
-</div>
-<div class="cardCob">
-	<img src="https://c.pxhere.com/images/3d/2a/f63e6744866c8fa2ea7e935514c3-1434047.jpg!d">
-	<h5>Cobertura wawa</h5><br>
-	<label>Beneficios:</label>los b e n e f i c i o s ....<br>
-</div>
+<%   if(cob.getIdCobertura() != pac.getCobertura().getIdCobertura()){%>
+	<input type="hidden" name="idContratarCob" value="<%=cob.getIdCobertura()%>">
+    <input type="submit" class="buttonContratar" name="BtnContratarCob" value="Contratar">
 
+<%} %>
+	<br>
+	
+</div>
+	<% }
+ }%>
+ <br><br>
+</form>
 </body>
 </html>

@@ -136,8 +136,8 @@ public class PacienteDaoImpl implements PacienteDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "UPDATE pacientes SET NombrePaciente='"+pac.getNombre()+"', ApellidoPaciente='"+pac.getApellido()+"', FechaNacPaciente="
-				+pac.getFecha()+", Telefono='"+pac.getTelefono()+"', DireccionPaciente='"+pac.getDireccion()+"', IDLocalidad="+
+		String query = "UPDATE pacientes SET NombrePaciente='"+pac.getNombre()+"', ApellidoPaciente='"+pac.getApellido()+"', FechaNacPaciente='"
+				+pac.getFecha()+"', Telefono='"+pac.getTelefono()+"', DireccionPaciente='"+pac.getDireccion()+"', IDLocalidad="+
 				pac.getLocalidad().getId()+", IDCobertura="+pac.getCobertura().getIdCobertura()
 				+", EstadoPaciente="+ pac.getEstado()+" WHERE DNIPaciente='"+pac.getDni()+"'";
 		try
