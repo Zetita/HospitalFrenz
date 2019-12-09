@@ -34,16 +34,17 @@ public class ServletUsuarios extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession sesionIniciada=request.getSession();
+		Usuario u;
 		if(request.getParameter("Param")!=null)
 		{
 			String opcion = request.getParameter("Param").toString();
-			RequestDispatcher dispatcher = null;
 			List<Usuario> lst=new ArrayList<Usuario>();
 			switch (opcion) {
 			case "signup":
 			{
-				dispatcher = request.getRequestDispatcher("/SignUp.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/SignUp.jsp");
+				dispatcher.forward(request, response);
 				break;
 			}
 			case "admin":
@@ -72,21 +73,29 @@ public class ServletUsuarios extends HttpServlet {
 				break;
 			}
 			case "userDatos":
-			{
-				dispatcher = request.getRequestDispatcher("UserDatos.jsp");
+			{	
+				request.setAttribute("paciente", userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario")));
+				request.setAttribute("userDat", userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario")));
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
+				dispatcher.forward(request, response);
 				
 				break;
 			}
 			case "medDatos":
 			{
-				dispatcher = request.getRequestDispatcher("/MedDatos.jsp");	
+				request.setAttribute("medico", userNeg.buscarMedico((String)sesionIniciada.getAttribute("usuario")));
+				request.setAttribute("userDat", userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario")));
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedDatos.jsp");
+				dispatcher.forward(request, response);
+				
 				break;
 			}
 			default:
 				break;
 			}
 
-			dispatcher.forward(request, response);
 		}
 		
 		//RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
@@ -125,24 +134,27 @@ public class ServletUsuarios extends HttpServlet {
 			if(u.getUsuario()!=null)	
 			{
 				
-				request.setAttribute("usuarioiniciado", u);			
+				request.setAttribute("userDat", u);			
 				sesionIniciada.setAttribute("usuario",u.getUsuario());
 
 				if(u.getTipo().equals("adm"))
 				{
-					rd=request.getRequestDispatcher("AdminTurnos.jsp");					
+					rd=request.getRequestDispatcher("AdminTurnos.jsp");		
+					rd.forward(request,response);
 				}
 				else if(u.getTipo().equals("med"))
 				{			
 					request.setAttribute("medico", userNeg.buscarMedico(u.getUsuario()));
-					rd=request.getRequestDispatcher("MedDatos.jsp");				
+					rd=request.getRequestDispatcher("MedDatos.jsp");
+					rd.forward(request,response);
 				}
 				else
 				{
 					request.setAttribute("paciente", userNeg.buscarPaciente(u.getUsuario()));
-					rd=request.getRequestDispatcher("UserDatos.jsp");			
+					rd=request.getRequestDispatcher("UserDatos.jsp");	
+					rd.forward(request,response);
 				}
-				rd.forward(request,response);
+				
 				
 			}
 			else

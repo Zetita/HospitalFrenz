@@ -18,17 +18,10 @@
 </form>
 <br>
 <%
-		HttpSession sesionIniciada=request.getSession();
-		Paciente pac= new Paciente();
-		Usuario u= new Usuario();
-		UsuarioNeg userNeg = new UsuarioNegImpl();
-		
-		if(request.getAttribute("paciente")!=null)
-		{
-			pac= (Paciente) request.getAttribute("paciente");
-		}
-			
-		u= userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario"));
+		Paciente pac;
+		Usuario u;
+		pac= (Paciente) request.getAttribute("paciente");
+		u= (Usuario) request.getAttribute("userDat");
 	%>
 <div class="containerDat">
 <h5>Datos Personales</h5><br>

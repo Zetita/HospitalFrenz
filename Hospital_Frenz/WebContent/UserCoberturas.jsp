@@ -24,7 +24,20 @@
 			listaC = (List<Cobertura>) request.getAttribute("listaCob");
 		}
 %>
+<div class="cardCob">
 
+	<img src="https://c.pxhere.com/images/3d/2a/f63e6744866c8fa2ea7e935514c3-1434047.jpg!d">
+	<div class="cardCob-data">
+	<h5>Cobertura wawa</h5>
+	<h3>Beneficios:</h3>
+	<label>los b e n e f i c i o s .........................................................hfuhfhsfhf</label><br>
+	</div>
+</div>
+<div class="cardCob">
+	<img src="https://c.pxhere.com/images/3d/2a/f63e6744866c8fa2ea7e935514c3-1434047.jpg!d">
+	<h5>Cobertura wawa</h5><br>
+	<label>Beneficios:</label>los b e n e f i c i o s ....<br>
+</div>
 
 </body>
 </html>
