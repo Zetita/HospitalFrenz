@@ -52,8 +52,33 @@ public class UsuarioDaoImpl implements UsuarioDao{
 
 	@Override
 	public List<Usuario> obtenerTodas(String Consulta) {
-		// TODO Auto-generated method stub
-		return null;
+		cn = new Conexion();
+		cn.Open();
+		List<Usuario> list = new ArrayList<Usuario>();
+		try
+		{
+			ResultSet rs = cn.query(Consulta);
+			while(rs.next())
+			{
+				Usuario user = new Usuario();
+				user.setUsuario(rs.getString("usuarios.NombreUser"));
+				user.setEmail(rs.getString("usuarios.EmailUser"));
+				user.setDNI(rs.getString("usuarios.DNIUser"));
+				user.setContrasenia(rs.getString("usuarios.ContraseniaUser"));
+				user.setTipo(rs.getString("usuarios.TipoUser"));
+				user.setEstado(rs.getBoolean("usuarios.EstadoUser"));
+				list.add(user);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return list;
 	}
 	
 	@Override
