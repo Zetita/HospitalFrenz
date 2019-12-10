@@ -51,8 +51,8 @@ public class UsuarioNegImpl implements UsuarioNeg{
 	}
 
 	@Override
-	public boolean editar(Usuario user) {
-		return userDao.editar(user);
+	public boolean editar(String Consulta) {
+		return userDao.editar(Consulta);
 	}
 
 	@Override
