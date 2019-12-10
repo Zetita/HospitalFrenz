@@ -13,7 +13,7 @@ public interface UsuarioNeg {
 	public Usuario obtenerUsuarioUser(String usuario);
 	public boolean borrar(String dni);
 	public boolean insertar(Usuario user);
-	public boolean editar(Usuario user);
+	public boolean editar(String Consulta);
 	public Usuario ingresar(String usuario, String pass);
 	public Paciente buscarPaciente(String usuario);
 	public Medico buscarMedico(String usuario);
