@@ -11,12 +11,13 @@
 <link rel="stylesheet" href="css/EstiloAdmin.css">
 <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 
-<script src="javascript/jquery-3.4.1.js"></script>
-<script src="javascript/FiltroDinamico.js"></script>
-<script src="javascript/Modificar.js"></script>
-<script src="javascript/ObtenerFiltro.js"></script>
-<script src="javascript/ObtenerModificar.js"></script>
+<script type="text/javascript" src="javascript/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="javascript/FiltroDinamico.js"></script>
+<script type="text/javascript" src="javascript/Modificar.js"></script>
+<script type="text/javascript" src="javascript/ObtenerFiltro.js"></script>
+<script type="text/javascript" src="javascript/ObtenerModificacion.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="DataTables/Spanish.json"></script>
 
 <title>Administrar Usuarios</title>
 
@@ -28,6 +29,8 @@
 		$(document).ready( function () {
 		    $('#tbUsers').DataTable();
 		} );</script>
+		
+		
 		
 <div class="mitad1" style="width:56%">
 	<br>	
@@ -41,7 +44,7 @@
 
 			<tr>
 				<td style="border:none">
-					<input type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltro')" >
+					<input type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltroUser')" >
 				</td>
 				<td style="border:none">
 					<select id="ddlFiltro1[0]">
@@ -69,8 +72,11 @@
 		
 		<br>
 		<br>
-
-		<input type="button" id="btnFiltrar" style="width:94%" value="Filtrar" onclick="ObtenerFiltro(tbFiltroUser)">
+		
+	<form method=post action="ServletUsuarios">
+		<input type="Hidden" id="hdnConsulta" name="hdnConsulta" value="xdd"/>
+		<input type="submit" id="btnFiltrar" name="btnFiltrar" style="width:94%" value="Filtrar" onclick="ObtenerFiltro('tbFiltroUser')">
+	</form>
 	
 	<br>	
 	<br>
@@ -202,7 +208,7 @@
 	</table>
 	<br>
 	
-	<input class=boton type="submit" name="btnAceptar" style="width:95%" value="Agregar Usuario">
+	<input type="submit" name="btnAceptar" style="width:95%" value="Agregar Usuario">
 	</form>
 </div>
 </html>
