@@ -3,14 +3,14 @@ function ObtenerEliminar(boton,tablaID){
 	var indice=boton.parentNode.parentNode.rowIndex;
 	var x=document.getElementById(tablaID).rows;
 	var y=x[indice].cells;
-	var consulta;	
+	var DNI;	
 
 	if(tablaID=="tbUsers")
 	{
 
-		consulta="DELETE FROM USUARIOS WHERE DNI LIKE '"+DNI+"'";	
+		DNI=y[5].find("lblDNI["+indice+"]").value;	
 		
 	}
 
-	document.getElementById("hdnConsulta").value=consulta;
+	document.getElementById("hdnConsulta").value=DNI;
 }
