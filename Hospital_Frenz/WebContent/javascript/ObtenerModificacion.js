@@ -17,4 +17,5 @@ function ObtenerModificacion(boton,tablaID){
 	}
 
 	document.getElementById("hdnConsulta").value=consulta;
+	return consulta;
 }
