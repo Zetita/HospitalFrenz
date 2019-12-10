@@ -108,6 +108,31 @@ public class ServletUsuarios extends HttpServlet {
 
 		HttpSession sesionIniciada=request.getSession();
 		
+		if(request.getParameter("Indice")!=null){
+			String Indice=request.getParameter("Indice");
+			String Consulta=request.getParameter("hdnConsulta");
+			if(request.getParameter("btnModificar["+Indice+"]")!=null){
+				userNeg = new UsuarioNegImpl();
+				RequestDispatcher dispatcher = null;
+				List<Usuario> lst=new ArrayList<Usuario>();
+				userNeg.editar(Consulta);
+				lst=userNeg.listarUsuarios();
+				request.setAttribute("ListaUsers", lst);
+				dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");	
+				dispatcher.forward(request, response);
+			}
+			else if(request.getParameter("btnEliminar["+Indice+"]")!=null){
+				userNeg = new UsuarioNegImpl();
+				RequestDispatcher dispatcher = null;
+				List<Usuario> lst=new ArrayList<Usuario>();
+				userNeg.borrar(Consulta);
+				lst=userNeg.listarUsuarios();
+				request.setAttribute("ListaUsers", lst);
+				dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");	
+				dispatcher.forward(request, response);
+			}
+		}
+		
 		//Filtro
 		if(request.getParameter("btnFiltrar")!=null) {
 			userNeg = new UsuarioNegImpl();
