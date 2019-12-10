@@ -109,7 +109,7 @@
 			  for(int i=0;i<lst.size();i++){
 				  try{
 				  %>
-				  <form method=post action="ServletUsuarios?Param=<%=lst.get(i).getDNI()%>">
+				  <form method=post action="ServletUsuarios?Indice=<%indice%>">
 				  	<tr>
 				  		<td><input type="button" id="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbUsers')" value="Modificar"></td>
 				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" onclick="ObtenerEliminar(this,'tbUsers')" value="Eliminar"></td>
