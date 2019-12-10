@@ -11,7 +11,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Coberturas | Hospital Frenz</title>
 </head>
-
 <body>
 
 <form method="post" action="ServletUsuarios">
@@ -25,7 +24,7 @@
 			listaC = (List<Cobertura>) request.getAttribute("listaCob");
 		}
 		pac= (Paciente) request.getAttribute("paciente");
-	
+		
 %>
 
 <form method="post" action="ServletCoberturas">

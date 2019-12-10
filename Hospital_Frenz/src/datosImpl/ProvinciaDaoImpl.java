@@ -41,6 +41,37 @@ private Conexion cn;
 		 return list;
 	}
 	@Override
+	public List<Provincia> obtenerProvinciasConSedes() {
+		cn = new Conexion();
+		cn.Open();
+		 List<Provincia> list = new ArrayList<Provincia>();
+		 try
+		 {
+			 ResultSet rs= cn.query("select distinct provincias.id, provincias.nombre, provincias.codigo31662 "
+			 		+ "from sedes inner join localidades on localidades.id=sedes.IDLocalidad "
+			 		+ "inner join provincias on provincias.id=localidades.provincia_id");
+			 while(rs.next())
+			 {
+				 Provincia prov = new Provincia();
+				 prov.setId(rs.getInt("provincias.id"));
+				 prov.setNombre(rs.getString("provincias.nombre"));
+				 prov.setCodigo31662(rs.getString("provincias.codigo31662"));
+				 
+				 list.add(prov);
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return list;
+	}
+	@Override
 	public Provincia obtenerUna(int id) {
 		cn = new Conexion();
 		cn.Open();

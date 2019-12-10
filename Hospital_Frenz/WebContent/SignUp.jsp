@@ -9,7 +9,7 @@
 <header>
 <div class="container">
     <div class="logo-box">
-      <a href="/">
+      <a href="Inicio.jsp">
         <img src="Recursos/logo8.png">
       </a>
     </div>

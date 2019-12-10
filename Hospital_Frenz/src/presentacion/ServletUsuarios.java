@@ -15,8 +15,12 @@ import javax.servlet.http.HttpSession;
 import entidad.Paciente;
 import entidad.Usuario;
 import negocio.PacienteNeg;
+import negocio.ProvinciaNeg;
+import negocio.SedeNeg;
 import negocio.UsuarioNeg;
 import negocioImpl.PacienteNegImpl;
+import negocioImpl.ProvinciaNegImpl;
+import negocioImpl.SedeNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
 /**
@@ -90,6 +94,15 @@ public class ServletUsuarios extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedDatos.jsp");
 				dispatcher.forward(request, response);
 				
+				break;
+			}
+			case "userSedes":
+			{
+				ProvinciaNeg provNeg = new ProvinciaNegImpl();
+				request.setAttribute("provincias", provNeg.listarProvinciasConSedes());
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserSedes.jsp");
+				dispatcher.forward(request, response);
 				break;
 			}
 			default:

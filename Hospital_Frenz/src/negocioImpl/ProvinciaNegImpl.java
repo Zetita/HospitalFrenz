@@ -23,7 +23,10 @@ public class ProvinciaNegImpl implements ProvinciaNeg {
 	public ArrayList<Provincia> listarProvincias() {
 		return (ArrayList<Provincia>) provDao.obtenerTodos();
 	}
-
+	@Override
+	public ArrayList<Provincia> listarProvinciasConSedes() {
+		return (ArrayList<Provincia>) provDao.obtenerProvinciasConSedes();
+	}
 	@Override
 	public Provincia obtenerUna(int id) {
 		return provDao.obtenerUna(id);
@@ -33,5 +36,6 @@ public class ProvinciaNegImpl implements ProvinciaNeg {
 	public boolean insertar(Provincia prov) {
 		return provDao.insertar(prov);
 	}
+	
 
 }
