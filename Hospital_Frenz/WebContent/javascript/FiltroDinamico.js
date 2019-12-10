@@ -5,30 +5,30 @@
         var cant = tabla.rows.length;
         
         if(cant <= 4){
-        
+
 	        var fila = tabla.insertRow(cant);
 	        
 	        ///CELDA 1
-	        
+
 	        var celda1 = fila.insertCell(0);
 	        celda1.setAttribute("style","border:none");
-	        
+
 	        var elemento1 = document.createElement("input");
 	        elemento1.type = "button";
 	        elemento1.value="-"
 	        elemento1.setAttribute("id","btn["+cant+"]");
-	        elemento1.setAttribute("onclick","quitarFila('tbFiltro',this)");
+	        elemento1.setAttribute("onclick","quitarFila('tbFiltroUser',this)");
 	        
 	        celda1.appendChild(elemento1);
 	
 	        ///CELDA 2
-	        
+
 	        var celda2 = fila.insertCell(1);
 	        celda2.setAttribute("style","border:none");
-	        
+
 	        var elemento2 = document.createElement("SELECT");
 			elemento2.setAttribute("id","ddlFiltro1["+cant+"]");
-	
+
 			var opcion1=document.createElement("option");
 	   		var opcion2=document.createElement("option");
 	   		var opcion3=document.createElement("option");
@@ -52,7 +52,7 @@
 	        celda2.appendChild(elemento2);
 	        
 	        ///CELDA 3
-	        
+
 	        var celda3 = fila.insertCell(2);
 	        celda3.setAttribute("style","border:none");
 	        
@@ -92,10 +92,10 @@
 	        celda3.appendChild(elemento3);
 	
 	        ///CELDA 4
-	        
+
 	        var celda4 = fila.insertCell(3);
 	        celda4.setAttribute("style","border:none");
-	        
+
 	        var elemento4 = document.createElement("SELECT");
 	        
 	        elemento4.setAttribute("id","ddlFiltro2["+cant+"]");
@@ -105,7 +105,7 @@
 	        celda4.appendChild(elemento4);
 	        
 	        ///CELDA 5
-	        
+
 	        var celda5 = fila.insertCell(4);
 	        celda5.setAttribute("style","text-align:center;border:none");
 	        var text=document.createTextNode("Completar datos");
@@ -166,7 +166,7 @@
 
     	 //Reinicio ultimo ddl
     	 
-    	 var x=document.getElementById('tbFiltro').rows
+    	 var x=document.getElementById('tbFiltroUser').rows
 		 var y=x[0].cells
 		 
 		 var text=document.createTextNode("Completar datos");
@@ -185,7 +185,7 @@
     	var indice = ddl.parentNode.parentNode.rowIndex;
     	var tipo= document.getElementById("ddlTipo["+indice+"]");
     	var filtro2= document.getElementById("ddlFiltro2["+indice+"]");
-    	var x=document.getElementById('tbFiltro').rows
+    	var x=document.getElementById('tbFiltroUser').rows
         var y=x[indice].cells
         
         if(tipo.value!="-"&&filtro2.value!="-"){
@@ -217,9 +217,9 @@
 	       		opcion1.text="Medico";
 	       		opcion2.text="Paciente";
 	       		opcion3.text="Administrador";
-	       		opcion1.value="med";
-	       		opcion2.value="pac";
-	       		opcion3.value="adm";
+	       		opcion1.value="Medico";
+	       		opcion2.value="Paciente";
+	       		opcion3.value="Administrador";
 	       		
 	       		}
 	       		else{
