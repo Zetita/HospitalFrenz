@@ -185,17 +185,15 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	}
 
 	@Override
-	public boolean editar(Usuario user) {
+	public boolean editar(String Consulta) {
 		boolean estado=true;
 
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "UPDATE usuarios SET NombreUser='"+user.getUsuario()+"', EmailUser='"+user.getEmail()
-		+"',ContraseniaUser='"+user.getContrasenia()+"', TipoUser='"+user.getTipo()+"', EstadoUser="+user.isEstado()+" WHERE IDCobertura="+user.getDNI();
 		try
 		 {
-			estado=cn.execute(query);
+			estado=cn.execute(Consulta);
 		 }
 		catch(Exception e)
 		{
