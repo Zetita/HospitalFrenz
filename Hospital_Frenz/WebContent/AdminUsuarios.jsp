@@ -16,6 +16,7 @@
 <script type="text/javascript" src="javascript/Modificar.js"></script>
 <script type="text/javascript" src="javascript/ObtenerFiltro.js"></script>
 <script type="text/javascript" src="javascript/ObtenerModificacion.js"></script>
+<script type="text/javascript" src="javascript/ObtenerEliminar.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 <script type="text/javascript" src="DataTables/Spanish.json"></script>
 
@@ -111,7 +112,7 @@
 				  <form method=post action="ServletUsuarios?Param=<%=lst.get(i).getDNI()%>">
 				  	<tr>
 				  		<td><input type="button" id="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbUsers')" value="Modificar"></td>
-				  		<td><input type="submit" id="btnEliminar[<%=indice %>]" style="font-size:10px" value="Eliminar"></td>
+				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" onclick="ObtenerEliminar(this,'tbUsers')" value="Eliminar"></td>
 				  		<td><label id="lblUsuario[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getUsuario()%></label></td>
 				  		<td><label id="lblContrasenia[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getContrasenia() %></label></td>
 				  		<td><label id="lblEmail[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getEmail()%></label></td>
