@@ -16,5 +16,5 @@ function ObtenerModificacion(boton,tablaID){
 		
 	}
 
-	return consulta;
+	document.getElementById("hdnConsulta").value=consulta;
 }
