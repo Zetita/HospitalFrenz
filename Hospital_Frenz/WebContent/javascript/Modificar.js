@@ -12,6 +12,7 @@ function modificar(boton,tablaID)
 		y[0].removeChild(btnModificar);
 				
 		btnModificar=document.createElement("input");
+		btnModificar.setAttribute("name","btnModificar["+indice+"]");
 		btnModificar.setAttribute("id","btnModificar["+indice+"]");
 		btnModificar.setAttribute("type","submit");
 		btnModificar.setAttribute("onclick","location.href='ServletUsuarios?Param=admin&Consulta='+ObtenerFiltro(this,'tbUsers')");
