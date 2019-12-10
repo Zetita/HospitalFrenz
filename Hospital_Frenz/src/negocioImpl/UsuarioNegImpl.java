@@ -29,7 +29,7 @@ public class UsuarioNegImpl implements UsuarioNeg{
 	@Override
 	public ArrayList<Usuario> listarUsuarios(String Consulta) {
 		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList<Usuario>) userDao.obtenerTodas(Consulta);
 	}
 
 	@Override
