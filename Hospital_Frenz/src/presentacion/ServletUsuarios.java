@@ -52,17 +52,17 @@ public class ServletUsuarios extends HttpServlet {
 				break;
 			}
 			case "AdminUsuarios":
-				{
-					try {
-						lst=userNeg.listarUsuarios();
-						request.setAttribute("ListaUsers", lst);
-						}
-					catch(Exception e){
-							
+			{
+				try {
+					lst=userNeg.listarUsuarios();
+					request.setAttribute("ListaUsers", lst);
 					}
-					dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");	
-					break;
+				catch(Exception e){
+							
 				}
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");
+				dispatcher.forward(request, response);
+				break;
 			}
 			case "userDatos":
 			{	
