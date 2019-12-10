@@ -51,30 +51,18 @@ public class ServletUsuarios extends HttpServlet {
 				dispatcher.forward(request, response);
 				break;
 			}
-			case "admin":
-			{
-				if(request.getParameter("Origen")!=null) {
-					if(request.getParameter("Origen").equals("1")) 
-					{
-						if(request.getParameter("Num")!=null) 
-						{
-							HttpSession sesion=request.getSession();
-							sesion.setAttribute("NumPag",request.getParameter("Num"));
-							lst=userNeg.listarUsuarios();
-							request.setAttribute("ListaUsers", lst);
-						}
-					}
-				}
-				else {
+			case "AdminUsuarios":
+				{
 					try {
-					lst=userNeg.listarUsuarios();
-					request.setAttribute("ListaUsers", lst);
-					}
+						lst=userNeg.listarUsuarios();
+						request.setAttribute("ListaUsers", lst);
+						}
 					catch(Exception e){
-						
+							
 					}
+					dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");	
+					break;
 				}
-				break;
 			}
 			case "userDatos":
 			{	
@@ -119,6 +107,19 @@ public class ServletUsuarios extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession sesionIniciada=request.getSession();
+		
+		//Filtro
+		if(request.getParameter("btnFiltrar")!=null) {
+			userNeg = new UsuarioNegImpl();
+			RequestDispatcher dispatcher = null;
+			List<Usuario> lst=new ArrayList<Usuario>();
+			lst=userNeg.listarUsuarios(request.getParameter("hdnConsulta"));
+			request.setAttribute("ListaUsers", lst);
+			dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");	
+			dispatcher.forward(request, response);
+		}
+		
+		
 		//admin
 		if(request.getParameter("btnAceptar")!=null) {
 			Usuario user=LlenarUsuario(request,response);
@@ -172,7 +173,7 @@ public class ServletUsuarios extends HttpServlet {
 			}
 			else
 			{
-                request.setAttribute("errorMessage", "Usuario y/o contraseÒa invalido.");
+                request.setAttribute("errorMessage", "Usuario y/o contrase√±a invalido.");
                 rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response); 
 			}
@@ -219,7 +220,7 @@ public class ServletUsuarios extends HttpServlet {
 				}
 				else
 				{
-					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo m·s tarde.");
+					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo m√°s tarde.");
 	                rd = request.getRequestDispatcher("SignUp.jsp");
 	                rd.forward(request, response);
 				}
