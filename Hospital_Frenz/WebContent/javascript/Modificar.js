@@ -15,7 +15,7 @@ function modificar(boton,tablaID)
 		btnModificar.setAttribute("name","btnModificar["+indice+"]");
 		btnModificar.setAttribute("id","btnModificar["+indice+"]");
 		btnModificar.setAttribute("type","submit");
-		btnModificar.setAttribute("onclick","location.href='ServletUsuarios?Param=admin&Consulta='+ObtenerFiltro(this,'tbUsers')");
+		btnModificar.setAttribute("onclick","ObtenerFiltro(this,'tbUsers')");
 		btnModificar.setAttribute("value","Aceptar");
 		btnModificar.setAttribute("style","font-size:10px");
 		y[0].appendChild(btnModificar);
