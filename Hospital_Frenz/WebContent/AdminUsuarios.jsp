@@ -18,20 +18,13 @@
 <script type="text/javascript" src="javascript/ObtenerModificacion.js"></script>
 <script type="text/javascript" src="javascript/ObtenerEliminar.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-<script type="text/javascript" src="DataTables/Spanish.json"></script>
+<script type="text/javascript" src="javascript/IniciarTablas.js"></script>
 
 <title>Administrar Usuarios</title>
 
 </head>
 
 <body>
-		
-		<script type="text/javascript">
-		$(document).ready( function () {
-		    $('#tbUsers').DataTable();
-		} );</script>
-		
-		
 		
 <div class="mitad1" style="width:56%">
 	<br>	
@@ -74,8 +67,8 @@
 		<br>
 		<br>
 		
-	<form method=post action="ServletUsuarios">
-		<input type="Hidden" id="hdnConsulta" name="hdnConsulta" value="xdd"/>
+	<form method="post" action="ServletUsuarios">
+		<input type="Hidden" id="hdnConsulta" name="hdnConsulta"/>
 		<input type="submit" id="btnFiltrar" name="btnFiltrar" style="width:94%" value="Filtrar" onclick="ObtenerFiltro('tbFiltroUser')">
 	</form>
 	
@@ -109,9 +102,12 @@
 			  for(int i=0;i<lst.size();i++){
 				  try{
 				  %>
-				  <form method=post action="ServletUsuarios?Indice=<%indice%>">
+				  <form method="post" action="ServletUsuarios?Indice=<%=indice%>">
 				  	<tr>
-				  		<td><input type="button" id="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbUsers')" value="Modificar"></td>
+				  		<td>
+				  		<input type="hidden" id="hdnConsulta[<%=indice %>]" name="hdnConsulta[<%=indice %>]">
+				  		<input type="button" id="btnModificar[<%=indice %>]" name="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbUsers')" value="Modificar">
+				  		</td>
 				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" onclick="ObtenerEliminar(this,'tbUsers')" value="Eliminar"></td>
 				  		<td><label id="lblUsuario[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getUsuario()%></label></td>
 				  		<td><label id="lblContrasenia[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getContrasenia() %></label></td>
