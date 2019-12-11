@@ -9,20 +9,19 @@ function modificar(boton,tablaID)
 	if(tablaID=="tbUsers")
 	{
 		var btnModificar=document.getElementById("btnModificar["+indice+"]");
-		y[0].removeChild(btnModificar);
+		//y[0].removeChild(btnModificar);
 				
-		btnModificar=document.createElement("input");
+		//btnModificar=document.createElement("input");
 		btnModificar.setAttribute("name","btnModificar["+indice+"]");
 		btnModificar.setAttribute("id","btnModificar["+indice+"]");
-		btnModificar.setAttribute("type","submit");
-		btnModificar.setAttribute("onclick","ObtenerFiltro(this,'tbUsers')");
+		btnModificar.setAttribute("onclick","ObtenerModificacion(this,'tbUsers')");
 		btnModificar.setAttribute("value","Aceptar");
 		btnModificar.setAttribute("style","font-size:10px");
-		y[0].appendChild(btnModificar);
+		//y[0].appendChild(btnModificar);
 		
 		
 		var lblContrasenia=document.getElementById("lblContrasenia["+indice+"]");
-		var Contrasenia=lblContrasenia.value;
+		var Contrasenia=lblContrasenia.innerText;
 		y[3].removeChild(lblContrasenia);
 		
 		lblContrasenia=document.createElement("input");
@@ -33,7 +32,7 @@ function modificar(boton,tablaID)
 		y[3].appendChild(lblContrasenia);
 		
 		var lblEmail=document.getElementById("lblEmail["+indice+"]");
-		var Email=lblEmail.value;
+		var Email=lblEmail.innerText;
 		y[4].removeChild(lblEmail);
 		
 		lblEmail=document.createElement("input");
@@ -44,7 +43,7 @@ function modificar(boton,tablaID)
 		y[4].appendChild(lblEmail);
 		
 		var lblTipo=document.getElementById("lblTipo["+indice+"]");
-		var Tipo=lblTipo.value;
+		var Tipo=lblTipo.innerText;
 		y[6].removeChild(lblTipo);
 		
 		lblTipo=document.createElement("select");
@@ -60,7 +59,7 @@ function modificar(boton,tablaID)
    		opcion1.value="med";
    		opcion2.value="pac";
    		opcion3.value="adm";
-		
+   		
 		switch(Tipo){
 			case "Medico":
 				opcion1.setAttribute("selected","selected");
