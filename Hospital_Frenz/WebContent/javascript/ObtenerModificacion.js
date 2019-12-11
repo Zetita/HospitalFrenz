@@ -7,14 +7,15 @@ function ObtenerModificacion(boton,tablaID){
 
 	if(tablaID=="tbUsers")
 	{
-		var DNI=document.getElementById("lblDNI["+indice+"]").value;
-		var Contrasenia=document.getElementById("lblContrasenia["+indice+"]").value;		
-		var Email=document.getElementById("lblEmail["+indice+"]").value;
-		var Tipo=document.getElementById("lblTipo["+indice+"]").value;
+		document.getElementById("btnModificar["+indice+"]").setAttribute("type","submit");
+		var DNI=document.getElementById("lblDNI["+indice+"]").innerText;
+		var Contrasenia=document.getElementById("txtContrasenia["+indice+"]").value;		
+		var Email=document.getElementById("txtEmail["+indice+"]").value;
+		var Tipo=document.getElementById("ddlTipo["+indice+"]").value;
 		
-		consulta="UPDATE USUARIOS SET ContraseniaUser = '"+Contrasenia+"', EmailUser ='"+Email+"', TipoUser ='"+Tipo+"' WHERE DNI LIKE '"+DNI+"'";	
+		consulta="UPDATE USUARIOS SET ContraseniaUser = '"+Contrasenia+"', EmailUser ='"+Email+"', TipoUser ='"+Tipo+"' WHERE DNIUser LIKE '"+DNI+"'";	
 		
 	}
 
-	document.getElementById("hdnConsulta").value=consulta;
+	document.getElementById("hdnConsulta["+indice+"]").value=consulta;
 }
