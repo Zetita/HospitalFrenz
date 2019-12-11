@@ -109,8 +109,10 @@ public class ServletUsuarios extends HttpServlet {
 		HttpSession sesionIniciada=request.getSession();
 		
 		if(request.getParameter("Indice")!=null){
+			
 			String Indice=request.getParameter("Indice");
-			String Consulta=request.getParameter("hdnConsulta");
+			String Consulta=request.getParameter("hdnConsulta["+Indice+"]");
+			
 			if(request.getParameter("btnModificar["+Indice+"]")!=null){
 				userNeg = new UsuarioNegImpl();
 				RequestDispatcher dispatcher = null;
