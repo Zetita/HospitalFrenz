@@ -33,12 +33,14 @@
 	<label style="width:190px">Apellido:</label><%= med.getApellido() %><br>
 </div>
 
+<form method="post" action="ServletUsuarios">
 <div class="containerDat" >
-	<h5>Datos de contacto</h5><br>
-	<label style="width:160px">Telefono:</label><input type=tel name=txtTelefono value=<%= med.getTelefono() %>><br>
-	<label style="width:160px">Correo-Electronico:</label><input type=email name=txtEmail value=<%= u.getEmail() %>><br>
-	<input type=button name=BtnActualizarMed class="btn btn-primary" value="Actualizar">
+<h5>Datos de contacto</h5><br>
+<label style="width:160px">Telefono:</label><input type=tel name=txtTelefono value=<%= med.getTelefono() %>><br>
+<label style="width:160px">Correo-Electronico:</label><input type=email name=txtEmail value=<%= u.getEmail() %>><br>
+<input type="submit" class="btn btn-primary" name="btnActualizarDatMed-1" value="Actualizar">
 </div>
+</form>
 
 <div class="containerDat" >
 	<h5>Datos de residencia</h5><br>
@@ -47,7 +49,6 @@
 	<label style="width:90px">Direccion:</label><input name=txtDireccion value="<%= med.getDireccion() %>" type="text"><br>
 <input type=button name=BtnActualizarMed class="btn btn-primary" value="Actualizar">
 </div>
-
 
 
 </body>

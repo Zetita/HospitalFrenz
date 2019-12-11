@@ -78,6 +78,12 @@ public class ServletCoberturas extends HttpServlet {
 			}
 			
 		}
+		if(request.getParameter("BtnActualizarCob")!=null) {
+			request.setAttribute("listaCob", cobNeg.listarCoberturas());
+			request.setAttribute("paciente", userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario")));
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCoberturas.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

@@ -218,6 +218,7 @@ p .btnTurno {
 	background-color: lightskyblue;
 	margin-left: 130px;
 	margin-right: 85px;
+	border-radius: 8px;
 }
 .cardCob h5{
 	color:black;

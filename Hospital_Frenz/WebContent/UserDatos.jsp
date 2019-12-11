@@ -32,11 +32,15 @@
 <label style="width:190px">Fecha De Nacimiento: </label><%= pac.getFecha() %><br>
 </div>
 
+<form method="post" action="ServletUsuarios">
 <div class="containerDat" >
 <h5>Datos de contacto</h5><br>
 <label style="width:160px">Celular:</label><input type=tel name=txtCel placeholder="11-1234-5678" value=<%= pac.getTelefono() %> required><br>
 <label style="width:160px">Correo-Electronico:</label><input type=email name=txtEmail placeholder="Email@email.com" value=<%= u.getEmail() %> required><br>
+
+<input type="submit" class="btn btn-primary" name="btnActualizarDatPac-1" value="Actualizar">
 </div>
+</form>
 
 <div class="containerDat">
 <h5>Datos de residencia</h5><br>
@@ -45,12 +49,14 @@
 <label style="width:90px">Direccion:</label><input name=txtDireccion value="<%=pac.getDireccion()%>" type="text"><br>
 </div>
 
+<form method="post" action="ServletCoberturas">
 <div  class="containerDat">
 <h5>Tipo de cobertura</h5><br>
 <label style="width:170px">Nombre de cobertura:</label><%= pac.getCobertura().getNombre() %><br>
 <label style="width:170px">Tipo de cobertura:</label><%= pac.getCobertura().getTipo() %><br>
-<div  class=boton><input type=button name=BtnActualizar class="btn btn-primary" value="Actualizar"></div>
+<input type=submit name=BtnActualizarCob class="btn btn-primary" value="Actualizar">
 </div>
+</form>
 
 </body>
 </html>

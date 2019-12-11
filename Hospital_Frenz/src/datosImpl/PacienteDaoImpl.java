@@ -140,6 +140,7 @@ public class PacienteDaoImpl implements PacienteDao {
 				+pac.getFecha()+"', Telefono='"+pac.getTelefono()+"', DireccionPaciente='"+pac.getDireccion()+"', IDLocalidad="+
 				pac.getLocalidad().getId()+", IDCobertura="+pac.getCobertura().getIdCobertura()
 				+", EstadoPaciente="+ pac.getEstado()+" WHERE DNIPaciente='"+pac.getDni()+"'";
+
 		try
 		 {
 			estado=cn.execute(query);

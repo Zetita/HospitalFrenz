@@ -12,15 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidad.Medico;
 import entidad.Paciente;
 import entidad.Usuario;
+import negocio.MedicoNeg;
 import negocio.PacienteNeg;
 import negocio.ProvinciaNeg;
-import negocio.SedeNeg;
 import negocio.UsuarioNeg;
+import negocioImpl.MedicoNegImpl;
 import negocioImpl.PacienteNegImpl;
 import negocioImpl.ProvinciaNegImpl;
-import negocioImpl.SedeNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
 /**
@@ -178,12 +179,12 @@ public class ServletUsuarios extends HttpServlet {
 				request.setAttribute("userDat", u);			
 				sesionIniciada.setAttribute("usuario",u.getUsuario());
 
-				if(u.getTipo().equals("adm"))
+				if(u.getTipo().equals("Administrador"))
 				{
 					rd=request.getRequestDispatcher("AdminTurnos.jsp");		
 					rd.forward(request,response);
 				}
-				else if(u.getTipo().equals("med"))
+				else if(u.getTipo().equals("Medico"))
 				{			
 					request.setAttribute("medico", userNeg.buscarMedico(u.getUsuario()));
 					rd=request.getRequestDispatcher("MedDatos.jsp");
@@ -195,8 +196,7 @@ public class ServletUsuarios extends HttpServlet {
 					rd=request.getRequestDispatcher("UserDatos.jsp");	
 					rd.forward(request,response);
 				}
-				
-				
+					
 			}
 			else
 			{
@@ -212,10 +212,9 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
             rd.forward(request, response);
 		}
+		//Para registrarse
 		if(request.getParameter("btnAceptarSU")!=null)
-		{
-			
-			
+		{		
 			RequestDispatcher rd;
 			Paciente pac= new Paciente();
 			Usuario nUser= new Usuario();
@@ -260,6 +259,41 @@ public class ServletUsuarios extends HttpServlet {
 			}
 			
 		}
+		if(request.getParameter("btnActualizarDatPac-1")!=null) {
+			Usuario user= new Usuario();
+			Paciente pac= new Paciente();
+			PacienteNeg pacNeg= new PacienteNegImpl();
+			
+			user=userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario"));
+			pac=userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario"));
+			pac.setTelefono(request.getParameter("txtCel"));
+			user.setEmail(request.getParameter("txtEmail"));
+			
+			if(userNeg.editar(user) && pacNeg.editar(pac)) {
+				request.setAttribute("userDat", user);	
+				request.setAttribute("paciente", pac);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
+				dispatcher.forward(request, response);
+			}
+		}
+		if(request.getParameter("btnActualizarDatMed-1")!=null) {
+			Usuario user= new Usuario();
+			Medico med= new Medico();
+			MedicoNeg medNeg= new MedicoNegImpl();
+			
+			user=userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario"));
+			med=userNeg.buscarMedico((String)sesionIniciada.getAttribute("usuario"));
+			med.setTelefono(request.getParameter("txtTelefono"));
+			user.setEmail(request.getParameter("txtEmail"));
+			
+			if(userNeg.editar(user) && medNeg.editar(med)) {
+				request.setAttribute("userDat", user);	
+				request.setAttribute("medico", med);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedDatos.jsp");
+				dispatcher.forward(request, response);
+			}
+		}
+
 		
 	}
 	
