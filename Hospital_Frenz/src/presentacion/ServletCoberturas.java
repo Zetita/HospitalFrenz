@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidad.Cobertura;
 import entidad.Paciente;
 import negocio.CoberturaNeg;
 import negocio.PacienteNeg;
@@ -40,9 +42,10 @@ public class ServletCoberturas extends HttpServlet {
 			String opcion = request.getParameter("Param").toString();
 			
 			switch (opcion) {
-			case "admin":
+			case "AdminCob":
 			{
-				request.setAttribute("listaCoberturas", cobNeg.listarCoberturas());
+				CargarListas(request,response);
+				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminCoberturas.jsp");
 				dispatcher.forward(request, response);
 				break;
@@ -63,6 +66,18 @@ public class ServletCoberturas extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesionIniciada=request.getSession();
+		
+		if(request.getParameter("btnAgregarCob")!=null) {
+			Cobertura cob=LlenarCobertura(request,response);
+			CoberturaNeg cobNeg=new CoberturaNegImpl();
+			cobNeg.insertar(cob);
+			
+			CargarListas(request,response);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminCoberturas.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 		if(request.getParameter("BtnContratarCob")!=null)
 		{
 			int idCob = Integer.parseInt(request.getParameter("idContratarCob"));
@@ -84,6 +99,23 @@ public class ServletCoberturas extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCoberturas.jsp");
 			dispatcher.forward(request, response);
 		}
+	}
+	
+	public Cobertura LlenarCobertura(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cobertura cob=new Cobertura();
+		cob.setIdCobertura(Integer.parseInt(request.getParameter("txtIdCobertura")));
+		cob.setNombre(request.getParameter("txtNombreCobertura"));
+		cob.setTipo(request.getParameter("txtTipoCobertura"));
+		cob.setCosto(Double.parseDouble(request.getParameter("txtCostoCobertura")));
+		cob.setDescripcion(request.getParameter("txtDescCobertura"));
+		return cob;
+	}
+	
+	public void CargarListas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CoberturaNeg cobNeg=new CoberturaNegImpl();
+		ArrayList<Cobertura> lst=new ArrayList<Cobertura>();
+		lst=cobNeg.listarCoberturas();
+		request.setAttribute("ListaCoberturas", lst);
 	}
 
 }
