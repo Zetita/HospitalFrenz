@@ -1,11 +1,24 @@
+<%@ page import="java.util.*, entidad.*"  %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="css/estiloThomy.css">
-<link rel="stylesheet" href="css/DataGrid.css">
+
+<link rel="stylesheet" href="css/EstiloAdmin.css">
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+
+<script type="text/javascript" src="javascript/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="javascript/FiltroDinamico.js"></script>
+<script type="text/javascript" src="javascript/Modificar.js"></script>
+<script type="text/javascript" src="javascript/ObtenerFiltro.js"></script>
+<script type="text/javascript" src="javascript/ObtenerModificacion.js"></script>
+<script type="text/javascript" src="javascript/ObtenerEliminar.js"></script>
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="javascript/IniciarTablas.js"></script>
+
+
 <jsp:include page="Master_Admin.html" />
 <title>Administrar Especialidades</title>
 </head>
@@ -18,67 +31,87 @@
 <br>
 <br>
 
-<hr style="width:1px;height:490px;position:absolute;left:700px">
 
-<div style="position:relative;left:215px;top:10px">
+<div class="mitad1" style="width:56%">
 
-	<b><label class=lbl2>LISTAR ESPECIALIDADES</label><br></b>
-	<br>
-	<input class=bonito type="Button" name="btnAgregar" value="+" >
-	
-	<select class=bonito name="ddlFiltro1">
-		<option value="NO ES">NO ES<option>
-	</select>
-	
-	&nbsp;
-	
-	<label class=lbl2>Estado:</label>
-	
-	&nbsp;
-	
-	<select class=bonito name="ddlFiltro">
-		<option value="Inhabilitado">Inhabilitado<option>
-	</select>
+<table id="tbEspecialidad" style="width:100%">
+			<thead>
+			<tr>
+				<th colspan="2"></th>
+				<th>ID</th>
+				<th>Descripción</th>
+				<th>Estado</th>
+			</tr>
+			</thead>
+			<tbody>
+			<% 
+			
+			List<Especialidad> lst=new ArrayList<Especialidad>();
+
+			  if(request.getAttribute("ListaEspecialidades")!=null)
+			  {
+				  lst=(ArrayList<Especialidad>)request.getAttribute("ListaEspecialidades");
+			  }
+			  
+			  int indice=1;
+			  for(int i=0;i<lst.size();i++){
+				  try{
+				  %>
+				  <form method="post" action="ServletEspecialidad?Indice=<%=indice%>">
+				  	<tr>
+				  		<td>
+				  		<input type="button" id="btnModificar[<%=indice %>]" name="btnModificar[<%=indice %>]" value="Modificar">
+				  		</td>
+				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px"  value="Eliminar"></td>
+				  		<td><label id="lblID[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getId()%></label></td>
+				  		<td><label id="lblDesc[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getDescripcion() %></label></td>
+				  		<td><label id="lblEstado[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getEstado()%></label></td>
+				  	</tr>
+				  </form>
+				  <%
+				  indice++;
+				  }
+				  catch(Exception e){
+					  
+				  }
+				  
+			  }
+			  
+				%>
+				</tbody>
+		</table>
 
 		
 </div>
 
 <br>
 
-<div style="position:relative;left:215px;top:10px">
+<div class="mitad2">
 		
-		<table>
-			<tr>
-				<th colspan="2"></th>
-				<th>Numero de la Especialidad</th>
-				<th>Descripción de la Especialidad</th>
-				<th>Estado</th>
-			</tr>
-			<tr>
-				<td><a href="#" name="llbModificar">Modificar</a></td>
-				<td><a href="#" name="llbEliminar">Eliminar</a></td>
-				<td>4</td>
-				<td>Dermatología</td>
-				<td>Habilitado</td>
-			</tr>
-		</table>
+	<form method="post" action="ServletEspecialidades">
+		
+	<b><label>AGREGAR ESPECIALIDAD</label></b><br>
+	<br>
 	
+	<label>ID DE LA ESPECIALIDAD:</label>
+
+	<input type="number" name="txtIDEsp">
+	
+	<br>
+	<br>
+	
+	<label>DESCRIPCIÓN DE LA ESPECIALIDAD:</label>
+
+	<input type="text" name="txtDescEsp">
+	
+	<br>
+	<br>
+	
+	<input type="Submit" name="btnAgregarEsp" style="width:100%" value="Agregar Especialidad" >
+	
+	</form>
 </div>
 
-<div style="position:relative;left:715px;bottom:110px">
-	<b><label class=lbl2>AGREGAR ESPECIALIDAD</label></b><br>
-	<br>
-	
-	<label class=lbl2>DESCRIPCIÓN DE LA ESPECIALIDAD:</label>
-	&nbsp;
-	<input class=bonito type="text" name="txtEspecialidad">
-	
-	<br>
-	<br>
-	
-	<input class=bonito type="Button" name="btnAceptar" value="Agregar Especialidad" >
-	
-</div>
 
 </body>
 </html>

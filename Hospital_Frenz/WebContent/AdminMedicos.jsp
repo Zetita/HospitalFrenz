@@ -39,7 +39,7 @@
 				<th>Nombre</th>
 				<th>Apellido</th>
 				<th>Direccion</th>
-				<th>ID Localidad</th>
+				<th>Localidad</th>
 				<th>Telefono</th>
 				<th>Estado</th>
 			</tr>
