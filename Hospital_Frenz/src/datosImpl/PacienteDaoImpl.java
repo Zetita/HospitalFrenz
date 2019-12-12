@@ -111,9 +111,10 @@ public class PacienteDaoImpl implements PacienteDao {
 
 		String query = "INSERT INTO pacientes (DNIPaciente, NombrePaciente, ApellidoPaciente, FechaNacPaciente, Telefono,"
 				+ " DireccionPaciente, IDLocalidad, IDCobertura, EstadoPaciente) VALUES ('"+pac.getDni()+"', '"
-				+pac.getNombre()+"', '"+pac.getApellido()+"', "+pac.getFecha()+", '"+pac.getTelefono()+"', '"+
+				+pac.getNombre()+"', '"+pac.getApellido()+"', '"+pac.getFecha()+"', '"+pac.getTelefono()+"', '"+
 				pac.getDireccion()+"', "+pac.getLocalidad().getId()+", "+ pac.getCobertura().getIdCobertura()+", "
 				+ pac.getEstado()+")";
+
 		try
 		 {
 			estado=cn.execute(query);

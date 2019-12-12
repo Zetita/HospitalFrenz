@@ -92,7 +92,7 @@ public class LocalidadDaoImpl implements LocalidadDao {
 		try 
 		{
 			ResultSet rs= cn.query("Select * from localidades INNER JOIN provincias ON localidades.provincia_id=provincias.id"
-					+ " WHERE localidades.id="+id+" limit 4");
+					+ " WHERE localidades.id="+id);
 			rs.next();
 			
 			loc.setId(rs.getInt("localidades.id"));
