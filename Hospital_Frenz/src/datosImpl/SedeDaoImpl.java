@@ -60,8 +60,6 @@ public class SedeDaoImpl implements SedeDao {
 		{
 			ResultSet rs= cn.query("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id "
 					+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE sedes.IDLocalidad="+idLoc);
-			System.out.println("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id "
-					+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE sedes.IDLocalidad="+idLoc);
 			while(rs.next())
 			{
 				Sede sede = new Sede();
@@ -88,9 +86,6 @@ public class SedeDaoImpl implements SedeDao {
 		 {
 			 cn.close();
 		 }
-		for(Sede sed: list) {
-			System.out.println(sed.toString());
-		}
 		
 		 return list;
 	}

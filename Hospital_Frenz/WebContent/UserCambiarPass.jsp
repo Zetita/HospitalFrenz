@@ -23,8 +23,9 @@
 <form method="post" action="ServletUsuarios">
 <div class="containerDat" >
 <h5>Datos de contacto</h5><br>
-<label style="width:160px">Contraseña actual:</label><input type=tel name=txtCel value="" required><br>
-<label style="width:160px">Correo-Electronico:</label><input type=email name=txtEmail placeholder="Email@email.com" value=<%= u.getEmail() %> required><br>
+<label style="width:160px">Contraseña actual:</label><input type="password" name=txtCel value="" required><br>
+<label style="width:160px">Nueva contraseña:</label><input type="password" name=txtEmail value="" required><br>
+<label style="width:160px">Repita nueva contraseña:</label><input type="password" name=txtEmail value="" required><br>
 
 <input type="submit" class="btn btn-primary" name="btnActualizarDatPac-1" value="Actualizar">
 </div>

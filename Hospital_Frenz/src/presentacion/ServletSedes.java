@@ -50,7 +50,8 @@ public class ServletSedes extends HttpServlet {
 			{
 				String idprov=request.getParameter("comboProv");
 				request.setAttribute("selectedProvincia", idprov );
-				
+				request.setAttribute("provincias", provNeg.listarProvinciasConSedes());
+
 				request.setAttribute("localidades", locNeg.listarLocalidadesxProv(Integer.parseInt(idprov)));
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserSedes.jsp");
