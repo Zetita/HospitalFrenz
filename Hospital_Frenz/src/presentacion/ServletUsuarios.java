@@ -17,11 +17,9 @@ import entidad.Paciente;
 import entidad.Usuario;
 import negocio.MedicoNeg;
 import negocio.PacienteNeg;
-import negocio.ProvinciaNeg;
 import negocio.UsuarioNeg;
 import negocioImpl.MedicoNegImpl;
 import negocioImpl.PacienteNegImpl;
-import negocioImpl.ProvinciaNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
 /**
@@ -32,7 +30,6 @@ public class ServletUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	UsuarioNeg userNeg=new UsuarioNegImpl();
-	
     public ServletUsuarios() {
     	super();
     }
@@ -41,6 +38,7 @@ public class ServletUsuarios extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesionIniciada=request.getSession();
 		Usuario u;
+		
 		if(request.getParameter("Param")!=null)
 		{
 			String opcion = request.getParameter("Param").toString();
@@ -85,15 +83,7 @@ public class ServletUsuarios extends HttpServlet {
 				
 				break;
 			}
-			case "userSedes":
-			{
-				ProvinciaNeg provNeg = new ProvinciaNegImpl();
-				request.setAttribute("provincias", provNeg.listarProvinciasConSedes());
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserSedes.jsp");
-				dispatcher.forward(request, response);
-				break;
-			}
+			
 			default:
 				break;
 			}
@@ -104,6 +94,8 @@ public class ServletUsuarios extends HttpServlet {
 		//rd.forward(request, response);
 	}
 
+	
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -293,7 +285,7 @@ public class ServletUsuarios extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
-
+		
 		
 	}
 	
@@ -305,6 +297,8 @@ public class ServletUsuarios extends HttpServlet {
 		user.setContrasenia(request.getParameter("txtContrasenia"));
 		user.setDNI(request.getParameter("txtDNI"));
 		user.setEstado(true);
+		
+		//no se para que usan esto pero por ahi hay que actualizarlo
 		if(request.getParameter("Tipo").equals("med")) user.setTipo("Medico");
 		else if (request.getParameter("Tipo").equals("pac")) user.setTipo("Paciente");
 		else if (request.getParameter("Tipo").equals("adm")) user.setTipo("Administrador");

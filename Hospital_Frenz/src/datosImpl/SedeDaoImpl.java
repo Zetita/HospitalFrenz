@@ -51,7 +51,49 @@ public class SedeDaoImpl implements SedeDao {
 		 }
 		 return list;
 	}
-
+	@Override
+	public List<Sede> obtenerSedesxLoc(int idLoc) {
+		cn = new Conexion();
+		cn.Open();
+		List<Sede> list = new ArrayList<Sede>();
+		try
+		{
+			ResultSet rs= cn.query("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id "
+					+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE sedes.IDLocalidad="+idLoc);
+			System.out.println("Select * from sedes INNER JOIN localidades ON sedes.IDLocalidad=localidades.id "
+					+ "INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE sedes.IDLocalidad="+idLoc);
+			while(rs.next())
+			{
+				Sede sede = new Sede();
+				Localidad loc = new Localidad();
+				LocalidadNeg locNeg= new LocalidadNegImpl();
+				 
+				sede.setId(rs.getInt("sedes.IDSede"));
+				sede.setNombre(rs.getString("sedes.NombreSede"));
+				sede.setDireccion(rs.getString("sedes.DireccionSede"));
+				sede.setEstado(rs.getInt("sedes.Estado"));
+				
+				loc= locNeg.obtenerUna(rs.getInt("sedes.IDLocalidad"));
+				sede.setLocalidad(loc);
+				 
+				list.add(sede);
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		for(Sede sed: list) {
+			System.out.println(sed.toString());
+		}
+		
+		 return list;
+	}
 	@Override
 	public Sede obtenerUna(int id) {
 		cn = new Conexion();

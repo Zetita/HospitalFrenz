@@ -185,7 +185,16 @@ p .btnTurno {
 	width: 100%;
 	max-width: 600px;	
 }
-
+/*container de sedes*/
+.containerSedes{
+	background-color:white;
+	border-radius:8px;
+	box-sizing:border-box;
+	margin-left:60px;
+	padding:20px;
+	max-width: 1000px;
+	
+}
 /*container de coberturas*/
 .cardCob{	
 	display: inline-table;

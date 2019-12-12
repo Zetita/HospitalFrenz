@@ -17,6 +17,10 @@ public class SedeNegImpl implements SedeNeg {
 	}
 
 	@Override
+	public ArrayList<Sede> obtenerSedesxLoc(int idLoc){
+		return (ArrayList<Sede>) sedeDao.obtenerSedesxLoc(idLoc);
+	}
+	@Override
 	public Sede obtenerUna(int id) {
 		return sedeDao.obtenerUna(id);
 	}

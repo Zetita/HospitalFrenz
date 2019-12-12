@@ -21,7 +21,10 @@ public class LocalidadNegImpl implements LocalidadNeg {
 	public ArrayList<Localidad> listarLocalidades() {
 		return (ArrayList<Localidad>) locDao.obtenerTodas();
 	}
-
+	@Override
+	public ArrayList<Localidad> listarLocalidadesxProv(int idProv){
+		return (ArrayList<Localidad>) locDao.obtenerLocxProv(idProv);
+	}
 	@Override
 	public Localidad obtenerUna(int id) {
 		return locDao.obtenerUna(id);

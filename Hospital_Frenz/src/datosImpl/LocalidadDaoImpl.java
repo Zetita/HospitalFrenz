@@ -7,6 +7,8 @@ import java.util.List;
 import datos.LocalidadDao;
 import entidad.Localidad;
 import entidad.Provincia;
+import negocio.ProvinciaNeg;
+import negocioImpl.ProvinciaNegImpl;
 
 public class LocalidadDaoImpl implements LocalidadDao {
 	
@@ -43,6 +45,43 @@ public class LocalidadDaoImpl implements LocalidadDao {
 		{
 			cn.close();
 		}
+			
+		return list;
+	}
+	@Override
+	public List<Localidad> obtenerLocxProv(int idProv){
+		cn = new Conexion();
+		cn.Open();
+		List<Localidad> list = new ArrayList<Localidad>();
+		try
+		{
+			ResultSet rs = cn.query("SELECT distinct localidades.id, localidades.provincia_id,localidades.nombre, localidades.codigopostal from "
+					+ "localidades INNER JOIN sedes on localidades.id=sedes.IDLocalidad INNER JOIN provincias ON "
+					+ "localidades.provincia_id=provincias.id WHERE provincias.id="+idProv);
+			while(rs.next())
+			{
+				Localidad loc = new Localidad();
+				loc.setId(rs.getInt("localidades.id"));
+				loc.setNombre(rs.getString("localidades.nombre"));
+				loc.setCp(rs.getInt("localidades.codigopostal"));
+				
+				Provincia prov = new Provincia();
+				ProvinciaNeg provNeg= new ProvinciaNegImpl();
+				prov=provNeg.obtenerUna(rs.getInt("localidades.provincia_id"));
+				
+				loc.setProvincia(prov);
+				list.add(loc);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+
 		return list;
 	}
 	@Override
