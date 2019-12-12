@@ -88,7 +88,7 @@ public class ServletTurnos extends HttpServlet {
 		
 		if(request.getParameter("BtnTurno")!=null)
 		{
-			request.setAttribute("listaEsp", espNeg.listarEspecialidades());
+			request.setAttribute("listaEsp", espNeg.listarEspecialidades(0));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserSolicitud.jsp");
 			dispatcher.forward(request, response);
 		}

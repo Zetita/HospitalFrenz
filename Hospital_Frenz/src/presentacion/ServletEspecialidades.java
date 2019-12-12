@@ -34,7 +34,7 @@ public class ServletEspecialidades extends HttpServlet {
 			case "admin":
 			{
 				//Se quiere insertar entonces cargo la lista de categorias
-				request.setAttribute("listaEspecialidades", negEsp.listarEspecialidades());
+				request.setAttribute("listaEspecialidades", negEsp.listarEspecialidades(0));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminEspecialidad.jsp");
 				dispatcher.forward(request, response);
 				break;
