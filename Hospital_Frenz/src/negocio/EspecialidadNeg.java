@@ -6,7 +6,7 @@ import entidad.Especialidad;
 
 public interface EspecialidadNeg {
 
-	public ArrayList<Especialidad> listarEspecialidades();
+	public ArrayList<Especialidad> listarEspecialidades(int Origen);
 	public Especialidad obtenerUna(int id);
 	public boolean insertar(Especialidad esp);
 	public boolean editar(Especialidad esp);
