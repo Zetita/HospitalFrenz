@@ -3,7 +3,8 @@
 
 select,input[type="text"],input[type="search"],
 input[type="password"],input[type="number"],
-input[type="email"],input[type="phone"],input[type="date"]{
+input[type="email"],input[type="phone"],input[type="date"],
+textarea{
 	border: 1px solid black;
 	border-radius:50px;
 	margin-left:10px;
