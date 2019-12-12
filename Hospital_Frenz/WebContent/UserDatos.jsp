@@ -125,13 +125,22 @@ if(l.getId()==pac.getLocalidad().getId()){
 </div>
 
 <form method="post" action="ServletCoberturas">
-<div  class="containerDat">
+<div  class="containerDat" style="position: absolute;top: 180px;left: 700px;">
 <h5>Tipo de cobertura</h5><br>
 <label style="width:170px;">Nombre de cobertura:</label><%= pac.getCobertura().getNombre() %><br>
 <label style="width:170px;">Tipo de cobertura:</label><%= pac.getCobertura().getTipo() %><br>
 <input type=submit name=BtnActualizarCob class="btn btn-primary" value="Actualizar">
 </div>
 </form>
+
+<form method="post" action="ServletUsuarios">
+<div  class="containerDat" style="position: absolute;top: 380px;left: 700px;">
+<h5>Actualizar contraseña</h5><br><br><br>
+
+<input type=submit name=BtnActualizarPassword class="btn btn-primary" style="position:absolute; top: 60px; left: 190px;" value="Actualizar">
+</div>
+</form>
+
 <br>
 </body>
 </html>

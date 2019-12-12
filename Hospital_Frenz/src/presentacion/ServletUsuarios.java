@@ -303,7 +303,32 @@ public class ServletUsuarios extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
-		
+		//solo redireccionamiento
+		if(request.getParameter("BtnActualizarPassword")!=null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
+			dispatcher.forward(request, response);
+		}
+		//cambiar contraseña
+		if(request.getParameter("btnActualizarPass")!=null) {
+			String passVieja= request.getParameter("txtPassVieja");
+			Usuario user= userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario"));
+			
+			if(!user.getContrasenia().equals(passVieja)) {
+				request.setAttribute("errorMessage1", "Contraseña actual incorrecta");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}
+			if(!request.getParameter("txtPassNueva1").equals(request.getParameter("txtPassNueva2"))) {
+				request.setAttribute("errorMessage1", "Contraseñas nuevas no coinciden");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}
+			if(request.getParameter("txtPassNueva1").equals(request.getParameter("txtPassVieja"))) {
+				request.setAttribute("errorMessage2", "Contraseña debe ser distinta a la actual.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}
+		}
 		
 	}
 	
