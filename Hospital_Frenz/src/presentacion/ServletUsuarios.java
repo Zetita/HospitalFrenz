@@ -206,7 +206,7 @@ public class ServletUsuarios extends HttpServlet {
 			}
 			else
 			{
-                request.setAttribute("errorMessage", "Usuario y/o contraseÃ±a invalido.");
+                request.setAttribute("errorMessage", "Usuario y/o contraseña invalido.");
                 rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response); 
 			}
@@ -308,28 +308,71 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 			dispatcher.forward(request, response);
 		}
+		if(request.getParameter("BtnActualizarPasswordM")!=null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
+			dispatcher.forward(request, response);
+		}
 		//cambiar contraseña
 		if(request.getParameter("btnActualizarPass")!=null) {
 			String passVieja= request.getParameter("txtPassVieja");
-			Usuario user= userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario"));
+			String passNueva1= request.getParameter("txtPassNueva1");
+			String passNueva2= request.getParameter("txtPassNueva2");
 			
-			if(!user.getContrasenia().equals(passVieja)) {
+			Usuario user= userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario"));
+			String sql="UPDATE usuarios SET ContraseniaUser='"+passNueva1+"' WHERE NombreUser='"+user.getUsuario()+"'";
+			
+			
+			if(user.getContrasenia().equals(passVieja)==false) {
 				request.setAttribute("errorMessage1", "Contraseña actual incorrecta");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
-			if(!request.getParameter("txtPassNueva1").equals(request.getParameter("txtPassNueva2"))) {
+			else if(passNueva1.equals(passNueva2)==false) {
 				request.setAttribute("errorMessage1", "Contraseñas nuevas no coinciden");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
-			if(request.getParameter("txtPassNueva1").equals(request.getParameter("txtPassVieja"))) {
-				request.setAttribute("errorMessage2", "Contraseña debe ser distinta a la actual.");
+			else if(passVieja.equals(passNueva1)) {
+				request.setAttribute("errorMessage1", "Contraseña debe ser distinta a la actual.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}	
+			else if(userNeg.editar(sql)) {
+				request.setAttribute("bienMessage", "Contraseña actualizada correctamente.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
 		}
-		
+		if(request.getParameter("btnActualizarPassM")!=null) {
+			String passVieja= request.getParameter("txtPassVieja");
+			String passNueva1= request.getParameter("txtPassNueva1");
+			String passNueva2= request.getParameter("txtPassNueva2");
+			
+			Usuario user= userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario"));
+			String sql="UPDATE usuarios SET ContraseniaUser='"+passNueva1+"' WHERE NombreUser='"+user.getUsuario()+"'";
+			
+			
+			if(user.getContrasenia().equals(passVieja)==false) {
+				request.setAttribute("errorMessage1", "Contraseña actual incorrecta");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}
+			else if(passNueva1.equals(passNueva2)==false) {
+				request.setAttribute("errorMessage1", "Contraseñas nuevas no coinciden");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}
+			else if(passVieja.equals(passNueva1)) {
+				request.setAttribute("errorMessage1", "Contraseña debe ser distinta a la actual.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}	
+			else if(userNeg.editar(sql)) {
+				request.setAttribute("bienMessage", "Contraseña actualizada correctamente.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}
+		}
 	}
 	
 	public Usuario LlenarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

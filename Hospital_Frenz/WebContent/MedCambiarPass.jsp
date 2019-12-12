@@ -5,7 +5,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<jsp:include page="Master_User.html" />
+<jsp:include page="Master_Medico.html" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cambiar Contraseña | Hospital Frenz</title>
 </head>
@@ -31,7 +31,7 @@
  : request.getAttribute("bienMessage")%></span>
  <span style="color:red"><%=(request.getAttribute("errorMessage1") == null) ? ""
  : request.getAttribute("errorMessage1")%></span><br>
-<input type="submit" class="btn btn-primary" name="btnActualizarPass" value="Actualizar">
+<input type="submit" class="btn btn-primary" name="btnActualizarPassM" value="Actualizar">
 </div>
 </form>
 

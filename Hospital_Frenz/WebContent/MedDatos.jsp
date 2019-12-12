@@ -51,5 +51,12 @@
 </div>
 
 
+<form method="post" action="ServletUsuarios">
+<div  class="containerDat" style="position: absolute;top: 180px;left: 700px;">
+<h5>Actualizar contraseña</h5><br><br><br>
+
+<input type=submit name=BtnActualizarPasswordM class="btn btn-primary" style="position:absolute; top: 60px; left: 190px;" value="Actualizar">
+</div>
+</form>
 </body>
 </html>
