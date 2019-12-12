@@ -251,7 +251,7 @@
     <label> TELEFONO: </label>
 
 
-	<%if(request.getAttribute("Direccion")!=null) 
+	<%if(request.getAttribute("Telefono")!=null) 
 	{%>
     <input name="txtTelefono" type="phone" placeholder="Numero: 441112312" style="position:relative;left:27%" value="<%=request.getAttribute("Telefono")%>">
 	<%}
