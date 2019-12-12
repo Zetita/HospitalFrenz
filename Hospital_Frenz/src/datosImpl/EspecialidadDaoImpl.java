@@ -12,13 +12,15 @@ public class EspecialidadDaoImpl implements EspecialidadDao {
 private Conexion cn;
 	
 	@Override
-	public List<Especialidad> obtenerTodas(){
+	public List<Especialidad> obtenerTodas(int Origen){
 		cn = new Conexion();
 		cn.Open();
 		List<Especialidad> list = new ArrayList<Especialidad>();
 		try
 		{
-			ResultSet rs = cn.query("Select * from especialidades");
+			ResultSet rs;
+			if(Origen==0) rs= cn.query("Select * from especialidades");
+			else rs=cn.query("Select * from especialidades where EstadoEspecialidad=1");
 			while(rs.next())
 			{
 				Especialidad esp = new Especialidad();

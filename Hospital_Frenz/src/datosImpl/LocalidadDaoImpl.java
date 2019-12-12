@@ -55,44 +55,9 @@ public class LocalidadDaoImpl implements LocalidadDao {
 		List<Localidad> list = new ArrayList<Localidad>();
 		try
 		{
-			ResultSet rs = cn.query("Select * from localidades INNER JOIN provincias ON localidades.provincia_id=provincias.id WHERE localidades.provincia_id="+idProv
-					+" AND localidades.nombre<>'' order by localidades.nombre");
-			while(rs.next())
-			{
-				Localidad loc = new Localidad();
-				loc.setId(rs.getInt("localidades.id"));
-				loc.setNombre(rs.getString("localidades.nombre"));
-				loc.setCp(rs.getInt("localidades.codigopostal"));
-				
-				Provincia prov = new Provincia();
-				prov.setId(rs.getInt("provincias.id"));
-				prov.setNombre(rs.getString("provincias.nombre"));
-				prov.setCodigo31662("provincias.codigo31662");
-				loc.setProvincia(prov);
-				list.add(loc);
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			cn.close();
-		}
-			
-		return list;
-	}
-	@Override
-	public List<Localidad> obtenerLocxProvxSed(int idProv){
-		cn = new Conexion();
-		cn.Open();
-		List<Localidad> list = new ArrayList<Localidad>();
-		try
-		{
 			ResultSet rs = cn.query("SELECT distinct localidades.id, localidades.provincia_id,localidades.nombre, localidades.codigopostal from "
 					+ "localidades INNER JOIN sedes on localidades.id=sedes.IDLocalidad INNER JOIN provincias ON "
-					+ "localidades.provincia_id=provincias.id WHERE provincias.id="+idProv+" order by localidades.nombre");
+					+ "localidades.provincia_id=provincias.id WHERE provincias.id="+idProv);
 			while(rs.next())
 			{
 				Localidad loc = new Localidad();
@@ -127,7 +92,7 @@ public class LocalidadDaoImpl implements LocalidadDao {
 		try 
 		{
 			ResultSet rs= cn.query("Select * from localidades INNER JOIN provincias ON localidades.provincia_id=provincias.id"
-					+ " WHERE localidades.id="+id);
+					+ " WHERE localidades.id="+id+" limit 4");
 			rs.next();
 			
 			loc.setId(rs.getInt("localidades.id"));
@@ -174,5 +139,40 @@ public class LocalidadDaoImpl implements LocalidadDao {
 			cn.close();
 		}
 		return estado;
+	}
+	@Override
+	public List<Localidad> obtenerTodas(int idprov) {
+		cn = new Conexion();
+		cn.Open();
+		List<Localidad> list = new ArrayList<Localidad>();
+		try
+		{
+			ResultSet rs = cn.query("Select * from localidades INNER JOIN provincias ON localidades.provincia_id=provincias.id "
+					+ "WHERE localidades.provincia_id="+idprov);
+			while(rs.next())
+			{
+				Localidad loc = new Localidad();
+				loc.setId(rs.getInt("localidades.id"));
+				loc.setNombre(rs.getString("localidades.nombre"));
+				loc.setCp(rs.getInt("localidades.codigopostal"));
+				
+				Provincia prov = new Provincia();
+				prov.setId(rs.getInt("provincias.id"));
+				prov.setNombre(rs.getString("provincias.nombre"));
+				prov.setCodigo31662("provincias.codigo31662");
+				loc.setProvincia(prov);
+				list.add(loc);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+			
+		return list;
 	}
 }
