@@ -3,7 +3,7 @@
 
 select,input[type="text"],input[type="search"],
 input[type="password"],input[type="number"],
-input[type="email"]{
+input[type="email"],input[type="phone"]{
 	border: 1px solid black;
 	border-radius:50px;
 	margin-left:10px;
@@ -59,4 +59,19 @@ table, th, td {
 th, td {
   padding: 5px;
   text-align: center;    
+}
+
+#nvSolapas a{
+	display:inline-block;
+	background-color:#345;
+	padding:2px;
+	text-align:center;
+	color:white;
+	border:1px solid white;
+	text-decoration:none;
+}
+
+#nvSolapas a:hover{
+	color:black;
+	text-shadow: 1px 1px 0 #FFF;
 }
