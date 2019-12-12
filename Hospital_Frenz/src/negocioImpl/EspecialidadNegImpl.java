@@ -20,8 +20,8 @@ public class EspecialidadNegImpl implements EspecialidadNeg {
 		
 	}
 	@Override
-	public ArrayList<Especialidad> listarEspecialidades() {
-		return (ArrayList<Especialidad>) espDao.obtenerTodas();
+	public ArrayList<Especialidad> listarEspecialidades(int Origen) {
+		return (ArrayList<Especialidad>) espDao.obtenerTodas(Origen);
 	}
 
 	@Override
