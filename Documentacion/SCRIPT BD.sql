@@ -97,7 +97,7 @@ CREATE TABLE `hospitalfrenz`.`espxmed` (
 CREATE TABLE `hospitalfrenz`.`medxsed` (
   `IDSede` INT NOT NULL,
   `IDMatriculaMed` VARCHAR(15) NOT NULL,
-  `EstadoMesxSed` TINYINT NOT NULL,
+  `EstadoMedxSed` TINYINT NOT NULL,
   CONSTRAINT `PK_MedXSed ` PRIMARY KEY (`IDSede`, `IDMatriculaMed`));
 
 CREATE TABLE `hospitalfrenz`.`turnos` (

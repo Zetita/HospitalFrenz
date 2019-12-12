@@ -8,8 +8,10 @@ INSERT INTO `hospitalfrenz`.`medicos`
 (`DNIMed`, `MatriculaMed`, `NombreMed`, `ApellidosMed`, `DireccionMed`, `IDLocalidad`, `TelefonoMed`, `EstadoMed`) 
 VALUES ('25.122.221', '61111413', 'Alexandra Marcela', 'Ballarini', 'Gral. Juan Lavalle 1227', '17299', '15-2020-3030', '1');
 
-INSERT INTO `hospitalfrenz`.`espxmed`(`IDMatriculaMed`, `IDEspecialidad`, `EstadoEspxMed`) VALUES(11111111,2,1);
-INSERT INTO `hospitalfrenz`.`espxmed`(`IDMatriculaMed`, `IDEspecialidad`, `EstadoEspxMed`) VALUES(11111112,2,1);
+INSERT INTO `hospitalfrenz`.`espxmed`(`IDMatriculaMed`, `IDEspecialidad`, `EstadoEspxMed`) VALUES('11111111',2,1);
+INSERT INTO `hospitalfrenz`.`espxmed`(`IDMatriculaMed`, `IDEspecialidad`, `EstadoEspxMed`) VALUES('11111112',2,1);
+INSERT INTO `hospitalfrenz`.`medxsed`(`IDSede`,`IDMatriculaMed`,`EstadoMedxSed`) VALUES (1,'11111111',1);
+
 
 INSERT INTO `hospitalfrenz`.`pacientes`
 (`DNIPaciente`,`NombrePaciente`,`ApellidoPaciente`, `FechaNacPaciente`,`Telefono`,`DireccionPaciente`,`IDLocalidad`,`IDCobertura`,`EstadoPaciente`) 
