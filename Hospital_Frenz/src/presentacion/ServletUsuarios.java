@@ -15,11 +15,15 @@ import javax.servlet.http.HttpSession;
 import entidad.Medico;
 import entidad.Paciente;
 import entidad.Usuario;
+import negocio.LocalidadNeg;
 import negocio.MedicoNeg;
 import negocio.PacienteNeg;
+import negocio.ProvinciaNeg;
 import negocio.UsuarioNeg;
+import negocioImpl.LocalidadNegImpl;
 import negocioImpl.MedicoNegImpl;
 import negocioImpl.PacienteNegImpl;
+import negocioImpl.ProvinciaNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
 /**
@@ -30,6 +34,8 @@ public class ServletUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	UsuarioNeg userNeg=new UsuarioNegImpl();
+	ProvinciaNeg provNeg= new ProvinciaNegImpl();
+	LocalidadNeg locNeg= new LocalidadNegImpl();
     public ServletUsuarios() {
     	super();
     }
@@ -65,8 +71,11 @@ public class ServletUsuarios extends HttpServlet {
 			}
 			case "userDatos":
 			{	
-				request.setAttribute("paciente", userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario")));
+				Paciente pac=userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario"));
+				request.setAttribute("paciente", pac);
 				request.setAttribute("userDat", userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario")));
+				request.setAttribute("provincias", provNeg.listarProvinciasConSedes());
+				request.setAttribute("localidades", locNeg.listarLocalidadesxProv(pac.getLocalidad().getProvincia().getId()));
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
 				dispatcher.forward(request, response);
@@ -77,7 +86,8 @@ public class ServletUsuarios extends HttpServlet {
 			{
 				request.setAttribute("medico", userNeg.buscarMedico((String)sesionIniciada.getAttribute("usuario")));
 				request.setAttribute("userDat", userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario")));
-				
+				request.setAttribute("provincias", provNeg.listarProvinciasConSedes());
+
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedDatos.jsp");
 				dispatcher.forward(request, response);
 				
@@ -183,8 +193,12 @@ public class ServletUsuarios extends HttpServlet {
 					rd.forward(request,response);
 				}
 				else
-				{
-					request.setAttribute("paciente", userNeg.buscarPaciente(u.getUsuario()));
+				{Paciente pac=userNeg.buscarPaciente(u.getUsuario());
+				request.setAttribute("paciente", pac);
+				request.setAttribute("provincias", provNeg.listarProvincias());
+				request.setAttribute("idprov", pac.getLocalidad().getProvincia().getId());
+				request.setAttribute("localidades", locNeg.listarLocalidadesxProv(pac.getLocalidad().getProvincia().getId()));
+				
 					rd=request.getRequestDispatcher("UserDatos.jsp");	
 					rd.forward(request,response);
 				}
@@ -238,7 +252,7 @@ public class ServletUsuarios extends HttpServlet {
 				}
 				else
 				{
-					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo m√°s tarde.");
+					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo m·s tarde.");
 	                rd = request.getRequestDispatcher("SignUp.jsp");
 	                rd.forward(request, response);
 				}
@@ -264,6 +278,9 @@ public class ServletUsuarios extends HttpServlet {
 			if(userNeg.editar(user) && pacNeg.editar(pac)) {
 				request.setAttribute("userDat", user);	
 				request.setAttribute("paciente", pac);
+				request.setAttribute("provincias", provNeg.listarProvincias());
+				request.setAttribute("localidades", locNeg.listarLocalidadesxProv(pac.getLocalidad().getProvincia().getId()));
+				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -281,6 +298,7 @@ public class ServletUsuarios extends HttpServlet {
 			if(userNeg.editar(user) && medNeg.editar(med)) {
 				request.setAttribute("userDat", user);	
 				request.setAttribute("medico", med);
+				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedDatos.jsp");
 				dispatcher.forward(request, response);
 			}

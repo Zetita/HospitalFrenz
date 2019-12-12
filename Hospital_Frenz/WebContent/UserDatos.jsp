@@ -1,6 +1,8 @@
 <%@page import="entidad.*"%>
 <%@page import="negocio.*"%>
 <%@page import="negocioImpl.*"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -14,16 +16,38 @@
 <title>Mis datos | Hospital Frenz</title>
 </head>
 <body>
-<form method="post" action="ServletUsuarios">
-<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion" ><div>${usuario}</div></button>
-</form>
-<br>
+
 <%
 		Paciente pac;
 		Usuario u;
 		pac= (Paciente) request.getAttribute("paciente");
 		u= (Usuario) request.getAttribute("userDat");
-	%>
+	List<Provincia> listaProv= new ArrayList<Provincia>();
+	List<Localidad> listaLoc = new ArrayList<Localidad>();
+	List<Sede> listaSedes= new ArrayList<Sede>();
+	String idProv="";
+	if (request.getAttribute("provincias") != null) {
+		listaProv = (List<Provincia>) request.getAttribute("provincias");
+	}
+	if (request.getAttribute("localidades") != null) {
+		listaLoc = (List<Localidad>) request.getAttribute("localidades");	
+	}	
+		
+	if(request.getAttribute("selectedProvincia")!=null){
+		idProv= (String) request.getAttribute("selectedProvincia");
+	}
+	if(request.getAttribute("sedes")!=null){
+		listaSedes= (List<Sede>) request.getAttribute("sedes");
+	}
+
+%>
+
+
+<form method="post" action="ServletUsuarios">
+<button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion" ><div>${usuario}</div></button>
+</form>
+<br>
+
 <div class="containerDat">
 <h5>Datos Personales</h5><br>
 <label style="width:190px">Numero de Documento:</label><%= pac.getDni() %><br>
@@ -42,21 +66,72 @@
 </div>
 </form>
 
+
 <div class="containerDat">
 <h5>Datos de residencia</h5><br>
-<label style="width:90px">Provincia:</label><input name=txtProvincia value="<%=pac.getLocalidad().getProvincia().getNombre()%>" type="text"><br>
-<label style="width:90px">Localidad:</label><input	name=txtLocalidad value="<%=pac.getLocalidad().getNombre()%>" type="text"><br>
-<label style="width:90px">Direccion:</label><input name=txtDireccion value="<%=pac.getDireccion()%>" type="text"><br>
+
+<form name="form1" action="http://localhost:8081/Hospital_Frenz/ServletPacientes" method="GET">
+<br>
+<input type=hidden name="Param" value="obtenerLoc">
+<label style="width:90px">Provincia:</label>
+<select style="margin-right:20px;" name=comboProv onchange="javascript:document.form1.submit();">
+	<option value=0>Seleccione Provincia</option>
+<%
+	for (Provincia p : listaProv) {
+%>
+	<option 
+	<% 	if(idProv.equals("")){ 
+		if(p.getId()==pac.getLocalidad().getProvincia().getId()){
+     %>
+	selected <% }}else{
+	String id=String.valueOf(p.getId());
+	if(idProv.equals(id)){
+%>
+	selected <% }}	%>
+	value="<%=p.getId()%>"><%=p.getNombre()%>
+
+	</option>
+<%
+	}
+%>
+</select>
+</form>
+<br>
+<form method="post" action="ServletPacientes">
+<br>
+<label style="width:90px;position: absolute; top: 715px; left: 264px;">Localidad:</label>
+<select style="position:absolute; top: 715px; left: 358px;" name=comboLoc>
+	<option value=0>Seleccione Localidad</option>
+<%
+	for (Localidad l : listaLoc) {
+%>
+	<option 
+<% if(idProv.equals("")){
+
+if(l.getId()==pac.getLocalidad().getId()){
+%>
+	selected <% }}	%> value="<%=l.getId()%>"><%=l.getNombre()%>
+	</option>
+<%
+	}
+%>
+</select>
+<br><br>
+<label style="width:90px;position: absolute; top: 750px; left: 264px;">Direccion:</label>
+<input style="position:absolute; top: 750px; left: 358px;" name=txtDireccion value="<%=pac.getDireccion()%>" type="text"><br><br><br><br>
+<input style="position:absolute; top: 780px; left: 260px;" type="submit" class="btn btn-primary"  name="btnActualizarDatPac-2" value="Actualizar">
+</form>
+<br><br>
 </div>
 
 <form method="post" action="ServletCoberturas">
 <div  class="containerDat">
 <h5>Tipo de cobertura</h5><br>
-<label style="width:170px">Nombre de cobertura:</label><%= pac.getCobertura().getNombre() %><br>
-<label style="width:170px">Tipo de cobertura:</label><%= pac.getCobertura().getTipo() %><br>
+<label style="width:170px;">Nombre de cobertura:</label><%= pac.getCobertura().getNombre() %><br>
+<label style="width:170px;">Tipo de cobertura:</label><%= pac.getCobertura().getTipo() %><br>
 <input type=submit name=BtnActualizarCob class="btn btn-primary" value="Actualizar">
 </div>
 </form>
-
+<br>
 </body>
 </html>

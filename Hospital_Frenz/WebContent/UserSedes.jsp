@@ -8,41 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <jsp:include page="Master_User.html" />
-<style>
-.blockquote {
-    position: relative;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    color: #464866;
-    padding: 30px 0;
-    width: 100%;
-    max-width: 500px;
-    z-index: 1;
-    margin: 20px auto;
-    align-self: center;
-    border-top: solid 1px;
-    border-bottom: solid 1px;
-}
-
-.blockquote h1 {
-    position: relative;
-    color: #29648a;
-    font-size: 40px;
-    font-weight: 800;
-    line-height: 1;
-    margin: 0;
-}
-.blockquote h4 {
-    position: relative;
-    color: #292a2b;
-    font-size: 1.4rem;
-    font-weight: normal;
-    line-height: 1;
-    margin: 0;
-    padding-top: 20px;
-    z-index: 1;
-}
-</style>
 <title>Sedes | Hospital Frenz</title>
 </head>
 

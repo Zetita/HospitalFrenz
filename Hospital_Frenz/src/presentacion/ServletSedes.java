@@ -52,7 +52,7 @@ public class ServletSedes extends HttpServlet {
 				request.setAttribute("selectedProvincia", idprov );
 				request.setAttribute("provincias", provNeg.listarProvinciasConSedes());
 
-				request.setAttribute("localidades", locNeg.listarLocalidadesxProv(Integer.parseInt(idprov)));
+				request.setAttribute("localidades", locNeg.listarLocalidadesxProvxSed(Integer.parseInt(idprov)));
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserSedes.jsp");
 				dispatcher.forward(request, response);

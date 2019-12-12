@@ -49,7 +49,7 @@ private Conexion cn;
 		 {
 			 ResultSet rs= cn.query("select distinct provincias.id, provincias.nombre, provincias.codigo31662 "
 			 		+ "from sedes inner join localidades on localidades.id=sedes.IDLocalidad "
-			 		+ "inner join provincias on provincias.id=localidades.provincia_id");
+			 		+ "inner join provincias on provincias.id=localidades.provincia_id order by provincias.nombre");
 			 while(rs.next())
 			 {
 				 Provincia prov = new Provincia();
