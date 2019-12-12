@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidad.Especialidad;
 import negocio.EspecialidadNeg;
 import negocioImpl.EspecialidadNegImpl;
 
@@ -31,10 +33,10 @@ public class ServletEspecialidades extends HttpServlet {
 			String opcion = request.getParameter("Param").toString();
 			
 			switch (opcion) {
-			case "admin":
+			case "AdminEsp":
 			{
-				//Se quiere insertar entonces cargo la lista de categorias
-				request.setAttribute("listaEspecialidades", negEsp.listarEspecialidades(0));
+				CargarListas(request,response);
+				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminEspecialidad.jsp");
 				dispatcher.forward(request, response);
 				break;
@@ -46,8 +48,34 @@ public class ServletEspecialidades extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		if(request.getParameter("btnAgregarEsp")!=null) {
+			Especialidad esp=LlenarEspecialidad(request,response);
+			EspecialidadNeg espNeg=new EspecialidadNegImpl();
+			
+			espNeg.insertar(esp);
+			
+			CargarListas(request,response);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminEspecialidad.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+	
+	public Especialidad LlenarEspecialidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Especialidad esp=new Especialidad();
+		esp.setId(Integer.parseInt(request.getParameter("txtIDEsp")));
+		esp.setDescripcion(request.getParameter("txtDescEsp"));
+		esp.setEstado(1);
+		return esp;
+	}
+	
+	public void CargarListas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EspecialidadNeg espNeg=new EspecialidadNegImpl();
+		ArrayList<Especialidad> lst=new ArrayList<Especialidad>();
+		
+		lst=espNeg.listarEspecialidades(0);
+		
+		request.setAttribute("ListaEspecialidades", lst);
 	}
 
 }
