@@ -114,28 +114,32 @@ public class ServletUsuarios extends HttpServlet {
 		if(request.getParameter("Indice")!=null){
 			
 			String Indice=request.getParameter("Indice");
-			String Consulta=request.getParameter("hdnConsulta["+Indice+"]");
-			
-			if(request.getParameter("btnModificar["+Indice+"]")!=null){
-				userNeg = new UsuarioNegImpl();
+			if(!request.getParameter("hdnConsulta["+Indice+"]").equals(null)){
+				String Consulta=request.getParameter("hdnConsulta["+Indice+"]");
 				RequestDispatcher dispatcher = null;
-				List<Usuario> lst=new ArrayList<Usuario>();
-				userNeg.editar(Consulta);
-				lst=userNeg.listarUsuarios();
-				request.setAttribute("ListaUsers", lst);
-				dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");	
-				dispatcher.forward(request, response);
+
+				if(request.getParameter("btnModificar["+Indice+"]")!=null){
+					userNeg = new UsuarioNegImpl();
+
+					List<Usuario> lst=new ArrayList<Usuario>();
+					userNeg.editar(Consulta);
+					lst=userNeg.listarUsuarios();
+					request.setAttribute("ListaUsers", lst);
+
+				}
+				else if(request.getParameter("btnEliminar["+Indice+"]")!=null){
+					userNeg = new UsuarioNegImpl();
+
+					List<Usuario> lst=new ArrayList<Usuario>();
+					userNeg.borrar(Consulta);
+					lst=userNeg.listarUsuarios();
+					request.setAttribute("ListaUsers", lst);
+
+				}
 			}
-			else if(request.getParameter("btnEliminar["+Indice+"]")!=null){
-				userNeg = new UsuarioNegImpl();
-				RequestDispatcher dispatcher = null;
-				List<Usuario> lst=new ArrayList<Usuario>();
-				userNeg.borrar(Consulta);
-				lst=userNeg.listarUsuarios();
-				request.setAttribute("ListaUsers", lst);
-				dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");	
-				dispatcher.forward(request, response);
-			}
+			dispatcher = request.getRequestDispatcher("/AdminUsuarios.jsp");	
+			dispatcher.forward(request, response);
+				
 		}
 		
 		//Filtro
