@@ -75,6 +75,7 @@ public class ServletEspecialidades extends HttpServlet {
 		
 		lst=espNeg.listarEspecialidades(0);
 		
+		request.setAttribute("CantEspecialidades", lst.size());
 		request.setAttribute("ListaEspecialidades", lst);
 	}
 
