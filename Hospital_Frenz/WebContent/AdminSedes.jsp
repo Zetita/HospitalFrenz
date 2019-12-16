@@ -95,18 +95,20 @@
 	<b><label>AGREGAR SEDE</label></b><br>
 	<br>
 	
-	<label> ID: </label>
+		<% 
+			
+			int cant;
 
-	<%if(request.getAttribute("ID")!=null) 
-	{%>
-    <input type="number" name="txtID" placeholder="ID" value="<%=request.getAttribute("ID")%>">
-	<%}
-	else{
-	%>
-	<input type="number" name="txtID" placeholder="ID">
-	<%
-	}%>
-	
+			  if(request.getAttribute("CantSedes")!=null)
+			  {
+				  cant=request.getAttribute("CantSedes");
+			  }
+			  
+		%>
+	<label> ID: <%=cant+1%></label>
+		
+    <input type="number" name="txtID" placeholder="ID" value="<%=cant+1%>">
+
     <br>
     <br>
 	
