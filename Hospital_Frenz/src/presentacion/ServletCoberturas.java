@@ -116,6 +116,7 @@ public class ServletCoberturas extends HttpServlet {
 		ArrayList<Cobertura> lst=new ArrayList<Cobertura>();
 		lst=cobNeg.listarCoberturas();
 		request.setAttribute("ListaCoberturas", lst);
+		request.setAttribute("CantCoberturas", lst.size());
 	}
 
 }
