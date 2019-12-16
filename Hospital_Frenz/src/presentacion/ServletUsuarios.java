@@ -154,14 +154,19 @@ public class ServletUsuarios extends HttpServlet {
 		if(request.getParameter("btnAceptar")!=null) {
 			Usuario user=LlenarUsuario(request,response);
 			List<Usuario> lst=new ArrayList<Usuario>();
-			try {
-				lst=userNeg.listarUsuarios();
-				request.setAttribute("ListaUsers", lst);
+			
+			if(user!=null){
+			
+				userNeg.insertar(user);
+
+				try {
+					lst=userNeg.listarUsuarios();
+					request.setAttribute("ListaUsers", lst);
+				}
+				catch(Exception e){
+
+				}
 			}
-			catch(Exception e){
-					
-			}
-			userNeg.insertar(user);
 			RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
 			rd.forward(request,response);
 		}
@@ -206,7 +211,7 @@ public class ServletUsuarios extends HttpServlet {
 			}
 			else
 			{
-                request.setAttribute("errorMessage", "Usuario y/o contrase�a invalido.");
+                request.setAttribute("errorMessage", "Usuario y/o contraseña invalido.");
                 rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response); 
 			}
@@ -252,7 +257,7 @@ public class ServletUsuarios extends HttpServlet {
 				}
 				else
 				{
-					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo m�s tarde.");
+					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo más tarde.");
 	                rd = request.getRequestDispatcher("SignUp.jsp");
 	                rd.forward(request, response);
 				}
@@ -312,7 +317,7 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
 			dispatcher.forward(request, response);
 		}
-		//cambiar contrase�a
+		//cambiar contraseña
 		if(request.getParameter("btnActualizarPass")!=null) {
 			String passVieja= request.getParameter("txtPassVieja");
 			String passNueva1= request.getParameter("txtPassNueva1");
@@ -323,22 +328,22 @@ public class ServletUsuarios extends HttpServlet {
 			
 			
 			if(user.getContrasenia().equals(passVieja)==false) {
-				request.setAttribute("errorMessage1", "Contrase�a actual incorrecta");
+				request.setAttribute("errorMessage1", "Contraseña actual incorrecta");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
 			else if(passNueva1.equals(passNueva2)==false) {
-				request.setAttribute("errorMessage1", "Contrase�as nuevas no coinciden");
+				request.setAttribute("errorMessage1", "Contraseñas nuevas no coinciden");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
 			else if(passVieja.equals(passNueva1)) {
-				request.setAttribute("errorMessage1", "Contrase�a debe ser distinta a la actual.");
+				request.setAttribute("errorMessage1", "Contraseña debe ser distinta a la actual.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}	
 			else if(userNeg.editar(sql)) {
-				request.setAttribute("bienMessage", "Contrase�a actualizada correctamente.");
+				request.setAttribute("bienMessage", "Contraseña actualizada correctamente.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -353,22 +358,22 @@ public class ServletUsuarios extends HttpServlet {
 			
 			
 			if(user.getContrasenia().equals(passVieja)==false) {
-				request.setAttribute("errorMessage1", "Contrase�a actual incorrecta");
+				request.setAttribute("errorMessage1", "Contraseña actual incorrecta");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
 			else if(passNueva1.equals(passNueva2)==false) {
-				request.setAttribute("errorMessage1", "Contrase�as nuevas no coinciden");
+				request.setAttribute("errorMessage1", "Contraseñas nuevas no coinciden");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
 			else if(passVieja.equals(passNueva1)) {
-				request.setAttribute("errorMessage1", "Contrase�a debe ser distinta a la actual.");
+				request.setAttribute("errorMessage1", "Contraseña debe ser distinta a la actual.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}	
 			else if(userNeg.editar(sql)) {
-				request.setAttribute("bienMessage", "Contrase�a actualizada correctamente.");
+				request.setAttribute("bienMessage", "Contraseña actualizada correctamente.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -384,12 +389,44 @@ public class ServletUsuarios extends HttpServlet {
 		user.setDNI(request.getParameter("txtDNI"));
 		user.setEstado(true);
 		
+		if(Validar(user,request,response)) return null;
+		
 		//no se para que usan esto pero por ahi hay que actualizarlo
 		if(request.getParameter("Tipo").equals("med")) user.setTipo("Medico");
 		else if (request.getParameter("Tipo").equals("pac")) user.setTipo("Paciente");
 		else if (request.getParameter("Tipo").equals("adm")) user.setTipo("Administrador");
 		
 		return user;
+	}
+	
+	public boolean Validar(Usuario user,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		if(!user.getUsuario().trim().equals("")){
+			if(!user.getEmail().trim().equals("")){
+				if(!user.getContrasenia().trim().equals("")){
+					if(user.getDNI>0){
+						return false;
+					}
+					else{
+						request.setAttribute("Mensaje","DNI Incorrecto.");
+						return true;
+					}
+				}
+				else{
+					request.setAttribute("Mensaje","Contraseña Incorrecta.");
+					return true;
+				}
+			}
+			else
+			{
+				request.setAttribute("Mensaje","Email Incorrecto.");
+				return true;
+			}
+		}
+		else{
+			request.setAttribute("Mensaje","Nombre de usuario Incorrecto.");
+			return true;
+		}
 	}
 
 }
