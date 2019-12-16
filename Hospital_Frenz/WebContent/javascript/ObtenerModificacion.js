@@ -13,9 +13,20 @@ function ObtenerModificacion(boton,tablaID){
 		var Email=document.getElementById("txtEmail["+indice+"]").value;
 		var Tipo=document.getElementById("ddlTipo["+indice+"]").text;
 		
-		if(Contrasenia.trim()!=""&&Email.trim()!=null)		
+		if(Contrasenia.trim()!=""){	
+			if(Email.trim()!=""){
 			consulta="UPDATE USUARIOS SET ContraseniaUser = '"+Contrasenia+"', EmailUser ='"+Email+"', TipoUser ='"+Tipo+"' WHERE DNIUser LIKE '"+DNI+"'";	
-		
+			}
+			else{
+				alert("Email incorrecto.");
+				return;
+			}
+		}
+		else
+		{
+			alert("Contraseña incorrecta.");
+			return;
+		}
 	}
 
 	document.getElementById("hdnConsulta["+indice+"]").value=consulta;
