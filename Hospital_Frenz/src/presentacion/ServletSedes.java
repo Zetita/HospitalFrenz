@@ -97,7 +97,7 @@ public class ServletSedes extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		
-if(request.getParameter("ddlProvincia")!=null&&request.getParameter("ddlProvincia")!="") {
+	if(request.getParameter("ddlProvincia")!=null&&request.getParameter("ddlProvincia")!="") {
 			
 			CargarListas(request,response);
 			CargarAnteriores(request,response);
@@ -147,6 +147,7 @@ if(request.getParameter("ddlProvincia")!=null&&request.getParameter("ddlProvinci
 		List<Sede> lst=new ArrayList<Sede>();
 		lst=sedNeg.obtenerTodas();
 		request.setAttribute("ListaSedes", lst);
+		request.setAttribute("CantSedes", lst.size());
 		
 		ProvinciaNeg provNeg=new ProvinciaNegImpl();
 		List<Provincia> lst1=new ArrayList<Provincia>();
