@@ -26,6 +26,15 @@
 
 <body>
 		
+	<% if(request.getAttribute("Mensaje")!=null{
+	%>
+	<script type="text/javascript">
+		alert("<%=request.getAttribute("Mensaje")%>")
+	</script>
+	<%
+	request.setAttribute("Mensaje",null);
+	}
+	%>
 <div class="mitad1" style="width:56%">
 	<br>	
 	<br>
