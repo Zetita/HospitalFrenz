@@ -13,7 +13,8 @@ function ObtenerModificacion(boton,tablaID){
 		var Email=document.getElementById("txtEmail["+indice+"]").value;
 		var Tipo=document.getElementById("ddlTipo["+indice+"]").text;
 		
-		consulta="UPDATE USUARIOS SET ContraseniaUser = '"+Contrasenia+"', EmailUser ='"+Email+"', TipoUser ='"+Tipo+"' WHERE DNIUser LIKE '"+DNI+"'";	
+		if(Contrasenia.trim()!=""&&Email.trim()!=null)		
+			consulta="UPDATE USUARIOS SET ContraseniaUser = '"+Contrasenia+"', EmailUser ='"+Email+"', TipoUser ='"+Tipo+"' WHERE DNIUser LIKE '"+DNI+"'";	
 		
 	}
 
