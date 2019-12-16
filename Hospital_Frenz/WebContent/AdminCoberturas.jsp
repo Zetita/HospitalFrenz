@@ -41,7 +41,7 @@
 				<th>Nombre</th>
 				<th>Tipo</th>
 				<th>Costo</th>
-				<th>Descripción</th>
+				<th>DescripciÃ³n</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -88,16 +88,27 @@
 </div>
 
 <div class="mitad2">
-
+	
 <form method="post" action="ServletCoberturas">
 
-<b><label class=lbl2>COBERTURAS MEDICAS</label></b><br>
+<b><label>COBERTURAS MEDICAS</label></b><br>
 <br>
-<b><label class=lbl2>AGREGAR COBERTURAS</label><br></b>
+<b><label>AGREGAR COBERTURAS</label><br></b>
 <br>
-<label class=lbl2> ID DE COBERTURA:  </label> 
+	<% 
+			
+			int cant;
 
-<input name="txtIdCobertura" type="number"  placeholder="ID" style="position:relative;left:70px">
+			  if(request.getAttribute("CantCoberturas")!=null)
+			  {
+				  cant=request.getAttribute("CantCoberturas");
+			  }
+			  
+			  %>
+	
+<label> ID DE COBERTURA: <%=cant%> </label> 
+
+<input name="txtIdCobertura" type="hidden" value="<%=cant%>"style="position:relative;left:70px">
 
 <br>
 <br>
@@ -126,10 +137,10 @@
 <br>
 <br>
 
-<label> DESCRIPCIÓN DE COBERTURA:  </label> 
+<label> DESCRIPCIÃ“N DE COBERTURA:  </label> 
 
 
-<textarea name="txtDescCobertura" placeholder="Descripción de cobertura" style="position:relative;left:50px">
+<textarea name="txtDescCobertura" placeholder="DescripciÃ³n de cobertura" style="position:relative;left:50px">
 </textarea>
 
 <br>
