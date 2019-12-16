@@ -106,9 +106,9 @@
 			  
 			  %>
 	
-<label> ID DE COBERTURA: <%=cant%> </label> 
+<label> ID DE COBERTURA: <%=cant+1%> </label> 
 
-<input name="txtIdCobertura" type="hidden" value="<%=cant%>"style="position:relative;left:70px">
+<input name="txtIdCobertura" type="hidden" value="<%=cant+1%>"style="position:relative;left:70px">
 
 <br>
 <br>
