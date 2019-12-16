@@ -119,7 +119,7 @@
     <br>
     <br>
 
-    <label> Nº MATRICULA: </label>
+    <label> NÂº MATRICULA: </label>
 	<%if(request.getAttribute("NMat")!=null) 
 	{%>
     <input name="txtNumeroMatricula" type="number" placeholder="Numero de matricula" style="position:relative;left:19%" value="<%=request.getAttribute("NMat")%>">
@@ -290,7 +290,7 @@
 			  for(int i=0;i<lst4.size();i++){
 				  try{
 
-				  	%><option value="<%=lst.get(i).getId()%>"><%=lst4.get(i).getNombre()%>, <%=lst4.get(i).getApellido()%></option>
+				  	%><option value="<%=lst.get(i).getId()%>">(<%=lst4.get(i).getMatricula()%>) <%=lst4.get(i).getNombre()%>, <%=lst4.get(i).getApellido()%></option>
 				
 					<%  }
 				  
@@ -322,7 +322,7 @@
 			  for(int i=0;i<lst1.size();i++){
 				  try{
 				  %>
-				  	<option value="<%=lst1.get(i).getId()%>"><%=lst1.get(i).getDescripcion() %></option>
+				  	<option value="<%=lst1.get(i).getId()%>">(<%=lst1.get(i).getId()%>) <%=lst1.get(i).getDescripcion() %></option>
 				  <%
 				  }
 				  catch(Exception e){
