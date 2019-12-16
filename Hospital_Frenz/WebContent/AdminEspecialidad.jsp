@@ -39,7 +39,7 @@
 			<tr>
 				<th colspan="2"></th>
 				<th>ID</th>
-				<th>Descripción</th>
+				<th>DescripciÃ³n</th>
 				<th>Estado</th>
 			</tr>
 			</thead>
@@ -93,14 +93,25 @@
 	<b><label>AGREGAR ESPECIALIDAD</label></b><br>
 	<br>
 	
-	<label>ID DE LA ESPECIALIDAD:</label>
+		<% 
+			
+			int cant=new int;
 
-	<input type="number" name="txtIDEsp">
+			  if(request.getAttribute("CantEspecialidades")!=null)
+			  {
+				  cant=request.getAttribute("CantEspecialidades");
+			  }
+			  
+		%>
+		
+	<label>ID DE LA ESPECIALIDAD: <%=cant+1%> </label>
+
+	<input type="hidden" value="<%=cant+1%>" name="txtIDEsp">
 	
 	<br>
 	<br>
 	
-	<label>DESCRIPCIÓN DE LA ESPECIALIDAD:</label>
+	<label>DESCRIPCIÃ“N DE LA ESPECIALIDAD:</label>
 
 	<input type="text" name="txtDescEsp">
 	
