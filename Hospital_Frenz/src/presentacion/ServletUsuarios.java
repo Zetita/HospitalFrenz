@@ -74,7 +74,7 @@ public class ServletUsuarios extends HttpServlet {
 				Paciente pac=userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario"));
 				request.setAttribute("paciente", pac);
 				request.setAttribute("userDat", userNeg.obtenerUsuarioUser((String)sesionIniciada.getAttribute("usuario")));
-				request.setAttribute("provincias", provNeg.listarProvinciasConSedes());
+				request.setAttribute("provincias", provNeg.listarProvincias());
 				request.setAttribute("localidades", locNeg.listarLocalidadesxProv(pac.getLocalidad().getProvincia().getId()));
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserDatos.jsp");

@@ -70,7 +70,7 @@
 <div class="containerDat">
 <h5>Datos de residencia</h5><br>
 
-<form name="form1" action="http://localhost:8081/Hospital_Frenz/ServletPacientes" method="GET">
+<form name="form1" action="ServletPacientes" method="GET">
 <br>
 <input type=hidden name="Param" value="obtenerLoc">
 <label style="width:90px">Provincia:</label>

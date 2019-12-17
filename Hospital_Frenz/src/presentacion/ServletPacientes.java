@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import entidad.Cobertura;
 import entidad.Localidad;
-import entidad.Medico;
 import entidad.Paciente;
 import entidad.Provincia;
 import negocio.CoberturaNeg;
