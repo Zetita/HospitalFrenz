@@ -134,7 +134,7 @@
 	
 </div>
 
-<div class="mitad2">
+<div class="mitad2" style="margin-left: 60%;">
 
 	<form name="frmAgregar" method="post" action="ServletPacientes">
 	<b><label>AGREGAR PACIENTE</label></b>
@@ -142,29 +142,29 @@
 	<br>
 	<br>
 	
-    <label> DNI: </label>
+    <label style="display:inline-block; width:160px;"> DNI: </label>
 
 	<%if(request.getAttribute("DNI")!=null) 
-	{%><input name="txtDNI" type="number" placeholder="11.111.111" style="position:relative;left:40%" value=<%=request.getAttribute("DNI") %>>
+	{%><input name="txtDNI" type="number" placeholder="11.111.111" value=<%=request.getAttribute("DNI") %>>
 		<%}
 	else{
 	%>
-	<input name="txtDNI" type="number" placeholder="11.111.111" style="position:relative;left:40%">
+	<input name="txtDNI" type="number" placeholder="11.111.111">
 	<%
 	}%>
 	
 	<br>
 	<br>
 	
-	<label> NOMBRE: </label>
+	<label style="display:inline-block; width:160px;"> NOMBRE: </label>
 
 	<%if(request.getAttribute("Nombre")!=null) 
 	{%>
-    <input name="txtNombre" type="text" placeholder="Nombre" style="position:relative;left:30%" value="<%=request.getAttribute("Nombre")%>">
+    <input name="txtNombre" type="text" placeholder="Nombre" value="<%=request.getAttribute("Nombre")%>">
 	<%}
 	else{
 	%>
-	<input name="txtNombre" type="text" placeholder="Nombre" style="position:relative;left:30%">
+	<input name="txtNombre" type="text" placeholder="Nombre">
 	<%
 	}%>
 	
@@ -172,40 +172,40 @@
     <br>
 
 	
-    <label> APELLIDO: </label>
+    <label style="display:inline-block; width:160px;"> APELLIDO: </label>
 
 
 	<%if(request.getAttribute("Apellido")!=null) 
 	{%>
-    <input name="txtApellido" type="text" placeholder="Apellido" style="position:relative;left:28%" value="<%=request.getAttribute("Apellido")%>">
+    <input name="txtApellido" type="text" placeholder="Apellido"  value="<%=request.getAttribute("Apellido")%>">
 	<%}
 	else{
 	%>
-	<input name="txtApellido" type="text" placeholder="Apellido" style="position:relative;left:28%">
+	<input name="txtApellido" type="text" placeholder="Apellido" >
 	<%
 	}%>
 	
     <br>
     <br>
 
-    <label> DIRECCION: </label>
+    <label style="display:inline-block; width:160px;"> DIRECCION: </label>
 
 	<%if(request.getAttribute("Direccion")!=null) 
 	{%>
-    <input name="txtDireccion" type="text" placeholder="Calle y numero" style="position:relative;left:25%" value="<%=request.getAttribute("Direccion")%>">
+    <input name="txtDireccion" type="text" placeholder="Calle y numero"  value="<%=request.getAttribute("Direccion")%>">
 	<%}
 	else{
 	%>
-	<input name="txtDireccion" type="text" placeholder="Calle y numero" style="position:relative;left:25%">
+	<input name="txtDireccion" type="text" placeholder="Calle y numero">
 	<%
 	}%>
 	
     <br>
     <br>
 
-    <label> PROVINCIA: </label>
+    <label style="display:inline-block; width:160px;"> PROVINCIA: </label>
 
-    <select name="ddlProvincia" style="position:relative;left:25%;width:65%" onchange="javascript:document.frmAgregar.submit();">
+    <select name="ddlProvincia" style="width:50%;" onchange="javascript:document.frmAgregar.submit();">
     	<option selected="" value=""></option>
     <% 
 			
@@ -243,9 +243,9 @@
     <br>
     <br>
 
-    <label> LOCALIDAD: </label>
+    <label  style="display:inline-block; width:160px;"> LOCALIDAD: </label>
 
-    <select name="ddlLocalidad" style="position:relative;left:25%;width:65%">
+    <select name="ddlLocalidad" style="width:50%">
     
      <% 
 			
@@ -275,20 +275,21 @@
     <br>
     <br>
 
-    <label> TELEFONO: </label>
+    <label style="display:inline-block; width:160px;"> TELEFONO: </label>
 
 
 	<%if(request.getAttribute("Telefono")!=null) 
 	{%>
-    <input name="txtTelefono" type="phone" placeholder="Numero: 441112312" style="position:relative;left:27%" value="<%=request.getAttribute("Telefono")%>">
+    <input name="txtTelefono" type="phone" placeholder="Numero: 441112312" value="<%=request.getAttribute("Telefono")%>">
 	<%}
 	else{
 	%>
-	<input name="txtTelefono" type="phone" placeholder="Numero: 441112312" style="position:relative;left:27%">
+	<input name="txtTelefono" type="phone" placeholder="Numero: 441112312">
 	<%
 	}%>
-	
-	<label>FECHA DE NACIMIENTO DEL PACIENTE:</label>
+	<br>
+    <br>
+	<label style="display:inline-block; width:160px;">FECHA DE NACIMIENTO DEL PACIENTE:</label>
 
 	<%if(request.getAttribute("FechaNac")!=null) 
 	{%>
@@ -303,7 +304,7 @@
 	<br>
 	<br>
 	
-	<label>COBERTURA DEL PACIENTE:</label>
+	<label style="display:inline-block; width:160px;">COBERTURA DEL PACIENTE:</label>
 
 	<select name="ddlCobertura" >
 	<%
@@ -339,7 +340,7 @@
 	
 	<br>
 	<br>
-	
+	<br>
 	<input type="Submit" style="width:100%" name="btnAgregarPac" value="Agregar Paciente" >
 	
 	</form>
