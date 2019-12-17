@@ -76,17 +76,35 @@ code {
 	font-size: 2em;
 	font-weight: 300;
 }
-.links > a {
+.links > a{
 	color: #9ab;
 	padding: .75em;
 	text-align: center;
 	text-decoration: none;
 	transition: all .5s;
 }
+
+#btnLogOff{
+	background-color: #123;
+	font-size:90%;
+	border:none;
+	color: #9ab;
+	padding: .75em;
+	text-align: center;
+	text-decoration: none;
+	transition: all .5s;
+}
+
 .links > a:hover {
 	background: #ffffff06;
 	color: #adf;
 }
+
+#btnLogOff:hover {
+	background: #ffffff06;
+	color: #adf;
+}
+
 .links > .line {
 	background: #68a;
 	height: 1px;
@@ -128,4 +146,4 @@ code {
 .links > a:nth-of-type(8):hover ~ .line { --index: 8; }
 .links > a:nth-of-type(9):hover ~ .line { --index: 9; }
 .links > a:nth-of-type(10):hover ~ .line { --index: 10; }
-.links > a:last-of-type:hover ~ .line { --index: var(--items); }
+.links > #btnLogOff:last-of-type:hover ~ .line { --index: var(--items); }
