@@ -1,4 +1,5 @@
 $(document).ready( function () {
+	document.getElementById("btnLogOff").innerHTML="<div style='height:100%;width:100%'>"+sessionStorage.getItem("NombreUser")+"</div>"; 
 		    $('#tbUsers').DataTable( {
 		        "language": {
 		            "sProcessing":     "Procesando...",
@@ -35,6 +36,7 @@ $(document).ready( function () {
 
 
 $(document).ready( function () {
+	document.getElementById("btnLogOff").innerHTML="<div style='height:100%;width:100%'>"+sessionStorage.getItem("NombreUser")+"</div>"; 
     $('#tbSedes').DataTable( {
         "language": {
             "sProcessing":     "Procesando...",
@@ -68,6 +70,7 @@ $(document).ready( function () {
 } );
 
 $(document).ready( function () {
+	document.getElementById("btnLogOff").innerHTML="<div style='height:100%;width:100%'>"+sessionStorage.getItem("NombreUser")+"</div>"; 
     $('#tbEspecialidad').DataTable( {
         "language": {
             "sProcessing":     "Procesando...",
@@ -101,6 +104,7 @@ $(document).ready( function () {
 } );
 
 $(document).ready( function () {
+	document.getElementById("btnLogOff").innerHTML="<div style='height:100%;width:100%'>"+sessionStorage.getItem("NombreUser")+"</div>"; 
     $('#tbMedicos').DataTable( {
         "language": {
             "sProcessing":     "Procesando...",
@@ -134,6 +138,7 @@ $(document).ready( function () {
 } );
 
 $(document).ready( function () {
+	document.getElementById("btnLogOff").innerHTML="<div style='height:100%;width:100%'>"+sessionStorage.getItem("NombreUser")+"</div>"; 
     $('#tbCoberturas').DataTable( {
         "language": {
             "sProcessing":     "Procesando...",
@@ -168,6 +173,7 @@ $(document).ready( function () {
 
 
 $(document).ready( function () {
+	document.getElementById("btnLogOff").innerHTML="<div style='height:100%;width:100%'>"+sessionStorage.getItem("NombreUser")+"</div>"; 
     $('#tbPacientes').DataTable( {
         "language": {
             "sProcessing":     "Procesando...",
