@@ -113,10 +113,12 @@ public class ServletUsuarios extends HttpServlet {
 		
 		if(request.getParameter("Indice")!=null){
 			
+			RequestDispatcher dispatcher = null;
 			String Indice=request.getParameter("Indice");
+			
 			if(!request.getParameter("hdnConsulta["+Indice+"]").equals(null)){
 				String Consulta=request.getParameter("hdnConsulta["+Indice+"]");
-				RequestDispatcher dispatcher = null;
+				
 
 				if(request.getParameter("btnModificar["+Indice+"]")!=null){
 					userNeg = new UsuarioNegImpl();
@@ -162,7 +164,8 @@ public class ServletUsuarios extends HttpServlet {
 			if(user!=null){
 			
 				userNeg.insertar(user);
-
+			}
+			
 				try {
 					lst=userNeg.listarUsuarios();
 					request.setAttribute("ListaUsers", lst);
@@ -170,7 +173,7 @@ public class ServletUsuarios extends HttpServlet {
 				catch(Exception e){
 
 				}
-			}
+			
 			RequestDispatcher rd=request.getRequestDispatcher("/AdminUsuarios.jsp");
 			rd.forward(request,response);
 		}
@@ -405,10 +408,10 @@ public class ServletUsuarios extends HttpServlet {
 	
 	public boolean Validar(Usuario user,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(!user.getUsuario().trim().equals("")){
-			if(!user.getEmail().trim().equals("")){
-				if(!user.getContrasenia().trim().equals("")){
-					if(user.getDNI>0){
+		if(!user.getUsuario().trim().equals("")&&!user.getUsuario().contains("")){
+			if(!user.getEmail().trim().equals("")&&!user.getEmail().contains("")){
+				if(!user.getContrasenia().trim().equals("")&&!user.getContrasenia().contains("")){
+					if(Integer.parseInt(user.getDNI())>0){
 						return false;
 					}
 					else{
@@ -417,7 +420,7 @@ public class ServletUsuarios extends HttpServlet {
 					}
 				}
 				else{
-					request.setAttribute("Mensaje","ContraseÃ±a Incorrecta.");
+					request.setAttribute("Mensaje","Contraseña Incorrecta.");
 					return true;
 				}
 			}
