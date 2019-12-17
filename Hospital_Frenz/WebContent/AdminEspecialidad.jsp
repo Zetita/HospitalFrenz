@@ -95,11 +95,11 @@
 	
 		<% 
 			
-			int cant=new int;
+			int cant=0;
 
 			  if(request.getAttribute("CantEspecialidades")!=null)
 			  {
-				  cant=request.getAttribute("CantEspecialidades");
+				  cant=Integer.parseInt(request.getAttribute("CantEspecialidades").toString());
 			  }
 			  
 		%>

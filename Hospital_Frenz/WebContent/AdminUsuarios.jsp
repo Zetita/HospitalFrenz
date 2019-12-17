@@ -26,7 +26,7 @@
 
 <body>
 		
-	<% if(request.getAttribute("Mensaje")!=null{
+	<% if(request.getAttribute("Mensaje")!=null){
 	%>
 	<script type="text/javascript">
 		alert("<%=request.getAttribute("Mensaje")%>")

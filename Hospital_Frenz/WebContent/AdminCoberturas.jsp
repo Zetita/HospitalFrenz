@@ -97,11 +97,11 @@
 <br>
 	<% 
 			
-			int cant;
+			int cant=0;
 
 			  if(request.getAttribute("CantCoberturas")!=null)
 			  {
-				  cant=request.getAttribute("CantCoberturas");
+				  cant=Integer.parseInt(request.getAttribute("CantCoberturas").toString());
 			  }
 			  
 			  %>

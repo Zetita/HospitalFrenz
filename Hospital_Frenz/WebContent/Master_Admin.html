@@ -8,8 +8,10 @@
 </head>
 <body>
 
+
+<form method="post" action="ServletUsuarios">
 <header id="header">
-	<nav class="links" style="--items: 7;">
+	<nav class="links" style="--items: 8;">
 		<a href="#">Turnos </a>
 		<a href="ServletSedes?Param=AdminSedes">Sedes</a>
 		<a href="ServletEspecialidades?Param=AdminEsp">Especialidades</a>
@@ -17,9 +19,11 @@
 		<a href="ServletMedicos?Param=AdminMed">Medicos</a>
 		<a href="ServletPacientes?Param=AdminPac">Pacientes</a>
 		<a href="ServletUsuarios?Param=AdminUsuarios">Usuarios</a>
+		<button type="submit" id="btnLogOff" name="btnLogOff" data-hover="Cerrar sesion" ></button>
 		<span class="line"></span>
 	</nav>
 </header>
+</form>
 
 <footer id="footer">
 	<ul>

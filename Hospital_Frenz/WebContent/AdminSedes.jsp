@@ -39,7 +39,7 @@
 			<tr>
 				<th colspan="2"></th>
 				<th>ID</th>
-				<th>Nombre</th>>
+				<th>Nombre</th>
 				<th>Direccion</th>
 				<th>Localidad</th>
 				<th>Estado</th>
@@ -97,17 +97,17 @@
 	
 		<% 
 			
-			int cant;
+			int cant=0;
 
 			  if(request.getAttribute("CantSedes")!=null)
 			  {
-				  cant=request.getAttribute("CantSedes");
+				  cant=Integer.parseInt(request.getAttribute("CantSedes").toString());
 			  }
 			  
 		%>
 	<label> ID: <%=cant+1%></label>
 		
-    <input type="number" name="txtID" placeholder="ID" value="<%=cant+1%>">
+    <input type="hidden" name="txtID" placeholder="ID" value="<%=cant+1%>">
 
     <br>
     <br>

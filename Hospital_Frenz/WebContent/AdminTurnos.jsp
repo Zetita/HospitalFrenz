@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<script type="text/javascript">
+	document.getElementById("btnLogOff").innerHTML="<div style='height:100%;width:100%'>"+sessionStorage.getItem("NombreUser")+"</div>"; 
+</script>
 
 <br>
 <br>

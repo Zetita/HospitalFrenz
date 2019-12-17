@@ -16,12 +16,21 @@
    </div>
 </header>
 <body>
+
+<script type="text/javascript" >
+
+function Asignar()
+{
+	sessionStorage.setItem("NombreUser", document.getElementById("txtUserLI").value);
+}
+</script> 
+
 	<div class="login-box">
             <h1>Ingresa</h1>
             <form method="post" action="ServletUsuarios">
             <div class="textbox">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <input type="text" placeholder="Usuario" name="txtUserLI" value="">
+                <input type="text" placeholder="Usuario" id="txtUserLI" name="txtUserLI" value="">
             </div>
 
             <div class="textbox">
@@ -30,7 +39,7 @@
             </div>
 			<span style="color:red"><%=(request.getAttribute("errorMessage") == null) ? ""
  : request.getAttribute("errorMessage")%></span>
-            <input type="submit" class="btn" name="btnAceptarLI" value="Entrar">
+            <input type="submit" class="btn" name="btnAceptarLI" value="Entrar" onclick="Asignar()">
             </form>
             ¿Aún no tenés usuario? <a href="ServletUsuarios?Param=signup">Hacé click acá para Registrarte</a>
       </div>
