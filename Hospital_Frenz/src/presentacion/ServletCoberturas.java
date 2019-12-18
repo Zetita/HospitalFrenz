@@ -2,6 +2,7 @@ package presentacion;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -130,7 +131,7 @@ public class ServletCoberturas extends HttpServlet {
 		if(!cob.getNombre().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( cob.getNombre() ).find()){
 			if(!cob.getTipo().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( cob.getTipo() ).find()){
 				if(cob.getCosto()>0){
-					if(!cob.getDescripcion().trim().equals(""){
+					if(!cob.getDescripcion().trim().equals("")){
 						request.setAttribute("Mensaje","Cobertura creada correctamente.");
 						return false;
 					}

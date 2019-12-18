@@ -2,6 +2,7 @@ package presentacion;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -83,7 +84,7 @@ public class ServletEspecialidades extends HttpServlet {
 	}
 	
 	public boolean Validar(Especialidad esp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!esp.getDescripcion().trim().equal("")&&!Pattern.compile( "[0-9]" ).matcher( esp.getDescripcion() ).find()){
+		if(!esp.getDescripcion().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( esp.getDescripcion() ).find()){
 			request.setAttribute("Mensaje","Especialidad agregada correctamente.");
 			return false;
 		}

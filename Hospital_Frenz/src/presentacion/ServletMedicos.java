@@ -3,6 +3,7 @@ package presentacion;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -250,8 +251,8 @@ public class ServletMedicos extends HttpServlet {
 	}
 	
 	public boolean Validar2(EspxMed espxmed, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		if(espxmed.getIDEsp()>0&&espxmed.getIDEsp()!=null){
-			if(!espxmed.getMatMed().trim().equals("")&&!espxmed.getMatMed().contains(" ")){
+		if(espxmed.getIDEsp()>0){
+			if(!espxmed.getMatriculaMed().trim().equals("")&&!espxmed.getMatriculaMed().contains(" ")){
 				request.setAttribute("Mensaje","Especialidad por Médico agregada.");
 				return false;
 			}
@@ -272,7 +273,7 @@ public class ServletMedicos extends HttpServlet {
 			if (!Character.isDigit(Cadena.charAt(i)))
 				return false;
 			}
-		}
+		
 		return true;
 	}
 }
