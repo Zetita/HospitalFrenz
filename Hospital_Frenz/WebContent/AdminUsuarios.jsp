@@ -151,17 +151,17 @@
 	
 	<form method="post" action="ServletUsuarios" >
 
-	<b><label class=lbl2>AGREGAR USUARIO</label></b><br>
+	<b><label>AGREGAR USUARIO</label></b><br>
 	<br>
 	
-	<label class=lbl2>NOMBRE DEL USUARIO:</label>
+	<label>NOMBRE DEL USUARIO:</label>
 	&nbsp;
 	<input type="text"style="position:relative;left:11%" name="txtNombre">
 	
 	<br>
 	<br>
 	
-	<label class=lbl2>CONTRASEёA DEL USUARIO:</label>
+	<label>CONTRASEёA DEL USUARIO:</label>
 	&nbsp;
 	<input type="password" style="position:relative;left:1.5%" name="txtContrasenia">
 	
@@ -169,7 +169,7 @@
 	<br>
 	
 
-	<label class=lbl2>DNI DEL USUARIO:</label>
+	<label>DNI DEL USUARIO:</label>
 	&nbsp;
 	<input type="number" style="position:relative;left:19%" name="txtDNI">
 	
@@ -177,7 +177,7 @@
 	<br>
 	
 
-	<label class=lbl2>EMAIL DEL USUARIO:</label>
+	<label>EMAIL DEL USUARIO:</label>
 	&nbsp;
 	<input type="text" style="position:relative;left:15%" name="txtEmail">
 	

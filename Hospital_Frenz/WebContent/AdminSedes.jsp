@@ -24,6 +24,15 @@
 </head>
 <body>
 
+<% if(request.getAttribute("Mensaje")!=null){
+	%>
+	<script type="text/javascript">
+		alert("<%=request.getAttribute("Mensaje")%>")
+	</script>
+	<%
+	request.setAttribute("Mensaje",null);
+	}
+	%>
 
 <br>
 <br>
