@@ -11,7 +11,8 @@ function ObtenerModificacion(boton,tablaID){
 		var DNI=document.getElementById("lblDNI["+indice+"]").innerText;
 		var Contrasenia=document.getElementById("txtContrasenia["+indice+"]").value;		
 		var Email=document.getElementById("txtEmail["+indice+"]").value;
-		var Tipo=document.getElementById("ddlTipo["+indice+"]").text;
+		var DDL=document.getElementById("ddlTipo["+indice+"]");
+		var Tipo=DDL.options[DDL.selectedIndex].text;
 		
 		if(Contrasenia.trim()!=""){	
 			if(Email.trim()!=""){
