@@ -184,36 +184,6 @@
 	<br>
 	<br>
 
-	<table style="border:none;width:112%">
-		<tr>
-			<td style="border:none;text-align:left">
-			</td>
-			<td style="border:none;text-align:left">
-				<input name="Tipo" type="radio" value="med" >
-				<label class=lbl2>Medico</label>
-			</td>
-		</tr>
-		<tr>
-			<td style="border:none;text-align:left">
-				<label class=lbl2>TIPO DE USUARIO:</label>
-
-			</td>
-			<td style="border:none;text-align:left">
-				<input name="Tipo" type="radio" value="pac">
-				<label class=lbl2>Paciente</label>
-			</td>
-		</tr>
-		<tr>
-			<td style="border:none;text-align:left">
-			</td>
-			<td style="border:none;text-align:left">
-				<input name="Tipo" type="radio" value="adm" >
-				<label class=lbl2>Administrador</label>
-			</td>
-		</tr>
-	</table>
-	<br>
-	
 	<input type="submit" name="btnAceptar" style="width:95%" value="Agregar Usuario">
 	</form>
 </div>
