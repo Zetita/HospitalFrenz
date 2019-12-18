@@ -94,7 +94,6 @@ public class ServletPacientes extends HttpServlet {
 			
 			if(!request.getParameter("hdnConsulta["+Indice+"]").equals(null)){
 				String Consulta=request.getParameter("hdnConsulta["+Indice+"]");
-				System.out.println(Consulta);
 
 				/*if(request.getParameter("btnModificar["+Indice+"]")!=null){
 					userNeg = new UsuarioNegImpl();
@@ -110,6 +109,11 @@ public class ServletPacientes extends HttpServlet {
 					negPac.borrar(Consulta);
 					CargarListas(request, response);
 
+				}/*else*/ if(request.getParameter("btnAlta["+Indice+"]")!=null){
+	
+					negPac.editar("UPDATE pacientes SET EstadoPaciente=1 WHERE DNIPaciente='"+Consulta+"'");
+					CargarListas(request, response);
+
 				}
 			}
 			dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
@@ -122,9 +126,7 @@ public class ServletPacientes extends HttpServlet {
 			Paciente pacExistente;
 			PacienteNeg pacNeg=new PacienteNegImpl();
 			pacExistente=pacNeg.obtenerUno(Pac.getDni());
-			
 			if(Pac!=null){
-			
 			if(Pac.getDni().trim().isEmpty()|| Pac.getNombre().trim().isEmpty() || Pac.getApellido().trim().isEmpty() || 
 					Pac.getDireccion().trim().isEmpty() || Pac.getTelefono().trim().isEmpty()) {
 				request.setAttribute("errorMessage", "Complete los campos solicitados.");
@@ -151,7 +153,6 @@ public class ServletPacientes extends HttpServlet {
 			
 			
 			pacNeg.insertar(Pac);
-				
 			}
 			CargarListas(request,response);
 			
@@ -220,7 +221,6 @@ public class ServletPacientes extends HttpServlet {
 		Pac.setLocalidad(loc);
 		
 		if(Validar(Pac,request,response)==true) return null;
-		
 		return Pac;
 	}
 	
@@ -269,15 +269,14 @@ public class ServletPacientes extends HttpServlet {
 		request.setAttribute("FechaNac",(request.getParameter("txtFechaNac")));
 		request.setAttribute("Cobertura",(request.getParameter("ddlCoberturas")));
 	}
-	
-	public boolean Validar(Paciente pac,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public boolean Validar(Paciente Pac,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		Pac.setDni(request.getParameter("txtDNI"));
 		Pac.setNombre(request.getParameter("txtNombre"));
 		Pac.setApellido(request.getParameter("txtApellido"));
 		Pac.setDireccion(request.getParameter("txtDireccion"));
 		Pac.setTelefono(request.getParameter("txtTelefono"));
 		Pac.setFecha(request.getParameter("txtFechaNac"));
-		
+
 		if(!Pac.getDni().trim().equals("")&&!Pac.getDni().contains(" ")){
 			if(!Pac.getNombre().trim().equals("")){
 				if(!Pac.getApellido().trim().equals("")){
@@ -305,12 +304,12 @@ public class ServletPacientes extends HttpServlet {
 							}
 						}
 						else{
-							request.setAttribute("Mensaje","TelÃ©fono del paciente incorrecto.");
+							request.setAttribute("Mensaje","Teléfono del paciente incorrecto.");
 							return true;
 						}
 					}
 					else{
-						request.setAttribute("Mensaje","DirecciÃ³n del paciente incorrecta.");
+						request.setAttribute("Mensaje","Dirección del paciente incorrecta.");
 						return true;
 					}
 				}
@@ -329,6 +328,5 @@ public class ServletPacientes extends HttpServlet {
 			return true;
 		}
 	}
-	
-}
+
 }
