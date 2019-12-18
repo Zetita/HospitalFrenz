@@ -27,8 +27,8 @@
 <br>
 <br>
 <br>
-	
-	<% if(request.getAttribute("Mensaje")!=null){
+
+<% if(request.getAttribute("Mensaje")!=null){
 	%>
 	<script type="text/javascript">
 		alert("<%=request.getAttribute("Mensaje")%>")
@@ -37,7 +37,6 @@
 	request.setAttribute("Mensaje",null);
 	}
 	%>
-	
 <%
 	List<Cobertura> lst3=new ArrayList<Cobertura>();
 
@@ -101,7 +100,7 @@
 				<th>Nombre</th>
 				<th>Apellido</th>
 				<th>Direccion</th>
-				<th>TelÃ©fono</th>
+				<th>Teléfono</th>
 				<th>Fecha de Nacimiento</th>
 				<th>Cobertura</th>
 				<th>Localidad</th>
@@ -128,7 +127,12 @@
 				  		<input type="hidden" id="hdnConsulta[<%=indice %>]" name="hdnConsulta[<%=indice %>]">
 				  		<input type="button" id="btnModificar[<%=indice %>]" name="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbPacientes')" value="Modificar">
 				  		</td>
+				  		<%if(lst4.get(i).getEstado()==1){ %>
 				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" onclick="ObtenerEliminar(this,'tbPacientes')" value="Eliminar"></td>
+				  		<%}else{ %>
+				  		<td><input type="submit" name="btnAlta[<%=indice %>]" id="btnAlta[<%=indice %>]" style="font-size:10px" onclick="ObtenerAlta(this,'tbPacientes')" value="Dar alta"></td>
+				  		<%} %>
+				  		
 				  		<td><label id="lblDNI[<%=indice%>]" style="font-size:10px"><%=lst4.get(i).getDni()%></label></td>
 				  		<td><label id="lblNombre[<%=indice%>]" style="font-size:10px"><%=lst4.get(i).getNombre()%></label></td>
 				  		<td><label id="lblApellido[<%=indice%>]" style="font-size:10px"><%=lst4.get(i).getApellido()%></label></td>
@@ -156,7 +160,7 @@
 	
 </div>
 
-<div class="mitad2" style="margin-left: 60%; width:30%;">
+<div class="mitad2" style="margin-left: 69%; width:26%;">
 
 	<form name="frmAgregar" method="post" action="ServletPacientes">
 	<b><label>AGREGAR PACIENTE</label></b>
