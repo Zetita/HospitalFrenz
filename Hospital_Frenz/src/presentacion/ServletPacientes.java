@@ -277,11 +277,11 @@ public class ServletPacientes extends HttpServlet {
 		Pac.setTelefono(request.getParameter("txtTelefono"));
 		Pac.setFecha(request.getParameter("txtFechaNac"));
 
-		if(!Pac.getDni().trim().equals("")&&!Pac.getDni().contains(" ")){
-			if(!Pac.getNombre().trim().equals("")){
-				if(!Pac.getApellido().trim().equals("")){
+		if(!Pac.getDni().trim().equals("")&&!Pac.getDni().contains(" ")&&Comprobar(Pac.getDni())){
+			if(!Pac.getNombre().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( Pac.getNombre() ).find()){
+				if(!Pac.getApellido().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( Pac.getApellido() ).find()){
 					if(!Pac.getDireccion().trim().equals("")){
-						if(!Pac.getTelefono().trim().equals("")&&!Pac.getTelefono().contains(" ")){
+						if(!Pac.getTelefono().trim().equals("")&&!Pac.getTelefono().contains(" ")&&Comprobar(Pac.getTelefono())){
 							if(!Pac.getFecha().trim().equals("")&&!Pac.getFecha().contains(" ")){
 								if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
 									if(!request.getParameter("ddlCobertura").equals("")&&request.getParameter("ddlCobertura")!=null){
@@ -304,12 +304,12 @@ public class ServletPacientes extends HttpServlet {
 							}
 						}
 						else{
-							request.setAttribute("Mensaje","Teléfono del paciente incorrecto.");
+							request.setAttribute("Mensaje","TelÃ©fono del paciente incorrecto.");
 							return true;
 						}
 					}
 					else{
-						request.setAttribute("Mensaje","Dirección del paciente incorrecta.");
+						request.setAttribute("Mensaje","DirecciÃ³n del paciente incorrecta.");
 						return true;
 					}
 				}
@@ -328,5 +328,14 @@ public class ServletPacientes extends HttpServlet {
 			return true;
 		}
 	}
-
+	
+	public boolean Comprobar(String Cadena)
+	{
+		for(int i=0;i<Cadena.length();i++){
+			if (!Character.isDigit(Cadena.charAt(i)))
+				return false;
+			}
+		}
+		return true;
+	}
 }
