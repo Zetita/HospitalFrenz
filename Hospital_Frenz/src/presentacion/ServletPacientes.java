@@ -117,6 +117,7 @@ public class ServletPacientes extends HttpServlet {
 				dispatcher.forward(request, response);
 			}*/
 			
+			
 			pacNeg.insertar(Pac);
 			CargarListas(request,response);
 			
