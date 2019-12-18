@@ -14,7 +14,7 @@ public class Paciente {
 	
 	public Paciente()
 	{
-		
+		dni=" ";
 	}
 	public Paciente(String dni, String nombre, String apellido, String fecha, String telefono, String direccion,
 			Localidad localidad, Cobertura cobertura, int estado) {

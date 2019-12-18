@@ -104,6 +104,7 @@
 				  <form method="post" action="ServletMedicos?Indice=<%=indice%>">
 				  	<tr>
 				  		<td>
+				  		<input type="hidden" id="hdnConsulta[<%=indice %>]" name="hdnConsulta[<%=indice %>]">
 				  		<input type="button" id="btnModificar[<%=indice %>]" name="btnModificar[<%=indice %>]" style="font-size:10px" value="Modificar">
 				  		</td>
 				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" value="Eliminar"></td>
@@ -134,7 +135,7 @@
 	
 </div>
 
-<div class="mitad2" style="margin-left: 60%;">
+<div class="mitad2" style="margin-left: 60%; width:30%;">
 
 	<form name="frmAgregar" method="post" action="ServletPacientes">
 	<b><label>AGREGAR PACIENTE</label></b>
@@ -145,11 +146,11 @@
     <label style="display:inline-block; width:160px;"> DNI: </label>
 
 	<%if(request.getAttribute("DNI")!=null) 
-	{%><input name="txtDNI" type="number" placeholder="11.111.111" value=<%=request.getAttribute("DNI") %>>
+	{%><input name="txtDNI" type="text" placeholder="11.111.111" value=<%=request.getAttribute("DNI") %> required>
 		<%}
 	else{
 	%>
-	<input name="txtDNI" type="number" placeholder="11.111.111">
+	<input name="txtDNI" type="text" placeholder="11.111.111" required>
 	<%
 	}%>
 	
@@ -160,11 +161,11 @@
 
 	<%if(request.getAttribute("Nombre")!=null) 
 	{%>
-    <input name="txtNombre" type="text" placeholder="Nombre" value="<%=request.getAttribute("Nombre")%>">
+    <input name="txtNombre" type="text" placeholder="Nombre" value="<%=request.getAttribute("Nombre")%>" required>
 	<%}
 	else{
 	%>
-	<input name="txtNombre" type="text" placeholder="Nombre">
+	<input name="txtNombre" type="text" placeholder="Nombre" required>
 	<%
 	}%>
 	
@@ -177,11 +178,11 @@
 
 	<%if(request.getAttribute("Apellido")!=null) 
 	{%>
-    <input name="txtApellido" type="text" placeholder="Apellido"  value="<%=request.getAttribute("Apellido")%>">
+    <input name="txtApellido" type="text" placeholder="Apellido"  value="<%=request.getAttribute("Apellido")%>" required>
 	<%}
 	else{
 	%>
-	<input name="txtApellido" type="text" placeholder="Apellido" >
+	<input name="txtApellido" type="text" placeholder="Apellido" required>
 	<%
 	}%>
 	
@@ -192,11 +193,11 @@
 
 	<%if(request.getAttribute("Direccion")!=null) 
 	{%>
-    <input name="txtDireccion" type="text" placeholder="Calle y numero"  value="<%=request.getAttribute("Direccion")%>">
+    <input name="txtDireccion" type="text" placeholder="Calle y numero"  value="<%=request.getAttribute("Direccion")%>" required>
 	<%}
 	else{
 	%>
-	<input name="txtDireccion" type="text" placeholder="Calle y numero">
+	<input name="txtDireccion" type="text" placeholder="Calle y numero" required>
 	<%
 	}%>
 	
@@ -205,7 +206,7 @@
 
     <label style="display:inline-block; width:160px;"> PROVINCIA: </label>
 
-    <select name="ddlProvincia" style="width:50%;" onchange="javascript:document.frmAgregar.submit();">
+    <select name="ddlProvincia" style="width:50%;" onchange="javascript:document.frmAgregar.submit();" required>
     	<option selected="" value=""></option>
     <% 
 			
@@ -245,7 +246,7 @@
 
     <label  style="display:inline-block; width:160px;"> LOCALIDAD: </label>
 
-    <select name="ddlLocalidad" style="width:50%">
+    <select name="ddlLocalidad" style="width:50%" required>
     
      <% 
 			
@@ -280,11 +281,11 @@
 
 	<%if(request.getAttribute("Telefono")!=null) 
 	{%>
-    <input name="txtTelefono" type="phone" placeholder="Numero: 441112312" value="<%=request.getAttribute("Telefono")%>">
+    <input name="txtTelefono" type="phone" placeholder="11-0000-0000" value="<%=request.getAttribute("Telefono")%>" required>
 	<%}
 	else{
 	%>
-	<input name="txtTelefono" type="phone" placeholder="Numero: 441112312">
+	<input name="txtTelefono" type="phone" placeholder="11-0000-0000" required>
 	<%
 	}%>
 	<br>
@@ -293,11 +294,11 @@
 
 	<%if(request.getAttribute("FechaNac")!=null) 
 	{%>
-    <input type="date" id="txtFechaNac" name="txtFechaNac" value="<%=request.getAttribute("FechaNac")%>" >
+    <input type="date" id="txtFechaNac" name="txtFechaNac" value="<%=request.getAttribute("FechaNac")%>" required>
 	<%}
 	else{
 	%>
-	<input type="date" id="txtFechaNac" name="txtFechaNac"/>
+	<input type="date" id="txtFechaNac" name="txtFechaNac" required>
 	<%
 	}%>
 	
@@ -306,7 +307,7 @@
 	
 	<label style="display:inline-block; width:160px;">COBERTURA DEL PACIENTE:</label>
 
-	<select name="ddlCobertura" >
+	<select name="ddlCobertura" required>
 	<%
 		List<Cobertura> lst3=new ArrayList<Cobertura>();
 
@@ -340,7 +341,10 @@
 	
 	<br>
 	<br>
+	<span style="color:red"><%=(request.getAttribute("errorMessage") == null) ? "": request.getAttribute("errorMessage")%></span>
 	<br>
+	<br>
+	
 	<input type="Submit" style="width:100%" name="btnAgregarPac" value="Agregar Paciente" >
 	
 	</form>

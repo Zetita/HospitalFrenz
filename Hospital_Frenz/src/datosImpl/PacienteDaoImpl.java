@@ -102,6 +102,50 @@ public class PacienteDaoImpl implements PacienteDao {
 		 return pac;
 	}
 	@Override
+	public boolean existe(String consulta) {
+		 cn = new Conexion();
+		 cn.Open();
+		 Paciente pac = new Paciente();
+		 Localidad loc = new Localidad();
+		 LocalidadNeg locNeg= new LocalidadNegImpl();
+		 Cobertura cob = new Cobertura();
+		 CoberturaNeg cobNeg= new CoberturaNegImpl();
+		 
+		 try
+		 {
+			ResultSet rs= cn.query("Select * from pacientes "+consulta);
+			rs.next();
+			 
+			pac.setDni(rs.getString("pacientes.DNIPaciente"));
+			pac.setNombre(rs.getString("pacientes.NombrePaciente"));
+			pac.setApellido(rs.getString("pacientes.ApellidoPaciente"));
+			pac.setFecha(rs.getString("pacientes.FechaNacPaciente"));
+			pac.setTelefono(rs.getString("pacientes.Telefono"));
+			pac.setDireccion(rs.getString("pacientes.DireccionPaciente"));
+			pac.setEstado(rs.getInt("pacientes.EstadoPaciente"));
+				 
+			loc=locNeg.obtenerUna(rs.getInt("pacientes.IDLocalidad"));
+			cob=cobNeg.obtenerUna(rs.getInt("pacientes.IDCobertura"));
+				
+			pac.setLocalidad(loc);
+			pac.setCobertura(cob);
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 if(pac.getDni()!=null) {
+			 return true;
+		 }else {
+			 return false;
+		 }
+	}
+
+	@Override
 	public boolean insertar(Paciente pac) {
 
 		boolean estado=true;

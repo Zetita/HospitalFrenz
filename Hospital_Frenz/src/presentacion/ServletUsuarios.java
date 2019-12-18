@@ -218,7 +218,7 @@ public class ServletUsuarios extends HttpServlet {
 			}
 			else
 			{
-                request.setAttribute("errorMessage", "Usuario y/o contraseña invalido.");
+                request.setAttribute("errorMessage", "Usuario y/o contrase�a invalido.");
                 rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response); 
 			}
@@ -241,19 +241,25 @@ public class ServletUsuarios extends HttpServlet {
 			pac= pacNeg.obtenerUno(request.getParameter("txtDNISU"));
 			nUser= userNeg.obtenerUsuario(request.getParameter("txtDNISU"));
 			
+			if(request.getParameter("txtDNISU").trim().isEmpty() || request.getParameter("txtDNISU").trim().isEmpty()) {
+				request.setAttribute("errorMessage2", "Complete los campos.");
+                rd = request.getRequestDispatcher("SignUp.jsp");
+                rd.forward(request, response); 
+			}
+			
 			if(nUser.getUsuario()!=null) //si existe ya el usuario
 			{
 				request.setAttribute("errorMessage2", "Paciente ya registrado.");
                 rd = request.getRequestDispatcher("SignUp.jsp");
                 rd.forward(request, response); 
 			}
-			if(pac.getDni()!=null) //si el paciente esta en los reg
-			{
+			if(pacNeg.existe("where DNIPaciente='"+pac.getDni()+"'")) {
+				
 				nUser.setDNI(request.getParameter("txtDNISU"));
 				nUser.setEmail(request.getParameter("txtEmailSU"));
 				nUser.setUsuario(request.getParameter("txtUserSU"));
 				nUser.setContrasenia(request.getParameter("txtPassSU"));
-				nUser.setTipo("pac");
+				nUser.setTipo("Paciente");
 				nUser.setEstado(true);
 				
 				if(userNeg.insertar(nUser))
@@ -264,17 +270,18 @@ public class ServletUsuarios extends HttpServlet {
 				}
 				else
 				{
-					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo más tarde.");
+					request.setAttribute("errorMessage3", "Usuario no pudo registrarse, intentelo denuevo mas tarde.");
 	                rd = request.getRequestDispatcher("SignUp.jsp");
 	                rd.forward(request, response);
-				}
-			}
-			else
-			{
-				request.setAttribute("errorMessage2", "DNI no pertenece a un paciente.");
-                rd = request.getRequestDispatcher("SignUp.jsp");
+				}		
+				
+			}else{
+				request.setAttribute("errorMessage1", "DNI no pertenece a un paciente.");
+				
+				rd = request.getRequestDispatcher("SignUp.jsp");
                 rd.forward(request, response); 
 			}
+			
 			
 		}
 		if(request.getParameter("btnActualizarDatPac-1")!=null) {
@@ -324,7 +331,7 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MedCambiarPass.jsp");
 			dispatcher.forward(request, response);
 		}
-		//cambiar contraseña
+		//cambiar contrasenia
 		if(request.getParameter("btnActualizarPass")!=null) {
 			String passVieja= request.getParameter("txtPassVieja");
 			String passNueva1= request.getParameter("txtPassNueva1");
@@ -334,8 +341,14 @@ public class ServletUsuarios extends HttpServlet {
 			String sql="UPDATE usuarios SET ContraseniaUser='"+passNueva1+"' WHERE NombreUser='"+user.getUsuario()+"'";
 			
 			
+			if(passVieja.trim().isEmpty() || passNueva1.trim().isEmpty() || passNueva2.trim().isEmpty()) {
+				request.setAttribute("errorMessage1", "Complete los campos.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
+				dispatcher.forward(request, response);
+			}
+			
 			if(user.getContrasenia().equals(passVieja)==false) {
-				request.setAttribute("errorMessage1", "Contraseña actual incorrecta");
+				request.setAttribute("errorMessage1", "Contrase�a actual incorrecta");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserCambiarPass.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -398,7 +411,6 @@ public class ServletUsuarios extends HttpServlet {
 		
 		if(Validar(user,request,response)) return null;
 		
-		//no se para que usan esto pero por ahi hay que actualizarlo
 		if(request.getParameter("Tipo").equals("med")) user.setTipo("Medico");
 		else if (request.getParameter("Tipo").equals("pac")) user.setTipo("Paciente");
 		else if (request.getParameter("Tipo").equals("adm")) user.setTipo("Administrador");

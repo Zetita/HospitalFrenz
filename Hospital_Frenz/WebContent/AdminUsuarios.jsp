@@ -161,7 +161,7 @@
 	<br>
 	<br>
 	
-	<label class=lbl2>CONTRASEÑA DEL USUARIOS:</label>
+	<label class=lbl2>CONTRASEёA DEL USUARIO:</label>
 	&nbsp;
 	<input type="password" style="position:relative;left:1.5%" name="txtContrasenia">
 	

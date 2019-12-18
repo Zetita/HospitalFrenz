@@ -27,7 +27,10 @@ public class PacienteNegImpl implements PacienteNeg {
 	public Paciente obtenerUno(String dni) {
 		return pacDao.obtenerUno(dni);
 	}
-
+	@Override
+	public boolean existe(String consulta) {
+		return pacDao.existe(consulta);
+	}
 	@Override
 	public boolean insertar(Paciente pac) {
 		return pacDao.insertar(pac);

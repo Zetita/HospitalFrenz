@@ -89,7 +89,34 @@ public class ServletPacientes extends HttpServlet {
 		if(request.getParameter("btnAgregarPac")!=null) 
 		{
 			Paciente Pac=LlenarPac(request,response);
+			Paciente pacExistente;
 			PacienteNeg pacNeg=new PacienteNegImpl();
+			pacExistente=pacNeg.obtenerUno(Pac.getDni());
+			
+			if(Pac.getDni().trim().isEmpty()|| Pac.getNombre().trim().isEmpty() || Pac.getApellido().trim().isEmpty() || 
+					Pac.getDireccion().trim().isEmpty() || Pac.getTelefono().trim().isEmpty()) {
+				request.setAttribute("errorMessage", "Complete los campos solicitados.");
+				
+				CargarListas(request,response);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
+				dispatcher.forward(request, response);
+			}
+			
+			if(pacNeg.existe("where DNIPaciente='"+Pac.getDni().trim()+"'")) {
+				request.setAttribute("errorMessage", "DNI ya esta registrado.");
+				
+				CargarListas(request,response);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
+				dispatcher.forward(request, response);
+			}
+			/*if(pacNeg.existe("where Telefono='"+Pac.getDni().trim()+"'")) {
+				request.setAttribute("errorMessage", "Telefono ya esta registrado.");
+				
+				CargarListas(request,response);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
+				dispatcher.forward(request, response);
+			}*/
+			
 			pacNeg.insertar(Pac);
 			CargarListas(request,response);
 			

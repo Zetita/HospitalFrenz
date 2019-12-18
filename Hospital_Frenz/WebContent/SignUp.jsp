@@ -24,7 +24,7 @@
                 <input type="text" placeholder="12345678" name="txtDNISU" value="" required>
             </div>
             <span style="color:red"><%=(request.getAttribute("errorMessage2") == null) ? ""
- : request.getAttribute("errorMessage2")%></span>
+ : request.getAttribute("errorMessage1")%></span>
             <div class="textbox">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <input type="email" placeholder="email@email.com" name="txtEmailSU" value=""  required>
@@ -38,7 +38,8 @@
                 <i class="fa fa-lock" aria-hidden="true"></i>
                 <input type="password" placeholder="contraseña" name="txtPassSU" value="" required>
             </div>
-
+ <span style="color:red"><%=(request.getAttribute("errorMessage2") == null) ? ""
+ : request.getAttribute("errorMessage2")%></span>
             <input type="submit" class="btn" name="btnAceptarSU" value="Aceptar">
             </form>
             <span style="color:green"><%=(request.getAttribute("bienMessage") == null) ? ""
