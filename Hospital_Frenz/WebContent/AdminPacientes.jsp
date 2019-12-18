@@ -146,11 +146,13 @@
     <label style="display:inline-block; width:160px;"> DNI: </label>
 
 	<%if(request.getAttribute("DNI")!=null) 
-	{%><input name="txtDNI" type="text" placeholder="11.111.111" value=<%=request.getAttribute("DNI") %> required>
+	{%><input name="txtDNI" type="text" placeholder="11.111.111" value=<%=request.getAttribute("DNI") %> required  
+	onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode==46) || (event.charCode==09)">
 		<%}
 	else{
 	%>
-	<input name="txtDNI" type="text" placeholder="11.111.111" required>
+	<input name="txtDNI" type="text" placeholder="11.111.111" required onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode==46)
+	|| (event.charCode==09)">
 	<%
 	}%>
 	
@@ -161,11 +163,15 @@
 
 	<%if(request.getAttribute("Nombre")!=null) 
 	{%>
-    <input name="txtNombre" type="text" placeholder="Nombre" value="<%=request.getAttribute("Nombre")%>" required>
+    <input name="txtNombre" type="text" placeholder="Nombre" value="<%=request.getAttribute("Nombre")%>" required onkeypress="return (event.charCode > 64 && 
+	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode==09) ||(event.charCode>191 && event.charCode<215) 
+	|| (event.charCode>216 && event.charCode<247) || (event.charCode>248 && event.charCode<256)">
 	<%}
 	else{
 	%>
-	<input name="txtNombre" type="text" placeholder="Nombre" required>
+	<input name="txtNombre" type="text" placeholder="Nombre" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && 
+	event.charCode < 123) || (event.charCode==32) || (event.charCode==32) || (event.charCode==09) ||(event.charCode>191 && event.charCode<215) 
+	|| (event.charCode>216 && event.charCode<247) || (event.charCode>248 && event.charCode<256)">
 	<%
 	}%>
 	
@@ -178,11 +184,15 @@
 
 	<%if(request.getAttribute("Apellido")!=null) 
 	{%>
-    <input name="txtApellido" type="text" placeholder="Apellido"  value="<%=request.getAttribute("Apellido")%>" required>
+    <input name="txtApellido" type="text" placeholder="Apellido"  value="<%=request.getAttribute("Apellido")%>" required onkeypress="return (event.charCode > 64 && 
+	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)|| (event.charCode==09) ||(event.charCode>191 && event.charCode<215) 
+	|| (event.charCode>216 && event.charCode<247) || (event.charCode>248 && event.charCode<256)">
 	<%}
 	else{
 	%>
-	<input name="txtApellido" type="text" placeholder="Apellido" required>
+	<input name="txtApellido" type="text" placeholder="Apellido" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && 
+	event.charCode < 123) || (event.charCode==32) || (event.charCode==09) ||(event.charCode>191 && event.charCode<215) 
+	|| (event.charCode>216 && event.charCode<247) || (event.charCode>248 && event.charCode<256)"">
 	<%
 	}%>
 	
@@ -281,11 +291,13 @@
 
 	<%if(request.getAttribute("Telefono")!=null) 
 	{%>
-    <input name="txtTelefono" type="phone" placeholder="11-0000-0000" value="<%=request.getAttribute("Telefono")%>" required>
+    <input name="txtTelefono" type="phone" placeholder="11-0000-0000" value="<%=request.getAttribute("Telefono")%>" required
+    onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode==45)">
 	<%}
 	else{
 	%>
-	<input name="txtTelefono" type="phone" placeholder="11-0000-0000" required>
+	<input name="txtTelefono" type="phone" placeholder="11-0000-0000" required
+	onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode==45)">
 	<%
 	}%>
 	<br>
