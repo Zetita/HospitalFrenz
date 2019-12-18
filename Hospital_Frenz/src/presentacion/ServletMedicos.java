@@ -75,6 +75,8 @@ public class ServletMedicos extends HttpServlet {
 			Medico med=LlenarMed(request,response);
 			MedicoNeg medNeg=new MedicoNegImpl();
 			
+			
+			
 			medNeg.insertar(med);
 			
 			List<Medico> lst=new ArrayList<Medico>();
@@ -82,6 +84,8 @@ public class ServletMedicos extends HttpServlet {
 			lst=medNeg.listarMedicos();
 			
 			request.setAttribute("ListaMed", lst);
+			
+			CargarDDL(request,response);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminMedicos.jsp");	
 			dispatcher.forward(request, response);
