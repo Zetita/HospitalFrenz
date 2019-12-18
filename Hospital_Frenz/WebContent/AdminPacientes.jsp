@@ -27,6 +27,17 @@
 <br>
 <br>
 <br>
+	
+	<% if(request.getAttribute("Mensaje")!=null){
+	%>
+	<script type="text/javascript">
+		alert("<%=request.getAttribute("Mensaje")%>")
+	</script>
+	<%
+	request.setAttribute("Mensaje",null);
+	}
+	%>
+	
 <%
 	List<Cobertura> lst3=new ArrayList<Cobertura>();
 
@@ -90,7 +101,7 @@
 				<th>Nombre</th>
 				<th>Apellido</th>
 				<th>Direccion</th>
-				<th>Teléfono</th>
+				<th>TelÃ©fono</th>
 				<th>Fecha de Nacimiento</th>
 				<th>Cobertura</th>
 				<th>Localidad</th>
