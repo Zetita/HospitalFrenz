@@ -27,7 +27,15 @@
 <br>
 <br>
 <br>
+<%
+	List<Cobertura> lst3=new ArrayList<Cobertura>();
 
+	if(request.getAttribute("ListaCoberturas")!=null)
+	{
+	  lst3=(ArrayList<Cobertura>)request.getAttribute("ListaCoberturas");
+	}
+
+%>
 <div class="mitad1" style="width:56%">
 
 <br>	
@@ -66,7 +74,10 @@
 				</td>
 			</tr>
 		</table>
-		
+		<form method="post" action="ServletPacientes">
+		<input type="Hidden" id="hdnConsulta" name="hdnConsulta"/>
+		<input type="submit" id="btnFiltrar" name="btnFiltrar" style="width:94%" value="Filtrar" onclick="ObtenerFiltro('tbFiltroPac')">
+	</form>
 		<br>
 		<br>
 
@@ -100,13 +111,13 @@
 			  for(int i=0;i<lst4.size();i++){
 				  try{
 				  %>
-				  <form method="post" action="ServletMedicos?Indice=<%=indice%>">
+				  <form method="post" action="ServletPacientes?Indice=<%=indice%>">
 				  	<tr>
 				  		<td>
 				  		<input type="hidden" id="hdnConsulta[<%=indice %>]" name="hdnConsulta[<%=indice %>]">
-				  		<input type="button" id="btnModificar[<%=indice %>]" name="btnModificar[<%=indice %>]" style="font-size:10px" value="Modificar">
+				  		<input type="button" id="btnModificar[<%=indice %>]" name="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbPacientes')" value="Modificar">
 				  		</td>
-				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" value="Eliminar"></td>
+				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" onclick="ObtenerEliminar(this,'tbPacientes')" value="Eliminar"></td>
 				  		<td><label id="lblDNI[<%=indice%>]" style="font-size:10px"><%=lst4.get(i).getDni()%></label></td>
 				  		<td><label id="lblNombre[<%=indice%>]" style="font-size:10px"><%=lst4.get(i).getNombre()%></label></td>
 				  		<td><label id="lblApellido[<%=indice%>]" style="font-size:10px"><%=lst4.get(i).getApellido()%></label></td>
@@ -320,7 +331,6 @@
 
 	<select name="ddlCobertura" required>
 	<%
-		List<Cobertura> lst3=new ArrayList<Cobertura>();
 
 			  if(request.getAttribute("ListaCoberturas")!=null)
 			  {

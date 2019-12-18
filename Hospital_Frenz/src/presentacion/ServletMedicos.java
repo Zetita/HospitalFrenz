@@ -112,7 +112,8 @@ public class ServletMedicos extends HttpServlet {
 			
 			List<Localidad> lst=new ArrayList<Localidad>();
 			
-			lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
+			//comento porque se rompe
+			//lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
 			
 			request.setAttribute("ListaLocalidades", lst);
 			

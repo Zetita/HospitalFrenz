@@ -16,6 +16,7 @@ import entidad.Cobertura;
 import entidad.Localidad;
 import entidad.Paciente;
 import entidad.Provincia;
+import entidad.Usuario;
 import negocio.CoberturaNeg;
 import negocio.LocalidadNeg;
 import negocio.PacienteNeg;
@@ -86,6 +87,35 @@ public class ServletPacientes extends HttpServlet {
 		HttpSession sesionIniciada=request.getSession();
 		UsuarioNeg userNeg = new UsuarioNegImpl();
 		
+		if(request.getParameter("Indice")!=null){
+			
+			RequestDispatcher dispatcher = null;
+			String Indice=request.getParameter("Indice");
+			
+			if(!request.getParameter("hdnConsulta["+Indice+"]").equals(null)){
+				String Consulta=request.getParameter("hdnConsulta["+Indice+"]");
+				System.out.println(Consulta);
+
+				/*if(request.getParameter("btnModificar["+Indice+"]")!=null){
+					userNeg = new UsuarioNegImpl();
+					
+					List<Usuario> lst=new ArrayList<Usuario>();
+					userNeg.editar(Consulta);
+					lst=userNeg.listarUsuarios();
+					request.setAttribute("ListaPacientes", lst);
+
+				}
+				else */if(request.getParameter("btnEliminar["+Indice+"]")!=null){
+	
+					negPac.borrar(Consulta);
+					CargarListas(request, response);
+
+				}
+			}
+			dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
+			dispatcher.forward(request, response);
+				
+		}
 		if(request.getParameter("btnAgregarPac")!=null) 
 		{
 			Paciente Pac=LlenarPac(request,response);

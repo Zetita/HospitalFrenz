@@ -10,5 +10,6 @@ public interface PacienteNeg {
 	public boolean existe(String consulta);
 	public boolean insertar(Paciente pac);
 	public boolean editar(Paciente pac);
+	public boolean editar(String Consulta);
 	public boolean borrar(String dni);
 }

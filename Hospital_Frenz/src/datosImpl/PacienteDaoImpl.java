@@ -201,12 +201,34 @@ public class PacienteDaoImpl implements PacienteDao {
 		return estado;
 	}
 	@Override
+	public boolean editar(String Consulta) {
+		boolean estado=true;
+
+		cn = new Conexion();
+		cn.Open();	
+
+		try
+		 {
+			estado=cn.execute(Consulta);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+	}
+	@Override
 	public boolean borrar(String dni) {
 		
 		boolean estado=true;
 		cn = new Conexion();
 		cn.Open();		 
 		String query = "UPDATE pacientes SET EstadoPaciente=0 WHERE DNIPaciente='"+dni+"'";
+		System.out.println(query);
 		try
 		 {
 			estado=cn.execute(query);

@@ -40,7 +40,10 @@ public class PacienteNegImpl implements PacienteNeg {
 	public boolean editar(Paciente pac) {
 		return pacDao.editar(pac);
 	}
-
+	@Override
+	public boolean editar(String Consulta) {
+		return pacDao.editar(Consulta);
+	}
 	@Override
 	public boolean borrar(String dni) {
 		return pacDao.borrar(dni);
