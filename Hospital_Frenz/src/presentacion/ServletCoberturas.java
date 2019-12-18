@@ -127,8 +127,8 @@ public class ServletCoberturas extends HttpServlet {
 
 	public boolean Validar(Cobertura cob,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		if(!cob.getNombre().trim().equals("")){
-			if(!cob.getTipo().trim().equals("")){
+		if(!cob.getNombre().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( cob.getNombre() ).find()){
+			if(!cob.getTipo().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( cob.getTipo() ).find()){
 				if(cob.getCosto()>0){
 					if(!cob.getDescripcion().trim().equals(""){
 						request.setAttribute("Mensaje","Cobertura creada correctamente.");

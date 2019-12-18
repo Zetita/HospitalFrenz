@@ -203,12 +203,12 @@ public class ServletMedicos extends HttpServlet {
 	
 	public boolean Validar(Medico med, Localidad loc, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
-		if(!med.getDni().trim().equals("")&&!med.getDni().contains(" ")){
-			if(!med.getMatricula().trim().equals("")&&!med.getDni().contains(" ")){
-				if(!med.getNombre().trim().equals("")){
-					if(!med.getApellido().trim().equals("")){
+		if(!med.getDni().trim().equals("")&&!med.getDni().contains(" ")&&Comprobar(med.getDni())){
+			if(!med.getMatricula().trim().equals("")&&!med.getDni().contains(" ")&&Comprobar(med.getMatricula())){
+				if(!med.getNombre().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( med.getNombre() ).find()){
+					if(!med.getApellido().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( med.getApellido() ).find()){
 						if(!med.getDireccion().trim().equals("")){
-							if(!med.getTelefono().trim().equals("")&&!med.getTelefono().contains(" ")){
+							if(!med.getTelefono().trim().equals("")&&!med.getTelefono().contains(" ")&&Comprobar(med.getTelefono())){
 								if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
 									request.setAttribute("Mensaje","Médico agregado correctamente.");
 									return false;
@@ -264,5 +264,15 @@ public class ServletMedicos extends HttpServlet {
 			request.setAttribute("Mensaje","Especialidad de Especialidad por Médico Incorrecto.");
 			return true;
 		}
+	}
+	
+	public boolean Comprobar(String Cadena)
+	{
+		for(int i=0;i<Cadena.length();i++){
+			if (!Character.isDigit(Cadena.charAt(i)))
+				return false;
+			}
+		}
+		return true;
 	}
 }

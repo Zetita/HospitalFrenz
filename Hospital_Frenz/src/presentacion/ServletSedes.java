@@ -170,7 +170,7 @@ public class ServletSedes extends HttpServlet {
 		sede.setDireccion(request.getParameter("txtDireccion"));
 		sede.setLocalidad(LlenarLocalidad(request,response));
 		
-		if(!sede.getNombre().trim().equals("")){
+		if(!sede.getNombre().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( sede.getNombre() ).find()){
 			if(!sede.getDireccion().trim().equals("")){
 				if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
 					request.setAttribute("Mensaje","Sede agregada correctamente.");
@@ -191,4 +191,6 @@ public class ServletSedes extends HttpServlet {
 			return true;
 		}
 	}
+	
+	
 }

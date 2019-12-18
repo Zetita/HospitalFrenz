@@ -83,7 +83,7 @@ public class ServletEspecialidades extends HttpServlet {
 	}
 	
 	public boolean Validar(Especialidad esp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!esp.getDescripcion().trim().equal("")){
+		if(!esp.getDescripcion().trim().equal("")&&!Pattern.compile( "[0-9]" ).matcher( esp.getDescripcion() ).find()){
 			request.setAttribute("Mensaje","Especialidad agregada correctamente.");
 			return false;
 		}
