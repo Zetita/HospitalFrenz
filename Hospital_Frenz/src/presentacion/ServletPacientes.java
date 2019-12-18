@@ -123,6 +123,8 @@ public class ServletPacientes extends HttpServlet {
 			PacienteNeg pacNeg=new PacienteNegImpl();
 			pacExistente=pacNeg.obtenerUno(Pac.getDni());
 			
+			if(Pac!=null){
+			
 			if(Pac.getDni().trim().isEmpty()|| Pac.getNombre().trim().isEmpty() || Pac.getApellido().trim().isEmpty() || 
 					Pac.getDireccion().trim().isEmpty() || Pac.getTelefono().trim().isEmpty()) {
 				request.setAttribute("errorMessage", "Complete los campos solicitados.");
@@ -149,6 +151,8 @@ public class ServletPacientes extends HttpServlet {
 			
 			
 			pacNeg.insertar(Pac);
+				
+			}
 			CargarListas(request,response);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
@@ -215,6 +219,8 @@ public class ServletPacientes extends HttpServlet {
 		Pac.setCobertura(cob);
 		Pac.setLocalidad(loc);
 		
+		if(Validar(Pac,request,response)==true) return null;
+		
 		return Pac;
 	}
 	
@@ -264,4 +270,65 @@ public class ServletPacientes extends HttpServlet {
 		request.setAttribute("Cobertura",(request.getParameter("ddlCoberturas")));
 	}
 	
+	public boolean Validar(Paciente pac,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		Pac.setDni(request.getParameter("txtDNI"));
+		Pac.setNombre(request.getParameter("txtNombre"));
+		Pac.setApellido(request.getParameter("txtApellido"));
+		Pac.setDireccion(request.getParameter("txtDireccion"));
+		Pac.setTelefono(request.getParameter("txtTelefono"));
+		Pac.setFecha(request.getParameter("txtFechaNac"));
+		
+		if(!Pac.getDni().trim().equals("")&&!Pac.getDni().contains(" ")){
+			if(!Pac.getNombre().trim().equals("")){
+				if(!Pac.getApellido().trim().equals("")){
+					if(!Pac.getDireccion().trim().equals("")){
+						if(!Pac.getTelefono().trim().equals("")&&!Pac.getTelefono().contains(" ")){
+							if(!Pac.getFecha().trim().equals("")&&!Pac.getFecha().contains(" ")){
+								if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
+									if(!request.getParameter("ddlCobertura").equals("")&&request.getParameter("ddlCobertura")!=null){
+										request.setAttribute("Mensaje","Paciente agregado correctamente.");
+										return false;
+									}
+									else{
+										request.setAttribute("Mensaje","Cobertura del paciente incorrecta.");
+										return true;
+									}
+								}
+								else{
+									request.setAttribute("Mensaje","Localidad del paciente incorrecta.");
+									return true;
+								}
+							}
+							else{
+								request.setAttribute("Mensaje","Fecha de Nacimiento del paciente incorrecta.");
+								return true;
+							}
+						}
+						else{
+							request.setAttribute("Mensaje","Teléfono del paciente incorrecto.");
+							return true;
+						}
+					}
+					else{
+						request.setAttribute("Mensaje","Dirección del paciente incorrecta.");
+						return true;
+					}
+				}
+				else{
+					request.setAttribute("Mensaje","Apellido del paciente incorrecto.");
+					return true;
+				}
+			}
+			else{
+				request.setAttribute("Mensaje","Nombre del paciente incorrecto.");
+				return true;
+			}
+		}
+		else{
+			request.setAttribute("Mensaje","DNI del paciente incorrecto.");
+			return true;
+		}
+	}
+	
+}
 }
