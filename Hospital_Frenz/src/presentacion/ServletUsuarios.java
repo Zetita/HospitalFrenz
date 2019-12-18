@@ -162,7 +162,7 @@ public class ServletUsuarios extends HttpServlet {
 			List<Usuario> lst=new ArrayList<Usuario>();
 			
 			if(user!=null){
-			
+				
 				userNeg.insertar(user);
 			}
 			
@@ -425,6 +425,7 @@ public class ServletUsuarios extends HttpServlet {
 			if(!user.getEmail().trim().equals("")&&!user.getEmail().contains(" ")){
 				if(!user.getContrasenia().trim().equals("")&&!user.getContrasenia().contains(" ")){
 					if(Integer.parseInt(user.getDNI())>0){
+						request.setAttribute("Mensaje","Usuario ingresado correctamente.");
 						return false;
 					}
 					else{

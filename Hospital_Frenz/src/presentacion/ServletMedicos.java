@@ -76,8 +76,7 @@ public class ServletMedicos extends HttpServlet {
 			MedicoNeg medNeg=new MedicoNegImpl();
 			
 			
-			
-			medNeg.insertar(med);
+			if(med!=null) medNeg.insertar(med);
 			
 			List<Medico> lst=new ArrayList<Medico>();
 			
@@ -94,7 +93,7 @@ public class ServletMedicos extends HttpServlet {
 			EspxMed espxmed=LlenarEspxMed(request,response);
 			EspxMedNeg espxmedNeg=new EspxMedNegImpl();
 			
-			espxmedNeg.insertar(espxmed);
+			if(espxmed!=null) espxmedNeg.insertar(espxmed);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminMedicos.jsp");	
 			dispatcher.forward(request, response);
@@ -112,8 +111,7 @@ public class ServletMedicos extends HttpServlet {
 			
 			List<Localidad> lst=new ArrayList<Localidad>();
 			
-			//comento porque se rompe
-			//lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
+			lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
 			
 			request.setAttribute("ListaLocalidades", lst);
 			
@@ -134,6 +132,8 @@ public class ServletMedicos extends HttpServlet {
 		med.setTelefono(request.getParameter("txtTelefono"));
 		med.setLocalidad(loc);
 		
+		if(Validar(med,loc,request,response)==true) return null;
+		
 		return med;
 	}
 	
@@ -142,6 +142,9 @@ public class ServletMedicos extends HttpServlet {
 		espxmed.setEstado(1);
 		espxmed.setIDEsp(Integer.parseInt(request.getParameter("ddlEspecialidad")));
 		espxmed.setMatriculaMed(request.getParameter("ddlMedico"));
+		
+		if(Validar2(espxmed,request,response)==true) return null;
+		
 		return espxmed;
 	}
 
@@ -196,5 +199,70 @@ public class ServletMedicos extends HttpServlet {
 		request.setAttribute("Direccion",(request.getParameter("txtDireccion")));
 		request.setAttribute("Telefono",(request.getParameter("txtTelefono")));
 		request.setAttribute("Provincia", request.getParameter("ddlProvincia"));
+	}
+	
+	public boolean Validar(Medico med, Localidad loc, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		if(!med.getDni().trim().equals("")&&!med.getDni().contains(" ")){
+			if(!med.getMatricula().trim().equals("")&&!med.getDni().contains(" ")){
+				if(!med.getNombre().trim().equals("")){
+					if(!med.getApellido().trim().equals("")){
+						if(!med.getDireccion().trim().equals("")){
+							if(!med.getTelefono().trim().equals("")&&!med.getTelefono().contains(" ")){
+								if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
+									request.setAttribute("Mensaje","Médico agregado correctamente.");
+									return false;
+								}
+								else{
+									request.setAttribute("Mensaje","Localidad de Médico Incorrecta.");
+									return true;
+								}
+							}
+							else{
+								request.setAttribute("Mensaje","Teléfono de Médico Incorrecta.");
+								return true;
+							}
+						}
+						else{
+							request.setAttribute("Mensaje","Dirección de Médico Incorrecta.");
+							return true;
+						}
+					}
+					else{
+						request.setAttribute("Mensaje","Apellido de Médico Incorrecta.");
+						return true;
+					}
+				}
+				else{
+					request.setAttribute("Mensaje","Nombre de Médico Incorrecta.");
+					return true;
+				}
+			}
+			else{
+				request.setAttribute("Mensaje","Matricula de Médico Incorrecta.");
+				return true;
+			}
+		}
+		else{
+			request.setAttribute("Mensaje","DNI de Médico Incorrecto.");
+			return true;
+		}
+	}
+	
+	public boolean Validar2(EspxMed espxmed, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		if(espxmed.getIDEsp()>0&&espxmed.getIDEsp()!=null){
+			if(!espxmed.getMatMed().trim().equals("")&&!espxmed.getMatMed().contains(" ")){
+				request.setAttribute("Mensaje","Especialidad por Médico agregada.");
+				return false;
+			}
+			else{
+				request.setAttribute("Mensaje","Médico de Especialidad por Médico Incorrecto.");
+				return true;
+			}
+		}
+		else{
+			request.setAttribute("Mensaje","Especialidad de Especialidad por Médico Incorrecto.");
+			return true;
+		}
 	}
 }

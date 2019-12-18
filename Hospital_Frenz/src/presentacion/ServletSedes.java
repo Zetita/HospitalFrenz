@@ -88,7 +88,7 @@ public class ServletSedes extends HttpServlet {
 			Sede sede=LlenarSede(request,response);
 			SedeNeg sedNeg=new SedeNegImpl();
 			
-			sedNeg.insertar(sede);
+			if(sede!=null)	sedNeg.insertar(sede);
 			
 			CargarListas(request,response);
 			
@@ -125,12 +125,14 @@ public class ServletSedes extends HttpServlet {
 	
 	public Sede LlenarSede(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Sede sede=new Sede();
-		System.out.println(request.getParameter("txtID"));
+
 		sede.setId(Integer.parseInt(request.getParameter("txtID")));
 		sede.setNombre(request.getParameter("txtNombre"));
 		sede.setDireccion(request.getParameter("txtDireccion"));
 		sede.setLocalidad(LlenarLocalidad(request,response));
 		sede.setEstado(1);
+		
+		if(Validar(sede,request,response)==true) return null;
 		
 		return sede;
 	}
@@ -160,5 +162,33 @@ public class ServletSedes extends HttpServlet {
 		request.setAttribute("Nombre",(request.getParameter("txtNombre")));
 		request.setAttribute("Direccion",(request.getParameter("txtDireccion")));
 		request.setAttribute("Provincia", request.getParameter("ddlProvincia"));
+	}
+	
+	public boolean Validar(Sede sede,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		sede.setId(Integer.parseInt(request.getParameter("txtID")));
+		sede.setNombre(request.getParameter("txtNombre"));
+		sede.setDireccion(request.getParameter("txtDireccion"));
+		sede.setLocalidad(LlenarLocalidad(request,response));
+		
+		if(!sede.getNombre().trim().equals("")){
+			if(!sede.getDireccion().trim().equals("")){
+				if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
+					request.setAttribute("Mensaje","Sede agregada correctamente.");
+					return false;
+				}
+				else{
+					request.setAttribute("Mensaje","Localidad de la Sede incorrecto.");
+					return true;
+				}
+			}
+			else{
+				request.setAttribute("Mensaje","Dirección de la Sede incorrecto.");
+				return true;
+			}
+		}
+		else{
+			request.setAttribute("Mensaje","Nombre de la Sede incorrecto.");
+			return true;
+		}
 	}
 }

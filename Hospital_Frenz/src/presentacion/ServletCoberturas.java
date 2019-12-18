@@ -70,8 +70,11 @@ public class ServletCoberturas extends HttpServlet {
 		if(request.getParameter("btnAgregarCob")!=null) {
 			Cobertura cob=LlenarCobertura(request,response);
 			CoberturaNeg cobNeg=new CoberturaNegImpl();
-			cobNeg.insertar(cob);
 			
+			if(cob!=null){
+				
+				cobNeg.insertar(cob);
+			}
 			CargarListas(request,response);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminCoberturas.jsp");
@@ -108,6 +111,9 @@ public class ServletCoberturas extends HttpServlet {
 		cob.setTipo(request.getParameter("txtTipoCobertura"));
 		cob.setCosto(Double.parseDouble(request.getParameter("txtCostoCobertura")));
 		cob.setDescripcion(request.getParameter("txtDescCobertura"));
+		
+		if(Validar(cob,request,response)==true) return null;
+		
 		return cob;
 	}
 	
@@ -119,4 +125,33 @@ public class ServletCoberturas extends HttpServlet {
 		request.setAttribute("CantCoberturas", lst.size());
 	}
 
+	public boolean Validar(Cobertura cob,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		if(!cob.getNombre().trim().equals("")){
+			if(!cob.getTipo().trim().equals("")){
+				if(cob.getCosto()>0){
+					if(!cob.getDescripcion().trim().equals(""){
+						request.setAttribute("Mensaje","Cobertura creada correctamente.");
+						return false;
+					}
+					else{
+						request.setAttribute("Mensaje","Descripcion de cobertura incorrecto.");
+						return true;
+					}
+				}
+				else{
+					request.setAttribute("Mensaje","Costo de cobertura incorrecto.");
+					return true;
+				}
+			}
+			else{
+				request.setAttribute("Mensaje","Tipo de cobertura incorrecto.");
+				return true;
+			}
+		}
+		else{
+			request.setAttribute("Mensaje","Nombre de cobertura incorrecto.");
+			return true;
+		}
+	}
 }

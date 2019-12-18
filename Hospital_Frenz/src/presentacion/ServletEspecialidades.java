@@ -52,7 +52,7 @@ public class ServletEspecialidades extends HttpServlet {
 			Especialidad esp=LlenarEspecialidad(request,response);
 			EspecialidadNeg espNeg=new EspecialidadNegImpl();
 			
-			espNeg.insertar(esp);
+			if(esp!=null) espNeg.insertar(esp);
 			
 			CargarListas(request,response);
 			
@@ -66,6 +66,9 @@ public class ServletEspecialidades extends HttpServlet {
 		esp.setId(Integer.parseInt(request.getParameter("txtIDEsp")));
 		esp.setDescripcion(request.getParameter("txtDescEsp"));
 		esp.setEstado(1);
+		
+		if(Validar(esp,request,response)==true) return null;
+		
 		return esp;
 	}
 	
@@ -78,5 +81,16 @@ public class ServletEspecialidades extends HttpServlet {
 		request.setAttribute("CantEspecialidades", lst.size());
 		request.setAttribute("ListaEspecialidades", lst);
 	}
-
+	
+	public boolean Validar(Especialidad esp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!esp.getDescripcion().trim().equal("")){
+			request.setAttribute("Mensaje","Especialidad agregada correctamente.");
+			return false;
+		}
+		else{
+			request.setAttribute("Mensaje","Descripcion de Especialidad incorrecta.");
+			return true;
+		}
+	}
+	
 }
