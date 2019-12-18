@@ -9,6 +9,7 @@ import entidad.Usuario;
 public interface UsuarioNeg {
 	public ArrayList<Usuario> listarUsuarios();
 	public ArrayList<Usuario> listarUsuarios(String Consulta);
+	public String obtenerTipo(String dni);
 	public Usuario obtenerUsuario(String dni);
 	public Usuario obtenerUsuarioUser(String usuario);
 	public boolean borrar(String dni);

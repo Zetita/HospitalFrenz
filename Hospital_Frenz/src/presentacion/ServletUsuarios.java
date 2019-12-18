@@ -403,6 +403,8 @@ public class ServletUsuarios extends HttpServlet {
 	public Usuario LlenarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Usuario user=new Usuario();
+		UsuarioNeg userNeg=new UsuarioNegImpl();
+		
 		user.setUsuario(request.getParameter("txtNombre"));
 		user.setEmail(request.getParameter("txtEmail"));
 		user.setContrasenia(request.getParameter("txtContrasenia"));
@@ -411,18 +413,17 @@ public class ServletUsuarios extends HttpServlet {
 		
 		if(Validar(user,request,response)) return null;
 		
-		if(request.getParameter("Tipo").equals("med")) user.setTipo("Medico");
-		else if (request.getParameter("Tipo").equals("pac")) user.setTipo("Paciente");
-		else if (request.getParameter("Tipo").equals("adm")) user.setTipo("Administrador");
-		
+		 user.setTipo(userNeg.obtenerTipo(user.getDNI()));
+		 
 		return user;
 	}
 	
 	public boolean Validar(Usuario user,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(!user.getUsuario().trim().equals("")&&!user.getUsuario().contains("")){
-			if(!user.getEmail().trim().equals("")&&!user.getEmail().contains("")){
-				if(!user.getContrasenia().trim().equals("")&&!user.getContrasenia().contains("")){
+
+		if(!user.getUsuario().trim().equals("")&&!user.getUsuario().contains(" ")){
+			if(!user.getEmail().trim().equals("")&&!user.getEmail().contains(" ")){
+				if(!user.getContrasenia().trim().equals("")&&!user.getContrasenia().contains(" ")){
 					if(Integer.parseInt(user.getDNI())>0){
 						return false;
 					}

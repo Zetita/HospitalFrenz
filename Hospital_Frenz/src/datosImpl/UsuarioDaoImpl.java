@@ -82,6 +82,32 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	}
 	
 	@Override
+	public String obtenerTipo(String dni) {
+		cn = new Conexion();
+		cn.Open();
+
+		String Tipo="";
+		
+		try 
+		{
+			ResultSet rs= cn.query("SELECT IF ((SELECT COUNT(DNIPaciente) FROM PACIENTES WHERE DNIPACIENTE LIKE '"+dni+"')>0,\"Paciente\",\r\n" + 
+					"	IF ((SELECT COUNT(DNIMed) FROM Medicos WHERE DNIMed LIKE '"+dni+"')>0,\"Medico\",\"Administrador\")) as Tipo");
+			rs.next();
+			Tipo=rs.getString("Tipo");
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return Tipo;
+	}
+	
+	@Override
 	public Usuario obtenerUna(String dni) {
 		cn = new Conexion();
 		cn.Open();

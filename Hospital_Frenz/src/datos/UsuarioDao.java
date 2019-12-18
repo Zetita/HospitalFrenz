@@ -9,6 +9,7 @@ import entidad.Usuario;
 public interface UsuarioDao {
 	public List<Usuario> obtenerTodas();
 	public List<Usuario> obtenerTodas(String Consulta);
+	public String obtenerTipo(String dni);
 	public Usuario obtenerUna(String dni);
 	public Usuario obtenerUnoUser(String usuario);
 	public boolean eliminar(String dni);

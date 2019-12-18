@@ -135,7 +135,7 @@ public class MedicoDaoImpl implements MedicoDao {
 		cn.Open();
 		
 		String query = "INSERT INTO medicos (DNIMed, MatriculaMed, NombreMed, ApellidosMed, DireccionMed, IDLocalidad," + 
-				" TelefonoMed, EstadoMed) VALUES ('"+med.getDni()+"', '"+med.getMatricula()+"'s, '"+med.getNombre()+"', '"+
+				" TelefonoMed, EstadoMed) VALUES ('"+med.getDni()+"', '"+med.getMatricula()+"', '"+med.getNombre()+"', '"+
 				med.getApellido()+"', '"+med.getDireccion()+"', "+med.getLocalidad().getId()+", '"+med.getTelefono()
 				+"', "+med.getEstado()+")";
 		try

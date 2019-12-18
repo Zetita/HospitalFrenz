@@ -33,6 +33,11 @@ public class UsuarioNegImpl implements UsuarioNeg{
 	}
 
 	@Override
+	public String obtenerTipo(String dni) {
+		return userDao.obtenerTipo(dni);
+	}
+	
+	@Override
 	public Usuario obtenerUsuario(String dni) {
 		return userDao.obtenerUna(dni);
 	}
