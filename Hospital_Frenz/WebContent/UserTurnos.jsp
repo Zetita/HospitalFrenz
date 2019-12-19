@@ -8,11 +8,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script type="text/javascript" src="javascript/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="DataTables/datatables.min.js"></script>
-<script type="text/javascript" src="javascript/IniciarTablas.js"></script>
 <jsp:include page="Master_User.html" />
 <link rel="stylesheet" href="css/Medico.css" type="text/css"><link>
+<script type="text/javascript" src="javascript/FiltroDinamico.js"></script>
+<script type="text/javascript" src="javascript/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="javascript/IniciarTablasUser.js"></script>
 <title>Turnos | Hospital Frenz</title>
 
 </head>
@@ -21,7 +22,7 @@
 <button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
 </form>
 <%	
-		int indice=0, indice2=0;
+		int indice=0;
 		List<Turno> listaTurPen = new ArrayList<Turno>();
 		if (request.getAttribute("listaTurPendientes") != null) {
 			listaTurPen = (List<Turno>) request.getAttribute("listaTurPendientes");
@@ -34,20 +35,58 @@
 
  %>
 
+	<table id="tbFiltroTurnosUser" style="width:100%;border:2px solid black">
+
+			<tr>
+				<td style="border:none">
+					<input type="submit" id="btnAgregar" value="+" onclick="agregarFila('tbFiltroTurnosUser')" >
+				</td>
+				<td style="border:none">
+					<select id="ddlFiltro1[0]">
+						<option value="-">-<option>
+					</select>
+				</td >
+				<td style="border:none">
+					<select id="ddlTipo[0]">
+						<option value="-">-</option>
+						<option value="1">Nombre</option>
+						<option value="2">Apellido</option>
+						<option value="3">Especialidad</option>
+						<option value="4">Sede</option>
+					</select>
+				</td>
+				<td style="border:none">
+					<select id="ddlFiltro2[0]">
+						<option value="-">-</option>
+						<option value="1">Contiene</option>
+						<option value="2">No contiene</option>
+					</select>
+				</td>
+				<td style="text-align:center;border:none"> <input type="text" id="dinamico[0]"></input>
+				</td>
+			</tr>
+		</table>
+		
+		<form method="post" action="ServletTurnos">
+		<input type="Hidden" id="hdnConsulta" name="hdnConsulta"/>
+		<input type="submit" id="btnFiltrar" name="btnFiltrar" style="width:94%" value="Filtrar" onclick="ObtenerFiltro('tbFiltroTurnosUser')">
+	</form>
+
 <table id="tbTurnosPac1" style="margin-left: 360px;">
  <form method="post" action="ServletTurnos?Indice=<%=indice%>">
 <div class="container1">
   <div class="items">
- 	 
     <div class="items-head">
-    
-      <p>Turnos recientes <input type="submit" name="BtnTurno" value="Solicitar Turno" class="btn btn-primary" style="margin-left:20px;"> </p>
+   
+     <p>Turnos recientes <input type="submit" name="BtnTurno" value="Solicitar Turno" class="btn btn-primary" style="margin-left:20px;"> </p>
       <hr>
      
     </div>
     <%
     if(listaTurPen == null || listaTurPen.size() == 0){ 
      %>
+
+
      <tr>
 	<h2 style="margin-left: 360px; background-color:white; width:800px;">No hay informacion para mostrar. </h2>
 	<% }  else{
@@ -83,14 +122,14 @@ for (Turno t1 : listaTurPen) {%>
 	<% }%>
  
 <% }%>
+
            
     </div>
   </div>
 </form>
 </table>
 <br>
-<table id="tbTurnosPac2" style="margin-left: 360px;">
-<form method="post" action="ServletTurnos?Indice2=<%=indice2%>">
+
 <div class="container2">
   <div class="items">
     <div class="items-head">
@@ -139,8 +178,6 @@ for (Turno t1 : listaTurPen) {%>
 <% }%>
   </div>
 </div>
-</table>
-
 <br>
 </body>
 </html>
