@@ -31,33 +31,27 @@
 
  %>
 
-<table id="tbTurnosPac1">
+<table id="tbTurnosPac1" style="margin-left: 360px;">
  <form method="post" action="ServletTurnos?Indice=<%=indice%>">
 <div class="container1">
   <div class="items">
- 	 <tr>
+ 	 
     <div class="items-head">
     
       <p>Turnos recientes <input type="submit" name="BtnTurno" value="Solicitar Turno" class="btn btn-primary" style="margin-left:20px;"> </p>
       <hr>
-     </tr>
+     
     </div>
     <%
     if(listaTurPen == null || listaTurPen.size() == 0){ 
      %>
      <tr>
-    <br>
-	<h2 style="margin-left:30px;">No hay informacion para mostrar. </h2>
-	<br>
+	<h2 style="margin-left: 360px; background-color:white; width:800px;">No hay informacion para mostrar. </h2>
 	<% }  else{
 	
-%>	<div class="items-body">
+%>	
 <%	 
 for (Turno t1 : listaTurPen) {%>
-	
-	<div class="items-body-content">
-	
-	
 	
 	<td>
         <span style="font-weight:bold;">Dr/a. <%= t1.getMedico().getApellido()%>, <%= t1.getMedico().getNombre() %> - 
@@ -80,11 +74,10 @@ for (Turno t1 : listaTurPen) {%>
      </td>
         <i class="fa fa-angle-right"></i>
       </tr>
-      </div>
+      
 	
-
+<tr class="trNone"></tr>
 	<% }%>
-	</div>
  
 <% }%>
            
