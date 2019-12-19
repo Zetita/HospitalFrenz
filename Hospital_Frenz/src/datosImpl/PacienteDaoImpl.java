@@ -228,7 +228,7 @@ public class PacienteDaoImpl implements PacienteDao {
 		cn = new Conexion();
 		cn.Open();		 
 		String query = "UPDATE pacientes SET EstadoPaciente=0 WHERE DNIPaciente='"+dni+"'";
-		System.out.println(query);
+
 		try
 		 {
 			estado=cn.execute(query);

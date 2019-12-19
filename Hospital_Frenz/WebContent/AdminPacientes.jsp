@@ -28,7 +28,19 @@
 <br>
 <br>
 
-<% if(request.getAttribute("Mensaje")!=null){
+<% 
+if(request.getAttribute("errorMessage")!=null){
+%>
+<script type="text/javascript">
+		alert("<%=request.getAttribute("errorMessage")%>")
+	</script>
+	<%
+	request.setAttribute("Mensaje",null);
+	}
+	%>
+
+<% 
+if(request.getAttribute("Mensaje")!=null){
 	%>
 	<script type="text/javascript">
 		alert("<%=request.getAttribute("Mensaje")%>")

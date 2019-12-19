@@ -96,21 +96,18 @@ public class ServletPacientes extends HttpServlet {
 			if(!request.getParameter("hdnConsulta["+Indice+"]").equals(null)){
 				String Consulta=request.getParameter("hdnConsulta["+Indice+"]");
 
-				/*if(request.getParameter("btnModificar["+Indice+"]")!=null){
-					userNeg = new UsuarioNegImpl();
+				if(request.getParameter("btnModificar["+Indice+"]")!=null){
 					
-					List<Usuario> lst=new ArrayList<Usuario>();
-					userNeg.editar(Consulta);
-					lst=userNeg.listarUsuarios();
-					request.setAttribute("ListaPacientes", lst);
-
+					negPac.editar(Consulta);
+					
+					CargarListas(request,response);
 				}
-				else */if(request.getParameter("btnEliminar["+Indice+"]")!=null){
+				else if(request.getParameter("btnEliminar["+Indice+"]")!=null){
 	
 					negPac.borrar(Consulta);
 					CargarListas(request, response);
 
-				}/*else*/ if(request.getParameter("btnAlta["+Indice+"]")!=null){
+				}else if(request.getParameter("btnAlta["+Indice+"]")!=null){
 	
 					negPac.editar("UPDATE pacientes SET EstadoPaciente=1 WHERE DNIPaciente='"+Consulta+"'");
 					CargarListas(request, response);
@@ -305,12 +302,12 @@ public class ServletPacientes extends HttpServlet {
 							}
 						}
 						else{
-							request.setAttribute("Mensaje","Teléfono del paciente incorrecto.");
+							request.setAttribute("Mensaje","Telefono del paciente incorrecto.");
 							return true;
 						}
 					}
 					else{
-						request.setAttribute("Mensaje","Dirección del paciente incorrecta.");
+						request.setAttribute("Mensaje","Direccion del paciente incorrecta.");
 						return true;
 					}
 				}

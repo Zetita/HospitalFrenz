@@ -18,9 +18,11 @@
 <button class="btnUser" type="submit" name="btnLogOff" data-hover="Cerrar sesion"><div>${usuario}</div></button>
 </form>
 <%	
+		int indice=0;
 		List<Turno> listaTurPen = new ArrayList<Turno>();
 		if (request.getAttribute("listaTurPendientes") != null) {
 			listaTurPen = (List<Turno>) request.getAttribute("listaTurPendientes");
+			
 		}
 		List<Turno> listaTurPas = new ArrayList<Turno>();
 		if (request.getAttribute("listaTurPasados") != null) {
@@ -29,13 +31,12 @@
 
  %>
 
-
- <form method="post" action="ServletTurnos">
+<table id="tbTurnosPac1">
+ <form method="post" action="ServletTurnos?Indice=<%=indice%>">
 <div class="container1">
   <div class="items">
     <div class="items-head">
-      <p>Turnos recientes <input type="submit" name="BtnTurno" value="Solicitar Turno" class="btn btn-primary" style="margin-left:20px;"> 
-      </p>
+      <p>Turnos recientes <input type="submit" name="BtnTurno" value="Solicitar Turno" class="btn btn-primary" style="margin-left:20px;"> </p>
       <hr>
     </div>
     <%
@@ -47,9 +48,14 @@
 	<% }  else{
 	
 %>	<div class="items-body">
-<% for (Turno t1 : listaTurPen) {%>
+<%	 
+for (Turno t1 : listaTurPen) {%>
 	
 	<div class="items-body-content">
+	
+	<tr>
+	
+	<td>
         <span style="font-weight:bold;">Dr/a. <%= t1.getMedico().getApellido()%>, <%= t1.getMedico().getNombre() %> - 
         <%= t1.getFecha() %> <%=t1.getHora().toString().substring(0,5) %> - PENDIENTE</span> 
         <br>
@@ -60,7 +66,16 @@
         <input type="hidden" name="idTurCancelar" value="<%=t1.getId()%>">
         <input type="hidden" name="idSedeCancelar" value="<%=t1.getSede().getId()%>">
         <input type="submit" class="buttonT" name="BtnCancelarxUser" value="Cancelar">
+     </td>
+     
+     <td>
+     	<input type="hidden" name="lblMedico" value="<%=t1.getMedico().getMatricula()%>">
+        <input type="hidden" name="lblFecha" value="<%=t1.getFecha()%>">
+        <input type="hidden" name="lblEspecialidad" value="<%=t1.getEspecialidad().getId() %>">
+        <input type="hidden" name="lblSede" value="<%= t1.getSede().getId()%>">
+     </td>
         <i class="fa fa-angle-right"></i>
+      </tr>
       </div>
 	
 
@@ -72,7 +87,7 @@
     </div>
   </div>
 </form>
-
+</table>
 <br>
 
 <div class="container2">

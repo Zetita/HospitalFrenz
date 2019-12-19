@@ -3,7 +3,7 @@ function ObtenerEliminar(boton,tablaID){
 	var indice=boton.parentNode.parentNode.rowIndex;
 	var x=document.getElementById(tablaID).rows;
 	var y=x[indice].cells;
-	var DNI,DNI2;	
+	var DNI;	
 	
 	if(tablaID=="tbUsers")
 	{
@@ -12,15 +12,22 @@ function ObtenerEliminar(boton,tablaID){
 	}
 	if(tablaID=="tbPacientes")
 	{
-		DNI2=y[2].childNodes[0].innerText;
-		alert(DNI);
+		DNI=y[2].childNodes[0].innerText;
 	}
-	
-	
-	
 	document.getElementById("hdnConsulta["+indice+"]").value=DNI;
-	document.getElementById("hdnConsulta["+indice+"]").value=DNI2;
+
+}
+function ObtenerAlta(boton,tablaID){
 	
-	
-	
+	var indice=boton.parentNode.parentNode.rowIndex;
+	var x=document.getElementById(tablaID).rows;
+	var y=x[indice].cells;
+	var DNI;
+
+	if(tablaID=="tbPacientes")
+	{
+		DNI=y[2].childNodes[0].innerText;
+	}
+	document.getElementById("hdnConsulta["+indice+"]").value=DNI;
+
 }

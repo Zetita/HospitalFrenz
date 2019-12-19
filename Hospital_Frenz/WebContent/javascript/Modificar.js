@@ -50,7 +50,7 @@ function modificar(boton,tablaID)
 		lblTipo.setAttribute("id","ddlTipo["+indice+"]");
 		lblTipo.setAttribute("style","font-size:10px");
 		
-		/*var opcion1=document.createElement("option");
+		var opcion1=document.createElement("option");
    		var opcion2=document.createElement("option");
    		var opcion3=document.createElement("option");
    		opcion1.text="Medico";
@@ -77,7 +77,7 @@ function modificar(boton,tablaID)
    		lblTipo.add(opcion3);
    		
    		y[6].appendChild(lblTipo);
-   		*/
+   		
 	}
 	
 	if(tablaID=="tbPacientes")
@@ -101,7 +101,10 @@ function modificar(boton,tablaID)
 		lblNombre=document.createElement("input");
 		lblNombre.setAttribute("id","txtNombre["+indice+"]");
 		lblNombre.setAttribute("type","text");
-		lblNombre.setAttribute("style","font-size:10px");
+		lblNombre.setAttribute("style","font-size:10px;width: 80px;");
+		lblNombre.setAttribute("onkeypress","return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || "+
+				"(event.charCode==32) || (event.charCode==09) ||(event.charCode>191 && event.charCode<215) || (event.charCode>216 && event.charCode<247)"+
+				"|| (event.charCode>248 && event.charCode<256)")
 		lblNombre.value=Nombre;
 		y[3].appendChild(lblNombre);
 		
@@ -112,7 +115,10 @@ function modificar(boton,tablaID)
 		lblApellido=document.createElement("input");
 		lblApellido.setAttribute("id","txtApellido["+indice+"]");
 		lblApellido.setAttribute("type","text");
-		lblApellido.setAttribute("style","font-size:10px");
+		lblApellido.setAttribute("style","font-size:10px;width: 80px;");
+		lblApellido.setAttribute("onkeypress","return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || "+
+				"(event.charCode==32) || (event.charCode==09) ||(event.charCode>191 && event.charCode<215) || (event.charCode>216 && event.charCode<247)"+
+				"|| (event.charCode>248 && event.charCode<256)")
 		lblApellido.value=Apellido;
 		y[4].appendChild(lblApellido);
 		
@@ -123,11 +129,21 @@ function modificar(boton,tablaID)
 		lblDireccion=document.createElement("input");
 		lblDireccion.setAttribute("id","txtDireccion["+indice+"]");
 		lblDireccion.setAttribute("type","text");
-		lblDireccion.setAttribute("style","font-size:10px");
+		lblDireccion.setAttribute("style","font-size:10px;width: 80px;");
 		lblDireccion.value=Direccion;
-		y[4].appendChild(lblDireccion);
+		y[5].appendChild(lblDireccion);
 		
+		var lblTelefono=document.getElementById("lblTelefono["+indice+"]");
+		var Telefono=lblTelefono.innerText;
+		y[6].removeChild(lblTelefono);
 		
+		lblTelefono=document.createElement("input");
+		lblTelefono.setAttribute("id","txtTelefono["+indice+"]");
+		lblTelefono.setAttribute("type","text");
+		lblTelefono.setAttribute("style","font-size:10px;width: 80px;");
+		lblTelefono.setAttribute("onkeypress","return (event.charCode>47 && event.charCode<58) || (event.charCode==45)");
+		lblTelefono.value=Telefono;
+		y[6].appendChild(lblTelefono);
 		
 		
 		var lblTipo=document.getElementById("lblTipo["+indice+"]");
@@ -136,7 +152,7 @@ function modificar(boton,tablaID)
 		
 		lblTipo=document.createElement("select");
 		lblTipo.setAttribute("id","ddlTipo["+indice+"]");
-		lblTipo.setAttribute("style","font-size:10px");
+		lblTipo.setAttribute("style","font-size:10px;");
 		
 		/*var opcion1=document.createElement("option");
    		var opcion2=document.createElement("option");
