@@ -300,7 +300,7 @@
 			  for(int i=0;i<lst4.size();i++){
 				  try{
 
-				  	%><option value="<%=lst.get(i).getId()%>">(<%=lst4.get(i).getMatricula()%>) <%=lst4.get(i).getNombre()%>, <%=lst4.get(i).getApellido()%></option>
+				  	%><option value="<%=lst4.get(i).getMatricula()%>">(<%=lst4.get(i).getMatricula()%>) <%=lst4.get(i).getNombre()%>, <%=lst4.get(i).getApellido()%></option>
 				
 					<%  }
 				  

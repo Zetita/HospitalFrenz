@@ -1,12 +1,24 @@
+<%@ page import="java.util.*, entidad.*"  %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="css/estiloThomy.css">
-<link rel="stylesheet" href="css/DataGrid.css">
+
 <jsp:include page="Master_Admin.html" />
+<link rel="stylesheet" href="css/EstiloAdmin.css">
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+
+<script type="text/javascript" src="javascript/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="javascript/FiltroDinamico.js"></script>
+<script type="text/javascript" src="javascript/Modificar.js"></script>
+<script type="text/javascript" src="javascript/ObtenerFiltro.js"></script>
+<script type="text/javascript" src="javascript/ObtenerModificacion.js"></script>
+<script type="text/javascript" src="javascript/ObtenerEliminar.js"></script>
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="javascript/IniciarTablas.js"></script>
+
 <title>Administrar Turnos</title>
 </head>
 <body>
@@ -15,15 +27,10 @@
 	document.getElementById("btnLogOff").innerHTML="<div style='height:100%;width:100%'>"+sessionStorage.getItem("NombreUser")+"</div>"; 
 </script>
 
-<br>
-<br>
-<br>
-<br>
-<br>
 
-<hr style="width:1px;height:490px;position:absolute;left:700px">
 
-<div>
+
+<div class="mitad1" style="width:56%">
 
 	<b><label class=lbl2>LISTAR TURNOS</label><br></b>
 	<br>
@@ -46,13 +53,12 @@
 	</select>
 
 		
-</div>
-
+<br>
 <br>
 
-<div>
+
 		
-		<table>
+		<table id="TbTurnos">
 			<tr>
 				<th colspan="2"></th>
 				<th>ID del Turno</th>
@@ -80,14 +86,36 @@
 	
 </div>
 
-<div style="position:relative;left:715px;bottom:110px">
+<div class="mitad2">
 	<b><label class=lbl2>AGREGAR TURNO</label></b><br>
 	<br>
 	
 	<label class=lbl2>SEDE:</label>
 	&nbsp;
 	<select class=bonito name="ddlSede">
-		<option value="Martinez">Martinez</option>
+		<option value=" "> </option>
+		<% 
+			
+			List<Sede> lst3=new ArrayList<Sede>();
+
+			  if(request.getAttribute("ListaSedes")!=null)
+			  {
+				  lst3=(ArrayList<Sede>)request.getAttribute("ListaSedes");
+			  }
+			  
+			  for(int i=0;i<lst3.size();i++){
+				  try{
+				  %>
+				  	<option value="<%=lst3.get(i).getId()%>">(<%=lst3.get(i).getId()%>) <%=lst3.get(i).getNombre() %></option>
+				  <%
+				  }
+				  catch(Exception e){
+					  
+				  }
+				  
+			  }
+			  
+				%>
 	</select>
 	
 	<br>
@@ -96,25 +124,94 @@
 	<label class=lbl2>ESPECIALIDAD:</label>
 	&nbsp;
 	<select class=bonito name="ddlEspecialidad">
-		<option value="Dermatologia">Dermatologia</option>
+		<option value=" "> </option>
+		<% 
+			
+			List<Especialidad> lst4=new ArrayList<Especialidad>();
+
+			  if(request.getAttribute("ListaEspecialidades")!=null)
+			  {
+				  lst4=(ArrayList<Especialidad>)request.getAttribute("ListaEspecialidades");
+			  }
+			  
+			  for(int i=0;i<lst4.size();i++){
+				  try{
+				  %>
+				  	<option value="<%=lst4.get(i).getId()%>">(<%=lst4.get(i).getId()%>) <%=lst4.get(i).getDescripcion() %></option>
+				  <%
+				  }
+				  catch(Exception e){
+					  
+				  }
+				  
+			  }
+			  
+				%>
+    
 	</select>
 	
 	<br>
 	<br>
 	
-	<label class=lbl2>MATRICULA DEL MEDICO:</label>
+	<label class=lbl2>MEDICO:</label>
 	&nbsp;
 	<select class=bonito name="ddlMedico" >
-		<option value="321">321</option>
+		<option value=" "> </option>
+		 <% 
+			
+			List<Medico> lst=new ArrayList<Medico>();
+
+			  if(request.getAttribute("ListaMedicos")!=null)
+			  {
+				  lst=(ArrayList<Medico>)request.getAttribute("ListaMedicos");
+			  }
+			  
+			  for(int i=0;i<lst.size();i++){
+				  try{
+
+				  	%><option value="<%=lst.get(i).getMatricula()%>">(<%=lst.get(i).getMatricula()%>) <%=lst.get(i).getNombre()%>, <%=lst.get(i).getApellido()%></option>
+				
+					<%  }
+				  
+				  catch(Exception e){
+					  
+				  }
+				  
+			  }
+			  
+				%>
 	</select>
 	
 	<br>
 	<br>
 	
-	<label class=lbl2>DNI DEL PACIENTE:</label>
+	<label class=lbl2>PACIENTE:</label>
 	&nbsp;
 	<select class=bonito name="ddlDNIPaciente" >
-		<option value="41324123">41324123</option>
+		<option value=" "> </option>
+		<% 
+			
+			List<Paciente> lst2=new ArrayList<Paciente>();
+
+			  if(request.getAttribute("ListaPacientes")!=null)
+			  {
+				  lst2=(ArrayList<Paciente>)request.getAttribute("ListaPacientes");
+			  }
+			  
+			  for(int i=0;i<lst2.size();i++){
+				  try{
+
+				  	%><option value="<%=lst2.get(i).getDni()%>">(<%=lst2.get(i).getDni()%>) <%=lst.get(i).getNombre()%>, <%=lst2.get(i).getApellido()%></option>
+				
+					<%  }
+				  
+				  catch(Exception e){
+					  
+				  }
+				  
+			  }
+			  
+				%>
 	</select>
 	
 	<br>
