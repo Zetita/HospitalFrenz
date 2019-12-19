@@ -127,7 +127,7 @@
 			        elemento1.type = "button";
 			        elemento1.value="-"
 			        elemento1.setAttribute("id","btn["+cant+"]");
-			        elemento1.setAttribute("onclick","quitarFila('tbFiltroUser',this)");
+			        elemento1.setAttribute("onclick","quitarFila('tbFiltroTurnosUser',this)");
 			        
 			        celda1.appendChild(elemento1);
 			

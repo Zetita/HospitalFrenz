@@ -7,12 +7,12 @@ function ObtenerFiltro(tablaID){
         Filtro+="* FROM Usuarios WHERE ";
     }
     if(tablaID=="tbFiltroTurnosUser"){
-        Filtro+="* FROM Turnos INNER JOIN medicos ON medicos.MatriculaMed=turnos.IDMatriculaMed INNER JOIN especialidades ON especialidades.IDEspecialidad=turnos.IDEspecialidad INNER JOIN sedes on sedes.IDSede=turnos.IDSede WHERE";
+        Filtro+="* FROM Turnos INNER JOIN medicos ON medicos.MatriculaMed=turnos.IDMatriculaMed INNER JOIN especialidades ON especialidades.IDEspecialidad=turnos.IDEspecialidad INNER JOIN sedes on sedes.IDSede=turnos.IDSede WHERE ";
     }
     ///Armar Consulta
     for(var i=0;i<Tabla.rows.length;i++){
         ///Diferenciar por tabla
-        if(tablaID=="tbFiltroUser"){;
+        if(tablaID=="tbFiltroUser"){
             ///Obtener valores
         	if(i!=0){
             var Filtro1=document.getElementById("ddlFiltro1["+i+"]").value;
@@ -91,7 +91,7 @@ function ObtenerFiltro(tablaID){
             }
         }
         
-        else if(tablaID=="tbFiltroTurnosUser"){;
+        else if(tablaID=="tbFiltroTurnosUser"){
         ///Obtener valores
     	if(i!=0){
         var Filtro1=document.getElementById("ddlFiltro1["+i+"]").value;
@@ -119,16 +119,16 @@ function ObtenerFiltro(tablaID){
 
             switch(Tipo){
                 case "1":
-                    Filtro+="Medicos.NombreMed ";
+                    Filtro+="Medicos.NombreMed";
                 break;
                 case "2":
-                    Filtro+="Medicos.ApellidosMed ";
+                    Filtro+="Medicos.ApellidosMed";
                 break;
                 case "3":
-                    Filtro+="Especialidades.DescripcionEspecialidad ";
+                    Filtro+="Especialidades.DescripcionEspecialidad";
                 break;
                 case "4":
-                    Filtro+="Sedes.NombreSede ";
+                    Filtro+="Sedes.NombreSede";
                 break;
             }
     
@@ -142,14 +142,15 @@ function ObtenerFiltro(tablaID){
 
                 break;
                 }
+        alert(Filtro);
         }
         else{
             alert("Complete los datos.");
-            Filtro="Select * from Turnos"
         }
     }
     }
     ///Agregar a input type hidden
-    
+    alert(Filtro);
     document.getElementById("hdnConsulta").value=Filtro;
+    
 }

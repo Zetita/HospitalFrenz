@@ -85,7 +85,6 @@
   border: 1px solid transparent;
   cursor: pointer;
   width:800px;
-  margin-left:9px;
 }
 #tbTurnosPac1 tr:hover {
   border-radius: 15px;

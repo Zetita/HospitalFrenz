@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import entidad.Medico;
 import entidad.Paciente;
+import entidad.Turno;
+import entidad.Usuario;
 import negocio.EspecialidadNeg;
 import negocio.TurnoNeg;
 import negocio.UsuarioNeg;
@@ -92,6 +96,43 @@ public class ServletTurnos extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserSolicitud.jsp");
 			dispatcher.forward(request, response);
 		}
+		if(request.getParameter("BtnBuscarTur1")!=null) {
+			String bus= request.getParameter("txtbuscartur1");
+			
+			if(bus.trim().isEmpty()) {
+				
+				Paciente pac= userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario"));
+				
+				request.setAttribute("listaTurPasados", turNeg.obtenerPasados("pac", pac.getDni() ));
+				request.setAttribute("listaTurPendientes", turNeg.obtenerPendientes("pac", pac.getDni()));
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/UserTurnos.jsp");
+				dispatcher.forward(request, response);
+			}else {
+			
+			
+			String consulta="(medicos.ApellidosMed LIKE '" + bus+"%' OR medicos.NombreMed LIKE '"+bus+"%' OR especialidades.DescripcionEspecialidad LIKE '"
+			+bus+"%' OR turnos.Fecha LIKE '%"+bus+"%')";
+			
+
+			Paciente pac= userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario"));
+			
+			request.setAttribute("listaTurPasados", turNeg.obtenerPasados("pac", pac.getDni(), consulta));
+			request.setAttribute("listaTurPendientes", turNeg.obtenerPendientes("pac", pac.getDni(),consulta));
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserTurnos.jsp");
+			dispatcher.forward(request, response);
+			}
+		}
+		if(request.getParameter("BtnMostrarTodosTur")!=null) {
+			Paciente pac= userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario"));
+			
+			request.setAttribute("listaTurPasados", turNeg.obtenerPasados("pac", pac.getDni() ));
+			request.setAttribute("listaTurPendientes", turNeg.obtenerPendientes("pac", pac.getDni()));
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/UserTurnos.jsp");
+			dispatcher.forward(request, response);
+		}
 		//Para cuando un paciente le da de baja a un turno
 		if(request.getParameter("BtnCancelarxUser")!=null) {
 			int idT= Integer.parseInt(request.getParameter("idTurCancelar"));
@@ -156,6 +197,20 @@ public class ServletTurnos extends HttpServlet {
 			}
 				
 		}
+		//Filtro
+				if(request.getParameter("btnFiltrar")!=null) {
+									
+					RequestDispatcher dispatcher = null;
+					List<Turno> lst= new ArrayList<Turno>();		
+					String consulta=request.getParameter("hdnConsulta");
+					Paciente pac= userNeg.buscarPaciente((String)sesionIniciada.getAttribute("usuario"));
+					System.out.println(consulta);
+					//lst=turNeg.obtenerPendientes("pac", pac.getDni(), consulta);
+					
+					request.setAttribute("listaTurPendientes", lst);
+					dispatcher = request.getRequestDispatcher("/UserTurnos.jsp");	
+					dispatcher.forward(request, response);
+				}
 	}
 
 }

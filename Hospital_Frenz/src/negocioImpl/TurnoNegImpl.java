@@ -46,12 +46,19 @@ public class TurnoNegImpl implements TurnoNeg {
 		return (ArrayList<Turno>) turDao.obtenerPendientes(OP, id);
 	}
 
-
 	@Override
 	public ArrayList<Turno> obtenerPasados(String OP, String id) {
 		return (ArrayList<Turno>) turDao.obtenerPasados(OP, id);
 	}
+	@Override
+	public ArrayList<Turno> obtenerPendientes(String OP, String id, String consulta) {
+		return (ArrayList<Turno>) turDao.obtenerPendientes(OP, id,consulta);
+	}
 
+	@Override
+	public ArrayList<Turno> obtenerPasados(String OP, String id, String consulta) {
+		return (ArrayList<Turno>) turDao.obtenerPasados(OP, id, consulta);
+	}
 
 	
 

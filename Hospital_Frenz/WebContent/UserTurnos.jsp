@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <jsp:include page="Master_User.html" />
 <link rel="stylesheet" href="css/Medico.css" type="text/css"><link>
+
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 <script type="text/javascript" src="javascript/FiltroDinamico.js"></script>
 <script type="text/javascript" src="javascript/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
@@ -34,7 +36,7 @@
 		}
 
  %>
-
+  <%-- 
 	<table id="tbFiltroTurnosUser" style="width:100%;border:2px solid black">
 
 			<tr>
@@ -71,9 +73,26 @@
 		<input type="Hidden" id="hdnConsulta" name="hdnConsulta"/>
 		<input type="submit" id="btnFiltrar" name="btnFiltrar" style="width:94%" value="Filtrar" onclick="ObtenerFiltro('tbFiltroTurnosUser')">
 	</form>
+  --%>
+  <% if(request.getAttribute("Mensaje")!=null){
+	%>
+	<script type="text/javascript">
+		alert("<%=request.getAttribute("Mensaje")%>")
+	</script>
+	<%
+	request.setAttribute("Mensaje",null);
+	}
+	%>
+<form method="post" action="ServletTurnos">
+ <br>
+ <input type="text" id="txtBuscarTur1" name="txtbuscartur1" style="padding: .10rem .70rem;margin-left:360px; border-radius:10px;"/>
+ <input type="submit" name="BtnBuscarTur1" class="btn btn-primary" style="margin-left:20px;"value="Buscar">
+ <input type="submit" name="BtnMostrarTodosTur" class="btn btn-primary" style="margin-left:20px;"value="Mostrar todos">
+</form>
 
 <table id="tbTurnosPac1" style="margin-left: 360px;">
  <form method="post" action="ServletTurnos?Indice=<%=indice%>">
+
 <div class="container1">
   <div class="items">
     <div class="items-head">
