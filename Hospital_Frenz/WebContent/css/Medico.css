@@ -85,6 +85,7 @@
   border: 1px solid transparent;
   cursor: pointer;
   width:800px;
+  margin-left:9px;
 }
 #tbTurnosPac1 tr:hover {
   border-radius: 15px;
@@ -99,6 +100,35 @@ cursor:auto;
 	padding-left: 15px;
 }
 #tbTurnosPac1 tr h2{
+	margin-left:30px;
+}
+#tbTurnosPac2 tr{
+		
+	padding: 10px;
+  padding-right: 0px;
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  background-color: white;
+  font-size: 13px;
+  grid-gap: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  width:800px;
+  margin-left:9px;
+}
+#tbTurnosPac2 tr:hover {
+  border-radius: 15px;
+  border: 1px solid #0B5AA2;
+}
+#tbTurnosPac2 .trNone:hover{
+border-radius:0;
+border:none;
+cursor:auto;
+}
+#tbTurnosPac2 td{
+	padding-left: 15px;
+}
+#tbTurnosPac2 tr h2{
 	margin-left:30px;
 }
 @keyframes icon {
