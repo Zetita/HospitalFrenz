@@ -13,7 +13,7 @@
 <script type="text/javascript" src="javascript/FiltroDinamico.js"></script>
 <script type="text/javascript" src="javascript/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-<script type="text/javascript" src="javascript/IniciarTablasUser.js"></script>
+<script type="text/javascript" src="javascript/IniciarTablas.js"></script>
 <title>Turnos | Hospital Frenz</title>
 
 </head>
