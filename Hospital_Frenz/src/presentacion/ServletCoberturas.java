@@ -130,20 +130,27 @@ public class ServletCoberturas extends HttpServlet {
 	{
 		if(!cob.getNombre().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( cob.getNombre() ).find()){
 			if(!cob.getTipo().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( cob.getTipo() ).find()){
-				if(cob.getCosto()>0){
-					if(!cob.getDescripcion().trim().equals("")){
-						request.setAttribute("Mensaje","Cobertura creada correctamente.");
-						return false;
+				try {
+					if(cob.getCosto()>0){
+						if(!cob.getDescripcion().trim().equals("")){
+							request.setAttribute("Mensaje","Cobertura creada correctamente.");
+							return false;
+						}
+						else{
+							request.setAttribute("Mensaje","Descripcion de cobertura incorrecto.");
+							return true;
+						}
 					}
 					else{
-						request.setAttribute("Mensaje","Descripcion de cobertura incorrecto.");
+						request.setAttribute("Mensaje","Costo de cobertura incorrecto.");
 						return true;
 					}
 				}
-				else{
+				catch(Exception e) {
 					request.setAttribute("Mensaje","Costo de cobertura incorrecto.");
 					return true;
 				}
+				
 			}
 			else{
 				request.setAttribute("Mensaje","Tipo de cobertura incorrecto.");

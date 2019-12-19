@@ -424,11 +424,17 @@ public class ServletUsuarios extends HttpServlet {
 		if(!user.getUsuario().trim().equals("")&&!user.getUsuario().contains(" ")){
 			if(!user.getEmail().trim().equals("")&&!user.getEmail().contains(" ")){
 				if(!user.getContrasenia().trim().equals("")&&!user.getContrasenia().contains(" ")){
-					if(Integer.parseInt(user.getDNI())>0){
-						request.setAttribute("Mensaje","Usuario ingresado correctamente.");
-						return false;
+					try {
+						if(Integer.parseInt(user.getDNI())>0){
+							request.setAttribute("Mensaje","Usuario ingresado correctamente.");
+							return false;
+						}
+						else{
+							request.setAttribute("Mensaje","DNI Incorrecto.");
+							return true;
+						}
 					}
-					else{
+					catch(Exception e){
 						request.setAttribute("Mensaje","DNI Incorrecto.");
 						return true;
 					}
