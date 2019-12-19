@@ -42,6 +42,7 @@ function modificar(boton,tablaID)
 		lblEmail.value=Email;
 		y[4].appendChild(lblEmail);
 		
+		/*
 		var lblTipo=document.getElementById("lblTipo["+indice+"]");
 		var Tipo=lblTipo.innerText;
 		y[6].removeChild(lblTipo);
@@ -77,7 +78,7 @@ function modificar(boton,tablaID)
    		lblTipo.add(opcion3);
    		
    		y[6].appendChild(lblTipo);
-   		
+   		*/
 	}
 	
 	if(tablaID=="tbPacientes")
