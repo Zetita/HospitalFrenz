@@ -107,12 +107,17 @@ public class ServletCoberturas extends HttpServlet {
 	
 	public Cobertura LlenarCobertura(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cobertura cob=new Cobertura();
+		try {
 		cob.setIdCobertura(Integer.parseInt(request.getParameter("txtIdCobertura")));
 		cob.setNombre(request.getParameter("txtNombreCobertura"));
 		cob.setTipo(request.getParameter("txtTipoCobertura"));
 		cob.setCosto(Double.parseDouble(request.getParameter("txtCostoCobertura")));
 		cob.setDescripcion(request.getParameter("txtDescCobertura"));
-		
+		}
+		catch(Exception e){
+			request.setAttribute("Mensaje", "Costo de cobertura incorrecto.");
+			return null;
+		}
 		if(Validar(cob,request,response)==true) return null;
 		
 		return cob;

@@ -12,14 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidad.Especialidad;
 import entidad.Medico;
 import entidad.Paciente;
+import entidad.Sede;
 import entidad.Turno;
 import entidad.Usuario;
 import negocio.EspecialidadNeg;
+import negocio.MedicoNeg;
+import negocio.PacienteNeg;
+import negocio.SedeNeg;
 import negocio.TurnoNeg;
 import negocio.UsuarioNeg;
 import negocioImpl.EspecialidadNegImpl;
+import negocioImpl.MedicoNegImpl;
+import negocioImpl.PacienteNegImpl;
+import negocioImpl.SedeNegImpl;
 import negocioImpl.TurnoNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
@@ -79,6 +87,11 @@ public class ServletTurnos extends HttpServlet {
 				dispatcher.forward(request, response);
 				break;
 			}
+			case "AdminTurnos":
+					CargarListas(request,response);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminTurnos.jsp");
+					dispatcher.forward(request, response);
+				break;
 			}
 				
 		}
@@ -89,6 +102,7 @@ public class ServletTurnos extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesionIniciada = request.getSession();
+		
 		
 		if(request.getParameter("BtnTurno")!=null)
 		{
@@ -211,6 +225,28 @@ public class ServletTurnos extends HttpServlet {
 					dispatcher = request.getRequestDispatcher("/UserTurnos.jsp");	
 					dispatcher.forward(request, response);
 				}
+	}
+	
+	public void CargarListas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EspecialidadNeg espNeg=new EspecialidadNegImpl();
+		List<Especialidad> lst4=new ArrayList<Especialidad>();
+		lst4=espNeg.listarEspecialidades(1);
+		request.setAttribute("ListaEspecialidades", lst4);
+		
+		MedicoNeg medNeg=new MedicoNegImpl();
+		List<Medico> lst=new ArrayList<Medico>();
+		lst=medNeg.listarMedicos();
+		request.setAttribute("ListaMedicos", lst);
+		
+		PacienteNeg pacNeg=new PacienteNegImpl();
+		List<Paciente> lst2=new ArrayList<Paciente>();
+		lst2=pacNeg.listarPacientes();
+		request.setAttribute("ListaPacientes", lst2);
+		
+		SedeNeg sedNeg=new SedeNegImpl();
+		List<Sede> lst3=new ArrayList<Sede>();
+		lst3=sedNeg.obtenerTodas();
+		request.setAttribute("ListaSedes", lst3);
 	}
 
 }

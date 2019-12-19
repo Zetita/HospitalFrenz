@@ -91,11 +91,19 @@ public class ServletMedicos extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		else if(request.getParameter("btnAgregarEsp")!=null) {
+			
+			MedicoNeg medNeg=new MedicoNegImpl();
+			List<Medico> lst=new ArrayList<Medico>();
+			lst=medNeg.listarMedicos();
+			request.setAttribute("ListaMed", lst);
+			CargarDDL(request,response);
+			
 			EspxMed espxmed=LlenarEspxMed(request,response);
 			EspxMedNeg espxmedNeg=new EspxMedNegImpl();
 			
+
 			if(espxmed!=null) espxmedNeg.insertar(espxmed);
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminMedicos.jsp");	
 			dispatcher.forward(request, response);
 			
@@ -125,14 +133,7 @@ public class ServletMedicos extends HttpServlet {
 		Medico med=new Medico();
 		Localidad loc=LlenarLocalidad(request,response);
 		
-		try {
 		med.setDni(request.getParameter("txtDNI"));
-		}
-		catch (Exception e){
-			request.setAttribute("Mensaje","DNI de M�dico Incorrecto.");
-			return null;
-		}
-		
 		med.setMatricula(request.getParameter("txtNumeroMatricula"));
 		med.setNombre(request.getParameter("txtNombre"));
 		med.setApellido(request.getParameter("txtApellido"));
@@ -147,20 +148,31 @@ public class ServletMedicos extends HttpServlet {
 	
 	public EspxMed LlenarEspxMed(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		EspxMed espxmed=new EspxMed();
+		try {
 		espxmed.setEstado(1);
 		espxmed.setIDEsp(Integer.parseInt(request.getParameter("ddlEspecialidad")));
 		espxmed.setMatriculaMed(request.getParameter("ddlMedico"));
+		}
+		catch(Exception e) {
+			request.setAttribute("Mensaje","Ingrese los datos necesarios.");
+			return null;
+		}
 		
 		if(Validar2(espxmed,request,response)==true) return null;
 		
 		return espxmed;
+		
 	}
 
 	public Localidad LlenarLocalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		try {
 		LocalidadNeg locNeg=new LocalidadNegImpl();
 		
 		return locNeg.obtenerUna(Integer.parseInt(request.getParameter("ddlLocalidad")));
-		
+		}
+		catch(Exception e) {
+			return null;
+		}
 	}
 	
 	public void CargarDDL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -218,47 +230,47 @@ public class ServletMedicos extends HttpServlet {
 						if(!med.getApellido().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( med.getApellido() ).find()){
 							if(!med.getDireccion().trim().equals("")){
 								if(!med.getTelefono().trim().equals("")&&!med.getTelefono().contains(" ")&&Comprobar(med.getTelefono())){
-									if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
-										request.setAttribute("Mensaje","Médico agregado correctamente.");
+									if(request.getParameter("ddlLocalidad")!=null&&!request.getParameter("ddlLocalidad").equals("")){
+										request.setAttribute("Mensaje","Medico agregado correctamente.");
 										return false;
 									}
 									else{
-										request.setAttribute("Mensaje","Localidad de Médico Incorrecta.");
+										request.setAttribute("Mensaje","Provincia y/o Localidad de Medico Incorrecta.");
 										return true;
 									}
 								}
 								else{
-									request.setAttribute("Mensaje","Teléfono de Médico Incorrecta.");
+									request.setAttribute("Mensaje","Telefono de Medico Incorrecta.");
 									return true;
 								}
 							}
 							else{
-								request.setAttribute("Mensaje","Dirección de Médico Incorrecta.");
+								request.setAttribute("Mensaje","Direccion de Medico Incorrecta.");
 								return true;
 							}
 						}
 						else{
-							request.setAttribute("Mensaje","Apellido de Médico Incorrecta.");
+							request.setAttribute("Mensaje","Apellido de Medico Incorrecta.");
 							return true;
 						}
 					}
 					else{
-						request.setAttribute("Mensaje","Nombre de Médico Incorrecta.");
+						request.setAttribute("Mensaje","Nombre de Medico Incorrecta.");
 						return true;
 					}
 				}
 				else{
-					request.setAttribute("Mensaje","Matricula de Médico Incorrecta.");
+					request.setAttribute("Mensaje","Matricula de Medico Incorrecta.");
 					return true;
 				}
 			}
 			else{
-				request.setAttribute("Mensaje","DNI de Médico Incorrecto.");
+				request.setAttribute("Mensaje","DNI de Medico Incorrecto.");
 				return true;
 			}
 		}
 		catch(Exception e) {
-			request.setAttribute("Mensaje","DNI de Médico Incorrecto.");
+			request.setAttribute("Mensaje","DNI de Medico Incorrecto.");
 			return true;
 		}
 	}
@@ -266,16 +278,16 @@ public class ServletMedicos extends HttpServlet {
 	public boolean Validar2(EspxMed espxmed, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		if(espxmed.getIDEsp()>0){
 			if(!espxmed.getMatriculaMed().trim().equals("")&&!espxmed.getMatriculaMed().contains(" ")){
-				request.setAttribute("Mensaje","Especialidad por Médico agregada.");
+				request.setAttribute("Mensaje","Especialidad por Medico agregada.");
 				return false;
 			}
 			else{
-				request.setAttribute("Mensaje","Médico de Especialidad por Médico Incorrecto.");
+				request.setAttribute("Mensaje","Medico de Especialidad por Medico Incorrecto.");
 				return true;
 			}
 		}
 		else{
-			request.setAttribute("Mensaje","Especialidad de Especialidad por Médico Incorrecto.");
+			request.setAttribute("Mensaje","Especialidad de Especialidad por Medico Incorrecto.");
 			return true;
 		}
 	}

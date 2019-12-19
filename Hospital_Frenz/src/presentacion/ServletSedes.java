@@ -139,10 +139,15 @@ public class ServletSedes extends HttpServlet {
 	}
 	
 	public Localidad LlenarLocalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		try {
 		LocalidadNeg locNeg=new LocalidadNegImpl();
 		
 		return locNeg.obtenerUna(Integer.parseInt(request.getParameter("ddlLocalidad")));
-		
+		}
+		catch(Exception e) {
+			request.setAttribute("Mensaje", "Provincia y/o Localidad incorrecta");
+			return null;
+		}
 	}
 	
 	public void CargarListas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -173,17 +178,17 @@ public class ServletSedes extends HttpServlet {
 		
 		if(!sede.getNombre().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( sede.getNombre() ).find()){
 			if(!sede.getDireccion().trim().equals("")){
-				if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
+				if(request.getParameter("ddlLocalidad")!=null&&!request.getParameter("ddlLocalidad").equals("")){
 					request.setAttribute("Mensaje","Sede agregada correctamente.");
 					return false;
 				}
 				else{
-					request.setAttribute("Mensaje","Localidad de la Sede incorrecto.");
+					request.setAttribute("Mensaje", "Provincia y/o Localidad incorrecta");
 					return true;
 				}
 			}
 			else{
-				request.setAttribute("Mensaje","Dirección de la Sede incorrecto.");
+				request.setAttribute("Mensaje","Direccion de la Sede incorrecto.");
 				return true;
 			}
 		}

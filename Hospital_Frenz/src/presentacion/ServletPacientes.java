@@ -225,10 +225,15 @@ public class ServletPacientes extends HttpServlet {
 	
 	
 	public Localidad LlenarLocalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		try {
 		LocalidadNeg locNeg=new LocalidadNegImpl();
 		
 		return locNeg.obtenerUna(Integer.parseInt(request.getParameter("ddlLocalidad")));
-		
+		}
+		catch(Exception e) {
+			request.setAttribute("Mensaje", "Provincia y/o Localidad incorrecta");
+			return null;
+		}
 	}
 	
 	public Cobertura LlenarCobertura(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -282,7 +287,7 @@ public class ServletPacientes extends HttpServlet {
 						if(!Pac.getDireccion().trim().equals("")){
 							if(!Pac.getTelefono().trim().equals("")&&!Pac.getTelefono().contains(" ")&&Comprobar(Pac.getTelefono())){
 								if(!Pac.getFecha().trim().equals("")&&!Pac.getFecha().contains(" ")){
-									if(!request.getParameter("ddlLocalidad").equals("")&&request.getParameter("ddlLocalidad")!=null){
+									if(request.getParameter("ddlLocalidad")!=null&&!request.getParameter("ddlLocalidad").equals("")){
 										if(!request.getParameter("ddlCobertura").equals("")&&request.getParameter("ddlCobertura")!=null){
 											request.setAttribute("Mensaje","Paciente agregado correctamente.");
 											return false;
@@ -293,7 +298,7 @@ public class ServletPacientes extends HttpServlet {
 										}
 									}
 									else{
-										request.setAttribute("Mensaje","Localidad del paciente incorrecta.");
+										request.setAttribute("Mensaje", "Provincia y/o Localidad incorrecta");
 										return true;
 									}
 								}
