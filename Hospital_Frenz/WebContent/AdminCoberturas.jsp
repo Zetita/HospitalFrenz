@@ -125,33 +125,65 @@
 
 <label> NOMBRE DE COBERTURA:  </label> 
 
+<%if(request.getAttribute("Nombre")!=null) 
+	{%><input name="txtNombreCobertura" type="text" placeholder="Nombre de la cobertura" style="position:relative;left:20px" value="<%=request.getAttribute("Nombre")%>">
 
-<input name="txtNombreCobertura" type="text" placeholder="Nombre de la cobertura" style="position:relative;left:20px">
+		<%}
+	else{
+	%>
+	<input name="txtNombreCobertura" type="text" placeholder="Nombre de la cobertura" style="position:relative;left:20px">
+
+	<%
+	}%>
 
 <br>
 <br>
 
 <label> TIPO DE COBERTURA:  </label> 
 
+<%if(request.getAttribute("Tipo")!=null) 
+	{%><input name="txtTipoCobertura" type="text" placeholder="Tipo de cobertura" style="position:relative;left:50px" value="<%=request.getAttribute("Tipo")%>">
 
-<input name="txtTipoCobertura" type="text" placeholder="Tipo de cobertura" style="position:relative;left:50px">
+		<%}
+	else{
+	%>
+	<input name="txtTipoCobertura" type="text" placeholder="Tipo de cobertura" style="position:relative;left:50px">
+
+	<%
+	}%>
 
 <br>
 <br>
 
 <label> COSTO DE COBERTURA:  </label> 
 
+<%if(request.getAttribute("Costo")!=null) 
+	{%><input name="txtCostoCobertura" type="number" placeholder="Costo de cobertura" style="position:relative;left:50px" value="<%=request.getAttribute("Costo") %>">
 
-<input name="txtCostoCobertura" type="number" placeholder="Costo de cobertura" style="position:relative;left:50px">
+		<%}
+	else{
+	%>
+	<input name="txtCostoCobertura" type="number" placeholder="Costo de cobertura" style="position:relative;left:50px">
+
+	<%
+	}%>
 
 <br>
 <br>
 
-<label> DESCRIPCIÓN DE COBERTURA:  </label> 
+<label> DESCRIPCIO�N DE COBERTURA:  </label> 
 
-
-<textarea name="txtDescCobertura" placeholder="Descripción de cobertura" style="position:relative;left:50px">
+<%if(request.getAttribute("Descripcion")!=null) 
+	{%><textarea name="txtDescCobertura" placeholder="Descripcion de cobertura" style="position:relative;left:50px" ><%=request.getAttribute("Descripcion")%>
+</textarea>>
+		<%}
+	else{
+	%>
+	<textarea name="txtDescCobertura" placeholder="Descripción de cobertura" style="position:relative;left:50px">
 </textarea>
+	<%
+	}%>
+
 
 <br>
 <br>
