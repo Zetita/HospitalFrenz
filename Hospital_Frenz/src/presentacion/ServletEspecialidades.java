@@ -54,7 +54,7 @@ public class ServletEspecialidades extends HttpServlet {
 			EspecialidadNeg espNeg=new EspecialidadNegImpl();
 			
 			if(esp!=null) espNeg.insertar(esp);
-			
+			else CargarAnteriores(request,response);
 			CargarListas(request,response);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminEspecialidad.jsp");
@@ -92,6 +92,10 @@ public class ServletEspecialidades extends HttpServlet {
 			request.setAttribute("Mensaje","Descripcion de Especialidad incorrecta.");
 			return true;
 		}
+	}
+	
+	public void CargarAnteriores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("Descripcion", request.getParameter("txtDescEsp"));
 	}
 	
 }

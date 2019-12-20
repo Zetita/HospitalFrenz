@@ -165,6 +165,9 @@ public class ServletUsuarios extends HttpServlet {
 				
 				userNeg.insertar(user);
 			}
+			else {
+				CargarAnteriores(request,response);
+			}
 			
 				try {
 					lst=userNeg.listarUsuarios();
@@ -454,6 +457,13 @@ public class ServletUsuarios extends HttpServlet {
 			request.setAttribute("Mensaje","Nombre de usuario Incorrecto.");
 			return true;
 		}
+	}
+	
+	public void CargarAnteriores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("Nombre",request.getParameter("txtNombre"));
+		request.setAttribute("Email",request.getParameter("txtEmail"));
+		request.setAttribute("Contrasenia",request.getParameter("txtContrasenia"));
+		request.setAttribute("DNI",request.getParameter("txtDNI"));
 	}
 
 }
