@@ -174,7 +174,8 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		cn.Open();
 		
 		try {
-			estado= cn.execute("DELETE from usuarios WHERE DNIUser='"+dni+"'");
+			estado= cn.execute(" SET @Prueba :=If((select EstadoUser from Usuarios WHERE DNIUser='"+dni+"')=1,'0','1');");
+			estado= cn.execute(" UPDATE usuarios SET EstadoUser = @Prueba WHERE DNIUser='"+dni+"';");
 		}
 		catch(Exception e){
 			e.printStackTrace();
