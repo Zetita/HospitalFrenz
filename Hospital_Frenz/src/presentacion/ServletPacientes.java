@@ -123,6 +123,7 @@ public class ServletPacientes extends HttpServlet {
 			Paciente Pac=LlenarPac(request,response);
 			Paciente pacExistente;
 			PacienteNeg pacNeg=new PacienteNegImpl();
+			
 			pacExistente=pacNeg.obtenerUno(Pac.getDni());
 			if(Pac!=null){
 			if(Pac.getDni().trim().isEmpty()|| Pac.getNombre().trim().isEmpty() || Pac.getApellido().trim().isEmpty() || 
@@ -133,7 +134,7 @@ public class ServletPacientes extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
 				dispatcher.forward(request, response);
 			}
-			
+
 			if(pacNeg.existe("where DNIPaciente='"+Pac.getDni().trim()+"'")) {
 				request.setAttribute("errorMessage", "DNI ya esta registrado.");
 				
@@ -151,6 +152,9 @@ public class ServletPacientes extends HttpServlet {
 			
 			
 			pacNeg.insertar(Pac);
+			} else {	
+				ValidarProvincia(request,response);
+				CargarAnteriores(request,response);
 			}
 			CargarListas(request,response);
 			
@@ -158,26 +162,8 @@ public class ServletPacientes extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		
-		if(request.getParameter("ddlProvincia")!=""&&request.getParameter("ddlProvincia")!=null) {
-			
-			CargarListas(request,response);
-			
-			CargarAnteriores(request,response);
-			
-			LocalidadNeg locNeg=new LocalidadNegImpl();
-			
-			List<Localidad> lst=new ArrayList<Localidad>();
-			
-			lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
-			
-			request.setAttribute("ListaLocalidades", lst);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
-			dispatcher.forward(request, response);
-		}
-		
-		
-		
+		ValidarProvincia(request,response);
+
 		//Para actualizar datos de residencia de paciente
 		if(request.getParameter("btnActualizarDatPac-2")!=null) {
 			String idL=request.getParameter("comboLoc");
@@ -271,6 +257,7 @@ public class ServletPacientes extends HttpServlet {
 		request.setAttribute("Provincia", (request.getParameter("ddlProvincia")));
 		request.setAttribute("FechaNac",(request.getParameter("txtFechaNac")));
 		request.setAttribute("Cobertura",(request.getParameter("ddlCoberturas")));
+		request.setAttribute("Localidad",(request.getParameter("ddlLocalidad")));
 	}
 	public boolean Validar(Paciente Pac,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		Pac.setDni(request.getParameter("txtDNI"));
@@ -347,4 +334,25 @@ public class ServletPacientes extends HttpServlet {
 		
 		return true;
 	}
+	
+	public void ValidarProvincia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+if(request.getParameter("ddlProvincia")!=""&&request.getParameter("ddlProvincia")!=null) {
+			
+			CargarListas(request,response);
+			
+			CargarAnteriores(request,response);
+			
+			LocalidadNeg locNeg=new LocalidadNegImpl();
+			
+			List<Localidad> lst=new ArrayList<Localidad>();
+			
+			lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
+			
+			request.setAttribute("ListaLocalidades", lst);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminPacientes.jsp");	
+			dispatcher.forward(request, response);
+		}
+	}
+	
 }

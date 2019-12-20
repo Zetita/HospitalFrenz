@@ -91,6 +91,10 @@ public class ServletSedes extends HttpServlet {
 			
 			if(sede!=null)	sedNeg.insertar(sede);
 			
+			else {
+				CargarAnteriores(request,response);
+				ValidarProvincia(request,response);
+			}
 			CargarListas(request,response);
 			
 			
@@ -98,19 +102,7 @@ public class ServletSedes extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		
-	if(request.getParameter("ddlProvincia")!=null&&request.getParameter("ddlProvincia")!="") {
-			
-			CargarListas(request,response);
-			CargarAnteriores(request,response);
-			LocalidadNeg locNeg=new LocalidadNegImpl();
-			List<Localidad> lst=new ArrayList<Localidad>();
-			lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
-			
-			request.setAttribute("ListaLocalidades", lst);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminSedes.jsp");	
-			dispatcher.forward(request, response);
-		}
+		ValidarProvincia(request,response);
 		
 		//para listar sedes
 		if(request.getParameter("BtnBuscarSedes")!=null) {
@@ -168,6 +160,7 @@ public class ServletSedes extends HttpServlet {
 		request.setAttribute("Nombre",(request.getParameter("txtNombre")));
 		request.setAttribute("Direccion",(request.getParameter("txtDireccion")));
 		request.setAttribute("Provincia", request.getParameter("ddlProvincia"));
+		request.setAttribute("Localidad", request.getParameter("ddlLocalidad"));
 	}
 	
 	public boolean Validar(Sede sede,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -198,5 +191,21 @@ public class ServletSedes extends HttpServlet {
 		}
 	}
 	
+	public void ValidarProvincia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		if(request.getParameter("ddlProvincia")!=null&&request.getParameter("ddlProvincia")!="") {
+			
+			CargarListas(request,response);
+			CargarAnteriores(request,response);
+			LocalidadNeg locNeg=new LocalidadNegImpl();
+			List<Localidad> lst=new ArrayList<Localidad>();
+			lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
+			
+			request.setAttribute("ListaLocalidades", lst);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminSedes.jsp");	
+			dispatcher.forward(request, response);
+		
+		}
+	}
 	
 }
