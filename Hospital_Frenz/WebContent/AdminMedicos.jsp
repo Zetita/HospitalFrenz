@@ -202,16 +202,23 @@
 			  
 			  for(int i=0;i<lst.size();i++){
 				  try{
-					  if(request.getAttribute("Provincia")!=null&&i==(Integer.parseInt(request.getAttribute("Provincia").toString()))-1){
-
+					  try{
+						  if(request.getAttribute("Provincia")!=null&&lst.get(i).getId()==(Integer.parseInt(request.getAttribute("Provincia").toString()))){
+	
+							  %>
+							  	<option value="<%=lst.get(i).getId()%>" selected="selected"><%=lst.get(i).getNombre() %></option>
+							  <%
+								  }
+						  else{
+					  %>
+					  	<option value="<%=lst.get(i).getId()%>"><%=lst.get(i).getNombre() %></option>
+					  <%
+						  }
+					  }
+					  catch(Exception e){
 						  %>
-						  	<option value="<%=lst.get(i).getId()%>" selected="selected"><%=lst.get(i).getNombre() %></option>
+						  	<option value="<%=lst.get(i).getId()%>"><%=lst.get(i).getNombre() %></option>
 						  <%
-							  }
-					  else{
-				  %>
-				  	<option value="<%=lst.get(i).getId()%>"><%=lst.get(i).getNombre() %></option>
-				  <%
 					  }
 				  }
 				  catch(Exception e){
@@ -241,16 +248,32 @@
 			  
 			  
 			  for(int i=0;i<lst2.size();i++){
-				  try{
-%>
+				  
+				try{
+					try{
+						  if(request.getAttribute("Localidad")!=null&&lst2.get(i).getId()==(Integer.parseInt(request.getAttribute("Localidad").toString()))){
+	
+							  %>
+							  	<option value="<%=lst2.get(i).getId()%>" selected="selected"><%=lst2.get(i).getNombre() %></option>
+							  <%
+								  }
+						  else{
+					  %>
 					  	<option value="<%=lst2.get(i).getId()%>"><%=lst2.get(i).getNombre() %></option>
-<%
-				  }
-				  catch(Exception e){
+					  <%
+						  }
+					  }
+					catch(Exception e){
+						%>
+					  	<option value="<%=lst2.get(i).getId()%>"><%=lst2.get(i).getNombre() %></option>
+					  <%
+					 }
+				}
+				catch(Exception e){
+						  
+				 }
 					  
 				  }
-				  
-			  }
 			  }
 				%>
     
@@ -299,17 +322,29 @@
 			  
 			  for(int i=0;i<lst4.size();i++){
 				  try{
-
-				  	%><option value="<%=lst4.get(i).getMatricula()%>">(<%=lst4.get(i).getMatricula()%>) <%=lst4.get(i).getNombre()%>, <%=lst4.get(i).getApellido()%></option>
-				
-					<%  }
-				  
+					  try{
+						  if(request.getAttribute("Medico")!=null&&lst4.get(i).getMatricula().equals(request.getAttribute("Medico").toString())){
+	
+							  %>
+							  	<option value="<%=lst4.get(i).getMatricula()%>" selected="selected">(<%=lst4.get(i).getMatricula()%>) <%=lst4.get(i).getNombre()%>, <%=lst4.get(i).getApellido()%></option>
+							  <%
+								  }
+						  else{
+					  %>
+					  	<option value="<%=lst4.get(i).getMatricula()%>">(<%=lst4.get(i).getMatricula()%>) <%=lst4.get(i).getNombre()%>, <%=lst4.get(i).getApellido()%></option>
+					  <%
+						  }
+					  }
+					  catch(Exception e){
+						  %>
+						  	<option value="<%=lst4.get(i).getMatricula()%>">(<%=lst4.get(i).getMatricula()%>) <%=lst4.get(i).getNombre()%>, <%=lst4.get(i).getApellido()%></option>
+						  <%
+					  }
+				  }
 				  catch(Exception e){
 					  
 				  }
-				  
 			  }
-			  
 				%>
     </select>
 	
@@ -331,12 +366,27 @@
 			  
 			  for(int i=0;i<lst1.size();i++){
 				  try{
-				  %>
-				  	<option value="<%=lst1.get(i).getId()%>">(<%=lst1.get(i).getId()%>) <%=lst1.get(i).getDescripcion() %></option>
-				  <%
+					  try{
+						  if(request.getAttribute("Especialidad")!=null&&lst1.get(i).getId()==(Integer.parseInt(request.getAttribute("Especialidad").toString()))){
+	
+							  %>
+							  	<option value="<%=lst1.get(i).getId()%>" selected="selected">(<%=lst1.get(i).getId()%>) <%=lst1.get(i).getDescripcion() %></option>
+							  <%
+								  }
+						  else{
+					  %>
+					  	<option value="<%=lst1.get(i).getId()%>">(<%=lst1.get(i).getId()%>) <%=lst1.get(i).getDescripcion() %></option>
+					  <%
+						  }
+					  }
+					  catch(Exception e){
+						  %>
+						  	<option value="<%=lst1.get(i).getId()%>">(<%=lst1.get(i).getId()%>) <%=lst1.get(i).getDescripcion() %></option>
+						  <%
+					  }
 				  }
 				  catch(Exception e){
-					  
+
 				  }
 				  
 			  }
