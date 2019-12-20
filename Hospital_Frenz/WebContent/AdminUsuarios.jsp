@@ -117,7 +117,11 @@
 				  		<input type="hidden" id="hdnConsulta[<%=indice %>]" name="hdnConsulta[<%=indice %>]">
 				  		<input type="button" id="btnModificar[<%=indice %>]" name="btnModificar[<%=indice %>]" style="font-size:10px" onclick="modificar(this,'tbUsers')" value="Modificar">
 				  		</td>
-				  		<td><input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" onclick="ObtenerEliminar(this,'tbUsers')" value="Eliminar"></td>
+				  		<td><% if(lst.get(i).isEstado()==true){%>
+				  		<input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" onclick="ObtenerEliminar(this,'tbUsers')" value="Dar de baja">
+				  		<%} else { %>
+				  		<input type="submit" name="btnEliminar[<%=indice %>]" id="btnEliminar[<%=indice %>]" style="font-size:10px" onclick="ObtenerEliminar(this,'tbUsers')" value="Dar de alta">
+				  		<%} %></td>
 				  		<td><label id="lblUsuario[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getUsuario()%></label></td>
 				  		<td><label id="lblContrasenia[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getContrasenia() %></label></td>
 				  		<td><label id="lblEmail[<%=indice%>]" style="font-size:10px"><%=lst.get(i).getEmail()%></label></td>
