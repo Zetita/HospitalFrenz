@@ -82,7 +82,7 @@ public class ServletMedicos extends HttpServlet {
 				
 			}
 			else {
-				ValidarProvincia(request,response);
+				ValidarProvincia(0,request,response);
 				CargarAnteriores(request,response);
 			}
 			
@@ -113,7 +113,7 @@ public class ServletMedicos extends HttpServlet {
 				espxmedNeg.insertar(espxmed);
 			}
 			else{
-				ValidarProvincia(request,response);
+				ValidarProvincia(0,request,response);
 				CargarAnteriores(request,response);
 			}
 
@@ -124,7 +124,7 @@ public class ServletMedicos extends HttpServlet {
 			
 		}
 		
-		ValidarProvincia(request,response);
+		ValidarProvincia(1,request,response);
 		
 		
 	}
@@ -305,7 +305,7 @@ public class ServletMedicos extends HttpServlet {
 		return true;
 	}
 	
-	public void ValidarProvincia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void ValidarProvincia(int Origen,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			if(request.getParameter("ddlProvincia")!="") {
 			
 			
@@ -323,8 +323,11 @@ public class ServletMedicos extends HttpServlet {
 			
 			request.setAttribute("ListaLocalidades", lst);
 			
+			if(Origen==1) {
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminMedicos.jsp");	
 			dispatcher.forward(request, response);
+			}
 		}
 	}
 	

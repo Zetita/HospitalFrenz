@@ -121,11 +121,12 @@ public class ServletPacientes extends HttpServlet {
 		if(request.getParameter("btnAgregarPac")!=null) 
 		{
 			Paciente Pac=LlenarPac(request,response);
-			Paciente pacExistente;
+			Paciente pacExistente=new Paciente();
 			PacienteNeg pacNeg=new PacienteNegImpl();
 			
-			pacExistente=pacNeg.obtenerUno(Pac.getDni());
+			
 			if(Pac!=null){
+				pacExistente=pacNeg.obtenerUno(Pac.getDni());
 			if(Pac.getDni().trim().isEmpty()|| Pac.getNombre().trim().isEmpty() || Pac.getApellido().trim().isEmpty() || 
 					Pac.getDireccion().trim().isEmpty() || Pac.getTelefono().trim().isEmpty()) {
 				request.setAttribute("errorMessage", "Complete los campos solicitados.");
