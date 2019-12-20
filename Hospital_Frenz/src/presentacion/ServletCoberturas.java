@@ -76,6 +76,9 @@ public class ServletCoberturas extends HttpServlet {
 				
 				cobNeg.insertar(cob);
 			}
+			else {
+				CargarAnteriores(request,response);
+			}
 			CargarListas(request,response);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminCoberturas.jsp");
@@ -134,7 +137,7 @@ public class ServletCoberturas extends HttpServlet {
 	public boolean Validar(Cobertura cob,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		if(!cob.getNombre().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( cob.getNombre() ).find()){
-			if(!cob.getTipo().trim().equals("")&&!Pattern.compile( "[0-9]" ).matcher( cob.getTipo() ).find()){
+			if(!cob.getTipo().trim().equals("")){
 				try {
 					if(cob.getCosto()>0){
 						if(!cob.getDescripcion().trim().equals("")){
@@ -166,5 +169,17 @@ public class ServletCoberturas extends HttpServlet {
 			request.setAttribute("Mensaje","Nombre de cobertura incorrecto.");
 			return true;
 		}
+	}
+	
+	public void CargarAnteriores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("Nombre",request.getParameter("txtNombreCobertura"));
+		request.setAttribute("Tipo",request.getParameter("txtTipoCobertura"));
+		request.setAttribute("Descripcion",request.getParameter("txtDescCobertura"));
+		try {
+			request.setAttribute("Costo",Double.parseDouble(request.getParameter("txtCostoCobertura")));
+			}
+			catch(Exception e) {
+				
+			}
 	}
 }
