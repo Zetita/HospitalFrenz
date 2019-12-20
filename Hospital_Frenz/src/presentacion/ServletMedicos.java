@@ -77,7 +77,14 @@ public class ServletMedicos extends HttpServlet {
 			MedicoNeg medNeg=new MedicoNegImpl();
 			
 			
-			if(med!=null) medNeg.insertar(med);
+			if(med!=null) { 
+				medNeg.insertar(med);
+				
+			}
+			else {
+				ValidarProvincia(request,response);
+				CargarAnteriores(request,response);
+			}
 			
 			List<Medico> lst=new ArrayList<Medico>();
 			
@@ -96,37 +103,30 @@ public class ServletMedicos extends HttpServlet {
 			List<Medico> lst=new ArrayList<Medico>();
 			lst=medNeg.listarMedicos();
 			request.setAttribute("ListaMed", lst);
-			CargarDDL(request,response);
+			
 			
 			EspxMed espxmed=LlenarEspxMed(request,response);
 			EspxMedNeg espxmedNeg=new EspxMedNegImpl();
 			
 
-			if(espxmed!=null) espxmedNeg.insertar(espxmed);
+			if(espxmed!=null) {
+				espxmedNeg.insertar(espxmed);
+			}
+			else{
+				ValidarProvincia(request,response);
+				CargarAnteriores(request,response);
+			}
 
+			CargarDDL(request,response);
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminMedicos.jsp");	
 			dispatcher.forward(request, response);
 			
 		}
 		
-		if(request.getParameter("ddlProvincia")!="") {
-			
-			CargarDDL(request,response);
-			
-			CargarAnteriores(request,response);
-			
-			LocalidadNeg locNeg=new LocalidadNegImpl();
-			
-			
-			List<Localidad> lst=new ArrayList<Localidad>();
-			
-			lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
-			
-			request.setAttribute("ListaLocalidades", lst);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminMedicos.jsp");	
-			dispatcher.forward(request, response);
-		}
+		ValidarProvincia(request,response);
+		
+		
 	}
 	
 	public Medico LlenarMed(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -219,6 +219,9 @@ public class ServletMedicos extends HttpServlet {
 		request.setAttribute("Direccion",(request.getParameter("txtDireccion")));
 		request.setAttribute("Telefono",(request.getParameter("txtTelefono")));
 		request.setAttribute("Provincia", request.getParameter("ddlProvincia"));
+		request.setAttribute("Localidad", request.getParameter("ddlLocalidad"));
+		request.setAttribute("Especialidad",request.getParameter("ddlEspecialidad"));
+		request.setAttribute("Medico",request.getParameter("ddlMedico"));
 	}
 	
 	public boolean Validar(Medico med, Localidad loc, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -301,4 +304,28 @@ public class ServletMedicos extends HttpServlet {
 		
 		return true;
 	}
+	
+	public void ValidarProvincia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			if(request.getParameter("ddlProvincia")!="") {
+			
+			
+			
+			CargarDDL(request,response);
+			
+			CargarAnteriores(request,response);
+			
+			LocalidadNeg locNeg=new LocalidadNegImpl();
+			
+			
+			List<Localidad> lst=new ArrayList<Localidad>();
+			
+			lst=locNeg.listarLocalidades(Integer.parseInt(request.getParameter("ddlProvincia")));
+			
+			request.setAttribute("ListaLocalidades", lst);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminMedicos.jsp");	
+			dispatcher.forward(request, response);
+		}
+	}
+	
 }
