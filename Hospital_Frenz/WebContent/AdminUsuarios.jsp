@@ -160,14 +160,34 @@
 	
 	<label>NOMBRE DEL USUARIO:</label>
 	&nbsp;
-	<input type="text"style="position:relative;left:11%" name="txtNombre">
+	
+	<%if(request.getAttribute("Nombre")!=null) 
+	{%><input type="text"style="position:relative;left:11%" placeholder="Nombre de Usuario" name="txtNombre" value="<%=request.getAttribute("Nombre")%>"><%}
+	else{
+	%>
+	<input type="text"style="position:relative;left:11%" placeholder="Nombre de Usuario" name="txtNombre">
+	<%
+	}%>
+	
+	
 	
 	<br>
 	<br>
 	
 	<label>CONTRASEёA DEL USUARIO:</label>
 	&nbsp;
-	<input type="password" style="position:relative;left:1.5%" name="txtContrasenia">
+	
+	<%if(request.getAttribute("Contrasenia")!=null) 
+	{%><input type="password" style="position:relative;left:1.5%" placeholder="Contrasenia" name="txtContrasenia" value="<%=request.getAttribute("Contrasenia")%>"><% 
+	}
+	else{
+	%>
+	<input type="password" style="position:relative;left:1.5%" placeholder="Contrasenia" name="txtContrasenia">
+	<%
+	}%>
+	
+	
+	
 	
 	<br>
 	<br>
@@ -175,7 +195,15 @@
 
 	<label>DNI DEL USUARIO:</label>
 	&nbsp;
-	<input type="number" style="position:relative;left:19%" name="txtDNI">
+	
+	<%if(request.getAttribute("DNI")!=null) 
+	{%><input name="txtDNI" type="number" placeholder="11.111.111" style="position:relative;left:19%" value=<%=request.getAttribute("DNI") %>>
+		<%}
+	else{
+	%>
+	<input name="txtDNI" type="number" placeholder="11.111.111" style="position:relative;left:19%">
+	<%
+	}%>
 	
 	<br>
 	<br>
@@ -183,7 +211,16 @@
 
 	<label>EMAIL DEL USUARIO:</label>
 	&nbsp;
-	<input type="text" style="position:relative;left:15%" name="txtEmail">
+	
+	<%if(request.getAttribute("Email")!=null) 
+	{%><input type="text" style="position:relative;left:15%" placeholder="Email" name="txtEmail" value="<%=request.getAttribute("Email")%>"><%}
+	else{
+	%>
+	<input type="text" style="position:relative;left:15%" placeholder="Email" name="txtEmail">
+	<%
+	}%>
+	
+	
 	
 	<br>
 	<br>

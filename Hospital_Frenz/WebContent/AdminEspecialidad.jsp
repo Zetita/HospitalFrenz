@@ -120,9 +120,17 @@
 	<br>
 	<br>
 	
-	<label>DESCRIPCIÓN DE LA ESPECIALIDAD:</label>
+	<label>DESCRIPCION DE LA ESPECIALIDAD:</label>
 
+	<%if(request.getAttribute("Descripcion")!=null) 
+	{%><input type="text" name="txtDescEsp" value="<%=request.getAttribute("Descripcion")%>">
+		<%}
+	else{
+	%>
 	<input type="text" name="txtDescEsp">
+	<%
+	}%>
+
 	
 	<br>
 	<br>
